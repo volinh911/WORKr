@@ -28,6 +28,10 @@
                     <span>Blogs</span></a>
                 </li>
                 <li>
+                    <a href="" class="active"><span><i class="fas fa-users"></i></span>
+                    <span>Users</span></a>
+                </li>
+                <li>
                     <a href="" class="active"><span><i class="fas fa-briefcase"></i></span>
                     <span>Jobs</span></a>
                 </li>
@@ -49,7 +53,8 @@
     <!-- Sidebar -->
 
     <div class="main-content">
-         <header>
+        <!-- Header -->
+        <header>
             <h2>
                 <label for="nav-toggle">
                     <span><i class="fas fa-bars text-white"></i></span>
@@ -62,6 +67,69 @@
                 </div>
             </div>
         </header>
+        <!-- Header -->
+
+        <main>
+             <div class="recent-grid">
+                <div class="projects">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Manage Users</h5>
+                            <a href="./create.php">
+                                <button>Add New User</button>
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table width="100%">
+                                    <thead>
+                                        <tr>
+                                            <td>SN</td>
+                                            <td>Title</td>
+                                            <td>Username</td>
+                                            <td>Date Upload</td>
+                                            <td>Delete</td>
+                                            <td>View</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>How you become..</td>
+                                                <td>1959009</td>
+                                                <td>30/9/2021</td>
+                                                <td><a href="#" class="delete">Delete</a></td>
+                                                <td><a href="#" class="text-primary">View</a></td>
+                                            </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="customers">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Admins</h5>
+                        </div>
+                        <div class="card-body">
+                                <div class="customer ">
+                                   <div class="info">
+                                    <img src="/images/Avatar.png " width="40px " height="40px " alt=" ">
+                                    <div>
+                                        <h4>1959009</h4>
+                                    </div>
+                                </div>
+                                <div class="contact ">
+                                    <span><i class="fas fa-comment-dots"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </main>
     </div>
 
 
