@@ -1,12 +1,12 @@
     <!-- Footer -->
     <footer class="bg-light">
-        <div class="container ">
+        <div class="container">
             <div class="boxx">
-                <div class="weird">
+                <div class="weird mt-4">
                     <img src="../images/LOGO.png" alt="">
                     <h6 style="font-size: 13px;">227 Nguyễn Văn Cừ, Distreet 5, HCMC, VN</h6>
                 </div>
-                <div class="row">
+                <div class="row mt-4">
                     <div class="col-md-4 col-sm-6">
                         <ul class="list-group">
                             <li>
