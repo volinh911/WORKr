@@ -1,26 +1,41 @@
+<?php
+    include './func/cre.php';
+    $model = new Model;
+    
+    if (isset($_GET['id'])) {
+        $blogID = $_GET['id'];
+        $blog = $model->getBlogDetail($blogID);
+    }
+?>
+
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <title>Title</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer"
-    />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+        integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/careerblog.css">
-  </head>
-  <body>
-      <!-- Navbar -->
-       <nav class="navbar navbar-expand-lg navbar-light shadow ">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light shadow ">
         <a class="navbar-brand ml-5" href="">
             <img src="../images/LOGO.png" alt="">
         </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse ml-5" id="navbarNav">
             <ul class="navbar-nav mr-auto">
@@ -51,59 +66,75 @@
             </ul>
         </div>
     </nav>
-      <!-- !Navbar -->
+    <!-- !Navbar -->
 
-      <!-- Content -->
-      <div class="container mt-5 ">
-          <h2 class="text-center">The 29 Most Valuable IT Certifications</h2>
-          <p class="mt-4 mb-4">By WORKr on September 25,2021 at 15:00pm </p>
-          <div class="picture">
-              <img class="d-block mx-auto img-fluid" src="/images/career.jpg" alt="">
-          </div>
-          <div class="blog-content mt-5">
-              <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reprehenderit saepe voluptas libero adipisci exercitationem tempora ut iusto neque molestias. Laboriosam eaque totam quam expedita, praesentium molestiae molestias, error natus voluptatibus maxime sed in facere quod, non repellat similique? Est repellat blanditiis facilis facere vero minus iure nam eos deleniti asperiores, aliquam obcaecati harum, quis alias nesciunt sint ex autem aspernatur error! Tempora amet ut voluptatibus at quam minus natus adipisci quidem? Quo, quaerat. Quae sint similique sit nam illo omnis quos vero voluptatem culpa error nobis nisi dolore obcaecati laborum veritatis eaque ullam non consectetur pariatur, delectus expedita voluptate nostrum totam. Odit, magni rerum sequi, provident voluptas incidunt in laborum, eveniet quisquam enim ab nulla officiis voluptatem repellendus tempore distinctio fugiat architecto deserunt velit et quos eos. Eos nihil ipsam reiciendis sed laborum magnam assumenda! Tempora numquam explicabo consectetur nobis autem voluptates. Recusandae placeat veritatis expedita earum sapiente dolor eligendi beatae vitae explicabo. Animi itaque eos, sunt nesciunt saepe quod quas inventore sint rem repudiandae excepturi! Quisquam, dolorum blanditiis? Sunt voluptas odit at! Amet nesciunt, quasi fugit architecto voluptatum nisi aperiam, excepturi expedita vitae est repudiandae eius at necessitatibus vero minima laborum explicabo iure totam sit molestias obcaecati. Quisquam aliquam, deserunt dolore voluptas eius repellendus iusto unde odit ipsa provident exercitationem distinctio magni eligendi veniam quae incidunt, ullam voluptatem commodi dolorem, iure sint? Fuga odio dolorum necessitatibus minima, repudiandae recusandae amet enim sint voluptatum voluptate doloribus officiis veritatis eligendi rerum, qui quibusdam. Similique, delectus eos tempora numquam minima architecto error? Quidem magni deleniti impedit atque, nesciunt alias doloremque temporibus, expedita laudantium dolores laboriosam modi nulla neque cum ad accusantium maxime quos rerum labore possimus, velit dolor reprehenderit fugiat! Dignissimos beatae fuga, aliquam nihil repellat omnis nostrum quaerat nobis aspernatur vero dolores. Quidem perferendis sunt veniam. Distinctio impedit neque ex maxime.</p>
-            </div>
+    <!-- Content -->
+
+    <?php if(isset($_GET['id']) && $blog != false): ?>
+
+    <div class="container mt-5 ">
+        <h2 class="text-center"> <?php echo $blog['title']; ?> </h2>
+        <p class="mt-4 mb-4">By <?php echo $blog['authorname']; ?> on <?php echo $blog['datecreated']; ?> </p>
+        <div class="picture">
+            <img class="d-block mx-auto img-fluid" src="<?php echo $blog['image']; ?>" alt="">
         </div>
+        <div class="blog-content mt-5">
+            <p> <?php echo $blog['content']; ?> </p>
+        </div>
+    </div>
+
+    <?php else: ?>
+
+    <h1>Blog not found</h1>
+
+    <?php endif ?>
     <!-- !Content -->
 
     <!-- See more blog -->
     <div class="container mt-5">
         <h3 class="text-center">More from blog...</h3>
         <div class="row">
-            <div class="col-lg-4 col-md-6">
-                 <div class="card border rounded-2 shadow advice mt-4" style="width: 20rem;">
-                        <img src="/images/carrer.svg" class="card-img-top" alt="    ">
-                        <div class="card-body">
-                            <h5 class="card-title">What you need to know about getting a side hustle</h5>
-                             <p class="card-text">WORKr | <small>September 25,2021</small></p>
-                             <p>Lorem ipsum dolor sit amet.</p>
-                             <small class="float-right"><i class="fa fa-arrow-right" aria-hidden="true"></i> Read More</small>
-                        </div>
-                    </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="card border rounded-2 shadow advice mt-4" style="width: 20rem;">
-                        <img src="/images/carrer.svg" class="card-img-top" alt="    ">
-                        <div class="card-body">
-                            <h5 class="card-title">What you need to know about getting a side hustle</h5>
-                             <p class="card-text">WORKr | <small>September 25,2021</small></p>
-                             <p>Lorem ipsum dolor sit amet.</p>
-                             <small class="float-right"><i class="fa fa-arrow-right" aria-hidden="true"></i> Read More</small>
-                        </div>
-                    </div>
-            </div>
+
+            <?php if(isset($_GET['id']) && $blog != false): ?>
+            <?php for ($i = 1; $i <= 3; $i++) : 
+
+                $randomBlogID = $model->getRandBlogID($blogID);
+                $blog = $model->getBlogDetail($randomBlogID); 
+                $smallText = substr($blog['content'], 0, 50);   
+
+                // var_dump($randomBlogID);
+            ?>
+
             <div class="col-lg-4 col-md-6">
                 <div class="card border rounded-2 shadow advice mt-4" style="width: 20rem;">
-                        <img src="/images/carrer.svg" class="card-img-top" alt="    ">
-                        <div class="card-body">
-                            <h5 class="card-title">What you need to know about getting a side hustle</h5>
-                             <p class="card-text">WORKr | <small>September 25,2021</small></p>
-                             <p>Lorem ipsum dolor sit amet.</p>
-                             <small class="float-right"><i class="fa fa-arrow-right" aria-hidden="true"></i> Read More</small>
-                        </div>
+
+                    <img src="<?php echo $blog['image']; ?>" class="card-img-top" alt="    ">
+
+                    <div class="card-body">
+
+                        <h5 class="card-title"> <?php echo $blog['title']; ?> </h5>
+
+                        <p class="card-text"> <?php echo $blog['authorname']; ?> | <small>
+                                <?php echo $blog['datecreated']; ?> </small></p>
+
+                        <p> <?php echo $smallText; ?> </p>
+
+                        <a href="blogdetail.php?id=<?php echo $blog['id']; ?>"><small class="float-right"><i
+                                    class="fa fa-arrow-right" aria-hidden="true"></i> Read More</small></a>
+
                     </div>
+                </div>
             </div>
-        </div>    
+
+            <?php endfor; ?>
+
+            <?php else: ?>
+
+            <h1>Blog not found</h1>
+
+            <?php endif ?>
+
+        </div>
     </div>
     <!-- !See more blog -->
 
@@ -175,8 +206,15 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  </body>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+</body>
+
 </html>

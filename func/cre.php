@@ -212,26 +212,88 @@
 			}
 		}
 
-		public function fetchAllBlogs(){
+        public function getPages(){
 
-			$fetchall = "SELECT * FROM blog ORDER BY datecreated";
+            $limit = 6;
+            $countQuery = "SELECT count(id) as blognum from blog";
+            $result = pg_query($this->conn,$countQuery);
+
+            if(pg_num_rows($result) > 0){
+
+                $blogs =  pg_fetch_all($result);
+                $total = $blogs[0]['blognum'];
+				var_dump($total);
+                return ceil($total/ $limit);
+
+            }
+        }
+
+		public function fetchBlogs($page){
+
+            $limit = 6;
+            $start = ($page - 1) * $limit;
+            $fetchall = "SELECT * FROM blog ORDER BY datecreated DESC LIMIT $limit OFFSET $start";
 			$result = pg_query($this->conn,$fetchall);
-
-			if(pg_num_rows($result) > 0){
+			
+            if(pg_num_rows($result) > 0) {
 
 				return pg_fetch_all($result);
 
-			}else{
+            }else{
 
+				return false;
 				echo "<script>alert('No blog');</script>";
 
 			}
+
+        }
+
+		public function getBlogDetail($id){
+
+			$getBlogbyID = "SELECT * FROM blog WHERE id = $id";
+			$queryBlogID = pg_query($this->conn,$getBlogbyID);
+
+			if(pg_num_rows($queryBlogID) > 0 ){
+
+				return pg_fetch_assoc($queryBlogID);
+
+			}else{
+
+				return false;
+				echo "<script>alert('No such blog');</script>";
+
+			}
+
 		}
 
+		public function getRandBlogID($currentBlog){
 
+			$threeBlog = $currentBlog + 3;
+			$limit = 3;
+			$getBlogID = "SELECT id FROM blog LIMIT $limit OFFSET $threeBlog";
+			$queryID = pg_query($this->conn,$getBlogID);
 
+			if(pg_num_rows($queryID) > 0){	
 
+				$blogIDarr = array();
+				$blogIDObject = pg_fetch_all($queryID);
+				foreach($blogIDObject as $blogID){
+					array_push($blogIDarr, $blogID['id']);
+				}
 
+				// do {
+				// 	$n = mt_rand($blogIDarr[0],end($blogIDarr));
+				// } while(in_array($n,$d= array($exclude)));
+				
+				// var_dump($d);
+
+				return mt_rand($blogIDarr[0],end($blogIDarr));
+				// var_dump($blogIDarr[0]);
+				// var_dump(end($blogIDarr));
+				
+			}
+
+		}
 
     }
 

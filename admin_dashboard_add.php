@@ -85,7 +85,7 @@
                         <div class="card-body">
                              <div class="table-responsive">
                                  <!-- Neu khong phai admin thi out -->
-                                 <?php var_dump($_SESSION); if ($_SESSION['role'] == 1): ?>
+                                 <?php if ($_SESSION['role'] == 1): ?>
 
                                 <form action="admin_dashboard_add.php" method="POST" enctype="multipart/form-data">
 
