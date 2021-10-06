@@ -1,5 +1,7 @@
 <?php 
     include './func/cre.php';
+    include './func/render.php';
+
     $model = new Model;
 
     $page = isset($_GET['page']) ? $_GET['page'] : "1";
@@ -97,33 +99,15 @@
 
         ?>
 
-            <div class='col-lg-4 col-md-6 pt-4'>
-                <div class='card border rounded-2 shadow advice' style='width: 25rem;'>
-
-                    <img src='<?php echo $blog['image']; ?>' class='card-img-top' alt='    '>
-
-                    <div class='card-body'>
-
-                        <h5 class='card-title'> <?php echo $blog['title']; ?> </h5>
-
-                        <p class='card-text'> <?php echo $blog['authorname']; ?> |
-                            <small> <?php echo $blog['datecreated']; ?> </small>
-                        </p>
-
-                        <p> <?php echo $smallText; ?> </p>
-
-                        <a href='blogdetail.php?id=<?php echo $blog['id']; ?>'>
-                            <small class='float-right'><i class='fa fa-arrow-right' aria-hidden='true'></i> Read More</small></a>
-                            
-                    </div>
-                </div>
-            </div>
+                <?php renderBlogList($blog, $smallText);  ?>
 
         <?php
+
         }
         }else{
             echo "You have no blog";
         }
+        
         ?>
         
         <?php else : ?>

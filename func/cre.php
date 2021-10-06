@@ -233,7 +233,7 @@
             $limit = 6;
             $start = ($page - 1) * $limit;
             $fetchall = "SELECT * FROM blog ORDER BY datecreated DESC LIMIT $limit OFFSET $start";
-			$result = pg_query($this->conn,$fetchall);
+			$result = pg_query($this->conn, $fetchall);
 			
             if(pg_num_rows($result) > 0) {
 
@@ -247,6 +247,22 @@
 			}
 
         }
+
+		public function fetchAllBlogs(){
+			$fetchall = "SELECT * FROM blog ORDER BY datecreated ASC";
+			$result = pg_query($this->conn, $fetchall);
+
+			if(pg_num_rows($result) > 0) {
+
+				return pg_fetch_all($result);
+
+            }else{
+
+				return false;
+				echo "<script>alert('No blog');</script>";
+
+			}
+		}
 
 		public function getBlogDetail($id){
 
@@ -266,7 +282,7 @@
 
 		}
 
-		public function getRandBlogID(){
+		public function getRandBlogID($exclude){
 
 			$getBlogID = "SELECT id FROM blog";
 			$queryID = pg_query($this->conn,$getBlogID);
@@ -280,33 +296,122 @@
 					array_push($blogIDarr, $blogID['id']);
 				}
 
-				return mt_rand($blogIDarr[0],end($blogIDarr));
-				
+				// var_dump($blogIDarr);
+				// Kiem id cua blog hien tai voi array
+				$dupID = array_search($exclude, $blogIDarr);
+
+				// var_dump($dupID);
+				// Remove ID cua blog hien tai trong array ID
+				unset($blogIDarr[$dupID]);
+				// var_dump($blogIDarr);
+
+				do{
+
+					$randomNum = mt_rand(reset($blogIDarr),end($blogIDarr));
+
+				}while(
+
+					!in_array($randomNum, $blogIDarr)
+
+				);
+				// var_dump($randomNum);
+				return $randomNum;
 			}
 
 		}
 
-		public function renderMoreBlog($blog,$smallText) {
-			echo "<div class='col-lg-4 col-md-6'>
-			<div class='card border rounded-2 shadow advice mt-4' style='width: 20rem;'>
+		public function deleteBlog($id){
 
-				<img src={$blog['image']} class='card-img-top' alt=''    >
+			$deleteBlog = "DELETE FROM blog WHERE id = '$id'";
+			$deleteQuery = pg_query($this->conn, $deleteBlog);
 
-				<div class='card-body'>
+			if($deleteQuery){
 
-					<h5 class='card-title'>{$blog['title']}</h5>
+				return true;
 
-					<p class='card-text'> {$blog['authorname']} | <small>
-							{$blog['datecreated']}</small></p>
+			}else{
 
-					<p> $smallText </p>
+				return false;
 
-					<a href='blogdetail.php?id={$blog['id']}'><small class='float-right'><i
-								class='fa fa-arrow-right' aria-hidden='true'></i> Read More</small></a>
+			}
 
-				</div>
-			</div>
-		</div>";
+		}
+
+		public function updateBlog($id){
+			if(isset($_POST['update'])){
+				if(isset($_POST['title']) && isset($_POST['author']) && isset($_POST['body'])){
+					if(!empty($_POST['title']) && !empty($_POST['author']) && !empty($_POST['body'])){
+
+						$userid = (int)$_SESSION['userid'];
+						$title = $this->validate($_POST['title']);
+						$authorname = $this->validate($_POST['author']);
+						$body = $this->validate($_POST['body']);
+
+						$file = $_FILES['image'];
+						$fileName = $file['name'];
+						$fileTmpName = $file['tmp_name'];
+						$fileSize = $file['size'];
+						$fileError = $file['error'];
+						$fileType = $file['type'];
+						$fileExt = explode('.', $fileName);
+						$fileActualExt = strtolower(end($fileExt));
+						$allowed = array('jpg', 'jpeg', 'png');
+						
+						if(in_array($fileActualExt, $allowed)){
+
+							if($fileError === 0){
+
+								if($fileSize < 10000000 && $fileSize > 1000){
+									
+									$fileNameNew = uniqid('',true).".".$fileActualExt;
+									$filenalDestination = './blogImages/'.$fileNameNew;
+									move_uploaded_file($fileTmpName, $filenalDestination);
+
+									$updateBlog = "UPDATE blog SET userid= $userid, title= '$title', authorname= '$authorname', content= '$body', image='$filenalDestination' WHERE id = $id"; 
+									$queryUpdate = pg_query($this->conn, $updateBlog);
+
+									if($queryUpdate){
+
+										echo "<script>alert('Blog update successfully');</script>";
+										echo "<script>window.location.href = 'admin_dashboard_blog.php';</script>";
+				
+									}else{
+				
+										echo "<script>alert('Query Failed');</script>";
+										echo "<script>window.location.href = 'admin_dashboard_blog.php';</script>";
+				
+									}
+
+								}else{
+
+									echo "<script>alert('Your file too fat or it is empty');</script>";
+									echo "<script>window.location.href = 'admin_dashboard_blog.php';</script>";
+
+								}
+
+							}else{
+
+								echo "<script>alert('Error uploading file');</script>";
+								echo "<script>window.location.href = 'admin_dashboard_blog.php';</script>";
+
+							}
+
+						}else{
+
+							echo "<script>alert('Your file must be jpg || jpeg || png');</script>";
+							echo "<script>window.location.href = 'admin_dashboard_blog.php';</script>";
+
+						}
+
+					}else{
+
+						echo "<script>alert('You cant leave Title || Author || Body || Image empty');</script>";
+						echo "<script>window.location.href = 'admin_dashboard_blog.php';</script>";
+
+					}
+
+				}
+			}
 		}
 
     }

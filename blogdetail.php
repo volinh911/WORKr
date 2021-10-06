@@ -1,5 +1,7 @@
 <?php
     include './func/cre.php';
+    include './func/render.php';
+
     $model = new Model;
     
     if (isset($_GET['id'])) {
@@ -74,16 +76,7 @@
 
     <?php if(isset($_GET['id']) && $blog != false): ?>
 
-    <div class="container mt-5 ">
-        <h2 class="text-center"> <?php echo $blog['title']; ?> </h2>
-        <p class="mt-4 mb-4">By <?php echo $blog['authorname']; ?> on <?php echo $blog['datecreated']; ?> </p>
-        <div class="picture">
-            <img class="d-block mx-auto img-fluid" src="<?php echo $blog['image']; ?>" alt="">
-        </div>
-        <div class="blog-content mt-5">
-            <p> <?php echo $blog['content']; ?> </p>
-        </div>
-    </div>
+        <?php renderBlogDetail($blog); ?>
 
     <?php else: ?>
 
@@ -109,7 +102,7 @@
 
                 do{
 
-                    $randomBlogID = $model->getRandBlogID();
+                    $randomBlogID = $model->getRandBlogID($blogID);
 
                 } while(
 
@@ -123,29 +116,15 @@
 
                 // Neu du 3 bai thi set => khong de thi co nhieu in bay nhieu
                 // Cac bai bi xoa lot vao 3 so random thi co bao nhieu in bay nhieu
-                if (isset($_GET['id']) && $blog != false) {
 
-                    $smallText = substr($blog['content'], 0, 50);
+                $smallText = substr($blog['content'], 0, 50);
 
-                } else{
-
-                    continue;
-
-                }
 
             ?>
 
             <?php
 
-                if (isset($_GET['id']) && $blog != false) {
-
-                $model->renderMoreBlog($blog, $smallText);
-
-                } else{
-
-                    continue;
-
-                }
+               renderMoreBlog($blog, $smallText);
 
             ?>
 

@@ -86,7 +86,7 @@
                         <div class="card-body">
                              <div class="table-responsive">
                                  <!-- Neu khong phai admin thi out -->
-                                 <?php if ($_SESSION['role'] == 1): ?>
+                                 <?php if (isset($_SESSION['role']) && $_SESSION['role'] == 1): ?>
 
                                 <form action="" method="POST" enctype="multipart/form-data">
 
