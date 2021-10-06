@@ -17,7 +17,7 @@
                     <a class="nav-link" href="#">Career Blog</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Comapny Review</a>
+                    <a class="nav-link" href="#">Company Review</a>
                 </li>
             </ul>
             <ul class="navbar-nav">

@@ -15,9 +15,9 @@
                                 </a>
                             </li>
                             <li><a href="">About</a></li>
-                            <li><a href="">Carrer Blog</a></li>
+                            <li><a href="">Career Blog</a></li>
                             <li><a href="">Company Review</a></li>
-                            <li><a href="">Term of Use</a></li>
+                            <li><a href="">Terms of Use</a></li>
                         </ul>
                     </div>
                     <div class="col-md-4 col-sm-6">
@@ -42,7 +42,7 @@
                                 </a>
                             </li>
                             <li><a href="">Post Jobs</a></li>
-                            <li><a href="">Find All Resume</a></li>
+                            <li><a href="">Find All Resumes</a></li>
                             <li><a href="">Favorite Resume</a></li>
                         </ul>
                     </div>
