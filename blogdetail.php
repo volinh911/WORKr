@@ -3,8 +3,10 @@
     $model = new Model;
     
     if (isset($_GET['id'])) {
+
         $blogID = $_GET['id'];
         $blog = $model->getBlogDetail($blogID);
+
     }
 ?>
 
@@ -95,37 +97,27 @@
         <h3 class="text-center">More from blog...</h3>
         <div class="row">
 
-            <?php if(isset($_GET['id']) && $blog != false): ?>
-            <?php for ($i = 1; $i <= 3; $i++) : 
+            <?php if(isset($_GET['id']) && $blog != false): $exists = array(); ?>
+                
+            <?php for ($i = 1; $i <= 3; $i++) :  
 
-                $randomBlogID = $model->getRandBlogID($blogID);
-                $blog = $model->getBlogDetail($randomBlogID); 
+                do{
+                    $randomBlogID = $model->getRandBlogID($blogID);
+                } while( in_array($randomBlogID, $exists)
+
+                );
+                array_push($exists, $randomBlogID);
+
+                $blog = $model->getBlogDetail((int)$randomBlogID); 
                 $smallText = substr($blog['content'], 0, 50);   
+                var_dump($randomBlogID);
 
-                // var_dump($randomBlogID);
             ?>
 
-            <div class="col-lg-4 col-md-6">
-                <div class="card border rounded-2 shadow advice mt-4" style="width: 20rem;">
-
-                    <img src="<?php echo $blog['image']; ?>" class="card-img-top" alt="    ">
-
-                    <div class="card-body">
-
-                        <h5 class="card-title"> <?php echo $blog['title']; ?> </h5>
-
-                        <p class="card-text"> <?php echo $blog['authorname']; ?> | <small>
-                                <?php echo $blog['datecreated']; ?> </small></p>
-
-                        <p> <?php echo $smallText; ?> </p>
-
-                        <a href="blogdetail.php?id=<?php echo $blog['id']; ?>"><small class="float-right"><i
-                                    class="fa fa-arrow-right" aria-hidden="true"></i> Read More</small></a>
-
-                    </div>
-                </div>
-            </div>
-
+            <?php
+                $model->renderBlog($blog, $smallText);
+            ?>
+            
             <?php endfor; ?>
 
             <?php else: ?>
@@ -191,18 +183,6 @@
         <br>
         <h6 class="text-center" style="color: #2D7BA0;">© 2021 WORKs. All rights reserved</h6>
     </footer>
-
-
-
-
-
-
-
-
-
-
-
-
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

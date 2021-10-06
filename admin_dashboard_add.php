@@ -1,8 +1,9 @@
 <?php
+
     include './func/cre.php';
     $model = new Model;
     $createBlog = $model->createBlog();
-    
+
 ?>
 
 <!doctype html>
@@ -87,7 +88,7 @@
                                  <!-- Neu khong phai admin thi out -->
                                  <?php if ($_SESSION['role'] == 1): ?>
 
-                                <form action="admin_dashboard_add.php" method="POST" enctype="multipart/form-data">
+                                <form action="" method="POST" enctype="multipart/form-data">
 
                                     <!-- Input TITLE -->
                                     <div>

@@ -5,6 +5,7 @@
     $page = isset($_GET['page']) ? $_GET['page'] : "1";
     if ($page > 0) {
         $blogs = $model->fetchBlogs($page);
+        
     }
 
     //get number of pages
@@ -14,6 +15,7 @@
     #sigular Page
     $Previous = $page - 1;
     $Next = $page + 1;
+     
 
 ?>
 

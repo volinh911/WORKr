@@ -23,9 +23,10 @@
 
 		private function validate($data){
 
-			$data = html_entity_decode(strip_tags($data));
-			$data = trim($data);
-			$data = htmlspecialchars($data);
+			$data = pg_escape_string($data);
+			// $data = filter_var($data, FILTER_SANITIZE_STRING);
+			//$data = html_entity_decode(strip_tags($data));
+			// $data = htmlspecialchars($data);
 			return $data;
 
 		}
@@ -101,7 +102,6 @@
 							$row = pg_fetch_assoc($queryCheck);
 							if($row['email'] === $email && $row['password'] === $password){
 								
-								// var_dump($row);
 								$_SESSION['userid'] = $row['id'];
 								$_SESSION['email'] = $row['email'];
 								$_SESSION['avatar'] = $row['avatar'];
@@ -141,11 +141,11 @@
 				if(isset($_POST['title']) && isset($_POST['author']) && isset($_POST['body'])){
 					if(!empty($_POST['title']) && !empty($_POST['author']) && !empty($_POST['body'])){
 
-						$userid = $_SESSION['userid'];
+						$userid = (int)$_SESSION['userid'];
 						$title = $this->validate($_POST['title']);
 						$authorname = $this->validate($_POST['author']);
 						$body = $this->validate($_POST['body']);
-				
+
 						$file = $_FILES['image'];
 						$fileName = $file['name'];
 						$fileTmpName = $file['tmp_name'];
@@ -161,11 +161,11 @@
 							if($fileError === 0){
 
 								if($fileSize < 10000000 && $fileSize > 1000){
-
+									
 									$fileNameNew = uniqid('',true).".".$fileActualExt;
 									$filenalDestination = './blogImages/'.$fileNameNew;
 									move_uploaded_file($fileTmpName, $filenalDestination);
-									
+
 									$insertBlog = "INSERT INTO blog (userid, title, authorname, content, image) VALUES ('$userid', '$title', '$authorname', '$body', '$filenalDestination')" ;
 									$queryInsert = pg_query($this->conn, $insertBlog);
 
@@ -173,13 +173,14 @@
 
 										echo "<script>alert('Blog create successfully');</script>";
 										echo "<script>window.location.href = 'careerblog.php';</script>";
-
+				
 									}else{
-
+				
 										echo "<script>alert('Query Failed');</script>";
 										echo "<script>window.location.href = 'admin_dashboard_add.php';</script>";
-
+				
 									}
+
 
 								}else{
 
@@ -208,6 +209,7 @@
 						echo "<script>window.location.href = 'admin_dashboard_add.php';</script>";
 
 					}
+
 				}
 			}
 		}
@@ -222,7 +224,6 @@
 
                 $blogs =  pg_fetch_all($result);
                 $total = $blogs[0]['blognum'];
-				var_dump($total);
                 return ceil($total/ $limit);
 
             }
@@ -266,33 +267,47 @@
 
 		}
 
-		public function getRandBlogID($currentBlog){
+		public function getRandBlogID(){
 
-			$threeBlog = $currentBlog + 3;
-			$limit = 3;
-			$getBlogID = "SELECT id FROM blog LIMIT $limit OFFSET $threeBlog";
+			$getBlogID = "SELECT id FROM blog";
 			$queryID = pg_query($this->conn,$getBlogID);
 
 			if(pg_num_rows($queryID) > 0){	
 
 				$blogIDarr = array();
 				$blogIDObject = pg_fetch_all($queryID);
+				
 				foreach($blogIDObject as $blogID){
 					array_push($blogIDarr, $blogID['id']);
 				}
 
-				// do {
-				// 	$n = mt_rand($blogIDarr[0],end($blogIDarr));
-				// } while(in_array($n,$d= array($exclude)));
-				
-				// var_dump($d);
-
 				return mt_rand($blogIDarr[0],end($blogIDarr));
-				// var_dump($blogIDarr[0]);
-				// var_dump(end($blogIDarr));
 				
 			}
 
+		}
+
+		public function renderBlog($blog,$smallText) {
+			echo "<div class='col-lg-4 col-md-6'>
+			<div class='card border rounded-2 shadow advice mt-4' style='width: 20rem;'>
+
+				<img src={$blog['image']} class='card-img-top' alt=''    >
+
+				<div class='card-body'>
+
+					<h5 class='card-title'>{$blog['title']}</h5>
+
+					<p class='card-text'> {$blog['authorname']} | <small>
+							{$blog['datecreated']}</small></p>
+
+					<p> $smallText </p>
+
+					<a href='blogdetail.php?id={$blog['id']}'><small class='float-right'><i
+								class='fa fa-arrow-right' aria-hidden='true'></i> Read More</small></a>
+
+				</div>
+			</div>
+		</div>";
 		}
 
     }
