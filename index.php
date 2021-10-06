@@ -3,6 +3,7 @@
 <?php include("func/cre.php"); 
     $model = new Model;
     $signup = $model->loginJobSeeker();
+
 ?>
 
 <div class="l-form">

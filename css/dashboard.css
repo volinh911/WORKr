@@ -500,15 +500,3 @@ form button {
         grid-template-columns: 100%;
     }
 }
-.text-input {
-  padding: .7rem 1rem;
-  display: block;
-  /* width: 100%; */
-  border-radius: 3px;
-  border: 1px solid #e0e0e0;
-  outline: none;
-  color: #444;
-  line-height: 1.2rem;
-  font-size: 1em;
-  font-family: 'Poppins', sans-serif;
-}

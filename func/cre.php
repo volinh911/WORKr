@@ -10,11 +10,12 @@
 		public function __construct(){
 
 			try {
-
+				
 				$this->conn = pg_connect("$this->server $this->port $this->dbname $this->credentials");
 				$setSearchPath = "set search_path to 'workRDatabase'";
 				$querySearchPath = pg_query($this->conn, $setSearchPath);
-
+				session_start();
+				
 			} catch (Exception $e) {
 				echo "connection failed" . $e->getMessage();
 			}
@@ -179,7 +180,6 @@
 										echo "<script>window.location.href = 'admin_dashboard_add.php';</script>";
 				
 									}
-
 
 								}else{
 

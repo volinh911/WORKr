@@ -1,3 +1,24 @@
+<?php 
+    include './func/cre.php';
+    $model = new Model;
+
+    $page = isset($_GET['page']) ? $_GET['page'] : "1";
+    if ($page > 0) {
+        $blogs = $model->fetchBlogs($page);
+        
+    }
+
+    //get number of pages
+    $pages = $model->getPages();
+
+
+    #sigular Page
+    $Previous = $page - 1;
+    $Next = $page + 1;
+     
+
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -63,54 +84,55 @@
         <h3>Advice and inspiration for building successful careers.</h3>
         <p class="">Resume guides. Interviewing tips. Industry data.</p>
         <div class="row topic-post">
-            <div class="col-lg-4 col-md-6 pt-4">
-                <div class="card border rounded-2 shadow advice" style="width: 25rem;">
-                    <img src="/images/carrer.svg" class="card-img-top" alt="    ">
-                    <div class="card-body">
-                        <h5 class="card-title">What you need to know about getting a side hustle</h5>
-                        <p class="card-text">WORKr | <small>September 25,2021</small></p>
-                        <p>Lorem ipsum dolor sit amet.</p>
-                        <small class="float-right"><i class="fa fa-arrow-right" aria-hidden="true"></i> Read
-                            More</small>
+
+        <?php if ($page > 0 && $page <= $pages) : ?>
+        <?php 
+
+        if ($blogs != false){
+
+            foreach ($blogs as $blog) {
+
+                // Giam luong characters xuong 50
+                $smallText = substr($blog['content'], 0, 50);
+
+        ?>
+
+            <div class='col-lg-4 col-md-6 pt-4'>
+                <div class='card border rounded-2 shadow advice' style='width: 25rem;'>
+
+                    <img src='<?php echo $blog['image']; ?>' class='card-img-top' alt='    '>
+
+                    <div class='card-body'>
+
+                        <h5 class='card-title'> <?php echo $blog['title']; ?> </h5>
+
+                        <p class='card-text'> <?php echo $blog['authorname']; ?> |
+                            <small> <?php echo $blog['datecreated']; ?> </small>
+                        </p>
+
+                        <p> <?php echo $smallText; ?> </p>
+
+                        <a href='blogdetail.php?id=<?php echo $blog['id']; ?>'>
+                            <small class='float-right'><i class='fa fa-arrow-right' aria-hidden='true'></i> Read More</small></a>
+                            
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6 pt-4">
-                <div class="card border rounded-2 shadow advice" style="width: 25rem;">
-                    <img src="/images/carrer.svg" class="card-img-top" alt="    ">
-                    <div class="card-body">
-                        <h5 class="card-title">What you need to know about getting a side hustle</h5>
-                        <p class="card-text">WORKr | <small>September 25,2021</small></p>
-                        <p>Lorem ipsum dolor sit amet.</p>
-                        <small class="float-right"><i class="fa fa-arrow-right" aria-hidden="true"></i> Read
-                            More</small>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 pt-4">
-                <div class="card border rounded-2 shadow advice" style="width: 25rem;">
-                    <img src="/images/carrer.svg" class="card-img-top" alt="    ">
-                    <div class="card-body">
-                        <h5 class="card-title">What you need to know about getting a side hustle</h5>
-                        <p class="card-text">WORKr | <small>September 25,2021</small></p>
-                        <p>Lorem ipsum dolor sit amet.</p>
-                        <small class="float-right"><i class="fa fa-arrow-right" aria-hidden="true"></i> Read
-                            More</small>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 pt-4">
-                <div class="card border rounded-2 shadow advice" style="width: 25rem;">
-                    <img src="/images/carrer.svg" class="card-img-top" alt="    ">
-                    <div class="card-body">
-                        <h5 class="card-title">What you need to know about getting a side hustle</h5>
-                        <p class="card-text">WORKr | <small>September 25,2021</small></p>
-                        <p>Lorem ipsum dolor sit amet.</p>
-                        <small class="float-right"><i class="fa fa-arrow-right" aria-hidden="true"></i> Read
-                            More</small>
-                    </div>
-                </div>
-            </div>
+
+        <?php
+        }
+        }else{
+            echo "You have no blog";
+        }
+        ?>
+        
+        <?php else : ?>
+
+        <h1>Page not available </h1>
+
+        <?php endif; ?>
+        
+
         </div>
 
     </div>
