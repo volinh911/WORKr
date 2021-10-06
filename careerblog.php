@@ -1,8 +1,22 @@
 <?php 
     include './func/cre.php';
     $model = new Model;
-    $blogs = $model->fetchAllBlogs();
-    // var_dump($blogs);
+
+    $page = isset($_GET['page']) ? $_GET['page'] : "1";
+    if ($page > 0) {
+        $blogs = $model->fetchBlogs($page);
+        
+    }
+
+    //get number of pages
+    $pages = $model->getPages();
+
+
+    #sigular Page
+    $Previous = $page - 1;
+    $Next = $page + 1;
+     
+
 ?>
 
 <!doctype html>
@@ -71,28 +85,53 @@
         <p class="">Resume guides. Interviewing tips. Industry data.</p>
         <div class="row topic-post">
 
+        <?php if ($page > 0 && $page <= $pages) : ?>
         <?php 
-        foreach($blogs as $blog){
-            
-            // Giam luong characters xuong 50
-            $smallText = substr($blog['content'], 0, 50);
-            
-            // echo $smallText;
-            echo "
+
+        if ($blogs != false){
+
+            foreach ($blogs as $blog) {
+
+                // Giam luong characters xuong 50
+                $smallText = substr($blog['content'], 0, 50);
+
+        ?>
+
             <div class='col-lg-4 col-md-6 pt-4'>
                 <div class='card border rounded-2 shadow advice' style='width: 25rem;'>
-                    <img src='{$blog['image']}' class='card-img-top' alt='    '>
+
+                    <img src='<?php echo $blog['image']; ?>' class='card-img-top' alt='    '>
+
                     <div class='card-body'>
-                        <h5 class='card-title'>{$blog['title']}</h5>
-                        <p class='card-text'>{$blog['authorname']} | <small>{$blog['datecreated']}</small></p>
-                        <p>$smallText</p>
-                        <a href='blogdetail.php?id={$blog['id']}'><small class='float-right'><i class='fa fa-arrow-right' aria-hidden='true'></i> Read
-                            More</small></a>
+
+                        <h5 class='card-title'> <?php echo $blog['title']; ?> </h5>
+
+                        <p class='card-text'> <?php echo $blog['authorname']; ?> |
+                            <small> <?php echo $blog['datecreated']; ?> </small>
+                        </p>
+
+                        <p> <?php echo $smallText; ?> </p>
+
+                        <a href='blogdetail.php?id=<?php echo $blog['id']; ?>'>
+                            <small class='float-right'><i class='fa fa-arrow-right' aria-hidden='true'></i> Read More</small></a>
+                            
                     </div>
                 </div>
-            </div> ";
+            </div>
+
+        <?php
+        }
+        }else{
+            echo "You have no blog";
         }
         ?>
+        
+        <?php else : ?>
+
+        <h1>Page not available </h1>
+
+        <?php endif; ?>
+        
 
         </div>
 
@@ -104,20 +143,42 @@
     <div class="container mt-3 d-flex justify-content-center">
         <div class="row">
             <ul class="d-flex page-nav">
-                <li><a class="prev" href=""><i class="fas fa-chevron-left"></i></a></li>
-                <li class="pageNumber active"><a href="">1</a></li>
-                <li class="pageNumber"><a href="">2</a></li>
-                <li class="pageNumber"><a href="">3</a></li>
-                <li class="pageNumber"><a href="">4</a></li>
-                <li class="pageNumber"><a href="">5</a></li>
-                <li class="pageNumber"><a href="">6</a></li>
-                <li><a class="next" href=""><i class="fas fa-chevron-right"></i></a></li>
+
+                <!-- Dynamic pagination -->
+                <!-- Disabled khi khong co trang previous && next -->
+                <?php if ($page == 1) : ?>
+                
+                <li class="disabled"><a class="prev" href="careerblog.php?page=<?= $Previous; ?>"><i class="fas fa-chevron-left"></i></a></li>
+
+                <?php else : ?>
+
+                <li><a class="prev" href="careerblog.php?page=<?= $Previous; ?>"><i class="fas fa-chevron-left"></i></a></li>
+
+                <?php endif; ?>
+
+                <!-- In ra so trang tuong ung voi luong bai viet -->
+                <?php for ($i = 1; $i <= $pages; $i++) : ?>
+                    
+                <li class="pageNumber active"><a href="careerblog.php?page=<?= $i; ?>"> <?= $i; ?> </a></li>
+
+                <?php endfor; ?>
+
+                <?php if ($page < $pages) : ?>
+
+                <li><a class="next" href="careerblog.php?page=<?= $Next; ?>"><i class="fas fa-chevron-right"></i></a></li>
+
+                <?php else : ?>
+
+                <li class="disabled"><a class="next" href="careerblog.php?page=<?= $Next; ?>"><i class="fas fa-chevron-right"></i></a></li>
+
+                <?php endif; ?>
+
             </ul>
         </div>
     </div>
     <!-- !Pagination -->
 
-     <!-- Footer -->
+    <!-- Footer -->
     <footer class="bg-light">
         <div class="container">
             <div class="boxx">
@@ -174,14 +235,14 @@
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
 </body>
 
 </html>
