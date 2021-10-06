@@ -10,12 +10,11 @@
 		public function __construct(){
 
 			try {
-				
+
 				$this->conn = pg_connect("$this->server $this->port $this->dbname $this->credentials");
 				$setSearchPath = "set search_path to 'workRDatabase'";
 				$querySearchPath = pg_query($this->conn, $setSearchPath);
-				session_start();
-				
+
 			} catch (Exception $e) {
 				echo "connection failed" . $e->getMessage();
 			}
@@ -23,7 +22,6 @@
 
 		private function validate($data){
 
-			$data = html_entity_decode(strip_tags($data));
 			$data = trim($data);
 			$data = htmlspecialchars($data);
 			return $data;
@@ -101,8 +99,7 @@
 							$row = pg_fetch_assoc($queryCheck);
 							if($row['email'] === $email && $row['password'] === $password){
 								
-								// var_dump($row);
-								$_SESSION['userid'] = $row['id'];
+								var_dump($row);
 								$_SESSION['email'] = $row['email'];
 								$_SESSION['avatar'] = $row['avatar'];
 								$_SESSION['role'] = $row['role'];
@@ -136,103 +133,12 @@
 			}
 		}
 		
-		public function createBlog(){
-			if(isset($_POST['submit'])){
-				if(isset($_POST['title']) && isset($_POST['author']) && isset($_POST['body'])){
-					if(!empty($_POST['title']) && !empty($_POST['author']) && !empty($_POST['body'])){
-
-						$userid = $_SESSION['userid'];
-						$title = $this->validate($_POST['title']);
-						$authorname = $this->validate($_POST['author']);
-						$body = $this->validate($_POST['body']);
-				
-						$file = $_FILES['image'];
-						$fileName = $file['name'];
-						$fileTmpName = $file['tmp_name'];
-						$fileSize = $file['size'];
-						$fileError = $file['error'];
-						$fileType = $file['type'];
-						$fileExt = explode('.', $fileName);
-						$fileActualExt = strtolower(end($fileExt));
-						$allowed = array('jpg', 'jpeg', 'png');
-						
-						if(in_array($fileActualExt, $allowed)){
-
-							if($fileError === 0){
-
-								if($fileSize < 10000000 && $fileSize > 1000){
-
-									$fileNameNew = uniqid('',true).".".$fileActualExt;
-									$filenalDestination = './blogImages/'.$fileNameNew;
-									move_uploaded_file($fileTmpName, $filenalDestination);
-									
-									$insertBlog = "INSERT INTO blog (userid, title, authorname, content, image) VALUES ('$userid', '$title', '$authorname', '$body', '$filenalDestination')" ;
-									$queryInsert = pg_query($this->conn, $insertBlog);
-
-									if($queryInsert){
-
-										echo "<script>alert('Blog create successfully');</script>";
-										echo "<script>window.location.href = 'careerblog.php';</script>";
-
-									}else{
-
-										echo "<script>alert('Query Failed');</script>";
-										echo "<script>window.location.href = 'admin_dashboard_add.php';</script>";
-
-									}
-
-								}else{
-
-									echo "<script>alert('Your file too fat or it is empty');</script>";
-									echo "<script>window.location.href = 'admin_dashboard_add.php';</script>";
-
-								}
-
-							}else{
-
-								echo "<script>alert('Error uploading file');</script>";
-								echo "<script>window.location.href = 'admin_dashboard_add.php';</script>";
-
-							}
-
-						}else{
-
-							echo "<script>alert('Your file must be jpg || jpeg || png');</script>";
-							echo "<script>window.location.href = 'admin_dashboard_add.php';</script>";
-
-						}
-
-					}else{
-
-						echo "<script>alert('You cant leave Title || Author || Body || Image empty');</script>";
-						echo "<script>window.location.href = 'admin_dashboard_add.php';</script>";
-
-					}
-				}
-			}
+		public function logout(){
+			session_start();
+			session_unset();
+			session_destroy();
 		}
-
-		public function fetchAllBlogs(){
-
-			$fetchall = "SELECT * FROM blog ORDER BY datecreated";
-			$result = pg_query($this->conn,$fetchall);
-
-			if(pg_num_rows($result) > 0){
-
-				return pg_fetch_all($result);
-
-			}else{
-
-				echo "<script>alert('No blog');</script>";
-
-			}
-		}
-
-
-
-
-
-
+		
     }
 
 

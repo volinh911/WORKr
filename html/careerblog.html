@@ -1,10 +1,3 @@
-<?php 
-    include './func/cre.php';
-    $model = new Model;
-    $blogs = $model->fetchAllBlogs();
-    // var_dump($blogs);
-?>
-
 <!doctype html>
 <html lang="en">
 
@@ -70,30 +63,54 @@
         <h3>Advice and inspiration for building successful careers.</h3>
         <p class="">Resume guides. Interviewing tips. Industry data.</p>
         <div class="row topic-post">
-
-        <?php 
-        foreach($blogs as $blog){
-            
-            // Giam luong characters xuong 50
-            $smallText = substr($blog['content'], 0, 50);
-            
-            // echo $smallText;
-            echo "
-            <div class='col-lg-4 col-md-6 pt-4'>
-                <div class='card border rounded-2 shadow advice' style='width: 25rem;'>
-                    <img src='{$blog['image']}' class='card-img-top' alt='    '>
-                    <div class='card-body'>
-                        <h5 class='card-title'>{$blog['title']}</h5>
-                        <p class='card-text'>{$blog['authorname']} | <small>{$blog['datecreated']}</small></p>
-                        <p>$smallText</p>
-                        <a href='blogdetail.php?id={$blog['id']}'><small class='float-right'><i class='fa fa-arrow-right' aria-hidden='true'></i> Read
-                            More</small></a>
+            <div class="col-lg-4 col-md-6 pt-4">
+                <div class="card border rounded-2 shadow advice" style="width: 25rem;">
+                    <img src="/images/carrer.svg" class="card-img-top" alt="    ">
+                    <div class="card-body">
+                        <h5 class="card-title">What you need to know about getting a side hustle</h5>
+                        <p class="card-text">WORKr | <small>September 25,2021</small></p>
+                        <p>Lorem ipsum dolor sit amet.</p>
+                        <small class="float-right"><i class="fa fa-arrow-right" aria-hidden="true"></i> Read
+                            More</small>
                     </div>
                 </div>
-            </div> ";
-        }
-        ?>
-
+            </div>
+            <div class="col-lg-4 col-md-6 pt-4">
+                <div class="card border rounded-2 shadow advice" style="width: 25rem;">
+                    <img src="/images/carrer.svg" class="card-img-top" alt="    ">
+                    <div class="card-body">
+                        <h5 class="card-title">What you need to know about getting a side hustle</h5>
+                        <p class="card-text">WORKr | <small>September 25,2021</small></p>
+                        <p>Lorem ipsum dolor sit amet.</p>
+                        <small class="float-right"><i class="fa fa-arrow-right" aria-hidden="true"></i> Read
+                            More</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 pt-4">
+                <div class="card border rounded-2 shadow advice" style="width: 25rem;">
+                    <img src="/images/carrer.svg" class="card-img-top" alt="    ">
+                    <div class="card-body">
+                        <h5 class="card-title">What you need to know about getting a side hustle</h5>
+                        <p class="card-text">WORKr | <small>September 25,2021</small></p>
+                        <p>Lorem ipsum dolor sit amet.</p>
+                        <small class="float-right"><i class="fa fa-arrow-right" aria-hidden="true"></i> Read
+                            More</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 pt-4">
+                <div class="card border rounded-2 shadow advice" style="width: 25rem;">
+                    <img src="/images/carrer.svg" class="card-img-top" alt="    ">
+                    <div class="card-body">
+                        <h5 class="card-title">What you need to know about getting a side hustle</h5>
+                        <p class="card-text">WORKr | <small>September 25,2021</small></p>
+                        <p>Lorem ipsum dolor sit amet.</p>
+                        <small class="float-right"><i class="fa fa-arrow-right" aria-hidden="true"></i> Read
+                            More</small>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>
