@@ -286,7 +286,7 @@
 
 		}
 
-		public function renderBlog($blog,$smallText) {
+		public function renderMoreBlog($blog,$smallText) {
 			echo "<div class='col-lg-4 col-md-6'>
 			<div class='card border rounded-2 shadow advice mt-4' style='width: 20rem;'>
 

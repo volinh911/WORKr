@@ -97,27 +97,58 @@
         <h3 class="text-center">More from blog...</h3>
         <div class="row">
 
-            <?php if(isset($_GET['id']) && $blog != false): $exists = array(); ?>
+        <!-- Neu lay duoc ID va sql query khong loi -->
+            <?php if(isset($_GET['id']) && $blog != false): 
                 
+                $exists = array(); 
+                
+            ?>
+
+        <!-- Loop 3 lan = 3 bai  -->
             <?php for ($i = 1; $i <= 3; $i++) :  
 
                 do{
-                    $randomBlogID = $model->getRandBlogID($blogID);
-                } while( in_array($randomBlogID, $exists)
+
+                    $randomBlogID = $model->getRandBlogID();
+
+                } while(
+
+                    in_array($randomBlogID, $exists)
 
                 );
+
                 array_push($exists, $randomBlogID);
 
                 $blog = $model->getBlogDetail((int)$randomBlogID); 
-                $smallText = substr($blog['content'], 0, 50);   
-                var_dump($randomBlogID);
+
+                // Neu du 3 bai thi set => khong de thi co nhieu in bay nhieu
+                // Cac bai bi xoa lot vao 3 so random thi co bao nhieu in bay nhieu
+                if (isset($_GET['id']) && $blog != false) {
+
+                    $smallText = substr($blog['content'], 0, 50);
+
+                } else{
+
+                    continue;
+
+                }
 
             ?>
 
             <?php
-                $model->renderBlog($blog, $smallText);
+
+                if (isset($_GET['id']) && $blog != false) {
+
+                $model->renderMoreBlog($blog, $smallText);
+
+                } else{
+
+                    continue;
+
+                }
+
             ?>
-            
+
             <?php endfor; ?>
 
             <?php else: ?>
