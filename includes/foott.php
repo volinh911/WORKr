@@ -2,8 +2,13 @@
     <footer class="bg-light">
         <div class="container">
             <div class="boxx">
+<<<<<<< Updated upstream
                 <div class="weird mt-4">
                     <img src="../images/LOGO.png" alt="">
+=======
+                <div class="weird">
+                    <img src="images/LOGO.png" alt="">
+>>>>>>> Stashed changes
                     <h6 style="font-size: 13px;">227 Nguyễn Văn Cừ, Distreet 5, HCMC, VN</h6>
                 </div>
                 <div class="row mt-4">

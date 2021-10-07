@@ -1,0 +1,116 @@
+.therealtitletm {
+    padding: 50px 20% 0px 20%;
+    background: sienna;
+    display: grid;
+    grid-template-columns: 6fr 1fr;
+}
+
+.logo img {
+    border-radius: 50%;
+    max-width: 200px;
+    height: 200px;
+}
+
+.smoltitle {
+    display: flex;
+}
+
+.supersmoltitle {
+    color: antiquewhite;
+    margin-left: 30px;
+    align-self: center;
+}
+
+.therest button {
+    border: none;
+    padding: 3px 50px;
+    border-radius: 30px;
+    font-size: xx-large;
+}
+
+.therest {
+    align-self: center;
+}
+
+.bigchungus {
+    background: blanchedalmond;
+    padding: 50px 8%;
+    display: flex;
+}
+
+.babybox {
+    width: 32%;
+    background: sienna;
+    color: #ffdec5;
+    padding: 36px;
+    font-size: 17px;
+    text-align: justify;
+    border-radius: 30px;
+    box-shadow: 7px 7px 3px #000000;
+}
+
+.mommabox {
+    border-radius: 30px;
+    background: chocolate;
+    width: 64%;
+    margin-left: 60px;
+    box-shadow: 7px 7px 3px #000000;
+}
+
+.review-box {
+    background: antiquewhite;
+    padding: 30px;
+    margin: 30px;
+    border-radius: 60px;
+    box-shadow: 4px 5px 5px black;
+}
+
+.review-box img {
+    max-width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 16px;
+}
+
+hr.divider {
+    border: 0;
+    height: 1px;
+    width: 50%;
+    position: relative;
+    margin: 30px auto;
+    background: #481700;
+}
+
+hr.divider::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    background: #481700;
+    display: inline-block;
+    border: 2px solid #481700;
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    margin: 0 0 0 -3px;
+    transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    /* IE 9 */
+    -webkit-transform: rotate(45deg);
+    /* Opera, Chrome, and Safari */
+}
+
+button.da-plus {
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    font-size: 76px;
+    background: antiquewhite;
+    margin: 30px -40px 0px auto;
+    float: right;
+    border: solid;
+}
+
+i.fas.fa-plus-circle {
+    color: sienna;
+    vertical-align: top;
+}
