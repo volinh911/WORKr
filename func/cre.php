@@ -414,9 +414,135 @@
 			}
 		}
 
+		public function signupEmployer(){
+
+			if(isset($_POST['submit'])){
+				if(isset($_POST['email']) && isset($_POST['password']) && isset($_POST['companyid'])){
+					if(!empty($_POST['email']) && !empty($_POST['password']) && $_POST['companyid'] != 0){
+
+						$email = $this->validate($_POST['email']);
+						
+						// plaintext Password
+						$passwordText = $this->validate($_POST['password']);
+						// Hash password
+						$password = md5($passwordText);
+
+						$companyID = $this->validate($_POST['companyid']);
+						$role = 3;
+						
+						// Test trung email || username
+						$dupCheck = "SELECT * FROM employer WHERE email = '$email';";
+						$queryCheck = pg_query($this->conn, $dupCheck);
+
+						// Trung -> bat nhap lai
+                        if (pg_num_rows($queryCheck) > 0) {
+
+                            echo "<script>alert('Email has been taken');</script>";
+                            echo "<script>window.location.href = 'register_employer.php';</script>";
+
+						// Khong trung tao acc moi
+						}else{
+							
+							$insertUser = "INSERT INTO employer (email, password, role, companyid) VALUES ('$email', '$password', '$role', '$companyID')" ;
+							$queryInsert = pg_query($this->conn, $insertUser);
+
+							if($queryInsert){
+
+								echo "<script>alert('Account create successfully');</script>";
+								echo "<script>window.location.href = 'login_employer.php';</script>";
+
+							}else{
+
+								echo "<script>alert('Query Failed');</script>";
+								echo "<script>window.location.href = 'register_employer.php';</script>";
+
+							}
+
+						}
+
+					}else{
+
+						echo "<script>alert('You cant leave Email || Company || Password empty');</script>";
+						echo "<script>window.location.href = 'register_employer.php';</script>";
+
+					}
+				}
+			}
+		}
+
+		public function loginEmployer(){
+
+			if(isset($_POST['submit'])){
+				if(isset($_POST['email']) && isset($_POST['password'])){
+					if(!empty($_POST['email']) && !empty($_POST['password'])){
+
+						$email = $this->validate($_POST['email']);
+						$passwordText = $this->validate($_POST['password']);
+						$password = md5($passwordText);
+
+						$loginCheck = "SELECT * FROM employer WHERE email = '$email' and password = '$password';";
+						$queryCheck = pg_query($this->conn, $loginCheck);
+
+						if(pg_num_rows($queryCheck) === 1){
+
+							$row = pg_fetch_assoc($queryCheck);
+							if($row['email'] === $email && $row['password'] === $password){
+								
+								$_SESSION['userid'] = $row['id'];
+								$_SESSION['email'] = $row['email'];
+								$_SESSION['avatar'] = $row['avatar'];
+								$_SESSION['role'] = $row['role'];
+								$_SESSION['companyid'] = $row['companyid'];
+								$_SESSION['loggedin'] = true;
+								echo "<script>alert('Login successfully');</script>";
+								echo "<script>window.location.href = 'login_employer.php';</script>";
+
+							}else{
+
+								echo "<script>alert('Invalid Email || Password');</script>";
+								echo "<script>window.location.href = 'login_employer.php';</script>";
+
+							}
+
+						}else{
+							
+							echo "<script>alert('Invalid Email || Password');</script>";
+							echo "<script>window.location.href = 'login_employer.php';</script>";
+
+						}
+						
+
+					}else{
+
+						echo "<script>alert('You cant leave Email || Password empty');</script>";
+						echo "<script>window.location.href = 'login_employer.php';</script>";
+
+					}
+				}
+			}
+		}
+
+		public function fetchCompany(){
+
+			$fetchCompany = "SELECT * FROM company";
+			$result = pg_query($this->conn, $fetchCompany);
+
+			if(pg_num_rows($result) > 0) {
+
+				return pg_fetch_all($result);
+
+            }else{
+
+				return false;
+				echo "<script>alert('No Company');</script>";
+
+			}
+
+		}
+
     }
 
-
+		
 
 
 ?>

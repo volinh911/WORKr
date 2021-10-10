@@ -1,3 +1,11 @@
+<?php
+
+    include './func/cre.php';
+    $model = new Model;
+    $login = $model->loginEmployer();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 

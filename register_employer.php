@@ -1,3 +1,12 @@
+<?php
+
+    include './func/cre.php';
+    $model = new Model;
+    $companyNames = $model->fetchCompany();
+    $signup = $model->signupEmployer();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -96,12 +105,15 @@
                     </div><br>
 
                     <div class="form-group">
-                        <select id="inputState" class="form-control">
-                            <option selected>Choose your company</option>
-                            <option value="fpt_comp">FPT Company</option>
-                            <option value="fpt_comp">FPT Company</option>
-                            <option value="fpt_comp">FPT Company</option>
-                            <option value="fpt_comp">FPT Company</option>
+                        <select id="inputState" class="form-control" name="companyid">
+                            <option value="0" selected>Choose your company</option>
+
+                            <?php foreach($companyNames as $companyName): ?>
+
+                            <option value="<?php echo $companyName['id']; ?>"> <?php echo $companyName['name']; ?> </option>
+
+                            <?php endforeach; ?>
+
                         </select>
                     </div>
 
