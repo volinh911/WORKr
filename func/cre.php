@@ -464,7 +464,34 @@
 
 						echo "<script>alert('You cant leave Email || Company || Password empty');</script>";
 						echo "<script>window.location.href = 'register_employer.php';</script>";
+					}
+				}
+			}
+		}
+			
 
+		public function createCompany(){
+			if (isset($_POST['submit'])) {
+				if (isset($_POST['name']) && isset($_POST['address']) && isset($_POST['website']) && isset($_POST['applyemail']) && isset($_POST['size']) &&  isset($_POST['logo']) && isset($_POST['body']) ) {
+					if (!empty($_POST['name']) && !empty($_POST['address']) && !empty($_POST['website']) && !empty($_POST['applyemail']) && !empty($_POST['size']) && !empty($_POST['logo']) && !empty($_POST['body'])) {
+						$name = $this->validate($_POST['name']);
+						$address = $this->validate($_POST['address']);
+						$website = $this->validate($_POST['website']);
+						$applyemail = $this->validate($_POST['applyemail']);
+						$size = $this->validate($_POST['size']);
+						$logo = $this->validate($_POST['logo']);
+						$description = $this->validate($_POST['body']);
+
+						$insertCompany = "INSERT INTO company (name, address, website, applyemail, description, logo, size) VALUES ('$name', '$address', '$website', '$applyemail', '$description', '$logo', '$size')";
+						$queryInsert = pg_query($this->conn, $insertCompany);
+						
+						if ($queryInsert) {
+							echo "<script>alert(' create successfully');</script>";
+						} else {
+							echo "<script>alert('Query Failed');</script>";
+						}
+					} else {
+						echo "<script>alert('empty');</script>";
 					}
 				}
 			}
