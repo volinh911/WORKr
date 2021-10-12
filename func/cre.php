@@ -486,7 +486,7 @@
 						$queryInsert = pg_query($this->conn, $insertCompany);
 						
 						if ($queryInsert) {
-							echo "<script>alert(' create successfully');</script>";
+							echo "<script>alert('Company create successfully');</script>";
 						} else {
 							echo "<script>alert('Query Failed');</script>";
 						}
@@ -567,9 +567,182 @@
 
 		}
 
-    }
+		public function getCompany(){
 
-		
+			$fetch = "SELECT id, name FROM company";
+			$result = pg_query($this->conn, $fetch);
+
+			if(pg_num_rows($result) > 0) {
+
+				return pg_fetch_all($result);
+
+            }else{
+
+				return false;
+				echo "<script>alert('No Company');</script>";
+
+			}
+
+		}
+
+		public function getExperience(){
+
+			$fetch = "SELECT id, experienceyear FROM experience;";
+			$result = pg_query($this->conn, $fetch);
+
+			if(pg_num_rows($result) > 0) {
+
+				return pg_fetch_all($result);
+
+            }else{
+
+				return false;
+				echo "<script>alert('No Experience');</script>";
+
+			}
+
+		}
+
+		public function getIndustry(){
+
+			$fetch = "SELECT id,name FROM industry";
+			$result = pg_query($this->conn, $fetch);
+
+			if(pg_num_rows($result) > 0) {
+
+				return pg_fetch_all($result);
+
+            }else{
+
+				return false;
+				echo "<script>alert('No Industry');</script>";
+
+			}
+
+		}
+
+		public function getLevel(){
+
+			$fetch = "SELECT id,name FROM level";
+			$result = pg_query($this->conn, $fetch);
+
+			if(pg_num_rows($result) > 0) {
+
+				return pg_fetch_all($result);
+
+            }else{
+
+				return false;
+				echo "<script>alert('No Level');</script>";
+
+			}
+
+		}
+
+		public function getLocation(){
+
+			$fetch = "SELECT id,location FROM location";
+			$result = pg_query($this->conn, $fetch);
+
+			if(pg_num_rows($result) > 0) {
+
+				return pg_fetch_all($result);
+
+            }else{
+
+				return false;
+				echo "<script>alert('No Location');</script>";
+
+			}
+
+		}
+
+		public function getSalary(){
+
+			$fetch = "SELECT id,number FROM salary";
+			$result = pg_query($this->conn, $fetch);
+
+			if(pg_num_rows($result) > 0) {
+
+				return pg_fetch_all($result);
+
+            }else{
+
+				return false;
+				echo "<script>alert('No Salary');</script>";
+
+			}
+
+		}
+
+		public function getType(){
+
+			$fetch = "SELECT id,name FROM type";
+			$result = pg_query($this->conn, $fetch);
+
+			if(pg_num_rows($result) > 0) {
+
+				return pg_fetch_all($result);
+
+            }else{
+
+				return false;
+				echo "<script>alert('No Level');</script>";
+
+			}
+
+		}
+
+		public function createJob(){
+
+			if (isset($_POST['submit'])) {
+				// check set 3 text box
+				if (isset($_POST['title']) && isset($_POST['description']) && isset($_POST['requirements']) && isset($_POST['enddate'])
+				// check set option
+				&& isset($_POST['company']) && isset($_POST['industry']) && isset($_POST['salary']) 
+				&& isset($_POST['experience']) && isset($_POST['type']) &&  isset($_POST['level']) && isset($_POST['location']) ) {
+
+					// check empty 3 text box
+					if (!empty($_POST['title']) && !empty($_POST['description']) && !empty($_POST['requirements']) && !empty($_POST['enddate']) && 
+					// check option
+					$_POST['company'] != 0 && $_POST['industry'] != 0 && $_POST['salary'] != 0
+					&& $_POST['experience'] != 0 && $_POST['type'] != 0 && $_POST['level'] != 0 && $_POST['location'] != 0) {
+
+						// 3 text box
+						$title = $this->validate($_POST['title']);
+						$description = $this->validate($_POST['description']);
+						$requirements = $this->validate($_POST['requirements']);
+						$enddate = $this->validate($_POST['enddate']);
+						// option
+						$company = $this->validate($_POST['company']);
+						$industry = $this->validate($_POST['industry']);
+						$salary = $this->validate($_POST['salary']);
+						$experience = $this->validate($_POST['experience']);
+						$type = $this->validate($_POST['type']);
+						$level = $this->validate($_POST['level']);
+						$location = $this->validate($_POST['location']);
+
+						$insertJob = "INSERT INTO job (title, requirements, description, enddate, companyid, industryid, experienceid, salaryid, typeid, levelid, locationid) 
+										VALUES ('$title', '$requirements','$description', '$enddate', '$company', '$industry', '$experience', '$salary', '$type', '$level', '$location')";
+
+						$queryInsert = pg_query($this->conn, $insertJob);
+						
+						if ($queryInsert) {
+							echo "<script>alert('Job create successfully');</script>";
+						} else {
+							echo "<script>alert('Query Failed');</script>";
+						}
+
+					} else {
+						echo "<script>alert('empty');</script>";
+					}
+				}
+			}
+			
+		}
+
+    }	
+
 
 
 ?>

@@ -2,8 +2,16 @@
 
     include './func/cre.php';
     $model = new Model;
-    $createBlog = $model->createCompany();
+    $company = $model->getCompany();
+    $experience = $model->getExperience();
+    $industry = $model->getIndustry();
+    $level = $model->getLevel();
+    $location = $model->getLocation();
+    $salary = $model->getSalary();
+    $type = $model->getType();
 
+    $createJog = $model->createJob();
+    var_dump($_POST['enddate']);
 ?>
 
 <!DOCTYPE html>
@@ -45,58 +53,86 @@
             </div>
             <div>
                 <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="company">
-                    <option selected>Choose company</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <option value="0" selected>Choose company</option>
+
+                    <?php foreach($company as $c): ?>
+
+                    <option value="<?php echo $c['id']; ?>"> <?php echo $c['name']; ?> </option>
+
+                    <?php endforeach; ?>
+
                 </select>
             </div>
             <div>
                 <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="industry">
-                    <option selected>Choose industry</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <option value="0" selected>Choose industry</option>
+
+                    <?php foreach($industry as $i):  ?>
+
+                    <option value="<?php echo $i['id']; ?>"> <?php echo $i['name']; ?></option>
+
+                    <?php endforeach; ?>
+
                 </select>
             </div>
             <div>
                 <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="salary">
-                    <option selected>Choose salary</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <option value="0" selected>Choose salary</option>
+
+                    <?php foreach($salary as $s):  ?>
+
+                    <option value="<?php echo $s['id']; ?>"> <?php echo $s['number']; ?></option>
+
+                    <?php endforeach; ?>
+
                 </select>
             </div>
             <div>
                 <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="experience">
-                    <option selected>Choose experience</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <option value="0" selected>Choose experience</option>
+
+                    <?php foreach($experience as $e):  ?>
+
+                    <option value="<?php echo $e['id']; ?>"> <?php echo $e['experienceyear']; ?> year</option>
+
+                    <?php endforeach; ?>
+
                 </select>
             </div>
             <div>
                 <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="type">
-                    <option selected>Choose type</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <option value="0" selected>Choose type</option>
+
+                    <?php foreach($type as $t):  ?>
+
+                    <option value="<?php echo $t['id']; ?>"> <?php echo $t['name']; ?></option>
+
+                    <?php endforeach; ?>
+
                 </select>
             </div>
             <div>
                 <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="level">
-                    <option selected>Choose level</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <option value="0" selected>Choose level</option>
+
+                    <?php foreach($level as $l):  ?>
+
+                    <option value="<?php echo $l['id']; ?>"> <?php echo $l['name']; ?></option>
+
+                    <?php endforeach; ?>
+
                 </select>
             </div>
             <div>
                 <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="location">
-                    <option selected>Choose location</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <option value="0" selected>Choose location</option>
+
+                    <?php foreach($location as $lo):  ?>
+
+                    <option value="<?php echo $lo['id']; ?>"> <?php echo $lo['location']; ?></option>
+
+                    <?php endforeach; ?>
+
                 </select>
             </div>
 
