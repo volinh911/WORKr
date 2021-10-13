@@ -6,6 +6,8 @@
 		private $credentials = "user = akitsuteixlbud password=61dc3e2c568a28b5817cb8c6abe04ab9d7165f41c03338c32a8acaefad5638d0";
 		private $dbname = "dbname = d52snp06li4fb7";
 		private $conn;
+		public $totalJobs;
+		public $totalBlogs;
 
 		public function __construct(){
 
@@ -213,7 +215,7 @@
 			}
 		}
 
-        public function getPages(){
+        public function getPagesBlog(){
 
             $limit = 6;
             $countQuery = "SELECT count(id) as blognum from blog";
@@ -223,6 +225,7 @@
 
                 $blogs =  pg_fetch_all($result);
                 $total = $blogs[0]['blognum'];
+				$this->totalBlogs = $total;
                 return ceil($total/ $limit);
 
             }
@@ -739,6 +742,73 @@
 				}
 			}
 			
+		}
+
+		public function getPagesJobs(){
+
+            $limit = 5;
+            $countQuery = "SELECT count(jobid) as jobnum from job;";
+            $result = pg_query($this->conn,$countQuery);
+
+            if(pg_num_rows($result) > 0){
+
+                $jobs =  pg_fetch_all($result);
+                $total = $jobs[0]['jobnum'];
+				$this->totalJobs = $total;
+                return ceil($total/ $limit);
+
+            }else{
+
+				echo "<script>alert('empty');</script>";
+
+			}
+        }
+
+		public function fetchJobs($page){
+
+			$limit = 5;
+            $start = ($page - 1) * $limit;
+
+			$fetchJobs = "SELECT * 
+							FROM job j, company c, industry i, experience e, salary s, type t, level l, location lo 
+							WHERE j.companyid = c.id and j.industryid = i.id and j.experienceid = e.id and j.salaryid = s.id and j.typeid = t.id and j.levelid = l.id and j.locationid = lo.id
+							ORDER BY startdate DESC LIMIT $limit OFFSET $start;";
+
+			$results = pg_query($this->conn, $fetchJobs);
+
+			if(pg_num_rows($results) > 0){
+
+				return pg_fetch_all($results);
+
+			}
+
+			else{
+
+				echo "<script>alert('no jobs');</script>";
+
+			}
+
+		}
+
+		public function fetchDetailJob($id){
+
+			$fetchJob = "SELECT * 
+							FROM job j, company c, industry i, experience e, salary s, type t, level l, location lo 
+							WHERE j.jobid = $id and j.companyid = c.id and j.industryid = i.id and j.experienceid = e.id and j.salaryid = s.id and j.typeid = t.id and j.levelid = l.id and j.locationid = lo.id;";
+
+			$result = pg_query($this->conn, $fetchJob);
+
+			if(pg_num_rows($result) > 0){
+
+				return pg_fetch_assoc($result);
+
+			}else{
+
+				return false;
+				echo "<script>alert('No such blog');</script>";
+
+			}
+
 		}
 
     }	

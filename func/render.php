@@ -114,4 +114,45 @@ function renderEditBlogAdmin($blog){
     </form>";
 }
 
+function renderJobList($job){
+    echo "
+    <div class='row'>
+    <div class='col-md-10 border-top border-bottom '>
+        <div class='jobs d-flex align-items-center mt-3 mb-3'>
+            <div class='card' style='width: 20rem;'>
+
+                <img src=' {$job['logo']} ' class='card-img-top' alt='...'>
+
+            </div>
+
+            <div class='card_content w-100 ml-3 d-flex justify-content-between align-items-end'>
+                <div class='job_info'>
+
+                <a href='job_details.php?id={$job['jobid']}'>
+
+                <h5 class='text-danger'> {$job['title']} </h5> 
+
+                </a>
+
+                    <h6> {$job['companyname']} </h6>
+                    <h6 class=' text-warning'><span><i class='fas fa-dollar-sign'></i></span>
+                        {$job['salary']} </h6>
+                    <h6><i class='fas fa-map-marker-alt'></i> {$job['location']} </h6>
+                    <div class='treatment'>
+                        <ul class='d-flex'>
+                            <li><i class='fas fa-medkit'></i> Health Insurance</li>
+                            <li><i class='fas fa-star-of-life'></i> Medical Services</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class='details'>
+                    <p><i class='far fa-heart mr-2' aria-hidden='true'></i>Add to favorite list</p>
+                    <p><i class='far fa-calendar-minus mr-2'></i> {$job['enddate']} </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";
+
+}
 ?>

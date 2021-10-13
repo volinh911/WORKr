@@ -11,8 +11,7 @@
     }
 
     //get number of pages
-    $pages = $model->getPages();
-
+    $pages = $model->getPagesBlog();
 
     #sigular Page
     $Previous = $page - 1;

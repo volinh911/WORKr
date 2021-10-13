@@ -1,3 +1,23 @@
 .treatment ul li {
     margin:  0px 10px;
 }
+
+.disabled {
+    pointer-events:none;        
+}
+
+.page-nav li a {
+    display: block;
+    border-radius: 50%;
+}
+
+ul li.pageNumber {
+    width: 50px;
+    height: 50px;
+    text-align: center;
+}
+
+ul li.pageNumber:hover a {
+    background: black;
+    color: white;
+}
