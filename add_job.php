@@ -11,7 +11,7 @@
     $type = $model->getType();
 
     $createJog = $model->createJob();
-    var_dump($_POST['enddate']);
+
 ?>
 
 <!DOCTYPE html>

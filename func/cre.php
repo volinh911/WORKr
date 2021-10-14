@@ -572,7 +572,7 @@
 
 		public function getCompany(){
 
-			$fetch = "SELECT id, name FROM company";
+			$fetch = "SELECT id, companyname FROM company";
 			$result = pg_query($this->conn, $fetch);
 
 			if(pg_num_rows($result) > 0) {
@@ -608,7 +608,7 @@
 
 		public function getIndustry(){
 
-			$fetch = "SELECT id,name FROM industry";
+			$fetch = "SELECT id,industry FROM industry";
 			$result = pg_query($this->conn, $fetch);
 
 			if(pg_num_rows($result) > 0) {
@@ -626,7 +626,7 @@
 
 		public function getLevel(){
 
-			$fetch = "SELECT id,name FROM level";
+			$fetch = "SELECT id,level FROM level";
 			$result = pg_query($this->conn, $fetch);
 
 			if(pg_num_rows($result) > 0) {
@@ -662,7 +662,7 @@
 
 		public function getSalary(){
 
-			$fetch = "SELECT id,number FROM salary";
+			$fetch = "SELECT id,salary FROM salary";
 			$result = pg_query($this->conn, $fetch);
 
 			if(pg_num_rows($result) > 0) {
@@ -680,7 +680,7 @@
 
 		public function getType(){
 
-			$fetch = "SELECT id,name FROM type";
+			$fetch = "SELECT id,type FROM type";
 			$result = pg_query($this->conn, $fetch);
 
 			if(pg_num_rows($result) > 0) {
