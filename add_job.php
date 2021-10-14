@@ -57,7 +57,7 @@
 
                     <?php foreach($company as $c): ?>
 
-                    <option value="<?php echo $c['id']; ?>"> <?php echo $c['name']; ?> </option>
+                    <option value="<?php echo $c['id']; ?>"> <?php echo $c['companyname']; ?> </option>
 
                     <?php endforeach; ?>
 
@@ -69,7 +69,7 @@
 
                     <?php foreach($industry as $i):  ?>
 
-                    <option value="<?php echo $i['id']; ?>"> <?php echo $i['name']; ?></option>
+                    <option value="<?php echo $i['id']; ?>"> <?php echo $i['industry']; ?></option>
 
                     <?php endforeach; ?>
 
@@ -81,7 +81,7 @@
 
                     <?php foreach($salary as $s):  ?>
 
-                    <option value="<?php echo $s['id']; ?>"> <?php echo $s['number']; ?></option>
+                    <option value="<?php echo $s['id']; ?>"> <?php echo $s['salary']; ?></option>
 
                     <?php endforeach; ?>
 
@@ -105,7 +105,7 @@
 
                     <?php foreach($type as $t):  ?>
 
-                    <option value="<?php echo $t['id']; ?>"> <?php echo $t['name']; ?></option>
+                    <option value="<?php echo $t['id']; ?>"> <?php echo $t['type']; ?></option>
 
                     <?php endforeach; ?>
 
@@ -117,7 +117,7 @@
 
                     <?php foreach($level as $l):  ?>
 
-                    <option value="<?php echo $l['id']; ?>"> <?php echo $l['name']; ?></option>
+                    <option value="<?php echo $l['id']; ?>"> <?php echo $l['level']; ?></option>
 
                     <?php endforeach; ?>
 
