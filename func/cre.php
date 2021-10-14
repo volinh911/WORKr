@@ -8,6 +8,7 @@
 		private $conn;
 		public $totalJobs;
 		public $totalBlogs;
+		public $totalJobSearch;
 
 		public function __construct(){
 
@@ -811,8 +812,74 @@
 
 		}
 
+		public function getPagesSearch(){
+
+            $limit = 5;
+
+            return ceil($this->totalJobSearch/ $limit);
+
+        }
+
+		public function searchBar($page)
+		{
+            if (isset($_POST['submit'])) {
+                if ($_POST['companyid'] != 0 || $_POST['typeid'] != 0 || $_POST['locationid'] != 0 ||
+                    $_POST['salaryid'] != 0 || $_POST['experienceid'] != 0 || $_POST['industryid'] != 0) {
+						
+                    $select = ["companyid","typeid","locationid","salaryid","experienceid","industryid"];
+
+                    $validSelect = [];
+
+                    foreach ($select as $key) {
+                        $value = $_POST[$key];
+                        if ($value != 0) {
+                            array_push($validSelect, $key);
+                        }
+                    }
+
+                    $whereString = "WHERE j.companyid = c.id and j.industryid = i.id and j.experienceid = e.id and j.salaryid = s.id and j.typeid = t.id and j.levelid = l.id and j.locationid = lo.id and ";
+
+                    // key = companyid/levelid/locationid
+                    // $_POST[$key] la value cua tung thang
+                    foreach ($validSelect as $key) {
+                        $whereString .= "$key = $_POST[$key] and ";
+                    }
+					
+					// Cat chu "and" cuoi query
+                    $finalWhere = substr($whereString, 0, -5);
+
+                    $fetchSearch = "SELECT * FROM job j, company c, industry i, experience e, salary s, type t, level l, location lo " . $finalWhere;
+					
+
+					$countSearch = "SELECT count(jobid) FROM job j, company c, industry i, experience e, salary s, type t, level l, location lo " . $finalWhere;
+
+					// Dem tong luong rows search duoc
+					$searchResult = pg_query($this->conn,$countSearch);
+					$searchNum = pg_fetch_assoc($searchResult);
+					$this->totalJobSearch = $searchNum['count'];
+					// $countString = substr($fetchSearch, 0, -40);
+
+					$results = pg_query($this->conn, $fetchSearch);
+
+					if(pg_num_rows($results) > 0){
+
+						return pg_fetch_all($results);
+
+					}else{
+
+						echo "<script>alert('Your search return none');</script>";
+						return false;
+
+					}
+
+                }else{
+					echo "<script>alert('You can\'t leave everything');</script>";
+				}
+
+            }
+			
+		}
+
     }	
-
-
 
 ?>
