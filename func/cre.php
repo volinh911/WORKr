@@ -486,7 +486,7 @@
 						$logo = $this->validate($_POST['logo']);
 						$description = $this->validate($_POST['body']);
 
-						$insertCompany = "INSERT INTO company (name, address, website, applyemail, description, logo, size) VALUES ('$name', '$address', '$website', '$applyemail', '$description', '$logo', '$size')";
+						$insertCompany = "INSERT INTO company (companyname, address, website, applyemail, companydescription, logo, size) VALUES ('$name', '$address', '$website', '$applyemail', '$description', '$logo', '$size')";
 						$queryInsert = pg_query($this->conn, $insertCompany);
 						
 						if ($queryInsert) {
