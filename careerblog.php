@@ -6,7 +6,7 @@
 
     $page = isset($_GET['page']) ? $_GET['page'] : "1";
     if ($page > 0) {
-        $blogs = $model->fetchBlogs($page);
+        $blogs = $model->getBlogs($page);
         
     }
 

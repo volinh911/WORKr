@@ -7,8 +7,10 @@
     if (isset($_GET['id'])) {
 
         $jobID = $_GET['id'];
-        $job = $model->fetchDetailJob($jobID);
-
+        $job = $model->getDetailJob($jobID);
+        $companyid = $job['companyid'];
+        $company = $model->getCompanyOverview($companyid);
+        var_dump($company);
     }
 ?>
 
@@ -86,12 +88,12 @@
                 <a class="nav-link active" data-toggle="tab" href="#job-detail" role="tab" aria-selected="true">Job
                     detail</a>
                 <a class="nav-link" data-toggle="tab" href="#company" role="tab" aria-controls="company"
-                    aria-selected="false">Company review</a>
+                    aria-selected="false">Company overview</a>
             </div>
         </nav>
         <?php if(isset($_GET['id']) && $job != false): ?>
 
-            <?php renderJobDetail($job); ?>
+        <?php renderJobDetail($job, $company); ?>
 
         <?php else: ?>
 

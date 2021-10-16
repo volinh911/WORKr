@@ -3,8 +3,7 @@
     include './func/cre.php';
     $model = new Model;
 
-    
-
+    // get required
     $company = $model->getCompany();
     $experience = $model->getExperience();
     $industry = $model->getIndustry();
@@ -12,11 +11,10 @@
     $salary = $model->getSalary();
     $type = $model->getType();
 
-
-
+    // Auto set page = 1 if not set
     $page = isset($_GET['page']) ? $_GET['page'] : "1";
     if ($page > 0) {
-        $jobs = $model->fetchJobs($page);
+        $jobs = $model->getJobs($page);
         $searchResult = $model->searchBar($page);
     }
 
@@ -24,6 +22,7 @@
     $pages = $model->getPagesJobs();
     $totalJobs = $model->totalJobs;
 
+    // get number of search pages
     $searchpages = $model->getPagesSearch();
     $totalJobsSearch = $model->totalJobSearch;
 

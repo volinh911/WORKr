@@ -6,6 +6,7 @@
 		private $credentials = "user = akitsuteixlbud password=61dc3e2c568a28b5817cb8c6abe04ab9d7165f41c03338c32a8acaefad5638d0";
 		private $dbname = "dbname = d52snp06li4fb7";
 		private $conn;
+
 		public $totalJobs;
 		public $totalBlogs;
 		public $totalJobSearch;
@@ -23,6 +24,157 @@
 				echo "connection failed" . $e->getMessage();
 			}
 		}
+
+// ------------------------------------- GET EVERYTHING FROM DATABASE ------------------------------------- //
+
+		public function getCompany(){
+
+			$fetch = "SELECT * FROM company";
+			$result = pg_query($this->conn, $fetch);
+
+			if(pg_num_rows($result) > 0) {
+
+				return pg_fetch_all($result);
+
+            }else{
+
+				return false;
+				echo "<script>alert('No Company');</script>";
+
+			}
+
+		}
+
+		public function getCompanyOverview($id){
+
+			$fetch = "SELECT * FROM company where id = $id";
+			$result = pg_query($this->conn, $fetch);
+
+			if(pg_num_rows($result) > 0) {
+
+				return pg_fetch_assoc($result);
+
+            }else{
+
+				return false;
+				echo "<script>alert('No Company');</script>";
+
+			}
+
+		}
+
+		public function getExperience(){
+
+			$fetch = "SELECT * FROM experience;";
+			$result = pg_query($this->conn, $fetch);
+
+			if(pg_num_rows($result) > 0) {
+
+				return pg_fetch_all($result);
+
+            }else{
+
+				return false;
+				echo "<script>alert('No Experience');</script>";
+
+			}
+
+		}
+
+		public function getIndustry(){
+
+			$fetch = "SELECT * FROM industry";
+			$result = pg_query($this->conn, $fetch);
+
+			if(pg_num_rows($result) > 0) {
+
+				return pg_fetch_all($result);
+
+            }else{
+
+				return false;
+				echo "<script>alert('No Industry');</script>";
+
+			}
+
+		}
+
+		public function getLevel(){
+
+			$fetch = "SELECT * FROM level";
+			$result = pg_query($this->conn, $fetch);
+
+			if(pg_num_rows($result) > 0) {
+
+				return pg_fetch_all($result);
+
+            }else{
+
+				return false;
+				echo "<script>alert('No Level');</script>";
+
+			}
+
+		}
+
+		public function getLocation(){
+
+			$fetch = "SELECT * FROM location";
+			$result = pg_query($this->conn, $fetch);
+
+			if(pg_num_rows($result) > 0) {
+
+				return pg_fetch_all($result);
+
+            }else{
+
+				return false;
+				echo "<script>alert('No Location');</script>";
+
+			}
+
+		}
+
+		public function getSalary(){
+
+			$fetch = "SELECT * FROM salary";
+			$result = pg_query($this->conn, $fetch);
+
+			if(pg_num_rows($result) > 0) {
+
+				return pg_fetch_all($result);
+
+            }else{
+
+				return false;
+				echo "<script>alert('No Salary');</script>";
+
+			}
+
+		}
+
+		public function getType(){
+
+			$fetch = "SELECT * FROM type";
+			$result = pg_query($this->conn, $fetch);
+
+			if(pg_num_rows($result) > 0) {
+
+				return pg_fetch_all($result);
+
+            }else{
+
+				return false;
+				echo "<script>alert('No Level');</script>";
+
+			}
+
+		}
+
+// ------------------------------------- END GET EVERYTHING FROM DATABASE ------------------------------------- //
+
+
+// ------------------------------------- ALL SIGNUP / LOGIN ------------------------------------- //
 
 		private function validate($data){
 
@@ -138,7 +290,118 @@
 				}
 			}
 		}
-		
+
+		public function signupEmployer(){
+
+			if(isset($_POST['submit'])){
+				if(isset($_POST['email']) && isset($_POST['password']) && isset($_POST['companyid'])){
+					if(!empty($_POST['email']) && !empty($_POST['password']) && $_POST['companyid'] != 0){
+
+						$email = $this->validate($_POST['email']);
+						
+						// plaintext Password
+						$passwordText = $this->validate($_POST['password']);
+						// Hash password
+						$password = md5($passwordText);
+
+						$companyID = $this->validate($_POST['companyid']);
+						$role = 3;
+						
+						// Test trung email || username
+						$dupCheck = "SELECT * FROM employer WHERE email = '$email';";
+						$queryCheck = pg_query($this->conn, $dupCheck);
+
+						// Trung -> bat nhap lai
+                        if (pg_num_rows($queryCheck) > 0) {
+
+                            echo "<script>alert('Email has been taken');</script>";
+                            echo "<script>window.location.href = 'register_employer.php';</script>";
+
+						// Khong trung tao acc moi
+						}else{
+							
+							$insertUser = "INSERT INTO employer (email, password, role, companyid) VALUES ('$email', '$password', '$role', '$companyID')" ;
+							$queryInsert = pg_query($this->conn, $insertUser);
+
+							if($queryInsert){
+
+								echo "<script>alert('Account create successfully');</script>";
+								echo "<script>window.location.href = 'login_employer.php';</script>";
+
+							}else{
+
+								echo "<script>alert('Query Failed');</script>";
+								echo "<script>window.location.href = 'register_employer.php';</script>";
+
+							}
+
+						}
+
+					}else{
+
+						echo "<script>alert('You cant leave Email || Company || Password empty');</script>";
+						echo "<script>window.location.href = 'register_employer.php';</script>";
+					}
+				}
+			}
+		}
+
+		public function loginEmployer(){
+
+			if(isset($_POST['submit'])){
+				if(isset($_POST['email']) && isset($_POST['password'])){
+					if(!empty($_POST['email']) && !empty($_POST['password'])){
+
+						$email = $this->validate($_POST['email']);
+						$passwordText = $this->validate($_POST['password']);
+						$password = md5($passwordText);
+
+						$loginCheck = "SELECT * FROM employer WHERE email = '$email' and password = '$password';";
+						$queryCheck = pg_query($this->conn, $loginCheck);
+
+						if(pg_num_rows($queryCheck) === 1){
+
+							$row = pg_fetch_assoc($queryCheck);
+							if($row['email'] === $email && $row['password'] === $password){
+								
+								$_SESSION['userid'] = $row['id'];
+								$_SESSION['email'] = $row['email'];
+								$_SESSION['avatar'] = $row['avatar'];
+								$_SESSION['role'] = $row['role'];
+								$_SESSION['companyid'] = $row['companyid'];
+								$_SESSION['loggedin'] = true;
+								echo "<script>alert('Login successfully');</script>";
+								echo "<script>window.location.href = 'login_employer.php';</script>";
+
+							}else{
+
+								echo "<script>alert('Invalid Email || Password');</script>";
+								echo "<script>window.location.href = 'login_employer.php';</script>";
+
+							}
+
+						}else{
+							
+							echo "<script>alert('Invalid Email || Password');</script>";
+							echo "<script>window.location.href = 'login_employer.php';</script>";
+
+						}
+						
+
+					}else{
+
+						echo "<script>alert('You cant leave Email || Password empty');</script>";
+						echo "<script>window.location.href = 'login_employer.php';</script>";
+
+					}
+				}
+			}
+		}
+
+// ------------------------------------- END ALL SIGNUP / LOGIN ------------------------------------- //
+
+// ------------------------------------- ALL BLOGS FUNCTION ------------------------------------- //
+
 		public function createBlog(){
 			if(isset($_POST['submit'])){
 				if(isset($_POST['title']) && isset($_POST['author']) && isset($_POST['body'])){
@@ -232,7 +495,7 @@
             }
         }
 
-		public function fetchBlogs($page){
+		public function getBlogs($page){
 
             $limit = 6;
             $start = ($page - 1) * $limit;
@@ -252,7 +515,7 @@
 
         }
 
-		public function fetchAllBlogs(){
+		public function getAllBlogs(){
 			$fetchall = "SELECT * FROM blog ORDER BY datecreated ASC";
 			$result = pg_query($this->conn, $fetchall);
 
@@ -418,61 +681,9 @@
 			}
 		}
 
-		public function signupEmployer(){
-
-			if(isset($_POST['submit'])){
-				if(isset($_POST['email']) && isset($_POST['password']) && isset($_POST['companyid'])){
-					if(!empty($_POST['email']) && !empty($_POST['password']) && $_POST['companyid'] != 0){
-
-						$email = $this->validate($_POST['email']);
-						
-						// plaintext Password
-						$passwordText = $this->validate($_POST['password']);
-						// Hash password
-						$password = md5($passwordText);
-
-						$companyID = $this->validate($_POST['companyid']);
-						$role = 3;
-						
-						// Test trung email || username
-						$dupCheck = "SELECT * FROM employer WHERE email = '$email';";
-						$queryCheck = pg_query($this->conn, $dupCheck);
-
-						// Trung -> bat nhap lai
-                        if (pg_num_rows($queryCheck) > 0) {
-
-                            echo "<script>alert('Email has been taken');</script>";
-                            echo "<script>window.location.href = 'register_employer.php';</script>";
-
-						// Khong trung tao acc moi
-						}else{
-							
-							$insertUser = "INSERT INTO employer (email, password, role, companyid) VALUES ('$email', '$password', '$role', '$companyID')" ;
-							$queryInsert = pg_query($this->conn, $insertUser);
-
-							if($queryInsert){
-
-								echo "<script>alert('Account create successfully');</script>";
-								echo "<script>window.location.href = 'login_employer.php';</script>";
-
-							}else{
-
-								echo "<script>alert('Query Failed');</script>";
-								echo "<script>window.location.href = 'register_employer.php';</script>";
-
-							}
-
-						}
-
-					}else{
-
-						echo "<script>alert('You cant leave Email || Company || Password empty');</script>";
-						echo "<script>window.location.href = 'register_employer.php';</script>";
-					}
-				}
-			}
-		}
+// ------------------------------------- END ALL BLOGS FUNCTION ------------------------------------- //
 			
+// ------------------------------------- ALL CREATE FUNCTION ------------------------------------- //
 
 		public function createCompany(){
 			if (isset($_POST['submit'])) {
@@ -499,202 +710,6 @@
 					}
 				}
 			}
-		}
-
-		public function loginEmployer(){
-
-			if(isset($_POST['submit'])){
-				if(isset($_POST['email']) && isset($_POST['password'])){
-					if(!empty($_POST['email']) && !empty($_POST['password'])){
-
-						$email = $this->validate($_POST['email']);
-						$passwordText = $this->validate($_POST['password']);
-						$password = md5($passwordText);
-
-						$loginCheck = "SELECT * FROM employer WHERE email = '$email' and password = '$password';";
-						$queryCheck = pg_query($this->conn, $loginCheck);
-
-						if(pg_num_rows($queryCheck) === 1){
-
-							$row = pg_fetch_assoc($queryCheck);
-							if($row['email'] === $email && $row['password'] === $password){
-								
-								$_SESSION['userid'] = $row['id'];
-								$_SESSION['email'] = $row['email'];
-								$_SESSION['avatar'] = $row['avatar'];
-								$_SESSION['role'] = $row['role'];
-								$_SESSION['companyid'] = $row['companyid'];
-								$_SESSION['loggedin'] = true;
-								echo "<script>alert('Login successfully');</script>";
-								echo "<script>window.location.href = 'login_employer.php';</script>";
-
-							}else{
-
-								echo "<script>alert('Invalid Email || Password');</script>";
-								echo "<script>window.location.href = 'login_employer.php';</script>";
-
-							}
-
-						}else{
-							
-							echo "<script>alert('Invalid Email || Password');</script>";
-							echo "<script>window.location.href = 'login_employer.php';</script>";
-
-						}
-						
-
-					}else{
-
-						echo "<script>alert('You cant leave Email || Password empty');</script>";
-						echo "<script>window.location.href = 'login_employer.php';</script>";
-
-					}
-				}
-			}
-		}
-
-		public function fetchCompany(){
-
-			$fetchCompany = "SELECT * FROM company";
-			$result = pg_query($this->conn, $fetchCompany);
-
-			if(pg_num_rows($result) > 0) {
-
-				return pg_fetch_all($result);
-
-            }else{
-
-				return false;
-				echo "<script>alert('No Company');</script>";
-
-			}
-
-		}
-
-		public function getCompany(){
-
-			$fetch = "SELECT id, companyname FROM company";
-			$result = pg_query($this->conn, $fetch);
-
-			if(pg_num_rows($result) > 0) {
-
-				return pg_fetch_all($result);
-
-            }else{
-
-				return false;
-				echo "<script>alert('No Company');</script>";
-
-			}
-
-		}
-
-		public function getExperience(){
-
-			$fetch = "SELECT id, experienceyear FROM experience;";
-			$result = pg_query($this->conn, $fetch);
-
-			if(pg_num_rows($result) > 0) {
-
-				return pg_fetch_all($result);
-
-            }else{
-
-				return false;
-				echo "<script>alert('No Experience');</script>";
-
-			}
-
-		}
-
-		public function getIndustry(){
-
-			$fetch = "SELECT id,industry FROM industry";
-			$result = pg_query($this->conn, $fetch);
-
-			if(pg_num_rows($result) > 0) {
-
-				return pg_fetch_all($result);
-
-            }else{
-
-				return false;
-				echo "<script>alert('No Industry');</script>";
-
-			}
-
-		}
-
-		public function getLevel(){
-
-			$fetch = "SELECT id,level FROM level";
-			$result = pg_query($this->conn, $fetch);
-
-			if(pg_num_rows($result) > 0) {
-
-				return pg_fetch_all($result);
-
-            }else{
-
-				return false;
-				echo "<script>alert('No Level');</script>";
-
-			}
-
-		}
-
-		public function getLocation(){
-
-			$fetch = "SELECT id,location FROM location";
-			$result = pg_query($this->conn, $fetch);
-
-			if(pg_num_rows($result) > 0) {
-
-				return pg_fetch_all($result);
-
-            }else{
-
-				return false;
-				echo "<script>alert('No Location');</script>";
-
-			}
-
-		}
-
-		public function getSalary(){
-
-			$fetch = "SELECT id,salary FROM salary";
-			$result = pg_query($this->conn, $fetch);
-
-			if(pg_num_rows($result) > 0) {
-
-				return pg_fetch_all($result);
-
-            }else{
-
-				return false;
-				echo "<script>alert('No Salary');</script>";
-
-			}
-
-		}
-
-		public function getType(){
-
-			$fetch = "SELECT id,type FROM type";
-			$result = pg_query($this->conn, $fetch);
-
-			if(pg_num_rows($result) > 0) {
-
-				return pg_fetch_all($result);
-
-            }else{
-
-				return false;
-				echo "<script>alert('No Level');</script>";
-
-			}
-
 		}
 
 		public function createJob(){
@@ -745,6 +760,10 @@
 			
 		}
 
+// ------------------------------------- END CREATE FUNCTION ------------------------------------- //
+
+// ------------------------------------- JOBLIST AND JOBDETAIL PAGE FUNCTION ------------------------------------- //
+
 		public function getPagesJobs(){
 
             $limit = 5;
@@ -765,7 +784,7 @@
 			}
         }
 
-		public function fetchJobs($page){
+		public function getJobs($page){
 
 			$limit = 5;
             $start = ($page - 1) * $limit;
@@ -791,7 +810,7 @@
 
 		}
 
-		public function fetchDetailJob($id){
+		public function getDetailJob($id){
 
 			$fetchJob = "SELECT * 
 							FROM job j, company c, industry i, experience e, salary s, type t, level l, location lo 
@@ -812,6 +831,10 @@
 
 		}
 
+// ------------------------------------- END JOBLIST AND JOBDETAIL PAGE FUNCTION ------------------------------------- //
+
+// ------------------------------------- SEARCH BAR FUNCTION ------------------------------------- //
+
 		public function getPagesSearch(){
 
             $limit = 5;
@@ -820,8 +843,8 @@
 
         }
 
-		public function searchBar($page)
-		{
+		public function searchBar($page){
+
             if (isset($_POST['submit'])) {
                 if ($_POST['companyid'] != 0 || $_POST['typeid'] != 0 || $_POST['locationid'] != 0 ||
                     $_POST['salaryid'] != 0 || $_POST['experienceid'] != 0 || $_POST['industryid'] != 0) {
@@ -873,12 +896,18 @@
 					}
 
                 }else{
-					echo "<script>alert('You can\'t leave everything');</script>";
+
+					echo "<script>alert('You can\'t leave everything empty');</script>";
+
 				}
 
             }
 			
 		}
+
+// ------------------------------------- END SEARCH BAR FUNCTION ------------------------------------- //
+
+
 
     }	
 

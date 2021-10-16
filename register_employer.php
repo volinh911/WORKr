@@ -2,7 +2,7 @@
 
     include './func/cre.php';
     $model = new Model;
-    $companyNames = $model->fetchCompany();
+    $companyNames = $model->getCompany();
     $signup = $model->signupEmployer();
 
 ?>
@@ -110,7 +110,7 @@
 
                             <?php foreach($companyNames as $companyName): ?>
 
-                            <option value="<?php echo $companyName['id']; ?>"> <?php echo $companyName['name']; ?> </option>
+                            <option value="<?php echo $companyName['id']; ?>"> <?php echo $companyName['companyname']; ?> </option>
 
                             <?php endforeach; ?>
 

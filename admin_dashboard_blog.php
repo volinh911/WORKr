@@ -3,7 +3,7 @@
     include './func/render.php';
 
     $model = new Model;
-    $blogs = $model->fetchAllBlogs();
+    $blogs = $model->getAllBlogs();
     var_dump($_SESSION);
 ?>
 

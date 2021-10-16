@@ -1,8 +1,11 @@
 <?php
 
+// ------------------------------------- RENDER BLOGS ------------------------------------- //
+
 function renderMoreBlog($blog,$smallText) {
 
-    echo "<div class='col-lg-4 col-md-6'>
+    echo "
+    <div class='col-lg-4 col-md-6'>
     <div class='card border rounded-2 shadow advice mt-4' style='width: 20rem;'>
 
         <img src={$blog['image']} class='card-img-top' alt=''    >
@@ -21,7 +24,7 @@ function renderMoreBlog($blog,$smallText) {
 
         </div>
     </div>
-</div>";
+    </div>";
 
 }
 
@@ -64,9 +67,13 @@ function renderBlogList($blog, $smallText){
                 
         </div>
     </div>
-</div>";
+    </div>";
 
 }
+
+// ------------------------------------- END RENDER BLOGS ------------------------------------- //
+
+// ------------------------------------- RENDER ADMIN DASHBOARD ------------------------------------- //
 
 function renderBlogListAdmin($blog){
 
@@ -114,6 +121,10 @@ function renderEditBlogAdmin($blog){
     </form>";
 }
 
+// ------------------------------------- END RENDER ADMIN DASHBOARD ------------------------------------- //
+
+// ------------------------------------- RENDER JOBLIST AND JOBDETAIL ------------------------------------- //
+
 function renderJobList($job){
     echo "
     <div class='row'>
@@ -152,11 +163,11 @@ function renderJobList($job){
             </div>
         </div>
     </div>
-</div>";
+    </div>";
 
 }
 
-function renderJobDetail($job){
+function renderJobDetail($job, $company){
     echo"
     <div class='tab-content' id='nav-tabContent'>
     <div class='tab-pane fade show active' id='job-detail' role='tabpanel'>
@@ -219,83 +230,116 @@ function renderJobDetail($job){
                                     year/years of experience
                                 </li>
                                 <li class='list-group-item'>
-                                    <i class='fas fa-language mr-2'></i> {$job['type']} ?>
-</li>
-
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-
-</div>";
-}
-
-function renderSearchResult($result){
-echo "
-<div class='row'>
-    <div class='col-md-10 border-top border-bottom '>
-        <div class='jobs d-flex align-items-center mt-3 mb-3'>
-            <div class='card' style='width: 20rem;'>
-
-                <img src=' {$result['logo']} ' class=' card-img-top' alt='...'>
-
-            </div>
-
-            <div class='card_content w-100 ml-3 d-flex justify-content-between align-items-end'>
-                <div class='job_info'>
-
-                    <a href='job_details.php?id={$result['jobid']}'>
-
-                        <h5 class='text-danger'> {$result['title']} </h5>
-
-                    </a>
-
-                    <h6> {$result['companyname']} </h6>
-                    <h6 class=' text-warning'><span><i class='fas fa-dollar-sign'></i></span>
-                        {$result['salary']} </h6>
-                    <h6><i class='fas fa-map-marker-alt'></i> {$result['location']} </h6>
-                    <div class='treatment'>
-                        <ul class='d-flex'>
-                            <li><i class='fas fa-medkit'></i> Health Insurance</li>
-                            <li><i class='fas fa-star-of-life'></i> Medical Services</li>
-                        </ul>
+                                    <i class='fas fa-language mr-2'></i> {$job['type']}
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-                <div class='details'>
-                    <p><i class='far fa-heart mr-2' aria-hidden='true'></i>Add to favorite list</p>
-                    <p><i class='far fa-calendar-minus mr-2'></i> {$result['enddate']} </p>
                 </div>
             </div>
         </div>
     </div>
-</div>";
 
-}
-function renderDropListSearch($list,$id)
-{
+    <div class='tab-pane fade' id='company'>
+    <div class='container mt-3'>
+        <div class='row'>
+            <div class='col-md-12 '>
+                <div class='jobs d-flex align-items-center mt-3 mb-3'>
+                    <div class='card' style='width: 18rem;'>
+                            <img src='{$company['logo']}' class='card-img-top' alt='...'>
+                        </div>
+                        <div class='card_content w-100 ml-3 d-flex justify-content-between align-items-end'>
+                        <div class='job_info'>
+                            <h3 class='text-danger'>{$company['companyname']}</h3>
+                            <h6>Location: <i class='fas fa-map-marker-alt text-black-50'></i> {$company['address']} </h6>
+                            <div class='treatment'>
+                                <h6 class='text-bold'>Company Infomation: {$company['companydescription']} </h6>
+                            <ul class='d-flex'>
+                                <li class='mr-3'><i class='fa fa-users' aria-hidden='true'></i> Company size: {$company['size']} </li>
+                                <li class='mr-3'><i class='fa fa-users' aria-hidden='true'></i> Company size: {$company['applyemail']} </li>
+                                <li><i class='fas fa-gamepad'></i> {$company['website']} </li>
+                            </ul>
+                        </div>
+                        </div>  
+                            <div class='details'>
 
-$options = "";
-
-foreach ($list as $item) {
-$options .= "<option ";
-        if (isset($id) && $id == $item['id']) 
-                $options .= 'selected';
-        $options .= " value={$item['id']}> {$item['companyname']}</option>";
-}
-echo "<div class='col-md-4 mt-3'>
-    <div class='input-group'>
-        <select class='custom-select' id='inputGroupSelect04' aria-label='Example select with button addon'
-            name='companyid'>
-            <option value='0' selected>Choose your Company</option>
-            {$options}
-
-        </select>
+                                <button type='submit' class='btn btn-outline-warning love-btn'><i class='far fa-heart' aria-hidden='true'></i> Add to favorite list</button>
+                            </div>      
+                        </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
-";
+    </div>
+    </div>";
 }
+
+function renderSearchResult($result){
+    echo "
+    <div class='row'>
+        <div class='col-md-10 border-top border-bottom '>
+            <div class='jobs d-flex align-items-center mt-3 mb-3'>
+                <div class='card' style='width: 20rem;'>
+
+                    <img src=' {$result['logo']} ' class=' card-img-top' alt='...'>
+
+                </div>
+
+                <div class='card_content w-100 ml-3 d-flex justify-content-between align-items-end'>
+                    <div class='job_info'>
+
+                        <a href='job_details.php?id={$result['jobid']}'>
+
+                            <h5 class='text-danger'> {$result['title']} </h5>
+
+                        </a>
+
+                        <h6> {$result['companyname']} </h6>
+                        <h6 class=' text-warning'><span><i class='fas fa-dollar-sign'></i></span>
+                            {$result['salary']} </h6>
+                        <h6><i class='fas fa-map-marker-alt'></i> {$result['location']} </h6>
+                        <div class='treatment'>
+                            <ul class='d-flex'>
+                                <li><i class='fas fa-medkit'></i> Health Insurance</li>
+                                <li><i class='fas fa-star-of-life'></i> Medical Services</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class='details'>
+                        <p><i class='far fa-heart mr-2' aria-hidden='true'></i>Add to favorite list</p>
+                        <p><i class='far fa-calendar-minus mr-2'></i> {$result['enddate']} </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>";
+
+}
+
+// ------------------------------------- END RENDER JOBLIST AND JOBDETAIL ------------------------------------- //
+
+// function renderDropListSearch($list,$id)
+// {
+
+// $options = "";
+
+// foreach ($list as $item) {
+// $options .= "<option ";
+//         if (isset($id) && $id == $item['id']) 
+//                 $options .= 'selected';
+//         $options .= " value={$item['id']}> {$item['companyname']}</option>";
+// }
+// echo "<div class='col-md-4 mt-3'>
+//     <div class='input-group'>
+//         <select class='custom-select' id='inputGroupSelect04' aria-label='Example select with button addon'
+//             name='companyid'>
+//             <option value='0' selected>Choose your Company</option>
+//             {$options}
+
+//         </select>
+//     </div>
+// </div>
+// ";
+// }
 
 ?>
