@@ -14,7 +14,8 @@ body {
 .sienna {
     color: #A0522D;
 }
-.bg-sienna{
+
+.bg-sienna {
     background: #A0522D;
 }
 
@@ -53,6 +54,44 @@ li a:hover {
 
 /*#region LOGIN*/
 
+
 /*#endregion LOGIN*/
 
 
+/* stylized hr */
+
+hr.center-diamond {
+    border: 0;
+    height: 1px;
+    width: 50%;
+    position: relative;
+    margin: 30px auto;
+    background: #A0522D;
+}
+
+hr.center-diamond::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    background: #A0522D;
+    display: inline-block;
+    border: 2px solid #A0522D;
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    margin: 0 0 0 -3px;
+    transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    /* IE 9 */
+    -webkit-transform: rotate(45deg);
+    /* Opera, Chrome, and Safari */
+}
+
+hr.simple_sienna {
+    border: 0;
+    height: 1px;
+    width: 30%;
+    position: relative;
+    background: #A0522D;
+    margin-top: -10px;
+}

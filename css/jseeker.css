@@ -1,0 +1,251 @@
+main {
+    padding: 2rem 5.5rem !important;
+}
+
+.info {
+    align-content: flex-start;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.info img {
+    max-width: 400px !important;
+    height: 300px !important;
+}
+
+.profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: #ffcdb5;
+}
+
+.profile-body {
+    display: inline-flex;
+    padding: 30px 80px;
+    box-shadow: 2px 2px 0px 2px sienna;
+}
+
+.text-box {
+    margin: auto;
+    align-self: center;
+    color: #441c09;
+}
+
+.text-box p,
+.info a {
+    margin-bottom: 7px;
+}
+
+.edit-btn {
+    padding: 10px 30px;
+    margin: 30px auto;
+    font-size: 25px;
+    border-color: #ea946c;
+    border-width: 10px;
+    border-radius: 15px;
+    background: #ffe7dc;
+}
+
+.pdesc-box {
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    border: #a0522d99;
+    border-width: 2px;
+    border-style: dotted;
+}
+
+.neatly-put-grid-columns h2 {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.neatly-constructed-grid-rows {
+    display: grid;
+    grid-template-rows: auto;
+    row-gap: 20px;
+}
+
+.neatly-put-grid-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 5rem;
+}
+
+label.field {
+    border-radius: 2px;
+    color: #666;
+    display: block;
+    max-width: 300px;
+    padding-left: 0px !important;
+    opacity: 0;
+    position: relative;
+    transition-property: opacity;
+    z-index: 1;
+}
+
+label.field span {
+    color: inherit;
+    display: block;
+    font-size: 16px;
+    height: 100%;
+    pointer-events: none;
+    position: absolute;
+    transform: scale(1) translateY(0);
+    transition-property: color, font-size, top;
+    z-index: 1;
+}
+
+label.field span .required::after {
+    color: inherit;
+    content: "*";
+    display: block;
+    height: 100%;
+    left: -20px;
+    line-height: 20px;
+    position: absolute;
+    text-align: center;
+    top: 0;
+}
+
+.psuedo_select {
+    background: rgba(255, 255, 255, 0);
+    position: relative;
+    border-color: #666;
+    border-style: solid;
+    border-width: 0 0 2px 0;
+    color: #666;
+    cursor: pointer;
+    font-size: 20px;
+    height: 32px;
+    line-height: 24px;
+    min-width: 250px;
+    padding-top: 24px;
+    outline: 0;
+    z-index: 1;
+}
+
+.psuedo_select::after {
+    background: url("data:image/svg+xml;utf8,<svg fill='#666' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'> <path d='M7.41 7.84L12 12.42l4.59-4.58L18 9.25l-6 6-6-6z'/> <path d='M0-.75h24v24H0z' fill='none'/> </svg>"), no-repeat;
+    content: "";
+    height: 24px;
+    width: 24px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transition-property: background;
+}
+
+.psuedo_select .selected {
+    height: 24px;
+    left: 1px;
+    line-height: 24px;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    transform: translateY(24px);
+    transition-property: opacity, transform;
+    will-change: transform;
+}
+
+.psuedo_select ul {
+    background: #fff;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+    display: block;
+    height: 0;
+    list-style: none;
+    margin-top: 2px;
+    opacity: 0;
+    overflow: hidden;
+    padding: 0 1px;
+    pointer-events: none;
+    transition-property: height, opacity;
+    width: 100%;
+    z-index: 2;
+}
+
+.psuedo_select ul li {
+    height: 32px;
+    padding: 5px 0px 0px 15px;
+    font-size: 17px;
+}
+
+.deselect {
+    height: 100vh;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    z-index: -1;
+}
+
+.focused {
+    color: #007BED;
+}
+
+.focused .psuedo_select {
+    border-color: #007BED;
+}
+
+.focused .psuedo_select::after {
+    background: url("data:image/svg+xml;utf8,<svg fill='#007BED' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'> <path d='M7.41 7.84L12 12.42l4.59-4.58L18 9.25l-6 6-6-6z'/> <path d='M0-.75h24v24H0z' fill='none'/> </svg>"), no-repeat;
+}
+
+.focused .psuedo_select ul {
+    opacity: 1;
+    pointer-events: all;
+}
+
+#special-body-uwu {
+    display: block !important;
+}
+
+#special-hr-uwu {
+    margin-bottom: 50px;
+}
+
+.projects {
+    box-shadow: 5px 5px 0px #64270ade !important;
+}
+
+td#j-status {
+    margin: 0px !important;
+}
+
+td#j-name {
+    width: 45%;
+}
+
+td#j-location {
+    width: 35%;
+}
+
+.c-box img {
+    max-width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+.c-box a {
+    display: flex;
+    color: sienna;
+    align-items: center;
+}
+
+.c-box {
+    margin: 30px;
+    border-radius: 30px;
+    transition: background 0.2s, box-shadow 0.5s, padding 0.2s;
+}
+
+.c-box a h3 {
+    margin-left: 40px;
+}
+
+.c-box:hover {
+    background: antiquewhite;
+    box-shadow: 7px 7px 0 rgb(90, 39, 15);
+    padding: 20px 10px;
+}
