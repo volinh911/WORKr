@@ -119,10 +119,8 @@ function renderJobList($job){
     <div class='row'>
     <div class='col-md-10 border-top border-bottom '>
         <div class='jobs d-flex align-items-center mt-3 mb-3'>
-            <div class='card' style='width: 20rem;'>
-
-                <img src=' {$job['logo']} ' class='card-img-top' alt='...'>
-
+            <div class='card' style='width: 170px;'>
+                <img src=' {$job['logo']} ' class=' card-img-top' style='height: 150px; width: 100%; object-fit: cover;' alt='...'>
             </div>
 
             <div class='card_content w-100 ml-3 d-flex justify-content-between align-items-end'>
@@ -130,14 +128,14 @@ function renderJobList($job){
 
                 <a href='job_details.php?id={$job['jobid']}'>
 
-                <h5 class='text-danger'> {$job['title']} </h5> 
+                <h5 class='text-danger' style='margin-left: 12px;'> {$job['title']} </h5> 
 
                 </a>
 
-                    <h6> {$job['companyname']} </h6>
-                    <h6 class=' text-warning'><span><i class='fas fa-dollar-sign'></i></span>
+                    <h6 style='margin-left: 12px;'> {$job['companyname']} </h6>
+                    <h6 class=' text-warning' style='margin-left: 12px;'><span><i class='fas fa-dollar-sign'></i></span>
                         {$job['salary']} </h6>
-                    <h6><i class='fas fa-map-marker-alt'></i> {$job['location']} </h6>
+                    <h6 style='margin-left: 12px;'><i class='fas fa-map-marker-alt'></i> {$job['location']} </h6>
                     <div class='treatment'>
                         <ul class='d-flex'>
                             <li><i class='fas fa-medkit'></i> Health Insurance</li>
@@ -163,10 +161,10 @@ function renderJobDetail($job){
         <!-- Job title -->
         <div class='container mt-3'>
             <div class='row'>
-                <div class='col-md-12 '>
+                <div class='col'>
                     <div class='jobs d-flex align-items-center mt-3 mb-3'>
-                        <div class='card' style='width: 18rem;'>
-                            <img src='{$job['logo']}' class='card-img-top' alt='...'>
+                        <div class='card' style='width:150px;'>
+                            <img src='{$job['logo']}' class='card-img-top' style='height: 150px; width: 100%; object-fit: cover;' alt='...'>
                         </div>
                         <div class='card_content w-100 ml-3 d-flex justify-content-between align-items-end'>
                             <div class='job_info'>
@@ -216,20 +214,19 @@ function renderJobDetail($job){
                                 </li>
                                 <li class='list-group-item'>
                                     <i class='fas fa-flag mr-2'></i> {$job['experienceyear']}
-                                    year/years of experience
+                                    year(s) of experience
                                 </li>
                                 <li class='list-group-item'>
-                                    <i class='fas fa-language mr-2'></i> {$job['type']} ?>
-</li>
+                                    <i class='fas fa-language mr-2'></i> {$job['type']} 
+                                </li>
 
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>";
 }
 
@@ -238,25 +235,20 @@ echo "
 <div class='row'>
     <div class='col-md-10 border-top border-bottom '>
         <div class='jobs d-flex align-items-center mt-3 mb-3'>
-            <div class='card' style='width: 20rem;'>
-
-                <img src=' {$result['logo']} ' class=' card-img-top' alt='...'>
-
+            <div class='card' style='width: 170px;'>
+                <img src=' {$result['logo']} ' class=' card-img-top' style='height: 150px; width: 100%; object-fit: cover;' alt='...'>
             </div>
 
             <div class='card_content w-100 ml-3 d-flex justify-content-between align-items-end'>
                 <div class='job_info'>
-
                     <a href='job_details.php?id={$result['jobid']}'>
-
-                        <h5 class='text-danger'> {$result['title']} </h5>
-
+                        <h5 class='text-danger' style='margin-left: 12px;'> {$result['title']} </h5>
                     </a>
 
-                    <h6> {$result['companyname']} </h6>
-                    <h6 class=' text-warning'><span><i class='fas fa-dollar-sign'></i></span>
+                    <h6 style='margin-left: 12px;'> {$result['companyname']} </h6>
+                    <h6 class=' text-warning' style='margin-left: 12px;'><span><i class='fas fa-dollar-sign'></i></span>
                         {$result['salary']} </h6>
-                    <h6><i class='fas fa-map-marker-alt'></i> {$result['location']} </h6>
+                    <h6><i class='fas fa-map-marker-alt' style='margin-left: 12px;'></i> {$result['location']} </h6>
                     <div class='treatment'>
                         <ul class='d-flex'>
                             <li><i class='fas fa-medkit'></i> Health Insurance</li>
