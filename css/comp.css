@@ -1,0 +1,212 @@
+.jumbotron {
+    background: url("../images/bg_comp_rvw.png");
+    height: fit-content;
+    background-position: center;
+    background-size: cover;
+}
+
+p.jum_title {
+    font-size: 6rem;
+    color: #0a004c;
+    text-align-last: center;
+}
+
+hr.center-diamond {
+    border: 0;
+    height: 1px;
+    width: 50%;
+    position: relative;
+    margin: 30px auto;
+    background: #A0522D;
+}
+
+hr.center-diamond::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    background: #A0522D;
+    display: inline-block;
+    border: 2px solid #A0522D;
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    margin: 0 0 0 -3px;
+    transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    /* IE 9 */
+    -webkit-transform: rotate(45deg);
+    /* Opera, Chrome, and Safari */
+}
+
+hr.simple_sienna {
+    border: 0;
+    height: 1px;
+    width: 30%;
+    position: relative;
+    background: #A0522D;
+    margin-top: -10px;
+}
+
+.main-box .box {
+    padding: 30px 100px;
+}
+
+.rvw_title {
+    margin-bottom: 50px;
+}
+
+.comp-box {
+    display: flex;
+    flex-direction: column;
+    max-width: 16.5em;
+    min-height: 22.75em;
+    overflow: hidden;
+    border-radius: .5em;
+    text-decoration: none;
+    background: white;
+    margin: 1em;
+    padding: 0.5em;
+    box-shadow: 0 1.5em 2.5em -.5em rgba(#000000, .1);
+    text-align: center;
+    align-items: center;
+    color: #A0522D;
+    transition: transform .45s ease, background .45s ease;
+}
+
+.comp-box img {
+    padding: 10px;
+    width: 264px;
+    min-height: 250px;
+    border-radius: 50%;
+}
+
+.comp-box h4 {
+    font-size: 28px;
+}
+
+.comp-box p {
+    font-size: 20px;
+    color: indigo;
+}
+
+.comp-box h4,
+.comp-box p {
+    transition: color .45s ease, border .45s ease;
+}
+
+.comp-box:hover {
+    background-color: #A0522D;
+    color: antiquewhite;
+    text-decoration: none;
+    transform: scale(1.02);
+}
+
+@keyframes point {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(.125em);
+    }
+}
+
+.griding {
+    /* display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: center;
+    align-items: center; */
+    display: flex;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    background: #a0512d50;
+    border: .75em solid white;
+    padding: 2em;
+}
+
+
+/* <!-- ======================================================================================================================= -->
+<!-- ======================================================================================================================= -->
+<!-- ======================================================================================================================= --> */
+
+
+/*  
+ *  Pure CSS star rating that works without reversing order
+ *  of inputs
+ *  -------------------------------------------------------
+ *  NOTE: For the styling to work, there needs to be a radio
+ *        input selected by default. There also needs to be a
+ *        radio input before the first star, regardless of
+ *        whether you offer a 'no rating' or 0 stars option
+ *  
+ *  This codepen uses FontAwesome icons
+ */
+
+
+/* use display:inline-flex to prevent whitespace issues. alternatively, you can put all the children of .rating-group on a single line */
+
+
+/* .rating-group {
+    display: inline-flex;
+}
+
+
+/* make hover effect work properly in IE */
+
+.rating__icon {
+    pointer-events: none;
+}
+
+
+/* hide radio inputs */
+
+.rating__input {
+    position: absolute !important;
+    left: -9999px !important;
+}
+
+
+/* hide 'none' input from screenreaders */
+
+.rating__input--none {
+    display: none
+}
+
+
+/* set icon padding and size */
+
+.rating__label {
+    cursor: pointer;
+    padding: 0 0.1em;
+    font-size: 2rem;
+}
+
+
+/* set default star color */
+
+.rating__icon--star {
+    color: orange;
+}
+
+
+/* if any input is checked, make its following siblings grey */
+
+.rating__input:checked~.rating__label .rating__icon--star {
+    color: #ddd;
+}
+
+
+/* make all stars orange on rating group hover */
+
+.rating-group:hover .rating__label .rating__icon--star {
+    color: orange;
+}
+
+
+/* make hovered input's following siblings grey on hover */
+
+.rating__input:hover~.rating__label .rating__icon--star {
+    color: #ddd;
+}
+
+*/
