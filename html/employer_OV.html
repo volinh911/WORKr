@@ -8,8 +8,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Bootstrap CSS -->
-  <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
     integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -70,63 +70,91 @@
           <li><a href="">Home</a></li>
           <li><a href="">Find Resume</a></li>
           <li><button>Sign Out</button></li>
+          <li><a href="" class="user-wrapper">
+              <img src="/images/user.jpg" width="40px" height="40px" alt="">
+              <div>
+                <h6 class="text-dark">User</h6>
+              </div>
+            </a></li>
         </ul>
       </nav>
 
-      <a href="" class="user-wrapper">
-        <img src="/images/user.jpg" width="40px" height="40px" alt="">
-        <div>
-          <h6>User</h6>
-        </div>
-      </a>
+
 
     </header>
 
-    <main>
-      <h2 class="dash-title">Company Detail</h2>
 
-      <div class="form-wrapper">
-        <div class="input-form">
-          <div class="input-field">
-            <label for="">Company Name</label>
-            <input type="text" class="input">
+    <main>
+      <div class="container">
+
+        <div class="overview-detail py-5">
+          <div class="overview-detail-header">
+            <h2>Profile</h2>
           </div>
 
-          <div class="input-field">
-            <label for="">Company Logo</label>
-            <div class="input-logo">
-              <img src="../images/user.jpg" alt="">
-              <input type="text" class="input" placeholder="Input image url here...">
+          <div class="overview-profile py-5 bg-white">
+            <div class="employer-avt pl-5">
+              <img src="../images/user.jpg" style="width: 300px; height:300px;" alt="">
+            </div>
+            <div class="employer-brief pl-5 align-self-center">
+              <div>
+                <h3 class="employer-name">Applejack</h3>
+              </div>
+              <div class="employer-address">
+                <span>123 Mt.Olympus, Mars, Solar System</span>
+              </div>
+              <div class="employer-description">
+                <span>add a brief of 50 characters i think here?</span>
+              </div>
+              <div class="employer-edit">
+                <a href="" class="btn overview-button">Edit Details...</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="overview-detail py-5">
+          <div class="overview-detail-header">
+            <h2>Post Jobs</h2>
+          </div>
+          <div class="overview-content p-5 bg-white">
+            <div class="job-posting-sum">
+              <span>U have posted </span>
+              <span class="job-num text-large">69</span>
+              <span>recruitment seekings.</span>
+            </div>
+            <div class="job-posting-recent">
+              <span>Your most recent recruitment seeking was posted on: </span>
+              <span class="job-date text-large">29-2-2021</span>
+            </div>
+            <div class="job-posting-option">
+              <a href="" class="btn overview-button">Make a Post</a>
             </div>
           </div>
 
-          <div class="input-field">
-            <label for="">Address</label>
-            <textarea class="textarea"></textarea>
-          </div>
+        </div>
 
-          <div class="input-field">
-            <label for="">Description</label>
-            <textarea class="textarea"></textarea>
+        <div class="overview-detail py-5">
+          <div class="overview-detail-header">
+            <h2>Favorite Resumes</h2>
           </div>
-
-          <div class="input-field">
-            <label for="">Other Infos</label>
-            <textarea class="textarea"></textarea>
-          </div>
-
-          <div class="input-field">
-            <input type="submit" value="Post" class="btn">
+          <div class="overview-content p-5 bg-white">
+            <div class="favorite-sum">
+              <span>You have </span>
+              <span class="fav-num text-large">75</span>
+              <span>favorite resumes in your stocks.</span>
+            </div>
+            <div class="favorite-option">
+              <a href="" class="btn overview-button">Go Check</a>
+              <a href="" class="btn overview-button">Fetch More</a>
+            </div>
           </div>
 
         </div>
       </div>
-
     </main>
+
   </div>
-
-
-
 
 
   <!-- footer -->

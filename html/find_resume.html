@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Title</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+    integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+    integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/find-resume.css">
+</head>
+
+<body>
+  <!-- header -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand ml-5" href="">
+      <img src="../images/LOGO.png" alt="">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse ml-5" id="navbarNav">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item ">
+          <a class="nav-link" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Career Blog</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Company Review</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="#">Find Resume</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-danger" href="#">Log Out</a>
+        </li>
+        <a href="" class="user-wrapper">
+          <img src="/images/user.jpg" width="40px" height="40px" alt="">
+          <div>
+            <h6 class="text-dark justify-content-center">User</h6>
+          </div>
+        </a>
+      </ul>
+    </div>
+  </nav>
+  <!--end of navbar-->
+
+  <h1 class="text-center py-4">Find Resumes</h1>
+
+  <div class="container py-5">
+    <div class="row">
+      <div class="filter-sidebar col-lg-3 col-md-3">
+        <div class="filter-search">
+          <!--im not sure quite about roles and job types since they are quite the same, i followed seek.com.au category so pls adjust if u need -->
+
+          <div class="filter-column">
+            <h4>JOB TYPE</h4>
+            <div class="select-box">
+              <div class="options-container">
+                <div class="option">
+                  <input type="radio" class="radio" id="accounting" name="category" />
+                  <label for="accounting">Accounting</label>
+                </div>
+
+                <div class="option">
+                  <input type="radio" class="radio" id="admin-office" name="category" />
+                  <label for="admin-office">Administration and Office Support</label>
+                </div>
+
+                <div class="option">
+                  <input type="radio" class="radio" id="advert-art-media" name="category" />
+                  <label for="advert-art-media">Advertising, Arts and Media</label>
+                </div>
+
+                <div class="option">
+                  <input type="radio" class="radio" id="art" name="category" />
+                  <label for="art">Art</label>
+                </div>
+
+                <div class="option">
+                  <input type="radio" class="radio" id="bank" name="category" />
+                  <label for="bank">Banking and Financial Services</label>
+                </div>
+
+              </div>
+
+              <div class="selected dropdown-toggle">
+                Select Job Type...
+              </div>
+
+            </div>
+
+          </div>
+          <hr>
+
+          <div class="filter-column">
+            <h4>ROLE</h4>
+
+            <div class="select-box">
+              <div class="options-container">
+                <div class="option">
+                  <input type="radio" class="radio" id="clerk" name="category" />
+                  <label for="clerk">Account Officers/Clerks</label>
+                </div>
+
+                <div class="option">
+                  <input type="radio" class="radio" id="playable" name="category" />
+                  <label for="playable">Accounts Payable</label>
+                </div>
+
+                <div class="option">
+                  <input type="radio" class="radio" id="receivable" name="category" />
+                  <label for="receivable">Accounts Receivable/Credit Control</label>
+                </div>
+
+                <div class="option">
+                  <input type="radio" class="radio" id="analysis" name="category" />
+                  <label for="analysis">Analysis and Reporting</label>
+                </div>
+
+              </div>
+
+              <div class="selected dropdown-toggle">
+                Select Role...
+              </div>
+
+            </div>
+          </div>
+          <hr>
+          <div class="filter-column">
+            <h4>EXPERIENCE LEVEL</h4>
+
+            <div class="select-box">
+              <div class="options-container">
+                <div class="option">
+                  <input type="radio" class="radio" id="intern" name="category" />
+                  <label for="intern">Intern</label>
+                </div>
+
+                <div class="option">
+                  <input type="radio" class="radio" id="1-3-years" name="category" />
+                  <label for="1-3-years">1 - 3 years</label>
+                </div>
+
+                <div class="option">
+                  <input type="radio" class="radio" id="4-6-years" name="category" />
+                  <label for="4-6-years">4 - 6 years</label>
+                </div>
+
+                <div class="option">
+                  <input type="radio" class="radio" id="over-5-years" name="category" />
+                  <label for="over-5-years"> > 5 years</label>
+                </div>
+
+              </div>
+
+              <div class="selected dropdown-toggle">
+                Select Experience Level...
+              </div>
+
+            </div>
+          </div>
+          <hr>
+          <div class="filter-column">
+            <h4>ADDITIONAL CONTENT</h4>
+            <!-- dunno that if u need more things to sort, but ill leave here just in case -->
+            <div class="select-box">
+              <div class="options-container">
+                <div class="option">
+
+                  <label for="automobiles">Automobiles</label>
+                </div>
+
+                <div class="option">
+                  <input type="radio" class="radio" id="film" name="category" />
+                  <label for="film">Film & Animation</label>
+                </div>
+
+                <div class="option">
+                  <input type="radio" class="radio" id="science" name="category" />
+                  <label for="science">Science & Technology</label>
+                </div>
+
+
+                <div class="option">
+                  <input type="radio" class="radio" id="tutorials" name="category" />
+                  <label for="tutorials">Tutorials</label>
+                </div>
+              </div>
+
+              <div class="selected dropdown-toggle">
+                Select Additional Contents...
+              </div>
+
+            </div>
+          </div>
+          <hr>
+
+          <div class="option-submit">
+            <a href="" class="btn filter-submit">Filter</a>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="filter-list col-lg-8 col-md-7">
+        <div class="resume-number d-flex">
+          <span>Total: 123 Resumes</span>
+        </div>
+        <hr>
+
+        <div class="resume-list">
+
+          <div class="resume-detail row">
+            <div class="resume-avt col-lg-3 p-2">
+              <img src="../images/user.jpg" alt="" style="height: 150px; width: 150px;">
+            </div>
+            <div class="resume-brief col-lg-9 pl-4 py-2">
+              <span class="resume-name"><a href="#" title="Name: Abcxyz">Abcxyz</a></span>
+              <div class="resume-title">I am a poteto, dont mind me</div>
+              <div class="resume-exp">
+                <span>Experience:</span>
+                <span class="exp-years">3 years</span>
+                <!--can adjust for input here-->
+              </div>
+              <div class="resume-locat">
+                Mars
+              </div>
+              <hr>
+              <div class="resume-option">
+                <a href="" class="resume-view">View more... <i class="fa fa-chevron-right"></i></a>
+                <!--btn to view resume detail-->
+                <a href="" class="btn resume-add">Add to Favorites</a>
+                <!--add to favorites-->
+              </div>
+            </div>
+          </div>
+          <hr>
+
+          <div class="resume-detail row">
+            <div class="resume-avt col-lg-3 p-2">
+              <img src="../images/user.jpg" alt="" style="height: 150px; width: 150px;">
+            </div>
+            <div class="resume-brief col-lg-9 pl-4 py-2">
+              <span class="resume-name"><a href="#" title="Name: Abcxyz">Abcxyz</a></span>
+              <div class="resume-title">I am a poteto, dont mind me</div>
+              <div class="resume-exp">
+                <span>Experience:</span>
+                <span class="exp-years">3 years</span>
+                <!--can adjust for input here-->
+              </div>
+              <div class="resume-locat">
+                Mars
+              </div>
+              <hr>
+              <div class="resume-option">
+                <a href="" class="resume-view">View more... <i class="fa fa-chevron-right"></i></a>
+                <!--btn to view resume detail-->
+                <a href="" class="btn resume-add">Add to Favorites</a>
+                <!--add to favorites-->
+              </div>
+            </div>
+          </div>
+          <hr>
+
+          <div class="resume-detail row">
+            <div class="resume-avt col-lg-3 p-2">
+              <img src="../images/user.jpg" alt="" style="height: 150px; width: 150px;">
+            </div>
+            <div class="resume-brief col-lg-9 pl-4 py-2">
+              <span class="resume-name"><a href="#" title="Name: Abcxyz">Abcxyz</a></span>
+              <div class="resume-title">I am a poteto, dont mind me</div>
+              <div class="resume-exp">
+                <span>Experience:</span>
+                <span class="exp-years">3 years</span>
+                <!--can adjust for input here-->
+              </div>
+              <div class="resume-locat">
+                Mars
+              </div>
+              <hr>
+              <div class="resume-option">
+                <a href="" class="resume-view">View more... <i class="fa fa-chevron-right"></i></a>
+                <!--btn to view resume detail-->
+                <a href="" class="btn resume-add">Add to Favorites</a>
+                <!--add to favorites-->
+              </div>
+            </div>
+          </div>
+          <hr>
+
+          <div class="resume-detail row">
+            <div class="resume-avt col-lg-3 p-2">
+              <img src="../images/user.jpg" alt="" style="height: 150px; width: 150px;">
+            </div>
+            <div class="resume-brief col-lg-9 pl-4 py-2">
+              <span class="resume-name"><a href="#" title="Name: Abcxyz">Abcxyz</a></span>
+              <div class="resume-title">I am a poteto, dont mind me</div>
+              <div class="resume-exp">
+                <span>Experience:</span>
+                <span class="exp-years">3 years</span>
+                <!--can adjust for input here-->
+              </div>
+              <div class="resume-locat">
+                Mars
+              </div>
+              <hr>
+              <div class="resume-option">
+                <a href="" class="resume-view">View more... <i class="fa fa-chevron-right"></i></a>
+                <!--btn to view resume detail-->
+                <a href="" class="btn resume-add">Add to Favorites</a>
+                <!--add to favorites-->
+              </div>
+            </div>
+          </div>
+          <hr>
+
+          <div class="resume-detail row">
+            <div class="resume-avt col-lg-3 p-2">
+              <img src="../images/user.jpg" alt="" style="height: 150px; width: 150px;">
+            </div>
+            <div class="resume-brief col-lg-9 pl-4 py-2">
+              <span class="resume-name"><a href="#" title="Name: Abcxyz">Abcxyz</a></span>
+              <div class="resume-title">I am a poteto, dont mind me</div>
+              <div class="resume-exp">
+                <span>Experience:</span>
+                <span class="exp-years">3 years</span>
+                <!--can adjust for input here-->
+              </div>
+              <div class="resume-locat">
+                Mars
+              </div>
+              <hr>
+              <div class="resume-option">
+                <a href="" class="resume-view">View more... <i class="fa fa-chevron-right"></i></a>
+                <!--btn to view resume detail-->
+                <a href="" class="btn resume-add">Add to Favorites</a>
+                <!--add to favorites-->
+              </div>
+            </div>
+          </div>
+          <hr>
+
+        </div>
+
+        <div class="resume-pagination">
+          <ul class="pagination">
+            <li><a href="#" class="prev">
+                < Prev</a>
+            </li>
+            <li class="pageNumber active"><a href="#">1</a></li>
+            <li class="pageNumber"><a href="#">2</a></li>
+            <li class="pageNumber"><a href="#">3</a></li>
+            <li class="pageNumber"><a href="#">4</a></li>
+            <li class="pageNumber"><a href="#">5</a></li>
+            <li class="pageNumber"><a href="#">6</a></li>
+            <li><a href="#" class="next">Next ></a></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+
+
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-light">
+    <div class="container">
+      <div class="boxx">
+        <div class="weird mt-4">
+          <img src="../images/LOGO.png" alt="">
+          <h6 style="font-size: 13px;">227 Nguyễn Văn Cừ, Distreet 5, HCMC, VN</h6>
+        </div>
+        <div class="row mt-4">
+          <div class="col-md-4 col-sm-6">
+            <ul class="list-group">
+              <li>
+                <a class="title" href="">
+                  <h6>WORKr</h6>
+                </a>
+              </li>
+              <li><a href="">About</a></li>
+              <li><a href="">Carrer Blog</a></li>
+              <li><a href="">Company Review</a></li>
+              <li><a href="">Term of Use</a></li>
+            </ul>
+          </div>
+          <div class="col-md-4 col-sm-6">
+            <ul class="list-group">
+              <li>
+                <a class="title" href="">
+                  <h6>Job Seeker</h6>
+                </a>
+              </li>
+              <li><a href="">Find All Jobs</a></li>
+              <li><a href="">Create Resume</a></li>
+              <li><a href="">Favorite Jobs</a></li>
+              <li><a href="">Review Company</a></li>
+              <li><a href="">Favorite Company</a></li>
+            </ul>
+          </div>
+          <div class="col-md-4 col-sm-6">
+            <ul class="list-group">
+              <li>
+                <a class="title" href="">
+                  <h6>Employers</h6>
+                </a>
+              </li>
+              <li><a href="">Post Jobs</a></li>
+              <li><a href="">Find All Resume</a></li>
+              <li><a href="">Favorite Resume</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <h6 class="text-center" style="color: #2D7BA0;">© 2021 WORKs. All rights reserved</h6>
+  </footer>
+  <!-- Footer -->
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+    crossorigin="anonymous"></script>
+  <script src="../js/find_resume.js"></script>
+
+</body>
