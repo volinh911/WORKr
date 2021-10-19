@@ -264,7 +264,7 @@
 								$_SESSION['username'] = $row['username'];
 								$_SESSION['loggedin'] = true;
 								echo "<script>alert('Login successfully');</script>";
-								echo "<script>window.location.href = 'index.php';</script>";
+								echo "<script>window.location.href = 'jseeker_dashboard.php';</script>";
 
 							}else{
 
@@ -371,7 +371,7 @@
 								$_SESSION['companyid'] = $row['companyid'];
 								$_SESSION['loggedin'] = true;
 								echo "<script>alert('Login successfully');</script>";
-								echo "<script>window.location.href = 'login_employer.php';</script>";
+								echo "<script>window.location.href = 'employer_OV.php';</script>";
 
 							}else{
 
@@ -712,55 +712,6 @@
 			}
 		}
 
-		public function createJob(){
-
-			if (isset($_POST['submit'])) {
-				// check set 3 text box
-				if (isset($_POST['title']) && isset($_POST['description']) && isset($_POST['requirements']) && isset($_POST['enddate'])
-				// check set option
-				&& isset($_POST['company']) && isset($_POST['industry']) && isset($_POST['salary']) 
-				&& isset($_POST['experience']) && isset($_POST['type']) &&  isset($_POST['level']) && isset($_POST['location']) ) {
-
-					// check empty 3 text box
-					if (!empty($_POST['title']) && !empty($_POST['description']) && !empty($_POST['requirements']) && !empty($_POST['enddate']) && 
-					// check option
-					$_POST['company'] != 0 && $_POST['industry'] != 0 && $_POST['salary'] != 0
-					&& $_POST['experience'] != 0 && $_POST['type'] != 0 && $_POST['level'] != 0 && $_POST['location'] != 0) {
-
-						// 3 text box
-						$title = $this->validate($_POST['title']);
-						$description = $this->validate($_POST['description']);
-						$requirements = $this->validate($_POST['requirements']);
-						$enddate = $this->validate($_POST['enddate']);
-						// option
-						$company = $this->validate($_POST['company']);
-						$industry = $this->validate($_POST['industry']);
-						$salary = $this->validate($_POST['salary']);
-						$experience = $this->validate($_POST['experience']);
-						$type = $this->validate($_POST['type']);
-						$level = $this->validate($_POST['level']);
-						$location = $this->validate($_POST['location']);
-						$userid = $_SESSION['userid'];
-
-						$insertJob = "INSERT INTO job (title, requirements, description, startdate, enddate, companyid, industryid, experienceid, salaryid, typeid, levelid, locationid, userid) 
-										VALUES ('$title', '$requirements','$description', 'now()', '$enddate', '$company', '$industry', '$experience', '$salary', '$type', '$level', '$location', '$userid')";
-
-						$queryInsert = pg_query($this->conn, $insertJob);
-						
-						if ($queryInsert) {
-							echo "<script>alert('Job create successfully');</script>";
-						} else {
-							echo "<script>alert('Query Failed');</script>";
-						}
-
-					} else {
-						echo "<script>alert('empty');</script>";
-					}
-				}
-			}
-			
-		}
-
 // ------------------------------------- END CREATE FUNCTION ------------------------------------- //
 
 // ------------------------------------- JOBLIST AND JOBDETAIL PAGE FUNCTION ------------------------------------- //
@@ -908,8 +859,119 @@
 
 // ------------------------------------- END SEARCH BAR FUNCTION ------------------------------------- //
 
+// ------------------------------------- EMPLOYER DASHBOARD ------------------------------------- //
 
+public function countTotalJob($userid){
 
-    }	
+	$countQuery = "SELECT COUNT(jobid) OVER(), startdate FROM job WHERE userid = $userid GROUP BY jobid, startdate ORDER BY startdate DESC LIMIT 1;";
+	$result = pg_query($this->conn, $countQuery);
+
+	if(pg_num_rows($result) > 0){
+
+		return pg_fetch_assoc($result);
+
+	}else{
+
+		return false;
+		echo "<script>alert('No result');</script>";
+
+	}
+
+}
+
+public function createJob(){
+
+	if (isset($_POST['submit'])) {
+		// check set 3 text box
+		if (isset($_POST['title']) && isset($_POST['description']) && isset($_POST['requirements']) && isset($_POST['enddate'])
+		// check set option
+		&& isset($_POST['company']) && isset($_POST['industry']) && isset($_POST['salary']) 
+		&& isset($_POST['experience']) && isset($_POST['type']) &&  isset($_POST['level']) && isset($_POST['location']) ) {
+
+			// check empty 3 text box
+			if (!empty($_POST['title']) && !empty($_POST['description']) && !empty($_POST['requirements']) && !empty($_POST['enddate']) && 
+			// check option
+			$_POST['company'] != 0 && $_POST['industry'] != 0 && $_POST['salary'] != 0
+			&& $_POST['experience'] != 0 && $_POST['type'] != 0 && $_POST['level'] != 0 && $_POST['location'] != 0) {
+
+				// 3 text box
+				$title = $this->validate($_POST['title']);
+				$description = $this->validate($_POST['description']);
+				$requirements = $this->validate($_POST['requirements']);
+				$enddate = $this->validate($_POST['enddate']);
+				// option
+				$company = $this->validate($_POST['company']);
+				$industry = $this->validate($_POST['industry']);
+				$salary = $this->validate($_POST['salary']);
+				$experience = $this->validate($_POST['experience']);
+				$type = $this->validate($_POST['type']);
+				$level = $this->validate($_POST['level']);
+				$location = $this->validate($_POST['location']);
+				$userid = $_SESSION['userid'];
+
+				$insertJob = "INSERT INTO job (title, requirements, description, startdate, enddate, companyid, industryid, experienceid, salaryid, typeid, levelid, locationid, userid) 
+								VALUES ('$title', '$requirements','$description', 'now()', '$enddate', '$company', '$industry', '$experience', '$salary', '$type', '$level', '$location', '$userid')";
+
+				$queryInsert = pg_query($this->conn, $insertJob);
+				
+				if ($queryInsert) {
+					echo "<script>alert('Job create successfully');</script>";
+				} else {
+					echo "<script>alert('Query Failed');</script>";
+				}
+
+			} else {
+				echo "<script>alert('empty');</script>";
+			}
+		}
+	}
+	
+}
+
+public function updateCompany($companyID){
+
+	if(isset($_POST['submit'])){
+
+		if(isset($_POST['name']) && isset($_POST['logo']) && isset($_POST['address']) && isset($_POST['website']) && isset($_POST['email']) && isset($_POST['size']) && isset($_POST['description'])){
+
+			if(!empty($_POST['name']) && !empty($_POST['logo']) && !empty($_POST['address']) && !empty($_POST['website']) && !empty($_POST['email']) && !empty($_POST['size']) && !empty($_POST['description'])){
+				
+				$companyname = $this->validate($_POST['name']);
+				$companylogo = $this->validate($_POST['logo']);
+				$companyaddress = $this->validate($_POST['address']);
+				$companywebsite = $this->validate($_POST['website']);
+				$companyemail = $this->validate($_POST['email']);
+				$companysize = $this->validate($_POST['size']);
+				$companydescription = $this->validate($_POST['description']);
+
+				$updateQuery = "UPDATE company
+								SET companyname='$companyname', address='$companyaddress', website='$companywebsite', applyemail='$companyemail', companydescription='$companydescription', logo='$companylogo', size='$companysize'
+								WHERE id = $companyID;";
+
+				$queryUpdate = pg_query($this->conn, $updateQuery);
+
+				if($queryUpdate){
+
+					echo "<script>alert('Company update successfully');</script>";
+					echo "<script>window.location.href = 'employer_CD.php';</script>";
+
+				}else{
+
+					echo "<script>alert('Query Failed');</script>";
+
+				}
+
+			}else {
+
+				echo "<script>alert('empty');</script>";
+
+			}
+		}
+	}
+}
+
+// ------------------------------------- END EMPLOYER DASHBOARD ------------------------------------- //
+
+}	
 
 ?>
