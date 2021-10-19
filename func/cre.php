@@ -740,9 +740,10 @@
 						$type = $this->validate($_POST['type']);
 						$level = $this->validate($_POST['level']);
 						$location = $this->validate($_POST['location']);
+						$userid = $_SESSION['userid'];
 
-						$insertJob = "INSERT INTO job (title, requirements, description, startdate, enddate, companyid, industryid, experienceid, salaryid, typeid, levelid, locationid) 
-										VALUES ('$title', '$requirements','$description', 'now()', '$enddate', '$company', '$industry', '$experience', '$salary', '$type', '$level', '$location')";
+						$insertJob = "INSERT INTO job (title, requirements, description, startdate, enddate, companyid, industryid, experienceid, salaryid, typeid, levelid, locationid, userid) 
+										VALUES ('$title', '$requirements','$description', 'now()', '$enddate', '$company', '$industry', '$experience', '$salary', '$type', '$level', '$location', '$userid')";
 
 						$queryInsert = pg_query($this->conn, $insertJob);
 						
