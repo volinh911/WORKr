@@ -128,39 +128,41 @@ function renderEditBlogAdmin($blog){
 function renderJobList($job){
     echo "
     <div class='row'>
-    <div class='col-md-10 border-top border-bottom '>
-        <div class='jobs d-flex align-items-center mt-3 mb-3'>
-            <div class='card' style='width: 170px;'>
-                <img src=' {$job['logo']} ' class=' card-img-top' style='height: 150px; width: 100%; object-fit: cover;' alt='...'>
-            </div>
-
-            <div class='card_content w-100 ml-3 d-flex justify-content-between align-items-end'>
-                <div class='job_info'>
-
-                <a href='job_details.php?id={$job['jobid']}'>
-
-                <h5 class='text-danger' style='margin-left: 12px;'> {$job['title']} </h5> 
-
-                </a>
-
-                    <h6 style='margin-left: 12px;'> {$job['companyname']} </h6>
-                    <h6 class=' text-warning' style='margin-left: 12px;'><span><i class='fas fa-dollar-sign'></i></span>
-                        {$job['salary']} </h6>
-                    <h6 style='margin-left: 12px;'><i class='fas fa-map-marker-alt'></i> {$job['location']} </h6>
-                    <div class='treatment'>
-                        <ul class='d-flex'>
-                            <li><i class='fas fa-medkit'></i> Health Insurance</li>
-                            <li><i class='fas fa-star-of-life'></i> Medical Services</li>
-                        </ul>
-                    </div>
+        <div class='col-md-10 border-top border-bottom '>
+            <div class='jobs d-flex align-items-center mt-3 mb-3'>
+                <div class='card' style='width: 170px;'>
+                    <img src=' {$job['logo']} ' class=' card-img-top' style='height: 150px; width: 100%; object-fit: cover;' alt='...'>
                 </div>
-                <div class='details'>
-                    <p><i class='far fa-heart mr-2' aria-hidden='true'></i>Add to favorite list</p>
-                    <p><i class='far fa-calendar-minus mr-2'></i> {$job['enddate']} </p>
+
+                <div class='card_content w-100 ml-3 d-flex justify-content-between align-items-end'>
+                    <div class='job_info'>
+
+                    <a href='job_details.php?id={$job['jobid']}'>
+
+                    <h5 class='text-danger' style='margin-left: 12px;'> {$job['title']} </h5> 
+
+                    </a>
+
+                        <h6 style='margin-left: 12px;'> {$job['companyname']} </h6>
+                        <h6 class=' text-warning' style='margin-left: 12px;'><span><i class='fas fa-dollar-sign'></i></span>
+                            {$job['salary']} </h6>
+                        <h6 style='margin-left: 12px;'><i class='fas fa-map-marker-alt'></i> {$job['location']} </h6>
+                        <div class='treatment'>
+                            <ul class='d-flex'>
+                                <li><i class='fas fa-medkit'></i> Health Insurance</li>
+                                <li><i class='fas fa-star-of-life'></i> Medical Services</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class='details'>
+                        <button type='submit' class='btn btn-outline-danger love-btn'>
+                            <i class='far fa-heart' aria-hidden='true'></i> Add to favorite list
+                        </button>
+                        <p class='mt-3'><i class='far fa-calendar-minus mr-2'></i> {$job['enddate']} </p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>";
 
 }
@@ -186,10 +188,10 @@ function renderJobDetail($job, $company){
                                 <h6><i class='fas fa-map-marker-alt'></i> {$job['location']} </h6>
                             </div>
                             <div class='details'>
-                                <button type='submit' class='btn btn-warning text-white'> Apply</button>
-                                <button type='submit' class='btn btn-outline-warning love-btn'><i
-                                        class='far fa-heart' aria-hidden='true'></i> Add to favorite
-                                    list</button>
+                                <button type='submit' class='btn btn-danger text-white'> Apply</button>
+                                <button type='submit' class='btn btn-outline-danger love-btn'>
+                                    <i class='far fa-heart' aria-hidden='true'></i> Add to favorite list
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -241,7 +243,7 @@ function renderJobDetail($job, $company){
     <div class='tab-pane fade' id='company'>
     <div class='container mt-3'>
         <div class='row'>
-            <div class='col-md-12 '>
+            <div class='col-md-12'>
                 <div class='jobs d-flex align-items-center mt-3 mb-3'>
                     <div class='card' style='width: 18rem;'>
                             <img src='{$company['logo']}' class='card-img-top' alt='...'>
@@ -258,16 +260,16 @@ function renderJobDetail($job, $company){
                                 <li><i class='fas fa-gamepad'></i> {$company['website']} </li>
                             </ul>
                         </div>
-                        </div>  
-                            <div class='details'>
-
-                                <button type='submit' class='btn btn-outline-warning love-btn'><i class='far fa-heart' aria-hidden='true'></i> Add to favorite list</button>
-                            </div>      
-                        </div>
+                
+                    </div>
                 </div>
             </div>
+            <div style='float: right;'>
+                <div class='details'>
+                    <button type='submit' class='btn btn-outline-danger love-btn mx-auto'><i class='far fa-heart' aria-hidden='true'></i> Add to favorite list</button>
+                </div> 
+            </div>
         </div>
-    </div>
     </div>";
 }
 
