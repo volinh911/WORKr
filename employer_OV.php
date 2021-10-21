@@ -160,6 +160,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == 3) {
                         </div>
                         <div class="favorite-option">
                             <a href="" class="btn overview-button">Go Check</a>
+                            <a href="" class="btn overview-button">Search Resumes</a>
                         </div>
                     </div>
 
