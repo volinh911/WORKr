@@ -296,7 +296,7 @@
         
         echo "
         <div class='row'>
-            <div class='col-md-10 border-top border-bottom '>
+            <div class='col-md-12'>
                 <div class='jobs d-flex align-items-center mt-3 mb-3'>
                     <div class='card' style='width: 170px;'>
                         <img src=' {$result['logo']} ' class=' card-img-top' style='height: 150px; width: 100%; object-fit: cover;' alt='...'>
