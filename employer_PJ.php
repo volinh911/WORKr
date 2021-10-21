@@ -3,8 +3,11 @@
     include './func/cre.php';
     $model = new Model;
     if (isset($_SESSION['role']) && $_SESSION['role'] == 3) {
+
         $companyID = $_SESSION['companyid'];
         $company = $model->getCompanyOverview($companyID);
+        $createJog = $model->createJob();
+        
     }
     
     $experience = $model->getExperience();
@@ -13,8 +16,6 @@
     $location = $model->getLocation();
     $salary = $model->getSalary();
     $type = $model->getType();
-
-    $createJog = $model->createJob();
 
 ?>
 

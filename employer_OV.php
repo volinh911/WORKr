@@ -6,6 +6,8 @@ $model = new Model;
 if (isset($_SESSION['role']) && $_SESSION['role'] == 3) {
   $companyID = $_SESSION['companyid'];
   $company = $model->getCompanyOverview($companyID);
+  $userid = $_SESSION['userid'];
+  $postjobOV = $model->countTotalJob($userid);
 }
 
 ?>
@@ -131,13 +133,13 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == 3) {
                     </div>
                     <div class="overview-content pl-5 pt-3 pb-4 bg-white">
                         <div class="job-posting-sum">
-                            <span>U have posted </span>
-                            <span class="job-num text-large">69</span>
+                            <span>You have posted </span>
+                            <span class="job-num text-large"><?php echo $postjobOV['count']; ?></span>
                             <span>recruitment seekings.</span>
                         </div>
                         <div class="job-posting-recent">
                             <span>Your most recent recruitment seeking was posted on: </span>
-                            <span class="job-date text-large">29-2-2021</span>
+                            <span class="job-date text-large"><?php echo $postjobOV['startdate']; ?></span>
                         </div>
                         <div class="job-posting-option">
                             <a href="" class="btn overview-button">Make a Post</a>
