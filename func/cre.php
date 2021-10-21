@@ -738,13 +738,12 @@
 
 		public function getJobs($page){
 
-			$limit = 5;
-            $start = ($page - 1) * $limit;
+			$start = ($page - 1) * 5;
 
 			$fetchJobs = "SELECT * 
 							FROM job j, company c, industry i, experience e, salary s, type t, level l, location lo 
 							WHERE j.companyid = c.id and j.industryid = i.id and j.experienceid = e.id and j.salaryid = s.id and j.typeid = t.id and j.levelid = l.id and j.locationid = lo.id
-							ORDER BY startdate DESC LIMIT $limit OFFSET $start;";
+							ORDER BY startdate DESC OFFSET $start;";
 
 			$results = pg_query($this->conn, $fetchJobs);
 
@@ -783,19 +782,58 @@
 
 		}
 
+		public function favoriteJob($jobid, $userid){
+
+				// Check user da favorite chua
+				$favoriteCheck = "SELECT * FROM favoritejob WHERE jobid = '$jobid' AND userid = '$userid'";
+				$queryCheck = pg_query($this->conn, $favoriteCheck);
+
+				if(pg_num_rows($queryCheck) > 0){
+
+					return false;
+				
+				// Neu chua thi favorite (true = co the favorite | false = da favorite)
+				}else{
+
+					if(isset($_POST['favorite'])){
+
+                        if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
+
+                            $favoriteQuery = "INSERT INTO favoritejob (jobid, userid) VALUES ('$jobid', '$userid')";
+                        
+                            $queryFavorite = pg_query($this->conn, $favoriteQuery);
+            
+                            if ($queryFavorite) {
+
+                                echo "<script>alert('Favorite job successfully');</script>";
+
+                            } else {
+
+                                echo "<script>alert('queryFail');</script>";
+
+                            }
+
+                        }else{
+
+							echo "<script>alert('You need to be logged in to favorite job');</script>";
+							return true;
+
+						}
+
+					}else{
+
+						return true;
+
+                    }
+				}
+
+		}
+
 // ------------------------------------- END JOBLIST AND JOBDETAIL PAGE FUNCTION ------------------------------------- //
 
 // ------------------------------------- SEARCH BAR FUNCTION ------------------------------------- //
 
-		public function getPagesSearch(){
-
-            $limit = 5;
-
-            return ceil($this->totalJobSearch/ $limit);
-
-        }
-
-		public function searchBar($page){
+		public function searchBar(){
 
             if (isset($_POST['submit'])) {
                 if ($_POST['companyid'] != 0 || $_POST['typeid'] != 0 || $_POST['locationid'] != 0 ||
@@ -825,15 +863,15 @@
 
                     $fetchSearch = "SELECT * FROM job j, company c, industry i, experience e, salary s, type t, level l, location lo " . $finalWhere;
 					
-
-					$countSearch = "SELECT count(jobid) FROM job j, company c, industry i, experience e, salary s, type t, level l, location lo " . $finalWhere;
+					// Dem so luong search tim duoc
+					$countSearch = "SELECT count(j.jobid) FROM job j, company c, industry i, experience e, salary s, type t, level l, location lo " . $finalWhere;
 
 					// Dem tong luong rows search duoc
 					$searchResult = pg_query($this->conn,$countSearch);
 					$searchNum = pg_fetch_assoc($searchResult);
 					$this->totalJobSearch = $searchNum['count'];
-					// $countString = substr($fetchSearch, 0, -40);
 
+					// in ra ket qua search
 					$results = pg_query($this->conn, $fetchSearch);
 
 					if(pg_num_rows($results) > 0){
@@ -861,114 +899,114 @@
 
 // ------------------------------------- EMPLOYER DASHBOARD ------------------------------------- //
 
-public function countTotalJob($userid){
+	public function countTotalJob($userid){
 
-	$countQuery = "SELECT COUNT(jobid) OVER(), startdate FROM job WHERE userid = $userid GROUP BY jobid, startdate ORDER BY startdate DESC LIMIT 1;";
-	$result = pg_query($this->conn, $countQuery);
+		$countQuery = "SELECT COUNT(jobid) OVER(), startdate FROM job WHERE userid = $userid GROUP BY jobid, startdate ORDER BY startdate DESC LIMIT 1;";
+		$result = pg_query($this->conn, $countQuery);
 
-	if(pg_num_rows($result) > 0){
+		if(pg_num_rows($result) > 0){
 
-		return pg_fetch_assoc($result);
+			return pg_fetch_assoc($result);
 
-	}else{
+		}else{
 
-		return false;
-		echo "<script>alert('No result');</script>";
+			return false;
+			echo "<script>alert('No result');</script>";
+
+		}
 
 	}
 
-}
+	public function createJob(){
 
-public function createJob(){
+		if (isset($_POST['submit'])) {
+			// check set 3 text box
+			if (isset($_POST['title']) && isset($_POST['description']) && isset($_POST['requirements']) && isset($_POST['enddate'])
+			// check set option
+			&& isset($_POST['company']) && isset($_POST['industry']) && isset($_POST['salary']) 
+			&& isset($_POST['experience']) && isset($_POST['type']) &&  isset($_POST['level']) && isset($_POST['location']) ) {
 
-	if (isset($_POST['submit'])) {
-		// check set 3 text box
-		if (isset($_POST['title']) && isset($_POST['description']) && isset($_POST['requirements']) && isset($_POST['enddate'])
-		// check set option
-		&& isset($_POST['company']) && isset($_POST['industry']) && isset($_POST['salary']) 
-		&& isset($_POST['experience']) && isset($_POST['type']) &&  isset($_POST['level']) && isset($_POST['location']) ) {
+				// check empty 3 text box
+				if (!empty($_POST['title']) && !empty($_POST['description']) && !empty($_POST['requirements']) && !empty($_POST['enddate']) && 
+				// check option
+				$_POST['company'] != 0 && $_POST['industry'] != 0 && $_POST['salary'] != 0
+				&& $_POST['experience'] != 0 && $_POST['type'] != 0 && $_POST['level'] != 0 && $_POST['location'] != 0) {
 
-			// check empty 3 text box
-			if (!empty($_POST['title']) && !empty($_POST['description']) && !empty($_POST['requirements']) && !empty($_POST['enddate']) && 
-			// check option
-			$_POST['company'] != 0 && $_POST['industry'] != 0 && $_POST['salary'] != 0
-			&& $_POST['experience'] != 0 && $_POST['type'] != 0 && $_POST['level'] != 0 && $_POST['location'] != 0) {
+					// 3 text box
+					$title = $this->validate($_POST['title']);
+					$description = $this->validate($_POST['description']);
+					$requirements = $this->validate($_POST['requirements']);
+					$enddate = $this->validate($_POST['enddate']);
+					// option
+					$company = $this->validate($_POST['company']);
+					$industry = $this->validate($_POST['industry']);
+					$salary = $this->validate($_POST['salary']);
+					$experience = $this->validate($_POST['experience']);
+					$type = $this->validate($_POST['type']);
+					$level = $this->validate($_POST['level']);
+					$location = $this->validate($_POST['location']);
+					$userid = $_SESSION['userid'];
 
-				// 3 text box
-				$title = $this->validate($_POST['title']);
-				$description = $this->validate($_POST['description']);
-				$requirements = $this->validate($_POST['requirements']);
-				$enddate = $this->validate($_POST['enddate']);
-				// option
-				$company = $this->validate($_POST['company']);
-				$industry = $this->validate($_POST['industry']);
-				$salary = $this->validate($_POST['salary']);
-				$experience = $this->validate($_POST['experience']);
-				$type = $this->validate($_POST['type']);
-				$level = $this->validate($_POST['level']);
-				$location = $this->validate($_POST['location']);
-				$userid = $_SESSION['userid'];
+					$insertJob = "INSERT INTO job (title, requirements, description, startdate, enddate, companyid, industryid, experienceid, salaryid, typeid, levelid, locationid, userid) 
+									VALUES ('$title', '$requirements','$description', 'now()', '$enddate', '$company', '$industry', '$experience', '$salary', '$type', '$level', '$location', '$userid')";
 
-				$insertJob = "INSERT INTO job (title, requirements, description, startdate, enddate, companyid, industryid, experienceid, salaryid, typeid, levelid, locationid, userid) 
-								VALUES ('$title', '$requirements','$description', 'now()', '$enddate', '$company', '$industry', '$experience', '$salary', '$type', '$level', '$location', '$userid')";
+					$queryInsert = pg_query($this->conn, $insertJob);
+					
+					if ($queryInsert) {
+						echo "<script>alert('Job create successfully');</script>";
+					} else {
+						echo "<script>alert('Query Failed');</script>";
+					}
 
-				$queryInsert = pg_query($this->conn, $insertJob);
-				
-				if ($queryInsert) {
-					echo "<script>alert('Job create successfully');</script>";
 				} else {
-					echo "<script>alert('Query Failed');</script>";
+					echo "<script>alert('empty');</script>";
 				}
+			}
+		}
+		
+	}
 
-			} else {
-				echo "<script>alert('empty');</script>";
+	public function updateCompany($companyID){
+
+		if(isset($_POST['submit'])){
+
+			if(isset($_POST['name']) && isset($_POST['logo']) && isset($_POST['address']) && isset($_POST['website']) && isset($_POST['email']) && isset($_POST['size']) && isset($_POST['description'])){
+
+				if(!empty($_POST['name']) && !empty($_POST['logo']) && !empty($_POST['address']) && !empty($_POST['website']) && !empty($_POST['email']) && !empty($_POST['size']) && !empty($_POST['description'])){
+					
+					$companyname = $this->validate($_POST['name']);
+					$companylogo = $this->validate($_POST['logo']);
+					$companyaddress = $this->validate($_POST['address']);
+					$companywebsite = $this->validate($_POST['website']);
+					$companyemail = $this->validate($_POST['email']);
+					$companysize = $this->validate($_POST['size']);
+					$companydescription = $this->validate($_POST['description']);
+
+					$updateQuery = "UPDATE company
+									SET companyname='$companyname', address='$companyaddress', website='$companywebsite', applyemail='$companyemail', companydescription='$companydescription', logo='$companylogo', size='$companysize'
+									WHERE id = $companyID;";
+
+					$queryUpdate = pg_query($this->conn, $updateQuery);
+
+					if($queryUpdate){
+
+						echo "<script>alert('Company update successfully');</script>";
+						echo "<script>window.location.href = 'employer_CD.php';</script>";
+
+					}else{
+
+						echo "<script>alert('Query Failed');</script>";
+
+					}
+
+				}else {
+
+					echo "<script>alert('empty');</script>";
+
+				}
 			}
 		}
 	}
-	
-}
-
-public function updateCompany($companyID){
-
-	if(isset($_POST['submit'])){
-
-		if(isset($_POST['name']) && isset($_POST['logo']) && isset($_POST['address']) && isset($_POST['website']) && isset($_POST['email']) && isset($_POST['size']) && isset($_POST['description'])){
-
-			if(!empty($_POST['name']) && !empty($_POST['logo']) && !empty($_POST['address']) && !empty($_POST['website']) && !empty($_POST['email']) && !empty($_POST['size']) && !empty($_POST['description'])){
-				
-				$companyname = $this->validate($_POST['name']);
-				$companylogo = $this->validate($_POST['logo']);
-				$companyaddress = $this->validate($_POST['address']);
-				$companywebsite = $this->validate($_POST['website']);
-				$companyemail = $this->validate($_POST['email']);
-				$companysize = $this->validate($_POST['size']);
-				$companydescription = $this->validate($_POST['description']);
-
-				$updateQuery = "UPDATE company
-								SET companyname='$companyname', address='$companyaddress', website='$companywebsite', applyemail='$companyemail', companydescription='$companydescription', logo='$companylogo', size='$companysize'
-								WHERE id = $companyID;";
-
-				$queryUpdate = pg_query($this->conn, $updateQuery);
-
-				if($queryUpdate){
-
-					echo "<script>alert('Company update successfully');</script>";
-					echo "<script>window.location.href = 'employer_CD.php';</script>";
-
-				}else{
-
-					echo "<script>alert('Query Failed');</script>";
-
-				}
-
-			}else {
-
-				echo "<script>alert('empty');</script>";
-
-			}
-		}
-	}
-}
 
 // ------------------------------------- END EMPLOYER DASHBOARD ------------------------------------- //
 
