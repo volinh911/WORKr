@@ -30,110 +30,106 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == 3) {
 </head>
 
 <body>
-    <input type="checkbox" id="sidebar-toggle">
+    <input type="checkbox" id="nav-toggle">
+    <!-- Sidebar -->
     <div class="sidebar">
-        <div class="sidebar-header">
-            <h3 class="brand">
-                <img src="../images/LOGO.png" alt="">
-            </h3>
-            <label for="sidebar-toggle" class="fa fa-bars"></label>
+        <div class="sidebar-brand">
+            <h2><span><img src="/images/LOGO.png" alt=""></span></h2>
         </div>
-
         <div class="sidebar-menu">
             <ul>
                 <li>
-                    <a href="">
-                        <span class="fa fa-home"></span>
-                        <span>Overview</span>
-                    </a>
+                    <a href="" class="active"><span><i class="fa fa-home"></i></span>
+                        <span>Overview</span></a>
                 </li>
                 <li>
-                    <a href="">
-                        <span class="fa fa-info-circle"></span>
-                        <span>Company Detail</span>
-                    </a>
+                    <a href="" class="active"><span><i class="fa fa-info-circle"></i></span>
+                        <span>Company Detail</span></a>
                 </li>
                 <li>
-                    <a href="">
-                        <span class="fa fa-heart"></span>
-                        <span>Favorite Resumes</span>
-                    </a>
+                    <a href="" class="active"><span><i class="fa fa-heart"></i></span>
+                        <span>Favorite Resumes</span></a>
                 </li>
                 <li>
-                    <a href="">
-                        <span class="fa fa-edit"></span>
-                        <span>Post Jobs</span>
-                    </a>
+                    <a href="" class="active"><span><i class="fa fa-edit" aria-hidden="true"></i></span>
+                        <span>Post Jobs</span></a>
                 </li>
                 <li>
-                    <a href="">
-                        <span class="fa fa-clipboard"></span>
-                        <span>Jobs Management</span>
-                    </a>
+                    <a href="" class="active"><span><i class="fa fa-clipboard" aria-hidden="true"></i></span>
+                        <span>Jobs Management</span></a>
+                </li>
+                <li>
+                    <a href="" class="active"><span><i class="fas fa-sign-out-alt"></i></span>
+                        <span>Logout</span></a>
                 </li>
             </ul>
         </div>
     </div>
+    <!-- Sidebar -->
 
     <div class="main-content">
+        <!-- Header -->
         <header>
-            <nav>
-                <ul class="nav-links">
-                    <li><a href="">Home</a></li>
-                    <li><a href="">Find Resume</a></li>
-                    <li><button>Sign Out</button></li>
-                    <li><a href="" class="user-wrapper">
-                            <img src="/images/user.jpg" width="40px" height="40px" alt="">
-                            <div>
-                                <h6 class="text-dark">User</h6>
-                            </div>
-                        </a></li>
-                </ul>
-            </nav>
-
-
-
+            <h2>
+                <label for="nav-toggle">
+                    <span><i class="fas fa-bars text-white"></i></span>
+                </label>
+            </h2>
+            <div class="user-wrapper">
+                <img src="/images/Avatar.png" width="40px" height="40px" alt="">
+                <div>
+                    <h6 class="text-white">Administrador</h6>
+                </div>
+            </div>
         </header>
+        <!-- Header -->
 
 
         <main>
 
-          <?php if (isset($_SESSION['role']) && $_SESSION['role'] == 3):?>
+            <?php if (isset($_SESSION['role']) && $_SESSION['role'] == 3):?>
 
             <div class="container">
 
-                <div class="overview-detail py-5">
-
-                    <div class="overview-detail-header">
-                        <h2>Profile</h2>
-                    </div>
-
-                    <div class="overview-profile py-5 bg-white">
-                        <div class="employer-avt pl-5">
-                            <img src="<?php echo $company['logo']; ?>" style="width: 300px; height:300px;" alt="">
-                        </div>
-                        <div class="employer-brief pl-5 align-self-center">
-                            <div>
-                                <h3 class="employer-name"><?php echo $company['companyname']; ?></h3>
+                <div class="row">
+                    <div class="col-md-12 ">
+                        <div class="jobs d-flex align-items-center mt-3 mb-3">
+                            <div class="card" style="width: 100px; height: 100px;">
+                                <img src="<?php echo $company['logo']; ?>" class="card-img-top" alt="...">
                             </div>
-                            <div class="employer-address">
-                                <span><?php echo $company['address']; ?></span>
+                            <div class="card_content w-100 ml-3 d-flex justify-content-between align-items-end">
+                                <div class="job_info">
+                                    <h3 class="text-danger">Gameloft Company</h3>
+                                    <p class="font-weight-bold">Address: <span><?php echo $company['address']; ?></span>
+                                    </p>
+                                </div>
                             </div>
-                            <div class="employer-description">
-                                <span><?php echo $company['companydescription']; ?></span>
-                            </div>
-                            <div class="employer-edit">
-                                <a href="" class="btn overview-button">Edit Details...</a>
+                            <div class="details">
+                                <button type="submit" class="btn btn-outline-success love-btn"><i
+                                        class="far fa-edit"></i></button>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="overview-detail py-5">
+
                     <div class="overview-detail-header">
-                        <h2>Post Jobs</h2>
+                        <h3 class="my-3">Description</h3>
                     </div>
-                    <div class="overview-content p-5 bg-white">
+
+                    <div class="bg-white p-3">
+                        <div class="employer-description">
+                            <span><?php echo $company['companydescription']; ?></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="overview-detail py-5">
+                    <div class="overview-detail-header">
+                        <h2 class="my-3">Post Jobs</h2>
+                    </div>
+                    <div class="overview-content pl-5 pt-3 pb-4 bg-white">
                         <div class="job-posting-sum">
                             <span>U have posted </span>
                             <span class="job-num text-large">69</span>
@@ -152,9 +148,9 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == 3) {
 
                 <div class="overview-detail py-5">
                     <div class="overview-detail-header">
-                        <h2>Favorite Resumes</h2>
+                        <h2 class="my-3">Favorite Resumes</h2>
                     </div>
-                    <div class="overview-content p-5 bg-white">
+                    <div class="overview-content pl-5 pt-3 pb-4 pr-5 bg-white">
                         <div class="favorite-sum">
                             <span>You have </span>
                             <span class="fav-num text-large">75</span>
@@ -162,17 +158,19 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == 3) {
                         </div>
                         <div class="favorite-option">
                             <a href="" class="btn overview-button">Go Check</a>
-                            <a href="" class="btn overview-button">Fetch More</a>
                         </div>
                     </div>
 
                 </div>
             </div>
 
-          <?php else: echo "<h1> You're not logged in or you're not an employer </h1>" ?>
-          <?php endif; ?>
+            <?php else: echo "<h1> You're not logged in or you're not an employer </h1>" ?>
+            <?php endif; ?>
 
         </main>
+        <footer>
+            <p class="text-center pt-2">© 2021 WORKr. All rights reserved.</p>
+        </footer>
 
     </div>
 
