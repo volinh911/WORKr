@@ -52,48 +52,13 @@
 
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light shadow">
-        <a class="navbar-brand ml-5" href="">
-            <img src="../images/LOGO.png" alt="">
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse ml-5" id="navbarNav">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item ">
-                    <a class="nav-link" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Career Blog</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Comapny Review</a>
-                </li>
-            </ul>
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">For Employers</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="fa fa-user" aria-hidden="true"></i> Sign In
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="fa fa-lock" aria-hidden="true"></i> Sign Up
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+    <?php include ("./includes/nav.php");?>
     <!-- Navbar end -->
 
     <!-- Searchbox -->
+    <hr>
     <form action="" method="post">
-        <div class="container-fluid mt-5">
+        <div class="container">
             <div class="row">
                 <div class="col-md-4 mt-3">
                     <div class="input-group">
@@ -149,11 +114,6 @@
                             <?php endforeach; ?>
 
                         </select>
-                        <div class="input-group-append">
-                            <button type="submit" class="btn bg-sienna" name="submit">
-                                <i class="fa fa-search text-white" aria-hidden="true"></i>
-                            </button>
-                        </div>
                     </div>
                 </div>
                 <div class="col-md-4 mt-3">
@@ -212,12 +172,17 @@
                     </div>
                 </div>
             </div>
+            <div class="input-group-append my-3 float-right">
+                <button type="submit" class="btn bg-sienna text-white" name="submit">
+                    <i class="fa fa-search text-white" aria-hidden="true"></i> Search
+                </button>
+            </div>
         </div>
     </form>
     <!-- Searchbox -->
 
     <!-- Job title -->
-    <div class="container-fluid mt-3">
+    <div class="container mt-3">
         <!-- In tong viec lam truoc va sau khi search -->
         <?php if ($searchResult == false): ?>
         <h3 class="mt-4"><?php echo $totalJobs; ?> việc làm</h3>
@@ -251,7 +216,6 @@
     <!-- Job title -->
 
     <!-- Pagination -->
-
     <div class="container mt-3 d-flex justify-content-center">
         <div class="row">
             <ul class="d-flex page-nav">
@@ -329,59 +293,7 @@
     <!-- !Pagination -->
 
     <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="boxx">
-                <div class="weird mt-4">
-                    <img src="../images/LOGO.png" alt="">
-                    <h6 style="font-size: 13px;">227 Nguyễn Văn Cừ, Distreet 5, HCMC, VN</h6>
-                </div>
-                <div class="row mt-4">
-                    <div class="col-md-4 col-sm-6">
-                        <ul class="list-group">
-                            <li>
-                                <a class="title" href="">
-                                    <h6>WORKr</h6>
-                                </a>
-                            </li>
-                            <li><a href="">About</a></li>
-                            <li><a href="">Carrer Blog</a></li>
-                            <li><a href="">Company Review</a></li>
-                            <li><a href="">Term of Use</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-md-4 col-sm-6">
-                        <ul class="list-group">
-                            <li>
-                                <a class="title" href="">
-                                    <h6>Job Seeker</h6>
-                                </a>
-                            </li>
-                            <li><a href="">Find All Jobs</a></li>
-                            <li><a href="">Create Resume</a></li>
-                            <li><a href="">Favorite Jobs</a></li>
-                            <li><a href="">Review Company</a></li>
-                            <li><a href="">Favorite Company</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-md-4 col-sm-6">
-                        <ul class="list-group">
-                            <li>
-                                <a class="title" href="">
-                                    <h6>Employers</h6>
-                                </a>
-                            </li>
-                            <li><a href="">Post Jobs</a></li>
-                            <li><a href="">Find All Resume</a></li>
-                            <li><a href="">Favorite Resume</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <br>
-        <h6 class="text-center" style="color: #2D7BA0;">© 2021 WORKs. All rights reserved</h6>
-    </footer>
+    <?php include ("./includes/footer.php");?>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">

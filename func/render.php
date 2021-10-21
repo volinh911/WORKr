@@ -127,11 +127,12 @@ function renderEditBlogAdmin($blog){
 
 function renderJobList($job){
     echo "
+    <hr>
     <div class='row'>
-        <div class='col-md-10 border-top border-bottom '>
+        <div class='col-md-12'>
             <div class='jobs d-flex align-items-center mt-3 mb-3'>
                 <div class='card' style='width: 170px;'>
-                    <img src=' {$job['logo']} ' class=' card-img-top' style='height: 150px; width: 100%; object-fit: cover;' alt='...'>
+                    <img src=' {$job['logo']} ' class='card-img-top' style='height: 150px; width: 100%; object-fit: cover;' alt='...'>
                 </div>
 
                 <div class='card_content w-100 ml-3 d-flex justify-content-between align-items-end'>
@@ -276,8 +277,9 @@ function renderJobDetail($job, $company){
 function renderSearchResult($result){
     
     echo "
+    <hr>
     <div class='row'>
-        <div class='col-md-10 border-top border-bottom '>
+        <div class='col-md-12'>
             <div class='jobs d-flex align-items-center mt-3 mb-3'>
                 <div class='card' style='width: 170px;'>
                     <img src=' {$result['logo']} ' class=' card-img-top' style='height: 150px; width: 100%; object-fit: cover;' alt='...'>
