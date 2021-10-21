@@ -101,7 +101,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == 3) {
                             </div>
                             <div class="card_content w-100 ml-3 d-flex justify-content-between align-items-end">
                                 <div class="job_info">
-                                    <h3 class="text-danger">Gameloft Company</h3>
+                                    <h3 class="text-danger"><?php echo $company['companyname']; ?></h3>
                                     <p class="font-weight-bold">Address: <span><?php echo $company['address']; ?></span>
                                     </p>
                                 </div>

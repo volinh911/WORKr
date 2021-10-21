@@ -173,14 +173,14 @@ function renderJobList($job){
         $appfavo = "";
         if($favoriteJob == true){
 
-            $appfavo .= "<button type='submit' class='btn btn-warning text-white' name='apply'> Apply </button>
-                        <button type='submit' class='btn btn-outline-warning love-btn' name='favorite'><i
+            $appfavo .= "<button type='submit' class='btn btn-danger text-white' name='apply'> Apply </button>
+                        <button type='submit' class='btn btn-outline-danger love-btn' name='favorite'><i
                         class='far fa-heart' aria-hidden='true'></i> Add to favorite list</button>";
 
         }else {
 
-            $appfavo .="<button type='submit' class='btn btn-warning text-white' name='apply'> Apply </button>
-                        <button type='submit' class='btn btn-outline-warning love-btn' name='favorite'><i
+            $appfavo .="<button type='submit' class='btn btn-danger text-white' name='apply'> Apply </button>
+                        <button type='submit' class='btn btn-outline-danger love-btn' name='favorite'><i
                         class='far fa-heart' aria-hidden='true'></i> Favorited </button>";
 
         }
@@ -200,7 +200,7 @@ function renderJobList($job){
                                 <div class='job_info'>
                                     <h3 class='text-danger'> {$job['title']} </h3>
                                     <h6> {$job['companyname']} </h6>
-                                    <h6 class=' text-warning'><span><i class='fas fa-dollar-sign'></i></span>
+                                    <h6 class=' text-success'><span><i class='fas fa-dollar-sign'></i></span>
                                         {$job['salary']} </h6>
                                     <h6><i class='fas fa-map-marker-alt'></i> {$job['location']} </h6>
                                 </div>
@@ -261,99 +261,75 @@ function renderJobList($job){
         </div>
 
         <div class='tab-pane fade' id='company'>
-        <div class='container mt-3'>
-            <div class='row'>
-                <div class='col-md-12 '>
-                    <div class='jobs d-flex align-items-center mt-3 mb-3'>
-                        <div class='card' style='width: 18rem;'>
-                                <img src='{$company['logo']}' class='card-img-top' alt='...'>
+            <div class='container mt-3'>
+                <div class='row'>
+                    <div class='col-md-12 '>
+                        <div class='jobs d-flex align-items-center mt-3 mb-3'>
+                            <div class='card' style='width:150px;'>
+                                <img src='{$job['logo']}' class='card-img-top' style='height: 150px; width: 100%; object-fit: cover;' alt='...'>
                             </div>
                             <div class='card_content w-100 ml-3 d-flex justify-content-between align-items-end'>
-                            <div class='job_info'>
-                                <h3 class='text-danger'>{$company['companyname']}</h3>
-                                <h6>Location: <i class='fas fa-map-marker-alt text-black-50'></i> {$company['address']} </h6>
-                                <div class='treatment'>
-                                    <h6 class='text-bold'>Company Infomation: {$company['companydescription']} </h6>
-                                <ul class='d-flex'>
-                                    <li class='mr-3'><i class='fa fa-users' aria-hidden='true'></i> Company size: {$company['size']} </li>
-                                    <li class='mr-3'><i class='fa fa-users' aria-hidden='true'></i> Company size: {$company['applyemail']} </li>
-                                    <li><i class='fas fa-gamepad'></i> {$company['website']} </li>
-                                </ul>
+                                <div class='job_info'>
+                                    <h3 class='text-danger'>{$company['companyname']}</h3>
+                                    <h6>Location: <i class='fas fa-map-marker-alt text-black-50'></i> {$company['address']} </h6>
+                                    <ul class='d-flex'>
+                                        <li class='mr-3'><i class='fa fa-users' aria-hidden='true'></i> Company size: {$company['size']} </li>
+                                        <li class='mr-3'><i class='fa fa-users' aria-hidden='true'></i> Company size: {$company['applyemail']} </li>
+                                        <li><i class='fas fa-gamepad'></i> {$company['website']} </li>
+                                    </ul>
+                                </div>
                             </div>
                             </div>  
-                                <div class='details'>
-
-                                    <button type='submit' class='btn btn-outline-warning love-btn'><i class='far fa-heart' aria-hidden='true'></i> Add to favorite list</button>
+                                <div class='details float-right'>
+                                    <button type='submit' class='btn btn-outline-danger love-btn'><i class='far fa-heart' aria-hidden='true'></i> Add to favorite list</button>
                                 </div>      
                             </div>
+                        </div>
                     </div>
                 </div>
+                <div class='treatment'>
+                    <h6 class='text-bold'>{$company['companydescription']} </h6>
+                </div>
             </div>
-        </div>
         </div>";
     }
 
     function renderSearchResult($result){
         
         echo "
+        <hr>
         <div class='row'>
             <div class='col-md-12'>
                 <div class='jobs d-flex align-items-center mt-3 mb-3'>
                     <div class='card' style='width: 170px;'>
-                        <img src=' {$result['logo']} ' class=' card-img-top' style='height: 150px; width: 100%; object-fit: cover;' alt='...'>
+                        <img src=' {$result['logo']} ' class='card-img-top' style='height: 150px; width: 100%; object-fit: cover;' alt='...'>
                     </div>
 
                     <div class='card_content w-100 ml-3 d-flex justify-content-between align-items-end'>
                         <div class='job_info'>
                             <a href='job_details.php?id={$result['jobid']}'>
-                                <h5 class='text-danger' style='margin-left: 12px;'> {$result['title']} </h5>
+                                <h5 class='text-danger' style='margin-left: 12px;'> {$result['title']} </h5> 
                             </a>
-
-                            <h6 style='margin-left: 12px;'> {$result['companyname']} </h6>
-                            <h6 class=' text-warning' style='margin-left: 12px;'><span><i class='fas fa-dollar-sign'></i></span>
-                                {$result['salary']} </h6>
-                            <h6><i class='fas fa-map-marker-alt' style='margin-left: 12px;'></i> {$result['location']} </h6>
-                            <div class='treatment'>
-                                <ul class='d-flex'>
-                                    <li><i class='fas fa-medkit'></i> Health Insurance</li>
-                                    <li><i class='fas fa-star-of-life'></i> Medical Services</li>
-                                </ul>
-                            </div>
+                                <h6 style='margin-left: 12px;'> {$result['companyname']} </h6>
+                                <h6 class=' text-warning' style='margin-left: 12px;'><span><i class='fas fa-dollar-sign'></i></span>
+                                    {$result['salary']} </h6>
+                                <h6 style='margin-left: 12px;'><i class='fas fa-map-marker-alt'></i> {$result['location']} </h6>
+                                <div class='treatment'>
+                                    <ul class='d-flex'>
+                                        <li><i class='fas fa-medkit'></i> Health Insurance</li>
+                                        <li><i class='fas fa-star-of-life'></i> Medical Services</li>
+                                    </ul>
+                                </div>
                         </div>
-                
-                    </div>
-                </div>
-            </div>
-            <div style='float: right;'>
-                <div class='details'>
-                    <button type='submit' class='btn btn-outline-danger love-btn mx-auto'><i class='far fa-heart' aria-hidden='true'></i> Add to favorite list</button>
-                </div> 
-            </div>
-        </div>
-    </div>";
-}
-
-function renderSearchResult($result){
-    
-    echo "
-    <hr>
-    <div class='row'>
-        <div class='col-md-12'>
-            <div class='jobs d-flex align-items-center mt-3 mb-3'>
-                <div class='card' style='width: 170px;'>
-                    <img src=' {$result['logo']} ' class=' card-img-top' style='height: 150px; width: 100%; object-fit: cover;' alt='...'>
-                </div>
 
                         <div class='details'>
                             <p><i class='far fa-calendar-minus mr-2'></i> {$result['enddate']} </p>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>";
-        
-    }
+}
 
 // ------------------------------------- END RENDER JOBLIST AND JOBDETAIL ------------------------------------- //
 
