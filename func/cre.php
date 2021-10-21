@@ -681,6 +681,7 @@
 			}
 		}
 
+
 // ------------------------------------- END ALL BLOGS FUNCTION ------------------------------------- //
 			
 // ------------------------------------- ALL CREATE FUNCTION ------------------------------------- //
@@ -705,12 +706,45 @@
 						} else {
 							echo "<script>alert('Query Failed');</script>";
 						}
+					// check empty 3 text box
+					if (!empty($_POST['title']) && !empty($_POST['description']) && !empty($_POST['requirements']) && !empty($_POST['enddate']) && 
+					// check option
+					$_POST['company'] != 0 && $_POST['industry'] != 0 && $_POST['salary'] != 0
+					&& $_POST['experience'] != 0 && $_POST['type'] != 0 && $_POST['level'] != 0 && $_POST['location'] != 0) {
+
+						// 3 text box
+						$title = $this->validate($_POST['title']);
+						$description = $this->validate($_POST['description']);
+						$requirements = $this->validate($_POST['requirements']);
+						$enddate = $this->validate($_POST['enddate']);
+						// option
+						$company = $this->validate($_POST['company']);
+						$industry = $this->validate($_POST['industry']);
+						$salary = $this->validate($_POST['salary']);
+						$experience = $this->validate($_POST['experience']);
+						$type = $this->validate($_POST['type']);
+						$level = $this->validate($_POST['level']);
+						$location = $this->validate($_POST['location']);
+						$userid = $_SESSION['userid'];
+
+						$insertJob = "INSERT INTO job (title, requirements, description, startdate, enddate, companyid, industryid, experienceid, salaryid, typeid, levelid, locationid, userid) 
+										VALUES ('$title', '$requirements','$description', 'now()', '$enddate', '$company', '$industry', '$experience', '$salary', '$type', '$level', '$location', '$userid')";
+
+						$queryInsert = pg_query($this->conn, $insertJob);
+						
+						if ($queryInsert) {
+							echo "<script>alert('Job create successfully');</script>";
+						} else {
+							echo "<script>alert('Query Failed');</script>";
+						}
+
 					} else {
 						echo "<script>alert('empty');</script>";
 					}
 				}
 			}
 		}
+	}
 
 // ------------------------------------- END CREATE FUNCTION ------------------------------------- //
 
