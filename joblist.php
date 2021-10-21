@@ -15,20 +15,20 @@
     $page = isset($_GET['page']) ? $_GET['page'] : "1";
     if ($page > 0) {
         $jobs = $model->getJobs($page);
-        $searchResult = $model->searchBar($page);
     }
 
     //get number of pages
     $pages = $model->getPagesJobs();
     $totalJobs = $model->totalJobs;
 
-    // get number of search pages
-    $searchpages = $model->getPagesSearch();
-    $totalJobsSearch = $model->totalJobSearch;
-
     #sigular Page
     $Previous = $page - 1;
     $Next = $page + 1;
+
+    // search bar
+    $searchResult = $model->searchBar();
+    $totalJobsSearch = $model->totalJobSearch;
+    
 ?>
 
 <!doctype html>
@@ -186,17 +186,19 @@
         <!-- In tong viec lam truoc va sau khi search -->
         <?php if ($searchResult == false): ?>
         <h3 class="mt-4"><?php echo $totalJobs; ?> việc làm</h3>
+
         <?php else: ?>
-        <h3 class="mt-4"><?php echo $totalJobsSearch; ?> việc làm</h3>
+
+        <h3 class="mt-4"><?php echo $totalJobsSearch; ?> việc làm được tìm thấy</h3>
         <?php endif; ?>
 
         <!-- In all jobs sort by startdate -->
         <?php if ($page > 0 && $page <= $pages && $searchResult == false): ?>
-        <?php foreach($jobs as $job): ?>
+        <?php $i = 0; foreach($jobs as $job): if ($i < 5){?>
 
-        <?php renderJobList($job); ?>
+        <?php $i += 1; renderJobList($job); ?>
 
-        <?php endforeach; ?>
+        <?php }endforeach; ?>
 
         <!-- In jobs da search -->
         <?php elseif($searchResult): ?>
@@ -222,7 +224,6 @@
 
                 <!-- Dynamic pagination -->
                 <!-- Disabled khi khong co trang previous && next -->
-                <?php if ($searchResult == false): ?>
                 <?php if ($page == 1) : ?>
 
                 <li class="disabled"><a class="prev" href="joblist.php?page=<?= $Previous; ?>"><i
@@ -253,40 +254,6 @@
 
                 <?php endif; ?>
 
-                <!-- Phan con loi -->
-                <?php else: ?>
-
-                <?php if ($page == 1) : ?>
-
-                <li class="disabled"><a class="prev" href="joblist.php?page=<?= $Previous; ?>"><i
-                            class="fas fa-chevron-left"></i></a></li>
-
-                <?php else : ?>
-
-                <li><a class="prev" href="joblist.php?page=<?= $Previous; ?>"><i class="fas fa-chevron-left"></i></a>
-                </li>
-
-                <?php endif; ?>
-
-                <!-- In ra so trang tuong ung voi luong bai viet -->
-                <?php for ($i = 1; $i <= $searchpages; $i++) : ?>
-
-                <li class="pageNumber active"><a href="joblist.php?page=<?= $i; ?>"> <?= $i; ?> </a></li>
-
-                <?php endfor; ?>
-
-                <?php if ($page < $searchpages) : ?>
-
-                <li><a class="next" href="joblist.php?page=<?= $Next; ?>"><i class="fas fa-chevron-right"></i></a></li>
-
-                <?php else : ?>
-
-                <li class="disabled"><a class="next" href="joblist.php?page=<?= $Next; ?>"><i
-                            class="fas fa-chevron-right"></i></a></li>
-
-                <?php endif; ?>
-
-                <?php endif; ?>
             </ul>
         </div>
     </div>
