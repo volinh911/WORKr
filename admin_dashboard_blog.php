@@ -1,10 +1,11 @@
 <?php
+
     include './func/cre.php';
     include './func/render.php';
 
     $model = new Model;
     $blogs = $model->getAllBlogs();
-    var_dump($_SESSION);
+
 ?>
 
 <!doctype html>

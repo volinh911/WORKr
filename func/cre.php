@@ -10,6 +10,8 @@
 		public $totalJobs;
 		public $totalBlogs;
 		public $totalJobSearch;
+		public $totalEmployerJobs;
+		public $totalFavoriteJobs;
 
 		public function __construct(){
 
@@ -831,7 +833,7 @@
 
 					if(isset($_POST['favorite'])){
 
-                        if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
+                        if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true && $_SESSION['role'] == 2) {
 
                             $favoriteQuery = "INSERT INTO favoritejob (jobid, userid) VALUES ('$jobid', '$userid')";
                         
@@ -849,7 +851,7 @@
 
                         }else{
 
-							echo "<script>alert('You need to be logged in to favorite job');</script>";
+							echo "<script>alert('You have to be a jobseeker to favorite job');</script>";
 							return true;
 
 						}
@@ -862,6 +864,53 @@
 				}
 
 		}
+
+		public function favoriteCompany($companyid, $userid){
+
+			// Check user da favorite chua
+			$favoriteCheck = "SELECT * FROM favoritecompany WHERE companyid = '$companyid' AND userid = '$userid'";
+			$queryCheck = pg_query($this->conn, $favoriteCheck);
+
+			if(pg_num_rows($queryCheck) > 0){
+
+				return false;
+			
+			// Neu chua thi favorite (true = co the favorite | false = da favorite)
+			}else{
+
+				if(isset($_POST['favoritecompany'])){
+
+					if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true && $_SESSION['role'] == 2) {
+
+						$favoriteQuery = "INSERT INTO favoritecompany (companyid, userid) VALUES ('$companyid', '$userid')";
+					
+						$queryFavorite = pg_query($this->conn, $favoriteQuery);
+		
+						if ($queryFavorite) {
+
+							echo "<script>alert('Favorite company successfully');</script>";
+
+						} else {
+
+							echo "<script>alert('queryFail');</script>";
+
+						}
+
+					}else{
+
+						echo "<script>alert('You have to be a jobseeker to favorite company');</script>";
+						return true;
+
+					}
+
+				}else{
+
+					return true;
+
+				}
+			}
+
+	}
 
 // ------------------------------------- END JOBLIST AND JOBDETAIL PAGE FUNCTION ------------------------------------- //
 
@@ -1042,7 +1091,145 @@
 		}
 	}
 
+	public function getAllEmployerJobs($userid){
+
+		$this->totalEmployerJobs = $this->countTotalJob($userid);
+
+		$getAllJobs = "SELECT * FROM job j, employer e WHERE e.id = '$userid' and e.id = j.userid ORDER BY startdate desc;";
+		$results = pg_query($this->conn, $getAllJobs);
+
+		if(pg_num_rows($results) > 0){
+
+			return pg_fetch_all($results);
+
+		}else{
+
+			return false;
+			echo "<script>alert('No Jobs');</script>";
+
+		}
+
+	}
+
+	public function deleteJob($jobid){
+
+		$deleteJob = "DELETE FROM job WHERE jobid = '$jobid'";
+		$deleteQuery = pg_query($this->conn, $deleteJob);
+
+		if($deleteQuery){
+
+			return true;
+
+		}else{
+
+			return false;
+
+		}
+
+	}
+	
 // ------------------------------------- END EMPLOYER DASHBOARD ------------------------------------- //
+
+// ------------------------------------- JOBSEEKER DASHBOARD ------------------------------------- //
+	
+	public function countFavoriteJob($userid){
+
+		$countFavoriteJob = "SELECT count(id) FROM favoritejob WHERE userid = '$userid';";
+
+		$result = pg_query($this->conn, $countFavoriteJob);
+
+		if(pg_num_rows($result) > 0) {
+
+			return pg_fetch_assoc($result);
+
+		}else{
+
+			return false;
+			echo "<script>alert('No result');</script>";
+
+		}
+
+	}
+
+	public function getFavoriteJob($userid){
+
+		$this->totalFavoriteJobs = $this->countFavoriteJob($userid);
+
+		$getFavoriteJob = "SELECT * FROM jobseeker js, favoritejob fj, job j WHERE js.id = '$userid' AND fj.userid = js.id AND fj.jobid = j.jobid  ORDER BY startdate DESC;";
+
+		$results = pg_query($this->conn, $getFavoriteJob);
+
+		if(pg_num_rows($results) > 0){
+
+			return pg_fetch_all($results);
+
+		}else{
+
+			return false;
+			echo "<script>alert('No Favorite Jobs');</script>";
+
+		}
+
+	}
+
+	public function deleteFavoriteJob($jobid){
+
+		$deleteFavoriteJob = "DELETE FROM favoritejob WHERE jobid = '$jobid'";
+		$deleteQuery = pg_query($this->conn, $deleteFavoriteJob);
+
+		if($deleteQuery){
+
+			return true;
+
+		}else{
+
+			return false;
+
+		}
+
+	}
+	
+	public function getFavoriteCompany($userid){
+
+		$getFavoriteCompany = "SELECT * FROM favoritecompany fc, company co, jobseeker js WHERE js.id = '$userid' AND fc.userid = js.id AND fc.companyid = co.id;";
+
+		$results = pg_query($this->conn, $getFavoriteCompany);
+
+		if(pg_num_rows($results) > 0){
+
+			return pg_fetch_all($results);
+
+		}else{
+
+			return false;
+			echo "<script>alert('No Favorite Company');</script>";
+
+		}
+
+	}
+
+	public function deleteFavoriteCompany($companyid){
+
+		$deleteFavoriteCompany = "DELETE FROM favoritecompany WHERE companyid = '$companyid'";
+		$deleteQuery = pg_query($this->conn, $deleteFavoriteCompany);
+
+		if($deleteQuery){
+
+			return true;
+
+		}else{
+
+			return false;
+
+		}
+
+	}
+
+
+
+// ------------------------------------- JOBSEEKER DASHBOARD ------------------------------------- //
+
+
 
 }	
 

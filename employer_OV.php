@@ -4,10 +4,12 @@ include './func/cre.php';
 $model = new Model;
 
 if (isset($_SESSION['role']) && $_SESSION['role'] == 3) {
+
     $companyID = $_SESSION['companyid'];
     $company = $model->getCompanyOverview($companyID);
     $userid = $_SESSION['userid'];
     $postjobOV = $model->countTotalJob($userid);
+    
 }
 
 ?>

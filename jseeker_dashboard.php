@@ -1,4 +1,4 @@
-<?php include("includes/head.php"); ?>
+<?php include("includes/head.php");?>
     <link rel="stylesheet" href="css/dashboard.css">
     <link rel="stylesheet" href="css/jseeker.css">
 </head>

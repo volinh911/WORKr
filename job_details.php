@@ -12,15 +12,18 @@
         $company = $model->getCompanyOverview($companyid);
 
         $favoriteJob = true;
+        $favoriteCompany = true;
         if (isset($_SESSION['loggedin'])) {
 
             $userid = $_SESSION['userid'];
             $favoriteJob = $model->favoriteJob($jobID, $userid);
-            
+            $favoriteCompany = $model->favoriteCompany($companyid,$userid);
+
         }else{
 
             $null = -1;
             $favoriteJob = $model->favoriteJob($jobID, $null);
+            $favoriteCompany = $model->favoriteCompany($companyid,$null);
 
         }
 
@@ -106,7 +109,7 @@
         </nav>
         <?php if(isset($_GET['id']) && $job != false): ?>
         
-        <?php renderJobDetail($job, $company, $favoriteJob); ?>
+        <?php renderJobDetail($job, $company, $favoriteJob, $favoriteCompany); ?>
 
         <?php else: ?>
 

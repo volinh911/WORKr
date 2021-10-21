@@ -125,63 +125,89 @@
 
 // ------------------------------------- RENDER JOBLIST AND JOBDETAIL ------------------------------------- //
 
-function renderJobList($job){
-    echo "
-    <hr>
-    <div class='row'>
-        <div class='col-md-12'>
-            <div class='jobs d-flex align-items-center mt-3 mb-3'>
-                <div class='card' style='width: 170px;'>
-                    <img src=' {$job['logo']} ' class='card-img-top' style='height: 150px; width: 100%; object-fit: cover;' alt='...'>
-                </div>
+    function renderJobList($job, $favoriteJob){
 
-                    <div class='card_content w-100 ml-3 d-flex justify-content-between align-items-end'>
-                        <div class='job_info'>
+        $favorite = '';
 
-                            <a href='job_details.php?id={$job['jobid']}'>
+        // var_dump($favoriteJob[0]['jobid']);
+        foreach ($favoriteJob as $favojob) {
 
-                            <h5 class='text-danger' style='margin-left: 12px;'> {$job['title']} </h5> 
+            if($favojob['jobid'] == $job['jobid']){
+                $favorite .= "<p> Favorited </p>";
+            }else{
+                $favorite .= "";
+            }
 
-                            </a>
+        }
 
-                                <h6 style='margin-left: 12px;'> {$job['companyname']} </h6>
-                                <h6 class=' text-warning' style='margin-left: 12px;'><span><i class='fas fa-dollar-sign'></i></span>
-                                    {$job['salary']} </h6>
-                                <h6 style='margin-left: 12px;'><i class='fas fa-map-marker-alt'></i> {$job['location']} </h6>
-                                <div class='treatment'>
-                                    <ul class='d-flex'>
-                                        <li><i class='fas fa-medkit'></i> Health Insurance</li>
-                                        <li><i class='fas fa-star-of-life'></i> Medical Services</li>
-                                    </ul>
-                                </div>
+        echo "
+        <hr>
+        <div class='row'>
+            <div class='col-md-12'>
+                <div class='jobs d-flex align-items-center mt-3 mb-3'>
+                    <div class='card' style='width: 170px;'>
+                        <img src=' {$job['logo']} ' class='card-img-top' style='height: 150px; width: 100%; object-fit: cover;' alt='...'>
+                    </div>
+
+                        <div class='card_content w-100 ml-3 d-flex justify-content-between align-items-end'>
+                            <div class='job_info'>
+
+                                <a href='job_details.php?id={$job['jobid']}'>
+
+                                <h5 class='text-danger' style='margin-left: 12px;'> {$job['title']} </h5> 
+
+                                </a>
+
+                                    <h6 style='margin-left: 12px;'> {$job['companyname']} </h6>
+                                    <h6 class=' text-warning' style='margin-left: 12px;'><span><i class='fas fa-dollar-sign'></i></span>
+                                        {$job['salary']} </h6>
+                                    <h6 style='margin-left: 12px;'><i class='fas fa-map-marker-alt'></i> {$job['location']} </h6>
+                                    <div class='treatment'>
+                                        <ul class='d-flex'>
+                                            <li><i class='fas fa-medkit'></i> Health Insurance</li>
+                                            <li><i class='fas fa-star-of-life'></i> Medical Services</li>
+                                        </ul>
+                                    </div>
+
+                            </div>
+
+                            <div class='details'>
+                                {$favorite}
+                                <p><i class='far fa-calendar-minus mr-2'></i> {$job['enddate']} </p>
+                            </div>
 
                         </div>
-
-                        <div class='details'>
-                            <p><i class='far fa-calendar-minus mr-2'></i> {$job['enddate']} </p>
-                        </div>
-
                     </div>
                 </div>
-            </div>
-        </div>";
+            </div>";
 
     }
 
-    function renderJobDetail($job, $company, $favoriteJob){
-        
+    function renderJobDetail($job, $company, $favoriteJob, $favoriteCompany){
+
         $appfavo = "";
         if($favoriteJob == true){
 
-            $appfavo .= "<button type='submit' class='btn btn-danger text-white' name='apply'> Apply </button>
+            $appfavo .= "<button type='submit' class='btn btn-danger text-white' name='apply'><a href ='{$job['website']}'>Apply</a></button>
                         <button type='submit' class='btn btn-outline-danger love-btn' name='favorite'><i
                         class='far fa-heart' aria-hidden='true'></i> Add to favorite list</button>";
 
         }else {
 
-            $appfavo .="<button type='submit' class='btn btn-danger text-white' name='apply'> Apply </button>
+            $appfavo .="<button type='submit' class='btn btn-danger text-white' name='apply'><a href ='{$job['website']}'>Apply</a></button>
                         <button type='submit' class='btn btn-outline-danger love-btn' name='favorite'><i
                         class='far fa-heart' aria-hidden='true'></i> Favorited </button>";
+
+        }
+
+        $companyfavo = "";
+        if($favoriteCompany == true){
+
+            $companyfavo .= "<button type='submit' class='btn btn-outline-danger love-btn' name = 'favoritecompany'><i class='far fa-heart' aria-hidden='true'></i> Add to favorite list </button>";
+
+        }else{
+
+            $companyfavo .= "<button type='submit' class='btn btn-outline-danger love-btn' name = 'favoritecompany'><i class='far fa-heart' aria-hidden='true'></i> Favorited </button>";
 
         }
 
@@ -281,7 +307,11 @@ function renderJobList($job){
                             </div>
                             </div>  
                                 <div class='details float-right'>
-                                    <button type='submit' class='btn btn-outline-danger love-btn'><i class='far fa-heart' aria-hidden='true'></i> Add to favorite list</button>
+
+                                    <form action='' method='post'>
+                                        {$companyfavo}
+                                    </form>
+
                                 </div>      
                             </div>
                         </div>
@@ -295,7 +325,6 @@ function renderJobList($job){
     }
 
     function renderSearchResult($result){
-        
         echo "
         <hr>
         <div class='row'>
@@ -329,9 +358,66 @@ function renderJobList($job){
                 </div>
             </div>
         </div>";
-}
+    }
+
 
 // ------------------------------------- END RENDER JOBLIST AND JOBDETAIL ------------------------------------- //
+
+// ------------------------------------- RENDER EMPLOYER DASHBOARD ------------------------------------- //
+
+    function renderEmployerJoblist($job){
+        echo "
+            <tr>
+
+            <td> {$job['title']} </td>
+            <td> {$job['startdate']} </td>
+            <td> {$job['enddate']} </td>
+
+            <td>
+                <a href='./job_details.php?id={$job['jobid']}' class='option success'>View</a>
+                <a href='./employer_JM_delete.php?id={$job['jobid']}' class='option warning'>Delete</a>
+            </td>
+
+        </tr>";
+    }
+
+// ------------------------------------- END RENDER EMPLOYER DASHBOARD ------------------------------------- //
+
+// ------------------------------------- RENDER JOBSEEKER DASHBOARD ------------------------------------- //
+
+    function renderJobseekerFavoriteJob($job){
+        echo "                            
+            <tr>
+
+                <td> {$job['title']} </td>
+                <td> {$job['startdate']} </td>
+                <td> {$job['enddate']} </td>
+
+                <td>
+                    <a href='./job_details.php?id={$job['jobid']}' class=' option success'>View</a>
+                    <a href='./jseeker_dashboard_fav_j_delete.php?id={$job['jobid']}' class='option warning'>Delete</a>
+                </td>
+
+            </tr>";
+    }
+
+    function renderJobseekerFavoriteCompany($company){
+
+        echo "                                
+        <div class='c-box'>
+        <a href='#'>
+            <img src='{$company['logo']}' alt=''>
+            <h3> {$company['companyname']} </h3>
+
+        </a>
+        <a href='./jseeker_dashboard_fav_c_delete.php?id={$company['companyid']}' class='option warning'>Delete</a>
+    </div>";
+
+    }
+
+// ------------------------------------- END RENDER JOBSEEKER DASHBOARD ------------------------------------- //
+
+
 
 // function renderDropListSearch($list,$id)
 // {

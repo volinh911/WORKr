@@ -28,7 +28,15 @@
     // search bar
     $searchResult = $model->searchBar();
     $totalJobsSearch = $model->totalJobSearch;
-    
+
+    // Null object
+    $favoriteJobs = new stdClass();
+    if(isset($_SESSION['role']) && $_SESSION['role'] == 2){
+
+        $userid = $_SESSION['userid'];
+        $favoriteJobs = $model->getfavoriteJob($userid);
+
+    }
 ?>
 
 <!doctype html>
@@ -196,7 +204,7 @@
         <?php if ($page > 0 && $page <= $pages && $searchResult == false): ?>
         <?php $i = 0; foreach($jobs as $job): if ($i < 5){?>
 
-        <?php $i += 1; renderJobList($job); ?>
+        <?php $i += 1; renderJobList($job, $favoriteJobs); ?>
 
         <?php }endforeach; ?>
 
