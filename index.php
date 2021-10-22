@@ -1,78 +1,106 @@
-<?php include("func/cre.php"); 
-    $model = new Model;
-    $signup = $model->loginJobSeeker();
+<?php
 
+    include './func/cre.php';
+    $model = new Model;
 ?>
+
 <!doctype html>
 <html lang="en">
 
 <head>
-    <title>Title</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
-        integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/account.css">
+    <?php include ('./includes/head.php');?>
+    <link rel="stylesheet" href="/css/home-style.css">
 </head>
 
 <body>
-    <?php include ("./includes/nav.php");?>
-    <div class="l-form">
-        <div class="shape1"></div>
-        <div class="shape2"></div>
-        <div class="form">
-            <img src="/images/login.svg" alt="" class="form__img">
-            <form action="" class="form__content" method="POST">
-                <h1 class="form__title">One of us ?</h1>
-                <div class="form__div form__div-one">
-                    <div class="form__icon">
-                        <i class="fas fa-envelope" aria-hidden="true"></i>
-                    </div>
+    <?php include ('./includes/nav.php');?>
+    <!--end of navbar-->
 
-                    <!-- Input EMAIL -->
-                    <div class="form__div-input">
-                        <label for="" class="form__label"></label>
-                        <input type="email" class="form__input" name="email" placeholder="Email">
-                    </div>
-
-                </div>
-                <div class="form__div">
-                    <div class="form__icon">
-                        <i class="fa fa-lock" aria-hidden="true"></i>
-                    </div>
-
-                    <!-- Input PASSWORD -->
-                    <div class="form__div-input">
-                        <label for="" class="form__label"></label>
-                        <input type="password" class="form__input" name="password" placeholder="Password">
-                    </div>
-
-                </div><br>
-                <input type="submit" class="form__button" name="submit" value="Login">
-            </form>
+    <!--page container-->
+    <!--banner-->
+    <div class="banner container-fluid row justify-content-around">
+        <div class="banner-title align-self-center">
+            <h1>Your Dream Career Starts Here.</h1>
+            <p>We offer you the chances to seek, hire, and share your skills, all in one place.</p>
+            <button class="join-us"><a href="login.html" class="sienna">Join us</a> </button>
         </div>
     </div>
+    <!--end of banner-->
 
-    <hr>
-    <?php include ("./includes/footer.php");?>
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
-    </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-    </script>
+    <!--trending-->
+    <div class="trending">
+        <p>Don't know where to start?</p>
+        <div class="h1">Trending</div>
+        <div class="tag-group">
+            <a href="" class="tag-item">Software Engineer</a>
+            <a href="" class="tag-item">Receptionist</a>
+            <a href="" class="tag-item">Human Resources</a>
+            <a href="" class="tag-item">Accounting</a>
+            <a href="" class="tag-item">Administrative Assistant</a>
+        </div>
+        <a href="" class="more-jobs sienna">or find out more here!</a>
+    </div>
+    <!--end of trending-->
+
+
+    <!--blog promo-->
+    <div class="blog-promo container py-5">
+        <div class="community-advert mb-5">
+            <p>CAN'T FIND ANYTHING?</p>
+            <h3>Explore other places of us!</h3>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-4 col-md-6 p-4">
+                <div class="border shadow card p-4">
+                    <img class="card-img-top" src="../images/blog.svg" alt="Card image cap">
+                    <div class="card-body">
+                        <h3 class="card-title sienna">Blog title</h3>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                            of the card's
+                            content.
+                        </p>
+                        <a href="#" class="sienna">Learn More <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 p-4">
+                <div class="border shadow card p-4">
+                    <img class="card-img-top" src="../images/review.svg" alt="Card image cap">
+                    <div class="card-body">
+                        <h3 class="card-title sienna">Company Review</h3>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                            of the card's
+                            content.
+                        </p>
+                        <a href="#" class="sienna">Learn More <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 p-4">
+                <div class="border shadow card p-4">
+                    <img class="card-img-top" src="../images/employer.svg" alt="Card image cap">
+                    <div class="card-body">
+                        <h3 class="card-title sienna">Employer title</h3>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                            of the card's
+                            content.
+                        </p>
+                        <a href="#" class="sienna">Learn More <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!--end of blog promo-->
+
+
+    <!--end of page container-->
+
+
+    <!-- Footer -->
+    <?php include ('./includes/footer.php');?>
+    <!-- Footer -->
 </body>
-
-</html>

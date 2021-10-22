@@ -18,19 +18,8 @@ if (isset($_GET['id'])) {
 <html lang="en">
 
 <head>
-    <title>Title</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
-        integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <?php include ('./includes/head.php');?>
     <link rel="stylesheet" href="/css/dashboard.css">
-    <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
@@ -103,14 +92,16 @@ if (isset($_GET['id'])) {
                                 <?php if (isset($_SESSION['role']) && $_SESSION['role'] == 1): ?>
 
                                 <?php 
-                                
-                                    renderEditBlogAdmin($blog);     
+
+                                    if (isset($_GET['id'])) {
+                                        renderEditBlogAdmin($blog);
                                     
-                                    if(isset($_POST['update'])){
-
-                                    $model->updateBlog($blogID);
-
-                                    } ?>
+                                        if (isset($_POST['update'])) {
+                                            $model->updateBlog($blogID);
+                                        }
+                                    }else{ echo "You have to choose a blog to edit"; }
+                                    
+                                ?>
 
                                 <?php else : echo "<h1> You're in a wrong place my friend";?>
                                 <?php endif ?>

@@ -48,25 +48,25 @@
 
         echo "
         <div class='col-lg-4 col-md-6 pt-4'>
-        <div class='card border rounded-2 shadow advice' style='width: 25rem;'>
+            <div class='card border rounded-2 shadow advice h-100' style='width: 25rem;'>
 
-            <img src={$blog['image']} class='card-img-top' alt='    '>
+                <img src={$blog['image']} class='card-img-top' alt='    '>
 
-            <div class='card-body'>
+                <div class='card-body'>
 
-                <h5 class='card-title'> {$blog['title']} </h5>
+                    <h5 class='card-title font-weight-bolder' style='height: 3rem; font-size: 1.3rem;'> {$blog['title']} </h5>
 
-                <p class='card-text'> {$blog['authorname']} |
-                    <small> {$blog['datecreated']} </small>
-                </p>
+                    <p class='card-text'> {$blog['authorname']} |
+                        <small> {$blog['datecreated']} </small>
+                    </p>
 
-                <p> $smallText </p>
+                    <p>$smallText ... </p>
 
-                <a href='blogdetail.php?id={$blog['id']}'>
-                    <small class='float-right'><i class='fa fa-arrow-right' aria-hidden='true'></i> Read More</small></a>
-                    
+                    <a href='blogdetail.php?id={$blog['id']}'>
+                        <small class='float-right'><i class='fa fa-arrow-right' aria-hidden='true'></i> Read More</small></a>
+                        
+                </div>
             </div>
-        </div>
         </div>";
 
     }
@@ -188,7 +188,7 @@
         $appfavo = "";
         if($favoriteJob == true){
 
-            $appfavo .= "<button type='submit' class='btn btn-danger text-white' name='apply'><a href ='{$job['website']}'>Apply</a></button>
+            $appfavo .= "<button type='submit' class='btn btn-danger text-white' name='apply'><a style='color: white;' href ='{$job['website']}'>Apply</a></button>
                         <button type='submit' class='btn btn-outline-danger love-btn' name='favorite'><i
                         class='far fa-heart' aria-hidden='true'></i> Add to favorite list</button>";
 
@@ -203,11 +203,11 @@
         $companyfavo = "";
         if($favoriteCompany == true){
 
-            $companyfavo .= "<button type='submit' class='btn btn-outline-danger love-btn' name = 'favoritecompany'><i class='far fa-heart' aria-hidden='true'></i> Add to favorite list </button>";
+            $companyfavo .= "<button type='submit' class='btn btn-outline-danger love-btn mb-3' name = 'favoritecompany'><i class='far fa-heart' aria-hidden='true'></i> Add to favorite list </button>";
 
         }else{
 
-            $companyfavo .= "<button type='submit' class='btn btn-outline-danger love-btn' name = 'favoritecompany'><i class='far fa-heart' aria-hidden='true'></i> Favorited </button>";
+            $companyfavo .= "<button type='submit' class='btn btn-outline-danger love-btn mb-3' name = 'favoritecompany'><i class='far fa-heart' aria-hidden='true'></i> Favorited </button>";
 
         }
 

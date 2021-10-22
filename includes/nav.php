@@ -9,29 +9,108 @@
     <div class="collapse navbar-collapse ml-5" id="navbarNav">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item ">
-                <a class="nav-link" href="#">Home</a>
+                <a class="nav-link" href="../index.php">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Career Blog</a>
+                <a class="nav-link" href="../careerblog.php">Career Blog</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Company Review</a>
             </li>
         </ul>
         <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="#">For Employers</a>
+            <!--admin-->
+            <?php if (isset($_SESSION['role']) && $_SESSION['role'] == 1): ?>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    For Employers
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="#">Log In</a>
+                    <a class="dropdown-item" href="#">Post Jobs</a>
+                    <a class="dropdown-item" href="#">Search Resumes</a>
+                </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="../admin_dashboard_add.php">
+                    <i class="fa fa-user" aria-hidden="true"></i> Dashboard
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../logout.php">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            </li>
+            <!--job seeker-->
+            <?php elseif (isset($_SESSION['role']) && $_SESSION['role'] == 2): ?>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    For Employers
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="#">Sign In</a>
+                    <a class="dropdown-item" href="#">Post Jobs</a>
+                    <a class="dropdown-item" href="#">Search Resumes</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../jseeker_dashboard.php">
+                    <i class="fa fa-user" aria-hidden="true"></i> Dashboard
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../logout.php">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            </li>
+            <!--employer-->
+            <?php elseif (isset($_SESSION['role']) && $_SESSION['role'] == 3): ?>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    For Employers
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="../employer_PJ.php">Post Jobs</a>
+                    <a class="dropdown-item" href="#">Search Resumes</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../employer_OV.php">
+                    <i class="fa fa-user" aria-hidden="true"></i> Dashboard
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../logout.php">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            </li>
+            <!--guest-->
+            <?php else : ?>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    For Employers
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="../login_employer.php">Log In</a>
+                    <a class="dropdown-item" href="#">Post Jobs</a>
+                    <a class="dropdown-item" href="#">Search Resumes</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../login.php">
                     <i class="fa fa-user" aria-hidden="true"></i> Sign In
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="../register.php">
                     <i class="fa fa-lock" aria-hidden="true"></i> Sign Up
                 </a>
             </li>
+            <?php endif ; ?>
         </ul>
     </div>
 </nav>

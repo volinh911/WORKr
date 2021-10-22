@@ -266,7 +266,7 @@
 								$_SESSION['username'] = $row['username'];
 								$_SESSION['loggedin'] = true;
 								echo "<script>alert('Login successfully');</script>";
-								echo "<script>window.location.href = 'jseeker_dashboard.php';</script>";
+								echo "<script>window.location.href = 'index.php';</script>";
 
 							}else{
 
@@ -373,7 +373,7 @@
 								$_SESSION['companyid'] = $row['companyid'];
 								$_SESSION['loggedin'] = true;
 								echo "<script>alert('Login successfully');</script>";
-								echo "<script>window.location.href = 'employer_OV.php';</script>";
+								echo "<script>window.location.href = 'index.php';</script>";
 
 							}else{
 

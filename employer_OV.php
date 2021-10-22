@@ -43,27 +43,28 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == 3) {
         <div class="sidebar-menu">
             <ul>
                 <li>
-                    <a href="" class="active"><span><i class="fa fa-home"></i></span>
+                    <a href="employer_OV.php" class="active"><span><i class="fa fa-home"></i></span>
                         <span>Overview</span></a>
                 </li>
                 <li>
-                    <a href="" class="active"><span><i class="fa fa-info-circle"></i></span>
+                    <a href="employer_CD.php" class="active"><span><i class="fa fa-info-circle"></i></span>
                         <span>Company Detail</span></a>
                 </li>
                 <li>
-                    <a href="" class="active"><span><i class="fa fa-heart"></i></span>
+                    <a href="#" class="active"><span><i class="fa fa-heart"></i></span>
                         <span>Favorite Resumes</span></a>
                 </li>
                 <li>
-                    <a href="" class="active"><span><i class="fa fa-edit" aria-hidden="true"></i></span>
+                    <a href="employer_PJ.php" class="active"><span><i class="fa fa-edit" aria-hidden="true"></i></span>
                         <span>Post Jobs</span></a>
                 </li>
                 <li>
-                    <a href="" class="active"><span><i class="fa fa-clipboard" aria-hidden="true"></i></span>
+                    <a href="employer_JM.php" class="active"><span><i class="fa fa-clipboard"
+                                aria-hidden="true"></i></span>
                         <span>Jobs Management</span></a>
                 </li>
                 <li>
-                    <a href="" class="active"><span><i class="fas fa-sign-out-alt"></i></span>
+                    <a href="logout.php" class="active"><span><i class="fas fa-sign-out-alt"></i></span>
                         <span>Logout</span></a>
                 </li>
             </ul>

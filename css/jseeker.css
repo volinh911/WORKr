@@ -23,7 +23,7 @@ main {
 
 .profile-body {
     display: inline-flex;
-    padding: 30px 80px;
+    padding: 30px 30px;
     box-shadow: 2px 2px 0px 2px sienna;
 }
 
@@ -38,7 +38,7 @@ main {
     margin-bottom: 7px;
 }
 
-.edit-btn {
+.text-box .edit-btn {
     padding: 10px 30px;
     margin: 30px auto;
     font-size: 25px;

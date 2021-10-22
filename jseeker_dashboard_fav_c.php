@@ -44,7 +44,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == 2) {
                         <span>Favourite Jobs</span></a>
                 </li>
                 <li>
-                    <a href="" class="active"><span><i class="fas fa-sign-out-alt"></i></span>
+                    <a href="logout.php" class="active"><span><i class="fas fa-sign-out-alt"></i></span>
                         <span>Logout</span></a>
                 </li>
             </ul>
@@ -85,7 +85,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == 2) {
                                 <?php if ($favoritecompany !=false): ?>
                                 <?php foreach($favoritecompany as $fc): ?>
 
-                                    <?php renderJobseekerFavoriteCompany($fc); ?>
+                                <?php renderJobseekerFavoriteCompany($fc); ?>
 
                                 <?php endforeach; ?>
                                 <?php else: echo "You have no favorite company"; ?>

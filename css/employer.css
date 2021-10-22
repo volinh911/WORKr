@@ -149,6 +149,8 @@ main {
 
 .dash-title {
     color: var(--color-dark);
+    margin-top: 3rem;
+    margin-left: 18rem;
 }
 
 
@@ -346,6 +348,9 @@ tbody tr:nth-child(even) {
     .summary {
         margin-top: 1.5rem;
     }
+    .dash-title {
+        margin-left: 15rem;
+    }
 }
 
 @media only screen and (max-width: 600px) {
@@ -355,12 +360,18 @@ tbody tr:nth-child(even) {
     header nav {
         display: none;
     }
+    .dash-title {
+        margin-left: 5rem;
+    }
 }
 
 @media only screen and (max-width: 450px) {
     main {
         padding-left: 1rem;
         padding-right: 1rem;
+    }
+    .dash-title {
+        margin-left: 0;
     }
 }
 
@@ -390,7 +401,7 @@ tbody tr:nth-child(even) {
 
 .form-wrapper .input-form .input-field .input,
 .form-wrapper .input-form .input-field .textarea {
-    width: 50%;
+    width: 100%;
     outline: none;
     border: 1px solid #d5dbd9;
     font-size: 15px;
@@ -400,7 +411,7 @@ tbody tr:nth-child(even) {
 
 .form-wrapper .input-form .input-field .textarea {
     resize: none;
-    height: 125px;
+    height: 80px;
 }
 
 .input-field select {
@@ -443,7 +454,7 @@ tbody tr:nth-child(even) {
 .form-wrapper .input-form .input-field .input-logo {
     display: flex;
     flex-direction: column;
-    width: 75%;
+    width: 100%;
 }
 
 .form-wrapper .input-form .input-field .input-logo img {
