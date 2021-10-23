@@ -90,6 +90,11 @@
     }
 
     function renderEditBlogAdmin($blog){
+
+        $blog = '';
+
+        
+
         echo "                               
             <form action='' method='POST' enctype='multipart/form-data'>
 
@@ -417,30 +422,227 @@
 
 // ------------------------------------- END RENDER JOBSEEKER DASHBOARD ------------------------------------- //
 
+// ------------------------------------- RENDER COMPANY ------------------------------------- //
 
+    function renderCompanySlider($company, $smallText){
+        echo "
+            <div class='swiper-slide'>
+                <div class='testi-item'>
+                    <div class='testi-avatar'><img src='{$company['logo']}'></div>
+                    <div class='testimonials-text-before'><i class='fa fa-quote-right'></i></div>
+                    <div class='testimonials-text'>
 
-// function renderDropListSearch($list,$id)
-// {
+                        <p>{$smallText}</p>
+                        <a href='#' class='text-link'></a>
+                            <div class='testimonials-avatar'>
+                                <h3>{$company['companyname']}</h3>
+                                <a href='./comp_review_details.php?id={$company['id']}'>Read more</a>
+                            </div>
 
-// $options = "";
+                    </div>
+                    <div class='testimonials-text-after'><i class='fa fa-quote-left'></i></div>
+                </div>
+            </div>";
+    }
 
-// foreach ($list as $item) {
-// $options .= "<option ";
-//         if (isset($id) && $id == $item['id']) 
-//                 $options .= 'selected';
-//         $options .= " value={$item['id']}> {$item['companyname']}</option>";
-// }
-// echo "<div class='col-md-4 mt-3'>
-//     <div class='input-group'>
-//         <select class='custom-select' id='inputGroupSelect04' aria-label='Example select with button addon'
-//             name='companyid'>
-//             <option value='0' selected>Choose your Company</option>
-//             {$options}
+    function renderCompanyDetail($company, $favoriteCompany){
 
-//         </select>
-//     </div>
-// </div>
-// ";
-// }
+        $companyfavo = "";
+        if($favoriteCompany == true){
+            
+            $companyfavo .= "<button type='submit' class='btn btn-danger text-white' name = 'favoritecompany'><i class='far fa-heart' aria-hidden='true'></i> Favorite </button>";
+
+        }else{
+
+            $companyfavo .= "<button type='submit' class='btn btn-danger text-white' name = 'favoritecompany'><i class='far fa-heart' aria-hidden='true'></i> Favorited </button>";
+
+        }
+
+        echo "                
+        <div class='jobs d-flex align-items-center mt-3 mb-3'>
+            <div class='card' style='width: 18rem;'>
+                <img src='{$company['logo']}' class='card-img-top' alt='...'>
+            </div>
+            <div class='card_content w-100 ml-3 d-flex justify-content-between align-items-end'>
+                <div class='job_info'>
+                    <h3 class='text-danger'> {$company['companyname']} </h3>
+                    <h6>Location: <i class='fas fa-map-marker-alt text-black-50'></i>
+                        {$company['address']} </h6>
+                    <div class='treatment'>
+                        <ul class='d-flex'>
+                            <li class='mr-3'><i class='fa fa-users' aria-hidden='true'></i> Company size:
+                                {$company['size']} </li>
+                            <li><i class='fas fa-gamepad'></i> Website: {$company['website']} </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class='details'>
+
+                    <form action='' method='post'>
+
+                        {$companyfavo}
+                        
+                        <button type='button' class='btn btn-primary' data-toggle='modal' data-target='#popUp'
+                            data-whatever='@getbootstrap' name = 'review'>
+                            Write a review
+                        </button>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>";
+    }
+
+    function renderReviewForm(){
+        echo "    
+            <div class='modal fade' id='popUp' tabindex='-1' role='dialog' aria-labelledby='popUpReviewForm' aria-hidden='true'>
+            <div class='modal-dialog' role='document'>
+                <form action='' method='post'>
+                    <div class='modal-content'>
+                        <div class='modal-header'>
+                            <h5 class='modal-title' id='popUpReviewForm'>New Review</h5>
+                            <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                                <span aria-hidden='true'>&times;</span>
+                            </button>
+                        </div>
+                        <div class='modal-body'>
+                            <form>
+                                <div class='form-group'>
+                                    <label for='recipient-name' class='col-form-label font-weight-bold'>How do you feel?
+                                    </label>
+                                    <div class='div'>
+                                        <div class='form-check'>
+                                            <input class='form-check-input' type='radio' name='inlineRadioOptions'
+                                                id='inlineRadio1' value='1'>
+                                            <label class='form-check-label' for='inlineRadio1'><i
+                                                    class='far fa-kiss-wink-heart'></i> I really love them!!!</label>
+                                        </div>
+                                        <div class='form-check'>
+                                            <input class='form-check-input' type='radio' name='inlineRadioOptions'
+                                                id='inlineRadio2' value='2'>
+                                            <label class='form-check-label' for='inlineRadio2'><i
+                                                    class='far fa-grin-stars'></i>
+                                                Just love them.</label>
+                                        </div>
+                                        <div class='form-check'>
+                                            <input class='form-check-input' type='radio' name='inlineRadioOptions'
+                                                id='inlineRadio3' value='3'>
+                                            <label class='form-check-label' for='inlineRadio3'><i class='far fa-smile'></i>
+                                                Just
+                                                ok! ok!</label>
+                                        </div>
+                                        <div class='form-check'>
+                                            <input class='form-check-input' type='radio' name='inlineRadioOptions'
+                                                id='inlineRadio4' value='4'>
+                                            <label class='form-check-label' for='inlineRadio4'><i
+                                                    class='far fa-frown-open'></i>
+                                                Not what I expected!!!!!</label>
+                                        </div>
+                                        <div class='form-check'>
+                                            <input class='form-check-input' type='radio' name='inlineRadioOptions'
+                                                id='inlineRadio5' value='5'>
+                                            <label class='form-check-label' for='inlineRadio5'><i
+                                                    class='far fa-sad-tear'></i> I
+                                                was really disappointed</label>
+                                        </div>
+                                        <div class='form-check'>
+                                            <input class='form-check-input' type='radio' name='inlineRadioOptions'
+                                                id='inlineRadio6' value='6'>
+                                            <label class='form-check-label' for='inlineRadio6'><i class='far fa-angry'></i>
+                                                Not
+                                                want to talk about it.</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class='form-group'>
+                                    <label for='message-text' class='col-form-label font-weight-bold'>Message</label>
+                                    <textarea class='form-control' id='message-text' name='message'></textarea>
+                                </div>
+
+                            </form>
+
+                        </div>
+
+                        <div class='modal-footer'>
+                            <button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>
+                            <button type='submit' class='btn btn-success' name='review'>Send message</button>
+                        </div>
+                </form>
+
+            </div>
+        </div>
+        </div>";
+    }
+
+    function renderReviews($review){
+
+        $image = '';
+
+        switch($review['feeling']){
+            case "1":
+                $image .= "/images/really love it.png";
+                break;
+            
+            case "2":
+                $image .= "/images/love it.png";
+                break;
+
+            case "3":
+                $image .= "/images/oke.png";
+                break;
+
+            case "4":
+                $image .= "/images/sad.png";
+                break;
+
+            case "5":
+                $image .= "/images/cry.png";
+                break;
+
+            case "6":
+                $image .= "/images/angry.png";
+                break;
+        }   
+
+        $avatar = ''; 
+        if($review['avatar'] == NULL){
+
+            $avatar .= '\images\Avatar.png';
+
+        }else{
+
+            $avatar .= $review['avatar'];
+
+        }
+
+        echo "        
+        <div class='row'>
+            <div class='col-md-12'>
+                <div class='jobs d-flex align-items-center mt-3 mb-3'>
+                    <div style='width: 18rem;'>
+                        <img src='{$avatar}' class='card-img-top' style='border-radius: 50%;' alt='...'>
+                    </div>
+                    <div class='card_content w-100 ml-3 d-flex justify-content-between align-items-end'>
+                        <div>
+                            <h3 class='text-success'>{$review['username']}</h3>
+                            <h4>{$review['datecreated']}</h4>
+                        </div>
+                        <div style='width: 100px;'>
+                            <img src='{$image}' class='card-img-top' alt='...'>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <p>{$review['content']}</p>
+                </div>
+            </div>
+        </div>";
+
+    }
+
+// ------------------------------------- END RENDER COMPANY ------------------------------------- //
+
 
 ?>

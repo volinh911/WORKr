@@ -1,3 +1,12 @@
+<?php 
+
+    include './func/cre.php';
+    include './func/render.php';
+    $model = new Model;
+    $company = $model->getCompany();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -85,78 +94,17 @@
             <div class="testimonials-carousel">
                 <div class="swiper-container">
                     <div class="swiper-wrapper">
-                        <!--first-->
-                        <div class="swiper-slide">
-                            <div class="testi-item">
-                                <div class="testi-avatar"><img src="/images/gameloft.jpg"></div>
-                                <div class="testimonials-text-before"><i class="fa fa-quote-right"></i></div>
-                                <div class="testimonials-text">
-                                    <!--trích giới thiệu công ty: khoảng 200 ký tự-->
-                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it</p>
-                                    <a href="#" class="text-link"></a>
-                                    <div class="testimonials-avatar">
-                                        <h3>Gameloft</h3>
-                                        <a href="">Read more</a>
-                                    </div>
-                                </div>
-                                <div class="testimonials-text-after"><i class="fa fa-quote-left"></i></div>
-                            </div>
-                        </div>
+                        <!--testi-->
+                        <?php if($company != false): ?>
+                            <?php foreach($company as $c): ?>
+                                <?php $smallText = substr($c['companydescription'], 0, 200); ?>
 
-                        <!--second--->
-                        <div class="swiper-slide">
-                            <div class="testi-item">
-                                <div class="testi-avatar"><img src="/images/gameloft.jpg"></div>
-                                <div class="testimonials-text-before"><i class="fa fa-quote-right"></i></div>
-                                <div class="testimonials-text">
-                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it
-                                        to make a type specimen book.</p>
-                                    <a href="#" class="text-link"></a>
-                                    <div class="testimonials-avatar">
-                                        <h3>Doe Boe</h3>
-                                        <h4>Director</h4>
-                                    </div>
-                                </div>
-                                <div class="testimonials-text-after"><i class="fa fa-quote-left"></i></div>
-                            </div>
-                        </div>
-                        <!--third-->
+                                    <?php renderCompanySlider($c, $smallText); ?>
 
-                        <div class="swiper-slide">
-                            <div class="testi-item">
-                                <div class="testi-avatar"><img src="/images/gameloft.jpg"></div>
-                                <div class="testimonials-text-before"><i class="fa fa-quote-right"></i></div>
-                                <div class="testimonials-text">
-                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it
-                                        to make a type specimen book.</p>
-                                    <a href="#" class="text-link"></a>
-                                    <div class="testimonials-avatar">
-                                        <h3>Boe Doe</h3>
-                                        <h4>Developer</h4>
-                                    </div>
-                                </div>
-                                <div class="testimonials-text-after"><i class="fa fa-quote-left"></i></div>
-                            </div>
-                        </div>
 
-                        <!--fourth-->
-                        <div class="swiper-slide">
-                            <div class="testi-item">
-                                <div class="testi-avatar"><img src="/images/gameloft.jpg"></div>
-                                <div class="testimonials-text-before"><i class="fa fa-quote-right"></i></div>
-                                <div class="testimonials-text">
-                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it
-                                        to make a type specimen book.</p>
-                                    <a href="#" class="text-link"></a>
-                                    <div class="testimonials-avatar">
-                                        <h3>Doe John</h3>
-                                        <h4>Designer</h4>
-                                    </div>
-                                </div>
-                                <div class="testimonials-text-after"><i class="fa fa-quote-left"></i></div>
-                            </div>
-                        </div>
                         <!--testi end-->
+                            <?php endforeach; ?>
+                        <?php endif; ?>
 
                     </div>
                 </div>

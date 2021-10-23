@@ -1226,10 +1226,80 @@
 	}
 
 
+// ------------------------------------- END JOBSEEKER DASHBOARD ------------------------------------- //
 
-// ------------------------------------- JOBSEEKER DASHBOARD ------------------------------------- //
+// ------------------------------------- REVIEW  ------------------------------------- //
+
+	public function createReview($userid, $companyid){
+
+        if (isset($_POST['review'])) {
+
+			if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true && $_SESSION['role'] == 2) {
+
+				if(isset($_POST['inlineRadioOptions']) && isset($_POST['message'])){
+
+					if(!empty($_POST['inlineRadioOptions']) && !empty($_POST['message'])){
+						
+						$feeling = $this->validate($_POST['inlineRadioOptions']);
+						$message = $this->validate($_POST['message']);
+
+						$insertReview = "INSERT INTO companyreview (user_id, companyid, content, feeling) VALUES ('$userid', '$companyid', '$message', '$feeling')";
+						$queryInsert = pg_query($this->conn, $insertReview);
+
+						if($queryInsert){
+
+							echo "<script>alert('Review create successfully');</script>";
+							echo "<script>window.location.href = 'comp_review_details.php?id=$companyid';</script>";
+
+						}else{
+
+							echo "<script>alert('Review create fail');</script>";
+							
+						}
+
+					}else{
+
+						echo "<script>alert('You cant leave Feeling || Message empty');</script>";
+
+					}
+
+				}else{
+
+					echo "<script>alert('You cant leave Feeling || Message empty');</script>";
+
+				}
+
+			}else{
+
+				echo "<script>alert('You have to be a jobseeker to review company');</script>";
+
+			}
+
+        }
 
 
+
+	}
+
+	public function getReviews($companyid){
+		
+		$getReviews = "SELECT * FROM companyreview cr, jobseeker j, company co, feeling f WHERE co.id = '$companyid' AND cr.user_id = j.id AND cr.companyid = co.id AND cr.feeling = f.id;";
+
+		$results = pg_query($this->conn, $getReviews);
+
+		if(pg_num_rows($results) > 0){
+
+			return pg_fetch_all($results);
+
+		}else{
+
+			return false;
+			echo "<script>alert('No Review');</script>";
+
+		}
+	}
+
+// ------------------------------------- END REVIEW ------------------------------------- //
 
 }	
 

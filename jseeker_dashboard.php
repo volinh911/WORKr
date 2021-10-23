@@ -1,4 +1,10 @@
-<?php include("includes/head.php");?>
+<?php 
+
+include("includes/head.php");
+include './func/cre.php';
+
+
+?>
 <link rel="stylesheet" href="css/dashboard.css">
 <link rel="stylesheet" href="css/jseeker.css">
 </head>
@@ -62,6 +68,7 @@
                         <div class="profile-header">
                             <h3>Profile</h3>
                         </div>
+                        <?php if(isset($_SESSION['role']) && $_SESSION['role'] == 2): ?>
                         <div class="profile-body">
                             <div class="profile-img">
                                 <div class="info">
@@ -80,6 +87,10 @@
                                 </button>
                             </div>
                         </div>
+
+                        <?php else: echo "<h1> You're not logged in or you're not a jobseeker </h1>" ?>
+                        <?php endif; ?>
+
                     </div>
                 </div>
             </div>
