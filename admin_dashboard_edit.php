@@ -33,20 +33,19 @@ if (isset($_GET['id'])) {
         <div class="sidebar-menu">
             <ul>
                 <li>
-                    <a href="" class="active"><span><i class="fab fa-blogger-b"></i></span>
+                    <a href="./admin_dashboard_add.php" class="active"><span><i class="fab fa-blogger-b"></i></span>
                         <span>Blogs</span></a>
                 </li>
-
                 <li>
-                    <a href="" class="active"><span><i class="fas fa-briefcase"></i></span>
+                    <a href="./admin_dashboard_blog.php" class="active"><span><i class="fas fa-briefcase"></i></span>
                         <span>Jobs</span></a>
                 </li>
                 <li>
-                    <a href="" class="active"><span><i class="fas fa-pen"></i></span>
+                    <a href="./admin_dashboard.reviews.php" class="active"><span><i class="fas fa-pen"></i></span>
                         <span>Review</span></a>
                 </li>
                 <li>
-                    <a href="" class="active"><span><i class="fa fa-home" aria-hidden="true"></i></span>
+                    <a href="./index.php" class="active"><span><i class="fa fa-home" aria-hidden="true"></i></span>
                         <span>Home</span></a>
                 </li>
                 <li>

@@ -6,24 +6,25 @@
 
         echo "
         <div class='col-lg-4 col-md-6'>
-        <div class='card border rounded-2 shadow advice mt-4' style='width: 20rem;'>
+            <div class='card border rounded-2 shadow advice h-100 mt-4' style='width: 20rem;'>
 
-            <img src={$blog['image']} class='card-img-top' alt=''    >
+                <img src={$blog['image']} class='card-img-top' alt=''    >
 
-            <div class='card-body'>
+                <div class='card-body'>
 
-                <h5 class='card-title'>{$blog['title']}</h5>
+                    <h5 class='card-title font-weight-bolder' style='height: 3.5rem; font-size: 1rem;'> {$blog['title']} </h5>
 
-                <p class='card-text'> {$blog['authorname']} | <small>
-                        {$blog['datecreated']}</small></p>
+                    <p class='card-text'> {$blog['authorname']} |
+                        <small> {$blog['datecreated']} </small>
+                    </p>
 
-                <p> $smallText </p>
+                    <p>$smallText ... </p>
 
-                <a href='blogdetail.php?id={$blog['id']}'><small class='float-right'><i
-                            class='fa fa-arrow-right' aria-hidden='true'></i> Read More</small></a>
-
+                    <a href='blogdetail.php?id={$blog['id']}'>
+                        <small class='float-right'><i class='fa fa-arrow-right' aria-hidden='true'></i> Read More</small></a>
+                            
+                </div>
             </div>
-        </div>
         </div>";
 
     }

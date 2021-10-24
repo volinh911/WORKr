@@ -18,7 +18,7 @@
                         <span>Personal Information</span></a>
                 </li>
                 <li>
-                    <a href="#" class="active"><span><i class="fas fa-briefcase"></i></span>
+                    <a href="jseeker_dashboard_cv.php" class="active"><span><i class="fas fa-briefcase"></i></span>
                         <span>Curriculum Vitae</span></a>
                 </li>
                 <li>
@@ -28,6 +28,10 @@
                 <li>
                     <a href="jseeker_dashboard_fav_j.php" class="active"><span><i class="fas fa-user-tie"></i></span>
                         <span>Favourite Jobs</span></a>
+                </li>
+                <li>
+                    <a href="jseeker_dashboard_review.php" class="active"><span><i class="fas fa-pen"></i></span>
+                        <span>Company Reviews</span></a>
                 </li>
                 <li>
                     <a href="logout.php" class="active"><span><i class="fas fa-sign-out-alt"></i></span>

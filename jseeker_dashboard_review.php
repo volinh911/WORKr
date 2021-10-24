@@ -1,31 +1,18 @@
-<?php 
+<!doctype html>
+<html lang="en">
 
-include("includes/head.php");
-include './func/cre.php';
-include './func/render.php';
-
-$model = new Model;
-if (isset($_SESSION['role']) && $_SESSION['role'] == 2) {
-    
-    $userid = $_SESSION['userid'];
-    $favoritejobs = $model->getFavoriteJob($userid);
-    $totalFavoriteJobs = $model->totalFavoriteJobs;
-    
-}
-
-?>
-<link rel="stylesheet" href="css/dashboard.css">
-<link rel="stylesheet" href="/css/employer.css">
+<head>
+    <?php include ('./includes/head.php');?>
+    <link rel="stylesheet" href="/css/dashboard.css">
 
 </head>
 
 <body>
-
     <input type="checkbox" id="nav-toggle">
     <!-- Sidebar -->
     <div class="sidebar">
         <div class="sidebar-brand">
-            <h2><span><img src="images/LOGO.png" alt=""></span></h2>
+            <h2><span><img src="/images/LOGO.png" alt=""></span></h2>
         </div>
         <div class="sidebar-menu">
             <ul>
@@ -67,7 +54,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == 2) {
                 </label>
             </h2>
             <div class="user-wrapper">
-                <img src="images/Avatar.png" width="40px" height="40px" alt="">
+                <img src="/images/Avatar.png" width="40px" height="40px" alt="">
                 <div>
                     <h6 class="text-white">Administrador</h6>
                 </div>
@@ -76,68 +63,64 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == 2) {
         <!-- Header -->
 
         <main>
-            <h2 class="dash-title">Favorite Jobs</h2>
-
-            <?php if (isset($_SESSION['role']) && $_SESSION['role'] == 2) :?>
-
-            <section class='recent'>
-                <div class='activity-grid'>
-                    <div class='activity-card'>
-                        <div class='table-responsive'>
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Jobs Title</th>
-                                        <th>Start Date</th>
-                                        <th>End Date</th>
-                                        <th>Options</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                    <?php if ($favoritejobs !=false): ?>
-
-                                    <?php foreach ($favoritejobs as $job):?>
-
-                                    <?php renderJobseekerFavoriteJob($job); ?>
-
-                                    <?php endforeach; ?>
-
-                                    <?php else: echo "You have no favorite job"; ?>
-
-                                    <?php endif; ?>
-
-                                </tbody>
-                            </table>
+            <div class="recent-grid">
+                <div class="projects">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Manage Company Reviews</h5>
                         </div>
-                    </div>
-
-                    <div class='summary'>
-                        <div class='summary-card'>
-
-                            <div class='summary-single'>
-                                <span class='fa fa-clipboard'></span>
-                                <div>
-                                    <h5><?php echo $totalFavoriteJobs['count']; ?></h5>
-                                    <small>Number of favorite Jobs</small>
-                                </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table width="100%">
+                                    <thead>
+                                        <tr>
+                                            <td>SN</td>
+                                            <td>Title</td>
+                                            <td>Date Upload</td>
+                                            <td>Delete</td>
+                                            <td>View</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>How you become..</td>
+                                            <td>30/9/2021</td>
+                                            <td><a href="#" class="delete">Delete</a></td>
+                                            <td><a href="#" class="text-primary">View</a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
 
                     </div>
                 </div>
-            </section>
 
-
-            <?php else: echo "<h1> You're not logged in or you're not a jobseeker </h1>" ?>
-            <?php endif; ?>
-
+                <div class="customers">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Admins</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="customer ">
+                                <div class="info">
+                                    <img src="/images/Avatar.png " width="40px " height="40px " alt=" ">
+                                    <div>
+                                        <h4>1959009</h4>
+                                    </div>
+                                </div>
+                                <div class="contact ">
+                                    <span><i class="fas fa-comment-dots"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
         </main>
-    </div>
-
-    <footer>
-        <p class="text-center pt-2">© 2021 WORKr. All rights reserved.</p>
-    </footer>
+        <footer>
+            <p class="text-center pt-2">© 2021 WORKr. All rights reserved.</p>
+        </footer>
     </div>
 
     <!-- Optional JavaScript -->

@@ -22,7 +22,7 @@
         <div class="banner-title align-self-center">
             <h1>Your Dream Career Starts Here.</h1>
             <p>We offer you the chances to seek, hire, and share your skills, all in one place.</p>
-            <button class="join-us"><a href="login.html" class="sienna">Join us</a> </button>
+            <button class="join-us"><a href="login.php" class="sienna">Join us</a> </button>
         </div>
     </div>
     <!--end of banner-->
@@ -54,12 +54,12 @@
                 <div class="border shadow card p-4">
                     <img class="card-img-top" src="../images/blog.svg" alt="Card image cap">
                     <div class="card-body">
-                        <h3 class="card-title sienna">Blog title</h3>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                            of the card's
-                            content.
+                        <h3 class="card-title sienna">Career Blog</h3>
+                        <p class="card-text font-weight-bold">Looking for some advice?</p>
+                        <p class="card-text">Where you can learn helpful tips in your next journeys
                         </p>
-                        <a href="#" class="sienna">Learn More <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+                        <a href="careerblog.php" class="sienna">Learn More <i class="fa fa-arrow-right"
+                                aria-hidden="true"></i></a>
                     </div>
                 </div>
             </div>
@@ -68,10 +68,10 @@
                 <div class="border shadow card p-4">
                     <img class="card-img-top" src="../images/review.svg" alt="Card image cap">
                     <div class="card-body">
-                        <h3 class="card-title sienna">Company Review</h3>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                            of the card's
-                            content.
+                        <h3 class="card-title sienna">Company Reviews</h3>
+                        <p class="card-text font-weight-bold">Wanna learn from experiences?</p>
+                        <p class="card-text">Where you can write, read and receive a variety of advice for your next
+                            job.
                         </p>
                         <a href="#" class="sienna">Learn More <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
                     </div>
@@ -82,12 +82,12 @@
                 <div class="border shadow card p-4">
                     <img class="card-img-top" src="../images/employer.svg" alt="Card image cap">
                     <div class="card-body">
-                        <h3 class="card-title sienna">Employer title</h3>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                            of the card's
-                            content.
+                        <h3 class="card-title sienna">For Employers</h3>
+                        <p class="card-text font-weight-bold">Looking to Post a job?</p>
+                        <p class="card-text">We have end-to-end solutions that can keep up with you and your standards
                         </p>
-                        <a href="#" class="sienna">Learn More <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+                        <a href="register_employer.php" class="sienna">Learn More <i class="fa fa-arrow-right"
+                                aria-hidden="true"></i></a>
                     </div>
                 </div>
             </div>

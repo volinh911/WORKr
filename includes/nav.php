@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light">
-    <a class="navbar-brand ml-5" href="">
+    <a class="navbar-brand ml-5" href="../index.php">
         <img src="../images/LOGO.png" alt="">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -9,7 +9,7 @@
     <div class="collapse navbar-collapse ml-5" id="navbarNav">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item ">
-                <a class="nav-link" href="../index.php">Home</a>
+                <a class="nav-link" href="../joblist.php">Search Jobs</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="../careerblog.php">Career Blog</a>
