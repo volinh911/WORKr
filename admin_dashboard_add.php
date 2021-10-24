@@ -33,7 +33,7 @@
                         <span>Jobs</span></a>
                 </li>
                 <li>
-                    <a href="" class="active"><span><i class="fas fa-pen"></i></span>
+                    <a href="./admin_dashboard.reviews.php" class="active"><span><i class="fas fa-pen"></i></span>
                         <span>Review</span></a>
                 </li>
                 <li>

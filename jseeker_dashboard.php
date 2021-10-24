@@ -30,6 +30,10 @@
                         <span>Favourite Jobs</span></a>
                 </li>
                 <li>
+                    <a href="jseeker_dashboard_review.php" class="active"><span><i class="fas fa-pen"></i></span>
+                        <span>Company Reviews</span></a>
+                </li>
+                <li>
                     <a href="logout.php" class="active"><span><i class="fas fa-sign-out-alt"></i></span>
                         <span>Logout</span></a>
                 </li>

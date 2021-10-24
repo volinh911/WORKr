@@ -36,12 +36,16 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == 2) {
                         <span>Curriculum Vitae</span></a>
                 </li>
                 <li>
-                    <a href="#" class="active"><span><i class="fas fa-building"></i></span>
+                    <a href="jseeker_dashboard_fav_c.php" class="active"><span><i class="fas fa-building"></i></span>
                         <span>Favourite Companies</span></a>
                 </li>
                 <li>
                     <a href="jseeker_dashboard_fav_j.php" class="active"><span><i class="fas fa-user-tie"></i></span>
                         <span>Favourite Jobs</span></a>
+                </li>
+                <li>
+                    <a href="jseeker_dashboard_review.php" class="active"><span><i class="fas fa-pen"></i></span>
+                        <span>Company Reviews</span></a>
                 </li>
                 <li>
                     <a href="logout.php" class="active"><span><i class="fas fa-sign-out-alt"></i></span>

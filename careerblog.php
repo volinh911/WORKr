@@ -47,7 +47,7 @@
             foreach ($blogs as $blog) {
 
                 // Giam luong characters xuong 50
-                $smallText = substr($blog['content'], 0, 50);
+                $smallText = substr($blog['content'], 0, 40);
 
         ?>
 

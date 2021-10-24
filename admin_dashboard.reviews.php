@@ -1,13 +1,3 @@
-<?php
-
-    include './func/cre.php';
-    include './func/render.php';
-
-    $model = new Model;
-    $blogs = $model->getAllBlogs();
-
-?>
-
 <!doctype html>
 <html lang="en">
 
@@ -18,7 +8,6 @@
 </head>
 
 <body>
-
     <input type="checkbox" id="nav-toggle">
     <!-- Sidebar -->
     <div class="sidebar">
@@ -74,10 +63,7 @@
                 <div class="projects">
                     <div class="card">
                         <div class="card-header">
-                            <h5>Manage Blogs</h5>
-                            <a href="/html/admin_dashboard_add.html">
-                                <button>Add New Blogs</button>
-                            </a>
+                            <h5>Manage Company Reviews</h5>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -89,21 +75,18 @@
                                             <td>Username</td>
                                             <td>Date Upload</td>
                                             <td>Delete</td>
-                                            <td>Edit</td>
+                                            <td>View</td>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php if (isset($_SESSION['role']) && $_SESSION['role'] == 1): ?>
-
-                                        <?php foreach($blogs as $blog): ?>
-
-                                        <?php renderBlogListAdmin($blog); ?>
-
-                                        <?php endforeach; ?>
-
-                                        <?php else : echo "<h1> You're in a wrong place my friend";?>
-                                        <?php endif ?>
-
+                                        <tr>
+                                            <td>1</td>
+                                            <td>How you become..</td>
+                                            <td>1959009</td>
+                                            <td>30/9/2021</td>
+                                            <td><a href="#" class="delete">Delete</a></td>
+                                            <td><a href="#" class="text-primary">View</a></td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -137,18 +120,6 @@
             <p class="text-center pt-2">© 2021 WORKr. All rights reserved.</p>
         </footer>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

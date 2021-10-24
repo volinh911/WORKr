@@ -39,7 +39,7 @@
     <!-- !Content -->
 
     <!-- See more blog -->
-    <div class="container mt-5">
+    <div class="container mt-5 mb-5">
         <h3 class="text-center">More from blog...</h3>
         <div class="row">
 
@@ -70,7 +70,7 @@
                 // Neu du 3 bai thi set => khong de thi co nhieu in bay nhieu
                 // Cac bai bi xoa lot vao 3 so random thi co bao nhieu in bay nhieu
 
-                $smallText = substr($blog['content'], 0, 50);
+                $smallText = substr($blog['content'], 0, 40);
 
 
             ?>

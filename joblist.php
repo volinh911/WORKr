@@ -53,7 +53,7 @@
     <!-- Navbar end -->
 
     <!-- Searchbox -->
-    <hr>
+    <hr style="margin-top: 0.3rem;">
     <form action="" method="post">
         <div class="container">
             <div class="row">
