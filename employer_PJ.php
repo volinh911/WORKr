@@ -27,19 +27,8 @@
 <html lang="en">
 
 <head>
-    <title>Title</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
-        integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="/css/style.css">
+    <?php include ('./includes/head.php');?>
+    <link rel="stylesheet" href="/css/dashboard.css">
     <link rel="stylesheet" href="/css/employer.css">
 </head>
 
@@ -53,27 +42,28 @@
         <div class="sidebar-menu">
             <ul>
                 <li>
-                    <a href="" class="active"><span><i class="fa fa-home"></i></span>
+                    <a href="employer_OV.php" class="active"><span><i class="fa fa-home"></i></span>
                         <span>Overview</span></a>
                 </li>
                 <li>
-                    <a href="" class="active"><span><i class="fa fa-info-circle"></i></span>
+                    <a href="employer_CD.php" class="active"><span><i class="fa fa-info-circle"></i></span>
                         <span>Company Detail</span></a>
                 </li>
                 <li>
-                    <a href="" class="active"><span><i class="fa fa-heart"></i></span>
+                    <a href="#" class="active"><span><i class="fa fa-heart"></i></span>
                         <span>Favorite Resumes</span></a>
                 </li>
                 <li>
-                    <a href="" class="active"><span><i class="fa fa-edit" aria-hidden="true"></i></span>
+                    <a href="employer_PJ.php" class="active"><span><i class="fa fa-edit" aria-hidden="true"></i></span>
                         <span>Post Jobs</span></a>
                 </li>
                 <li>
-                    <a href="" class="active"><span><i class="fa fa-clipboard" aria-hidden="true"></i></span>
+                    <a href="employer_JM.php" class="active"><span><i class="fa fa-clipboard"
+                                aria-hidden="true"></i></span>
                         <span>Jobs Management</span></a>
                 </li>
                 <li>
-                    <a href="" class="active"><span><i class="fas fa-sign-out-alt"></i></span>
+                    <a href="logout.php" class="active"><span><i class="fas fa-sign-out-alt"></i></span>
                         <span>Logout</span></a>
                 </li>
             </ul>
@@ -104,157 +94,139 @@
             <?php if (isset($_SESSION['role']) && $_SESSION['role'] == 3):?>
             <form action="" method="post">
 
-                <div class="form-wrapper">
-
+                <div class="form-wrapper mb-5">
                     <div class="input-form">
-
                         <div class="input-field">
                             <label for="">Job Title</label>
-                            <input type="text" class="input" name="title">
+                            <input type="text" name="title" id="" class="text-input"><br>
                         </div>
 
-                        <!-- Get Company Overview -->
-                        <div class="input-field">
-                            <label for="">Job from Company</label>
-                            <div class="custom-select">
-                                <select name="company">
-                                    <!-- Late put company name here acording to session that user logged in -->
-                                    <option value="0" selected>Choose company</option>
+                        <div class="input-field" style="margin-top: 2rem;">
+                            <label for="">Company name</label>
+                            <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="industry"
+                                style="padding-top: 0; padding-bottom: 0;">
+                                <!-- Late put company name here acording to session that user logged in -->
+                                <option value="0" selected>Choose company</option>
 
-                                    <option value="<?php echo $company['id']; ?>">
-                                        <?php echo $company['companyname']; ?> </option>
+                                <option value="<?php echo $company['id']; ?>">
+                                    <?php echo $company['companyname']; ?> </option>
 
-                                </select>
-                                <span class="custom-arrow"></span>
-                            </div>
+                            </select>
                         </div>
 
-                        <div class="input-field">
-                            <label for="">Industry</label>
-                            <div class="custom-select">
-                                <select name="industry">
+                        <div class="input-field" style="margin-top: 2rem;">
+                            <label for="">Job Industry</label>
+                            <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="industry"
+                                style="padding-top: 0; padding-bottom: 0;">
+                                <option value="0" selected>Choose industry</option>
 
-                                    <option value="0" selected>Choose industry</option>
+                                <?php foreach($industry as $i):  ?>
 
-                                    <?php foreach($industry as $i):  ?>
+                                <option value="<?php echo $i['id']; ?>"> <?php echo $i['industry']; ?></option>
 
-                                    <option value="<?php echo $i['id']; ?>"> <?php echo $i['industry']; ?></option>
+                                <?php endforeach; ?>
 
-                                    <?php endforeach; ?>
-
-                                </select>
-                                <span class="custom-arrow"></span>
-                            </div>
+                            </select>
                         </div>
 
-                        <div class="input-field">
-                            <label for="">Salary</label>
-                            <div class="custom-select">
-                                <select name="salary">
+                        <div class="input-field" style="margin-top: 2rem;">
+                            <label for="">Job Salary</label>
+                            <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="salary"
+                                style="padding-top: 0; padding-bottom: 0;">
+                                <option value="0" selected>Choose salary</option>
 
-                                    <option value="0" selected>Choose salary</option>
+                                <?php foreach($salary as $s):  ?>
 
-                                    <?php foreach($salary as $s):  ?>
+                                <option value="<?php echo $s['id']; ?>"> <?php echo $s['salary']; ?></option>
 
-                                    <option value="<?php echo $s['id']; ?>"> <?php echo $s['salary']; ?></option>
+                                <?php endforeach; ?>
 
-                                    <?php endforeach; ?>
-
-                                </select>
-                                <span class="custom-arrow"></span>
-                            </div>
+                            </select>
                         </div>
 
-                        <div class="input-field">
-                            <label for="">Experience Level</label>
-                            <div class="custom-select">
-                                <select name="experience">
+                        <div class="input-field" style="margin-top: 2rem;">
+                            <label for="">Job Experience Level</label>
+                            <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="experience"
+                                style="padding-top: 0; padding-bottom: 0;">
+                                <option value="0" selected>Choose experience</option>
 
-                                    <option value="0" selected>Choose experience</option>
+                                <?php foreach($experience as $e):  ?>
 
-                                    <?php foreach($experience as $e):  ?>
+                                <option value="<?php echo $e['id']; ?>"> <?php echo $e['experienceyear']; ?> year(s)
+                                </option>
 
-                                    <option value="<?php echo $e['id']; ?>"> <?php echo $e['experienceyear']; ?> year
-                                    </option>
+                                <?php endforeach; ?>
 
-                                    <?php endforeach; ?>
-
-                                </select>
-                                <span class="custom-arrow"></span>
-                            </div>
+                            </select>
                         </div>
 
-                        <div class="input-field">
-                            <label for="">Type</label>
-                            <div class="custom-select">
-                                <select name="type">
+                        <div class="input-field" style="margin-top: 2rem;">
+                            <label for="">Job Type</label>
+                            <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="type"
+                                style="padding-top: 0; padding-bottom: 0;">
+                                <option value="0" selected>Choose type</option>
 
-                                    <option value="0" selected>Choose type</option>
+                                <?php foreach($type as $t):  ?>
 
-                                    <?php foreach($type as $t):  ?>
+                                <option value="<?php echo $t['id']; ?>"> <?php echo $t['type']; ?></option>
 
-                                    <option value="<?php echo $t['id']; ?>"> <?php echo $t['type']; ?></option>
+                                <?php endforeach; ?>
 
-                                    <?php endforeach; ?>
-
-                                </select>
-                                <span class="custom-arrow"></span>
-                            </div>
+                            </select>
                         </div>
 
-                        <div class="input-field">
-                            <label for="">Position</label>
-                            <div class="custom-select">
-                                <select name="level">
+                        <div class="input-field" style="margin-top: 2rem;">
+                            <label for="">Job Level</label>
+                            <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="level"
+                                style="padding-top: 0; padding-bottom: 0;">
+                                <option value="0" selected>Choose level</option>
 
-                                    <option value="0" selected>Choose possition</option>
+                                <?php foreach($level as $l):  ?>
 
-                                    <?php foreach($level as $l):  ?>
+                                <option value="<?php echo $l['id']; ?>"> <?php echo $l['level']; ?></option>
 
-                                    <option value="<?php echo $l['id']; ?>"> <?php echo $l['level']; ?></option>
+                                <?php endforeach; ?>
 
-                                    <?php endforeach; ?>
-
-                                </select>
-                                <span class="custom-arrow"></span>
-                            </div>
+                            </select>
                         </div>
 
-                        <div class="input-field">
-                            <label for="">Location</label>
-                            <div class="custom-select">
-                                <select name="location">
+                        <div class="input-field" style="margin-top: 2rem;">
+                            <label for="">Job Level</label>
+                            <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="location"
+                                style="padding-top: 0; padding-bottom: 0;">
+                                <option value="0" selected>Choose location</option>
 
-                                    <option value="0" selected>Choose location</option>
+                                <?php foreach($location as $lo):  ?>
 
-                                    <?php foreach($location as $lo):  ?>
+                                <option value="<?php echo $lo['id']; ?>"> <?php echo $lo['location']; ?></option>
 
-                                    <option value="<?php echo $lo['id']; ?>"> <?php echo $lo['location']; ?></option>
+                                <?php endforeach; ?>
 
-                                    <?php endforeach; ?>
-
-                                </select>
-                                <span class="custom-arrow"></span>
-                            </div>
+                            </select>
                         </div>
 
-                        <div class="input-field">
-                            <label for="">Application Due Date</label>
-                            <input type="date" class="input" name="enddate">
+                        <div class="input-field" style="margin-top: 2rem;">
+                            <label for="">Due Date</label>
+                            <input type="date" id="" name="enddate" class="text-input">
                         </div>
 
-                        <div class="input-field">
-                            <label for="">Job Description</label>
-                            <textarea class="textarea" name="description"></textarea>
+                        <div class="input-field" style="margin-top: 2rem;">
+                            <label for="">Description</label>
                         </div>
 
-                        <div class="input-field">
+                        <div>
+                            <textarea name="body" id="description" class="text-input"></textarea>
+                        </div>
+
+                        <div class="input-field" style="margin-top: 2rem;">
                             <label for="">Requirements</label>
-                            <textarea class="textarea" name="requirements"></textarea>
+                        </div>
+                        <div>
+                            <textarea name="requirements" id="requirements" class="text-input"></textarea>
                         </div>
 
-                        <div class="input-field">
-                            <input type="submit" value="Post" class="btn" name="submit">
+                        <div class="input-field float-right mt-3">
+                            <input type="submit" value="Post" class="btn btn-danger" name="submit">
                         </div>
 
                     </div>
@@ -266,6 +238,10 @@
             <?php endif; ?>
 
         </main>
+
+        <footer>
+            <p class="text-center pt-2">© 2021 WORKr. All rights reserved.</p>
+        </footer>
     </div>
 
 
@@ -284,5 +260,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/12.2.0/classic/ckeditor.js"></script>
+    <script src="/js/blog_dashboard.js"></script>
     <!--end of footer-->
 </body>

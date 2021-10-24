@@ -17,6 +17,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == 3) {
 
 <head>
     <?php include ('./includes/head.php');?>
+    <link rel="stylesheet" href="/css/dashboard.css">
     <link rel="stylesheet" href="/css/employer.css">
 </head>
 
@@ -83,7 +84,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == 3) {
         <main>
             <h2 class="dash-title">Company Detail</h2>
 
-            <div class="form-wrapper">
+            <div class="form-wrapper mb-5">
                 <?php if (isset($_SESSION['role']) && $_SESSION['role'] == 3):?>
                 <form action="" method="post">
 

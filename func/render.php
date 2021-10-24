@@ -375,7 +375,7 @@
             <td> {$job['enddate']} </td>
 
             <td>
-                <a href='./job_details.php?id={$job['jobid']}' class='option success'>View</a>
+                <a href='./job_details.php?id={$job['jobid']}' class='option success mr-2'>View</a>
                 <a href='./employer_JM_delete.php?id={$job['jobid']}' class='option warning'>Delete</a>
             </td>
 
