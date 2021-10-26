@@ -2,7 +2,7 @@
 
 include("includes/head.php");
 include './func/cre.php';
-
+$model = new Model;
 
 ?>
 <link rel="stylesheet" href="css/dashboard.css">
@@ -92,7 +92,7 @@ include './func/cre.php';
                             </div>
                         </div>
 
-                        <?php else: echo "<h1> You're not logged in or you're not a jobseeker </h1>" ?>
+                        <?php else: echo "<h1> You're not logged in or you're not a jobseeker </h1>"; ?>
                         <?php endif; ?>
 
                     </div>

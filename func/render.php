@@ -127,6 +127,20 @@
         </form>";
     }
 
+    function renderReviewsListAdmin($review){
+
+        echo "                                        
+        <tr>
+        <td>{$review['id']}</td>
+        <td>{$review['content']}</td>
+        <td>{$review['companyname']}</td>
+        <td>{$review['datecreated']}</td>
+        <td><a href='./admin_dashboard.reviews_del.php?id={$review['id']}' class='delete'>Delete</a></td>
+        <td><a href='./comp_review_details.php?id={$review['companyid']}' class='text-primary'>View</a></td>
+        </tr>";
+
+    }
+
 // ------------------------------------- END RENDER ADMIN DASHBOARD ------------------------------------- //
 
 // ------------------------------------- RENDER JOBLIST AND JOBDETAIL ------------------------------------- //
@@ -417,7 +431,22 @@
 
         </a>
         <a href='./jseeker_dashboard_fav_c_delete.php?id={$company['companyid']}' class='option warning'>Delete</a>
-    </div>";
+        </div>";
+
+    }
+
+    function renderJobseekerReviews($review){
+
+        echo"
+            <tr>
+            <td>{$review['content']}</td>
+            <td>{$review['name']}</td>
+            <td>{$review['companyname']}</td>
+            <td>{$review['datecreated']}</td>
+            <td><a href='./jseeker_dashboard_review_del.php?id={$review['id']}' class='delete'>Delete</a></td>
+            <td><a href='./comp_review_details.php?id={$review['companyid']}' class='text-primary'>View</a></td>
+            </tr>
+        ";
 
     }
 

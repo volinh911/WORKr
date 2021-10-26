@@ -402,7 +402,7 @@
 
 // ------------------------------------- END ALL SIGNUP / LOGIN ------------------------------------- //
 
-// ------------------------------------- ALL BLOGS FUNCTION ------------------------------------- //
+// ------------------------------------- ALL ADMIN FUNCTION ------------------------------------- //
 
 		public function createBlog(){
 			if(isset($_POST['submit'])){
@@ -683,8 +683,42 @@
 			}
 		}
 
+		public function manageReviews(){
+			
+			$fetchall = "SELECT cr.id, cr.content, co.companyname, cr.datecreated, cr.companyid FROM companyreview cr, company co WHERE cr.companyid = co.id ORDER BY datecreated DESC";
+			$results = pg_query($this->conn, $fetchall);
 
-// ------------------------------------- END ALL BLOGS FUNCTION ------------------------------------- //
+			if(pg_num_rows($results) > 0){
+
+				return pg_fetch_all($results);
+
+			}else{
+
+				return false;
+				echo "<script>alert('No Reviews');</script>";
+
+			}
+
+		}
+
+		public function deleteReview($id){
+
+			$deleteReview= "DELETE FROM companyreview WHERE id = '$id'";
+			$deleteQuery = pg_query($this->conn, $deleteReview);
+
+			if($deleteQuery){
+
+				return true;
+
+			}else{
+
+				return false;
+
+			}
+
+		}
+
+// ------------------------------------- END ALL ADMIN FUNCTION ------------------------------------- //
 			
 // ------------------------------------- ALL CREATE FUNCTION ------------------------------------- //
 
@@ -1225,7 +1259,25 @@
 
 	}
 
+	public function userReviews($userid){
 
+		$fetchall = "SELECT cr.id, fe.name, cr.content, co.companyname, cr.datecreated, cr.companyid 
+						FROM companyreview cr, company co, feeling fe 
+							WHERE cr.user_id = '$userid' AND cr.companyid = co.id AND cr.feeling = fe.id ORDER BY datecreated DESC;";
+		$results = pg_query($this->conn, $fetchall);
+
+		if(pg_num_rows($results) > 0){
+
+			return pg_fetch_all($results);
+
+		}else{
+
+			return false;
+			echo "<script>alert('No Reviews');</script>";
+
+		}
+
+	}
 // ------------------------------------- END JOBSEEKER DASHBOARD ------------------------------------- //
 
 // ------------------------------------- REVIEW  ------------------------------------- //

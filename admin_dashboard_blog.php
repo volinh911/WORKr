@@ -93,7 +93,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php if (isset($_SESSION['role']) && $_SESSION['role'] == 1): ?>
+                                        <?php if (isset($_SESSION['role']) && $_SESSION['role'] == 1 && $blogs !=false): ?>
 
                                         <?php foreach($blogs as $blog): ?>
 

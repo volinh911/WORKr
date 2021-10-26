@@ -1,3 +1,13 @@
+<?php
+
+    include './func/cre.php';
+    include './func/render.php';
+
+    $model = new Model;
+    $reviews = $model->manageReviews();
+    
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -71,22 +81,26 @@
                                     <thead>
                                         <tr>
                                             <td>SN</td>
-                                            <td>Title</td>
-                                            <td>Username</td>
+                                            <td>Review</td>
+                                            <td>Company</td>
                                             <td>Date Upload</td>
                                             <td>Delete</td>
                                             <td>View</td>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>How you become..</td>
-                                            <td>1959009</td>
-                                            <td>30/9/2021</td>
-                                            <td><a href="#" class="delete">Delete</a></td>
-                                            <td><a href="#" class="text-primary">View</a></td>
-                                        </tr>
+
+                                        <?php if (isset($_SESSION['role']) && $_SESSION['role'] == 1 && $reviews !=false): ?>
+
+                                        <?php foreach($reviews as $review): ?>
+
+                                        <?php renderReviewsListAdmin($review); ?>
+
+                                        <?php endforeach; ?>
+
+                                        <?php else : echo "<h1> You're in a wrong place my friend"; ?>
+                                        <?php endif ?>
+
                                     </tbody>
                                 </table>
                             </div>
