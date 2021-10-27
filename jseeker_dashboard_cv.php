@@ -64,13 +64,14 @@
                 <div class="customers">
                     <div class="card">
                         <div class="profile-header">
-                            <h3>Profile</h3>
+                            <h3>WORKr Profile</h3>
                         </div>
                         <div class="profile-body">
                             <div class="profile-img">
                                 <div class="info">
                                     <img src="images/null_following.png" width="300px" height="300px " alt="">
-                                    <a href="" style="margin-top: 20px;"><i class="fas fa-plus"></i> Upload Picture</a>
+                                    <a data-toggle='modal' data-target='#imagePopUp' data-whatever='@getbootstrap'
+                                        href="" style="margin-top: 20px;"><i class="fas fa-plus"></i> Upload Picture</a>
                                     <a href=""><i class="fas fa-times"></i> Clear Picture</a>
                                 </div>
                             </div>
@@ -80,14 +81,35 @@
                                 <p><i class="fas fa-star"></i> No experience</p>
                                 <p><i class="fas fa-user"></i> No desired rank</p>
                                 <p><i class="fas fa-dollar-sign"></i> No desired salary</p>
-                                <button type="submit" class="edit-btn">Edit Profile</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-
+            <!-- image form -->
+            <div class='modal fade' id='imagePopUp' tabindex='-1' role='dialog' aria-labelledby='imagePopUpForm'
+                aria-hidden='true'>
+                <div class='modal-dialog' role='document'>
+                    <form action='' method='post'>
+                        <div class='modal-content'>
+                            <div class='modal-header'>
+                                <h5 class='modal-title' id='imagePopUpForm'>New Image</h5>
+                                <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                                    <span aria-hidden='true'>&times;</span>
+                                </button>
+                            </div>
+                            <div class='modal-body'>
+                                <form>
+                                    <label for="img">Select image:</label>
+                                    <input type="file" id="img" name="img" accept="image/*">
+                                    <input type="submit">
+                                </form>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
 
             <!-- ==================================================================================================== -->
 
@@ -97,8 +119,9 @@
                 <div class="customers">
                     <div class="card">
                         <div class="profile-header">
-                            <h3><i class="fas fa-user-circle" style="width: 50px;"></i>Profile Title*</h3>
-                            <button type="submit" class="edit-btn"
+                            <h3><i class="fas fa-user-circle" style="width: 50px;"></i>Resume Title*</h3>
+                            <button data-toggle='modal' data-target='#titlePopUp' data-whatever='@getbootstrap'
+                                type="submit" class="edit-btn"
                                 style="padding: 0px 30px; margin: 0px 0px 0px auto;">Edit</button>
                         </div>
                         <div class="profile-body">
@@ -110,21 +133,46 @@
                 </div>
             </div>
 
-
+            <!-- title form -->
+            <div class='modal fade' id='titlePopUp' tabindex='-1' role='dialog' aria-labelledby='titlePopUpForm'
+                aria-hidden='true'>
+                <div class='modal-dialog' role='document'>
+                    <form action='' method='post'>
+                        <div class='modal-content'>
+                            <div class='modal-header'>
+                                <h5 class='modal-title' id='titlePopUpForm'>Resume Title</h5>
+                                <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                                    <span aria-hidden='true'>&times;</span>
+                                </button>
+                            </div>
+                            <div class='modal-body'>
+                                <form>
+                                    <div class='form-group'>
+                                        <textarea class='form-control' id='title-text' name='title-content'></textarea>
+                                    </div>
+                                </form>
+                                <div class='modal-footer'>
+                                    <button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>
+                                    <button type='submit' class='btn btn-success' name='title'>Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
 
             <!-- ==================================================================================================== -->
-
-
 
             <div class="recent-grid">
                 <div class="customers">
                     <div class="card">
                         <div class="profile-header">
                             <h3><i class="fas fa-id-badge" style="width: 50px;"></i>Personal Info</h3>
-                            <button type="submit" class="edit-btn"
+                            <button data-toggle='modal' data-target='#personalInfoPopUp' data-whatever='@getbootstrap'
+                                type="submit" class="edit-btn"
                                 style="padding: 0px 30px; margin: 0px 0px 0px auto;">Edit</button>
                         </div>
-                        <div class="profile-body">
+                        <div class="profile-body" id="special-body-uwu">
                             <div class="neatly-constructed-grid-rows">
                                 <div class="neatly-put-grid-columns">
                                     <h2>Surname</h2>
@@ -144,16 +192,7 @@
                                 </div>
                                 <div class="neatly-put-grid-columns">
                                     <h2>Martial Status</h2>
-                                    <label id="img_category_label" class="field" for="img_category" data-value="">
-                                        <span></span>
-                                        <div id="img_category" class="psuedo_select" name="img_category">
-                                            <span class="selected"></span>
-                                            <ul id="img_category_options" class="options">
-                                                <li class="option" data-value="opt_1">Single</li>
-                                                <li class="option" data-value="opt_2">Married</li>
-                                            </ul>
-                                        </div>
-                                    </label>
+                                    <p>Married</p>
                                 </div>
                                 <div class="neatly-put-grid-columns">
                                     <h2>Current Country</h2>
@@ -165,7 +204,64 @@
                 </div>
             </div>
 
-
+            <!-- personal info form -->
+            <div class='modal fade' id='personalInfoPopUp' tabindex='-1' role='dialog'
+                aria-labelledby='personalInfoPopUpForm' aria-hidden='true'>
+                <div class='modal-dialog modal-dialog-centered' role='document'>
+                    <form action='' method='post' style="width: 100%;">
+                        <div class='modal-content'>
+                            <div class='modal-header'>
+                                <h5 class='modal-title' id='personalInfoPopUpForm'>Personal Info</h5>
+                                <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                                    <span aria-hidden='true'>&times;</span>
+                                </button>
+                            </div>
+                            <div class='modal-body'>
+                                <form>
+                                    <div class="form-group">
+                                        <label for="recipient-name" class="col-form-label">Full Name:</label>
+                                        <input style="margin-left: 0;" type="text" class="form-control"
+                                            id="recipient-name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="recipient-name" class="col-form-label">Last Name:</label>
+                                        <input style="margin-left: 0;" type="text" class="form-control"
+                                            id="recipient-name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="recipient-name" class="col-form-label">Email:</label>
+                                        <input style="margin-left: 0;" type="text" class="form-control"
+                                            id="recipient-name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="recipient-name" class="col-form-label">Nationality:</label>
+                                        <input style="margin-left: 0;" type="text" class="form-control"
+                                            id="recipient-name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="recipient-name" class="col-form-label">Current Address:</label>
+                                        <input style="margin-left: 0;" type="text" class="form-control"
+                                            id="recipient-name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="recipient-name" class="col-form-label">Marital Status:</label>
+                                        <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+                                            <option selected>Choose...</option>
+                                            <option value="1">One</option>
+                                            <option value="2">Two</option>
+                                            <option value="3">Three</option>
+                                        </select>
+                                    </div>
+                                </form>
+                                <div class='modal-footer'>
+                                    <button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>
+                                    <button type='submit' class='btn btn-success' name='title'>Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
 
             <!-- ==================================================================================================== -->
 
@@ -175,8 +271,9 @@
                 <div class="customers">
                     <div class="card">
                         <div class="profile-header">
-                            <h3><i class="fas fa-bullseye" style="width: 50px;"></i>Professional Goals</h3>
-                            <button type="submit" class="edit-btn"
+                            <h3><i class="fas fa-bullseye" style="width: 50px;"></i>Career Objective</h3>
+                            <button data-toggle='modal' data-target='#goalsPopUp' data-whatever='@getbootstrap'
+                                type="submit" class="edit-btn"
                                 style="padding: 0px 30px; margin: 0px 0px 0px auto;">Edit</button>
                         </div>
                         <div class="profile-body">
@@ -188,74 +285,62 @@
                 </div>
             </div>
 
-
+            <!-- goals form -->
+            <div class='modal fade' id='goalsPopUp' tabindex='-1' role='dialog' aria-labelledby='goalsPopUpForm'
+                aria-hidden='true'>
+                <div class='modal-dialog' role='document'>
+                    <form action='' method='post'>
+                        <div class='modal-content'>
+                            <div class='modal-header'>
+                                <h5 class='modal-title' id='goalsPopUpForm'>Career Objective</h5>
+                                <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                                    <span aria-hidden='true'>&times;</span>
+                                </button>
+                            </div>
+                            <div class='modal-body'>
+                                <form>
+                                    <div class='form-group'>
+                                        <textarea class='form-control' id='title-text' name='title-content'></textarea>
+                                    </div>
+                                </form>
+                                <div class='modal-footer'>
+                                    <button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>
+                                    <button type='submit' class='btn btn-success' name='title'>Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
 
             <!-- ==================================================================================================== -->
-
-
 
             <div class="recent-grid">
                 <div class="customers">
                     <div class="card">
                         <div class="profile-header">
-                            <h3><i class="fas fa-briefcase" style="width: 50px;"></i>Current Job</h3>
-                            <button type="submit" class="edit-btn"
+                            <h3><i class="fas fa-briefcase" style="width: 50px;"></i>Career Information</h3>
+                            <button data-toggle='modal' data-target='#careerInfoPopUp' data-whatever='@getbootstrap'
+                                type="submit" class="edit-btn"
                                 style="padding: 0px 30px; margin: 0px 0px 0px auto;">Edit</button>
                         </div>
-                        <div class="profile-body">
+                        <div class="profile-body" id="special-body-uwu">
                             <div class="neatly-constructed-grid-rows">
                                 <div class="neatly-put-grid-columns">
                                     <h2>Salary</h2>
-                                    <label id="img_category_label" class="field" for="img_category" data-value="">
-                                        <span></span>
-                                        <div id="img_category" class="psuedo_select" name="img_category">
-                                            <span class="selected"></span>
-                                            <ul id="img_category_options" class="options">
-                                                <li class="option" data-value="opt_1">Still Broke</li>
-                                                <li class="option" data-value="opt_2">Enough to eat chicken noodle</li>
-                                                <li class="option" data-value="opt_2">Mother*ucking Jeff Bezo</li>
-                                            </ul>
-                                        </div>
-                                    </label>
+                                    <p>5.000.000</p>
                                 </div>
                                 <div class="neatly-put-grid-columns">
-                                    <h2>Employment Type</h2>
-                                    <label id="img_category_label" class="field" for="img_category" data-value="">
-                                        <span></span>
-                                        <div id="img_category" class="psuedo_select" name="img_category">
-                                            <span class="selected"></span>
-                                            <ul id="img_category_options" class="options">
-                                                <li class="option" data-value="opt_1">Part-time</li>
-                                                <li class="option" data-value="opt_2">Full-time</li>
-                                            </ul>
-                                        </div>
-                                    </label>
+                                    <h2>Job Type</h2>
+                                    <p>Full time</p>
                                 </div>
                                 <div class="neatly-put-grid-columns">
-                                    <h2>Job</h2>
-                                    <label id="img_category_label" class="field" for="img_category" data-value="">
-                                        <span></span>
-                                        <div id="img_category" class="psuedo_select" name="img_category">
-                                            <span class="selected"></span>
-                                            <ul id="img_category_options" class="options">
-                                                <li class="option" data-value="opt_1">Dying</li>
-                                                <li class="option" data-value="opt_2">Dieing</li>
-                                            </ul>
-                                        </div>
-                                    </label>
+                                    <h2>Industry</h2>
+                                    <p>IT Software</p>
                                 </div>
                                 <div class="neatly-put-grid-columns">
-                                    <h2>Job Enviroment</h2>
-                                    <label id="img_category_label" class="field" for="img_category" data-value="">
-                                        <span></span>
-                                        <div id="img_category" class="psuedo_select" name="img_category">
-                                            <span class="selected"></span>
-                                            <ul id="img_category_options" class="options">
-                                                <li class="option" data-value="opt_1">Office</li>
-                                                <li class="option" data-value="opt_2">Like a hobo</li>
-                                            </ul>
-                                        </div>
-                                    </label>
+                                    <h2>Work Location</h2>
+                                    <p>Ho Chi Minh City</p>
                                 </div>
                             </div>
                         </div>
@@ -263,10 +348,68 @@
                 </div>
             </div>
 
-
+            <!-- career info form -->
+            <div class='modal fade' id='careerInfoPopUp' tabindex='-1' role='dialog'
+                aria-labelledby='careerInfoPopUpForm' aria-hidden='true'>
+                <div class='modal-dialog modal-dialog-centered' role='document'>
+                    <form action='' method='post' style="width: 100%;">
+                        <div class='modal-content'>
+                            <div class='modal-header'>
+                                <h5 class='modal-title' id='careerInfoPopUpForm'>Personal Info</h5>
+                                <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                                    <span aria-hidden='true'>&times;</span>
+                                </button>
+                            </div>
+                            <div class='modal-body'>
+                                <form>
+                                    <div class="form-group">
+                                        <label for="recipient-name" class="col-form-label">Salary:</label>
+                                        <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+                                            <option selected>Choose...</option>
+                                            <option value="1">One</option>
+                                            <option value="2">Two</option>
+                                            <option value="3">Three</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="recipient-name" class="col-form-label">Job Type:</label>
+                                        <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+                                            <option selected>Choose...</option>
+                                            <option value="1">One</option>
+                                            <option value="2">Two</option>
+                                            <option value="3">Three</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="recipient-name" class="col-form-label">Industry:</label>
+                                        <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+                                            <option selected>Choose...</option>
+                                            <option value="1">One</option>
+                                            <option value="2">Two</option>
+                                            <option value="3">Three</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="recipient-name" class="col-form-label">Work Location:</label>
+                                        <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+                                            <option selected>Choose...</option>
+                                            <option value="1">One</option>
+                                            <option value="2">Two</option>
+                                            <option value="3">Three</option>
+                                        </select>
+                                    </div>
+                                </form>
+                                <div class='modal-footer'>
+                                    <button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>
+                                    <button type='submit' class='btn btn-success' name='title'>Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
 
             <!-- ==================================================================================================== -->
-
 
 
             <div class="recent-grid">
@@ -274,53 +417,89 @@
                     <div class="card">
                         <div class="profile-header">
                             <h3><i class="fas fa-star" style="width: 50px;"></i>Work Experience</h3>
-                            <button type="submit" class="edit-btn"
+                            <button data-toggle='modal' data-target='#workExpPopUp' data-whatever='@getbootstrap'
+                                type="submit" class="edit-btn"
                                 style="padding: 0px 30px; margin: 0px 0px 0px auto;">Edit</button>
                         </div>
                         <div class="profile-body" id="special-body-uwu">
-                            <div class="pdesc-box">
-                                <p>no experience :(((</p>
-                            </div>
-                            <hr class="center-diamond">
                             <div class="neatly-constructed-grid-rows">
                                 <div class="neatly-put-grid-columns">
-                                    <h2>Years Of Experience</h2>
-                                    <label id="img_category_label" class="field" for="img_category" data-value="">
-                                        <span></span>
-                                        <div id="img_category" class="psuedo_select" name="img_category">
-                                            <span class="selected"></span>
-                                            <ul id="img_category_options" class="options">
-                                                <li class="option" data-value="opt_1">0-5</li>
-                                                <li class="option" data-value="opt_2">5-10</li>
-                                                <li class="option" data-value="opt_3">69+</li>
-                                            </ul>
-                                        </div>
-                                    </label>
+                                    <h2>Job Title/Position: </h2>
+                                    <p>Developer</p>
                                 </div>
                                 <div class="neatly-put-grid-columns">
-                                    <h2>Current Diploma</h2>
-                                    <label id="img_category_label" class="field" for="img_category" data-value="">
-                                        <span></span>
-                                        <div id="img_category" class="psuedo_select" name="img_category">
-                                            <span class="selected"></span>
-                                            <ul id="img_category_options" class="options">
-                                                <li class="option" data-value="opt_1">Elementary, my dear Watson</li>
-                                                <li class="option" data-value="opt_2">2</li>
-                                                <li class="option" data-value="opt_3">Dropped out</li>
-                                            </ul>
-                                        </div>
-                                    </label>
+                                    <h2>Company: </h2>
+                                    <p>ABC</p>
+                                </div>
+                                <div class="neatly-put-grid-columns">
+                                    <h2>Years Of Experience</h2>
+                                    <p>3 years</p>
+                                </div>
+                                <div class="neatly-put-grid-columns">
+                                    <h2>Current Level</h2>
+                                    <p>Staff</p>
                                 </div>
                             </div>
+                            <hr class="center-diamond">
                         </div>
                     </div>
                 </div>
             </div>
 
-
+            <!-- work experience form -->
+            <div class='modal fade' id='workExpPopUp' tabindex='-1' role='dialog' aria-labelledby='workExpPopUpForm'
+                aria-hidden='true'>
+                <div class='modal-dialog modal-dialog-centered' role='document'>
+                    <form action='' method='post' style="width: 100%;">
+                        <div class='modal-content'>
+                            <div class='modal-header'>
+                                <h5 class='modal-title' id='workExpPopUpForm'>Work Experience</h5>
+                                <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                                    <span aria-hidden='true'>&times;</span>
+                                </button>
+                            </div>
+                            <div class='modal-body'>
+                                <form>
+                                    <div class="form-group">
+                                        <label for="recipient-name" class="col-form-label">Job Title/Position:</label>
+                                        <input style="margin-left: 0;" type="text" class="form-control"
+                                            id="recipient-name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="recipient-name" class="col-form-label">Company:</label>
+                                        <input style="margin-left: 0;" type="text" class="form-control"
+                                            id="recipient-name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="recipient-name" class="col-form-label">Years of Experience:</label>
+                                        <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+                                            <option selected>Choose...</option>
+                                            <option value="1">One</option>
+                                            <option value="2">Two</option>
+                                            <option value="3">Three</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="recipient-name" class="col-form-label">Current Level:</label>
+                                        <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+                                            <option selected>Choose...</option>
+                                            <option value="1">One</option>
+                                            <option value="2">Two</option>
+                                            <option value="3">Three</option>
+                                        </select>
+                                    </div>
+                                </form>
+                                <div class='modal-footer'>
+                                    <button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>
+                                    <button type='submit' class='btn btn-success' name='title'>Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
 
             <!-- ==================================================================================================== -->
-
 
 
             <div class="recent-grid">
@@ -328,34 +507,62 @@
                     <div class="card">
                         <div class="profile-header">
                             <h3><i class="fas fa-graduation-cap" style="width: 50px;"></i>Education</h3>
-                            <button type="submit" class="edit-btn"
+                            <button data-toggle='modal' data-target='#eduPopUp' data-whatever='@getbootstrap'
+                                type="submit" class="edit-btn"
                                 style="padding: 0px 30px; margin: 0px 0px 0px auto;">Edit</button>
                         </div>
                         <div class="profile-body" id="special-body-uwu">
-                            <div class="pdesc-box">
-                                <p>illiteracy is a running problem :((((</p>
-                            </div>
-                            <hr class="center-diamond">
                             <div class="neatly-constructed-grid-rows">
                                 <div class="neatly-put-grid-columns">
                                     <h2>School</h2>
-                                    <p>Hogwarts School of Witchcraft and Wizardry</p>
+                                    <p>Hogwarts School of Witchcraft and Wizardr</p>
                                 </div>
                                 <div class="neatly-put-grid-columns">
-                                    <h2>Start Of Academic Year</h2>
-                                    <p>0000</p>
+                                    <h2>Academic Year</h2>
+                                    <p>2019-2023</p>
                                 </div>
-                                <div class="neatly-put-grid-columns">
-                                    <h2>End Of Academic Year</h2>
-                                    <p>0006</p>
-                                </div>
+                                <hr class="center-diamond">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-
+            <!-- education form -->
+            <div class='modal fade' id='eduPopUp' tabindex='-1' role='dialog' aria-labelledby='eduPopUpForm'
+                aria-hidden='true'>
+                <div class='modal-dialog modal-dialog-centered' role='document'>
+                    <form action='' method='post' style="width: 100%;">
+                        <div class='modal-content'>
+                            <div class='modal-header'>
+                                <h5 class='modal-title' id='eduPopUpForm'>Education</h5>
+                                <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                                    <span aria-hidden='true'>&times;</span>
+                                </button>
+                            </div>
+                            <div class='modal-body'>
+                                <form>
+                                    <div class="form-group">
+                                        <label for="recipient-name" class="col-form-label">School:</label>
+                                        <input style="margin-left: 0;" type="text" class="form-control"
+                                            id="recipient-name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="recipient-name" class="col-form-label">School Year (yyyy -
+                                            yyyy):</label>
+                                        <input style="margin-left: 0;" type="text" class="form-control"
+                                            id="recipient-name">
+                                    </div>
+                                </form>
+                                <div class='modal-footer'>
+                                    <button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>
+                                    <button type='submit' class='btn btn-success' name='title'>Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
 
             <!-- ==================================================================================================== -->
 
@@ -365,11 +572,12 @@
                 <div class="customers">
                     <div class="card">
                         <div class="profile-header">
-                            <h3><i class="fas fa-graduation-cap" style="width: 50px;"></i>Other Diplomas</h3>
-                            <button type="submit" class="edit-btn"
+                            <h3><i class="fas fa-stamp" style="width: 50px;"></i>Certificates</h3>
+                            <button data-toggle='modal' data-target='#certPopUp' data-whatever='@getbootstrap'
+                                type="submit" class="edit-btn"
                                 style="padding: 0px 30px; margin: 0px 0px 0px auto;">Edit</button>
                         </div>
-                        <div class="profile-body">
+                        <div class="profile-body" id="special-body-uwu">
                             <div class="neatly-constructed-grid-rows">
                                 <div class="neatly-put-grid-columns">
                                     <h2>Degree</h2>
@@ -387,7 +595,39 @@
                 </div>
             </div>
 
-
+            <!-- certificates form -->
+            <div class='modal fade' id='certPopUp' tabindex='-1' role='dialog' aria-labelledby='certPopUpForm'
+                aria-hidden='true'>
+                <div class='modal-dialog modal-dialog-centered' role='document'>
+                    <form action='' method='post' style="width: 100%;">
+                        <div class='modal-content'>
+                            <div class='modal-header'>
+                                <h5 class='modal-title' id='certPopUpForm'>Certificate</h5>
+                                <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                                    <span aria-hidden='true'>&times;</span>
+                                </button>
+                            </div>
+                            <div class='modal-body'>
+                                <form>
+                                    <div class="form-group">
+                                        <label for="recipient-name" class="col-form-label">Name of Certificate:</label>
+                                        <input style="margin-left: 0;" type="text" class="form-control"
+                                            id="recipient-name">
+                                    </div>
+                                    <div class='form-group'>
+                                        <label for="recipient-name" class="col-form-label">Description:</label>
+                                        <textarea class='form-control' id='title-text' name='title-content'></textarea>
+                                    </div>
+                                </form>
+                                <div class='modal-footer'>
+                                    <button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>
+                                    <button type='submit' class='btn btn-success' name='title'>Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
 
             <!-- ==================================================================================================== -->
 
@@ -398,10 +638,11 @@
                     <div class="card">
                         <div class="profile-header">
                             <h3><i class="fas fa-trophy" style="width: 50px;"></i>Achievements</h3>
-                            <button type="submit" class="edit-btn"
+                            <button data-toggle='modal' data-target='#achievementsPopUp' data-whatever='@getbootstrap'
+                                type="submit" class="edit-btn"
                                 style="padding: 0px 30px; margin: 0px 0px 0px auto;">Edit</button>
                         </div>
-                        <div class="profile-body">
+                        <div class="profile-body" id="special-body-uwu">
                             <div class="neatly-constructed-grid-rows">
                                 <div class="neatly-put-grid-columns">
                                     <h2>Achievement</h2>
@@ -419,7 +660,39 @@
                 </div>
             </div>
 
-
+            <!-- achievements form -->
+            <div class='modal fade' id='achievementsPopUp' tabindex='-1' role='dialog'
+                aria-labelledby='achievementsPopUpForm' aria-hidden='true'>
+                <div class='modal-dialog modal-dialog-centered' role='document'>
+                    <form action='' method='post' style="width: 100%;">
+                        <div class='modal-content'>
+                            <div class='modal-header'>
+                                <h5 class='modal-title' id='achievementsPopUpForm'>Achievement</h5>
+                                <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                                    <span aria-hidden='true'>&times;</span>
+                                </button>
+                            </div>
+                            <div class='modal-body'>
+                                <form>
+                                    <div class="form-group">
+                                        <label for="recipient-name" class="col-form-label">Achievement:</label>
+                                        <input style="margin-left: 0;" type="text" class="form-control"
+                                            id="recipient-name">
+                                    </div>
+                                    <div class='form-group'>
+                                        <label for="recipient-name" class="col-form-label">Description:</label>
+                                        <textarea class='form-control' id='title-text' name='title-content'></textarea>
+                                    </div>
+                                </form>
+                                <div class='modal-footer'>
+                                    <button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>
+                                    <button type='submit' class='btn btn-success' name='title'>Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
 
             <!-- ==================================================================================================== -->
 
@@ -430,10 +703,11 @@
                     <div class="card">
                         <div class="profile-header">
                             <h3><i class="fas fa-air-freshener" style="width: 50px;"></i>Activities</h3>
-                            <button type="submit" class="edit-btn"
+                            <button data-toggle='modal' data-target='#actPopUp' data-whatever='@getbootstrap'
+                                type="submit" class="edit-btn"
                                 style="padding: 0px 30px; margin: 0px 0px 0px auto;">Edit</button>
                         </div>
-                        <div class="profile-body">
+                        <div class="profile-body" id="special-body-uwu">
                             <div class="neatly-constructed-grid-rows">
                                 <div class="neatly-put-grid-columns">
                                     <h2>Activity</h2>
@@ -448,6 +722,40 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <!-- activities form -->
+            <div class='modal fade' id='actPopUp' tabindex='-1' role='dialog' aria-labelledby='actPopUpForm'
+                aria-hidden='true'>
+                <div class='modal-dialog modal-dialog-centered' role='document'>
+                    <form action='' method='post' style="width: 100%;">
+                        <div class='modal-content'>
+                            <div class='modal-header'>
+                                <h5 class='modal-title' id='actPopUpForm'>Activity</h5>
+                                <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                                    <span aria-hidden='true'>&times;</span>
+                                </button>
+                            </div>
+                            <div class='modal-body'>
+                                <form>
+                                    <div class="form-group">
+                                        <label for="recipient-name" class="col-form-label">Activity:</label>
+                                        <input style="margin-left: 0;" type="text" class="form-control"
+                                            id="recipient-name">
+                                    </div>
+                                    <div class='form-group'>
+                                        <label for="recipient-name" class="col-form-label">Description:</label>
+                                        <textarea class='form-control' id='title-text' name='title-content'></textarea>
+                                    </div>
+                                </form>
+                                <div class='modal-footer'>
+                                    <button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>
+                                    <button type='submit' class='btn btn-success' name='title'>Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
 

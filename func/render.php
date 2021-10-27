@@ -527,82 +527,82 @@
     function renderReviewForm(){
         echo "    
             <div class='modal fade' id='popUp' tabindex='-1' role='dialog' aria-labelledby='popUpReviewForm' aria-hidden='true'>
-            <div class='modal-dialog' role='document'>
-                <form action='' method='post'>
-                    <div class='modal-content'>
-                        <div class='modal-header'>
-                            <h5 class='modal-title' id='popUpReviewForm'>New Review</h5>
-                            <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
-                                <span aria-hidden='true'>&times;</span>
-                            </button>
-                        </div>
-                        <div class='modal-body'>
-                            <form>
-                                <div class='form-group'>
-                                    <label for='recipient-name' class='col-form-label font-weight-bold'>How do you feel?
-                                    </label>
-                                    <div class='div'>
-                                        <div class='form-check'>
-                                            <input class='form-check-input' type='radio' name='inlineRadioOptions'
-                                                id='inlineRadio1' value='1'>
-                                            <label class='form-check-label' for='inlineRadio1'><i
-                                                    class='far fa-kiss-wink-heart'></i> I really love them!!!</label>
-                                        </div>
-                                        <div class='form-check'>
-                                            <input class='form-check-input' type='radio' name='inlineRadioOptions'
-                                                id='inlineRadio2' value='2'>
-                                            <label class='form-check-label' for='inlineRadio2'><i
-                                                    class='far fa-grin-stars'></i>
-                                                Just love them.</label>
-                                        </div>
-                                        <div class='form-check'>
-                                            <input class='form-check-input' type='radio' name='inlineRadioOptions'
-                                                id='inlineRadio3' value='3'>
-                                            <label class='form-check-label' for='inlineRadio3'><i class='far fa-smile'></i>
-                                                Just
-                                                ok! ok!</label>
-                                        </div>
-                                        <div class='form-check'>
-                                            <input class='form-check-input' type='radio' name='inlineRadioOptions'
-                                                id='inlineRadio4' value='4'>
-                                            <label class='form-check-label' for='inlineRadio4'><i
-                                                    class='far fa-frown-open'></i>
-                                                Not what I expected!!!!!</label>
-                                        </div>
-                                        <div class='form-check'>
-                                            <input class='form-check-input' type='radio' name='inlineRadioOptions'
-                                                id='inlineRadio5' value='5'>
-                                            <label class='form-check-label' for='inlineRadio5'><i
-                                                    class='far fa-sad-tear'></i> I
-                                                was really disappointed</label>
-                                        </div>
-                                        <div class='form-check'>
-                                            <input class='form-check-input' type='radio' name='inlineRadioOptions'
-                                                id='inlineRadio6' value='6'>
-                                            <label class='form-check-label' for='inlineRadio6'><i class='far fa-angry'></i>
-                                                Not
-                                                want to talk about it.</label>
+                <div class='modal-dialog' role='document'>
+                    <form action='' method='post'>
+                        <div class='modal-content'>
+                            <div class='modal-header'>
+                                <h5 class='modal-title' id='popUpReviewForm'>New Review</h5>
+                                <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                                    <span aria-hidden='true'>&times;</span>
+                                </button>
+                            </div>
+                            <div class='modal-body'>
+                                <form>
+                                    <div class='form-group'>
+                                        <label for='recipient-name' class='col-form-label font-weight-bold'>How do you feel?
+                                        </label>
+                                        <div class='div'>
+                                            <div class='form-check'>
+                                                <input class='form-check-input' type='radio' name='inlineRadioOptions'
+                                                    id='inlineRadio1' value='1'>
+                                                <label class='form-check-label' for='inlineRadio1'><i
+                                                        class='far fa-kiss-wink-heart'></i> I really love them!!!</label>
+                                            </div>
+                                            <div class='form-check'>
+                                                <input class='form-check-input' type='radio' name='inlineRadioOptions'
+                                                    id='inlineRadio2' value='2'>
+                                                <label class='form-check-label' for='inlineRadio2'><i
+                                                        class='far fa-grin-stars'></i>
+                                                    Just love them.</label>
+                                            </div>
+                                            <div class='form-check'>
+                                                <input class='form-check-input' type='radio' name='inlineRadioOptions'
+                                                    id='inlineRadio3' value='3'>
+                                                <label class='form-check-label' for='inlineRadio3'><i class='far fa-smile'></i>
+                                                    Just
+                                                    ok! ok!</label>
+                                            </div>
+                                            <div class='form-check'>
+                                                <input class='form-check-input' type='radio' name='inlineRadioOptions'
+                                                    id='inlineRadio4' value='4'>
+                                                <label class='form-check-label' for='inlineRadio4'><i
+                                                        class='far fa-frown-open'></i>
+                                                    Not what I expected!!!!!</label>
+                                            </div>
+                                            <div class='form-check'>
+                                                <input class='form-check-input' type='radio' name='inlineRadioOptions'
+                                                    id='inlineRadio5' value='5'>
+                                                <label class='form-check-label' for='inlineRadio5'><i
+                                                        class='far fa-sad-tear'></i> I
+                                                    was really disappointed</label>
+                                            </div>
+                                            <div class='form-check'>
+                                                <input class='form-check-input' type='radio' name='inlineRadioOptions'
+                                                    id='inlineRadio6' value='6'>
+                                                <label class='form-check-label' for='inlineRadio6'><i class='far fa-angry'></i>
+                                                    Not
+                                                    want to talk about it.</label>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class='form-group'>
-                                    <label for='message-text' class='col-form-label font-weight-bold'>Message</label>
-                                    <textarea class='form-control' id='message-text' name='message'></textarea>
-                                </div>
+                                    <div class='form-group'>
+                                        <label for='message-text' class='col-form-label font-weight-bold'>Message</label>
+                                        <textarea class='form-control' id='message-text' name='message'></textarea>
+                                    </div>
 
-                            </form>
+                                </form>
 
-                        </div>
+                            </div>
 
-                        <div class='modal-footer'>
-                            <button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>
-                            <button type='submit' class='btn btn-success' name='review'>Send message</button>
-                        </div>
-                </form>
+                            <div class='modal-footer'>
+                                <button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>
+                                <button type='submit' class='btn btn-success' name='review'>Send message</button>
+                            </div>
+                    </form>
 
+                </div>
             </div>
-        </div>
         </div>";
     }
 

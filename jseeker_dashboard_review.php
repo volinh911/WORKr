@@ -51,6 +51,10 @@
                         <span>Company Reviews</span></a>
                 </li>
                 <li>
+                    <a href="index.php" class="active"><span><i class="fa fa-home" aria-hidden="true"></i></span>
+                        <span>Home</span></a>
+                </li>
+                <li>
                     <a href="logout.php" class="active"><span><i class="fas fa-sign-out-alt"></i></span>
                         <span>Logout</span></a>
                 </li>
@@ -98,16 +102,16 @@
                                     </thead>
                                     <tbody>
 
-                                            <?php if (isset($_SESSION['role']) && $_SESSION['role'] == 2 && $reviews !=false): ?>
+                                        <?php if (isset($_SESSION['role']) && $_SESSION['role'] == 2 && $reviews !=false): ?>
 
-                                            <?php foreach($reviews as $review): ?>
+                                        <?php foreach($reviews as $review): ?>
 
-                                            <?php renderJobseekerReviews($review); ?>
+                                        <?php renderJobseekerReviews($review); ?>
 
-                                            <?php endforeach; ?>
+                                        <?php endforeach; ?>
 
-                                            <?php else : echo "<h1> You're not logged in or you're not a jobseeker"; ?>
-                                            <?php endif ?>
+                                        <?php else : echo "<h1> You're not logged in or you're not a jobseeker"; ?>
+                                        <?php endif ?>
 
                                     </tbody>
                                 </table>
