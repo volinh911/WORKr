@@ -414,7 +414,7 @@
                 <td> {$job['enddate']} </td>
 
                 <td>
-                    <a href='./job_details.php?id={$job['jobid']}' class=' option success'>View</a>
+                    <a href='./job_details.php?id={$job['jobid']}' class=' option success mr-2'>View</a>
                     <a href='./jseeker_dashboard_fav_j_delete.php?id={$job['jobid']}' class='option warning'>Delete</a>
                 </td>
 
@@ -425,12 +425,12 @@
 
         echo "                                
         <div class='c-box'>
-        <a href='#'>
-            <img src='{$company['logo']}' alt=''>
-            <h3> {$company['companyname']} </h3>
-
-        </a>
-        <a href='./jseeker_dashboard_fav_c_delete.php?id={$company['companyid']}' class='option warning'>Delete</a>
+            <a href='#'>
+                <img src='{$company['logo']}' alt=''>
+                <h3> {$company['companyname']} </h3>
+            </a>
+            <a href='./jseeker_dashboard_fav_c_delete.php?id={$company['companyid']}' class='font-weight-bolder option text-danger float-right' 
+                    style='margin-bottom: 2rem; margin-right: 20px;font-size: 1rem;'>Delete</a>
         </div>";
 
     }
@@ -490,8 +490,8 @@
 
         echo "                
         <div class='jobs d-flex align-items-center mt-3 mb-3'>
-            <div class='card' style='width: 18rem;'>
-                <img src='{$company['logo']}' class='card-img-top' alt='...'>
+            <div class='card' style='width:100px;'>
+                <img src='{$company['logo']}' class='card-img-top' style='height: 100px; width: 100%; object-fit: cover;' alt='...'>
             </div>
             <div class='card_content w-100 ml-3 d-flex justify-content-between align-items-end'>
                 <div class='job_info'>
@@ -665,7 +665,7 @@
                     </div>
                 </div>
                 <div>
-                    <p>{$review['content']}</p>
+                    <p style='font-size: 1rem;'><i class='far fa-comment text-danger'></i><span class='font-weight-bolder text-danger'> What I think: </span>{$review['content']}</p>
                 </div>
             </div>
         </div>";

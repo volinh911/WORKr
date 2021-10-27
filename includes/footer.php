@@ -15,7 +15,7 @@
                             </a>
                         </li>
                         <li><a href="">About</a></li>
-                        <li><a href="">Carrer Blog</a></li>
+                        <li><a href="">Career Blog</a></li>
                         <li><a href="">Company Review</a></li>
                         <li><a href="">Term of Use</a></li>
                     </ul>

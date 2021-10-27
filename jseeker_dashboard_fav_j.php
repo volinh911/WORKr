@@ -119,7 +119,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == 2) {
                                 <span class='fa fa-clipboard'></span>
                                 <div>
                                     <h5><?php echo $totalFavoriteJobs['count']; ?></h5>
-                                    <small>Number of favorite Jobs</small>
+                                    <small>Favorite Jobs</small>
                                 </div>
                             </div>
                         </div>

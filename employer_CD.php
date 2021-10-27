@@ -39,11 +39,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == 3) {
                         <span>Company Detail</span></a>
                 </li>
                 <li>
-                    <a href="#" class="active"><span><i class="fas fa-search"></i></span>
-                        <span>Search Resumes</span></a>
-                </li>
-                <li>
-                    <a href="#" class="active"><span><i class="fa fa-heart"></i></span>
+                    <a href="employer_Fav_CV.php" class="active"><span><i class="fa fa-heart"></i></span>
                         <span>Favorite Resumes</span></a>
                 </li>
                 <li>
@@ -74,9 +70,16 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == 3) {
             </h2>
             <div class="user-wrapper">
                 <img src="/images/Avatar.png" width="40px" height="40px" alt="">
-                <div>
-                    <h6 class="text-white">Administrador</h6>
-                </div>
+                <li class="nav-item dropdown">
+                    <a style="font-size: 1.2rem;" class="nav-link dropdown-toggle text-white font-weight-bolder"
+                        href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
+                        Administrator
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Search Resumes</a>
+                    </div>
+                </li>
             </div>
         </header>
         <!-- Header -->

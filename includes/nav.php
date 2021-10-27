@@ -15,7 +15,7 @@
                 <a class="nav-link" href="../careerblog.php">Career Blog</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Company Review</a>
+                <a class="nav-link" href="../comp_review.php">Company Review</a>
             </li>
         </ul>
         <ul class="navbar-nav">

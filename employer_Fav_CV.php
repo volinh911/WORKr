@@ -6,8 +6,7 @@ include './func/render.php';
 $model = new Model;
 if(isset($_SESSION['role']) && $_SESSION['role'] == 3){
   $userid = $_SESSION['userid'];
-  $jobs = $model->getAllEmployerJobs($userid);
-  $totalJobs = $model->totalEmployerJobs;
+
 }
 
 ?>
@@ -87,7 +86,6 @@ if(isset($_SESSION['role']) && $_SESSION['role'] == 3){
         <main>
             <h2 class="dash-title">Jobs Management</h2>
 
-            <?php if (isset($_SESSION['role']) && $_SESSION['role'] == 3):?>
             <section class="recent">
                 <div class="activity-grid">
                     <div class="activity-card">
@@ -95,26 +93,18 @@ if(isset($_SESSION['role']) && $_SESSION['role'] == 3){
                             <table>
                                 <thead>
                                     <tr>
-                                        <th>Project</th>
-                                        <th>Start Date</th>
-                                        <th>End Date</th>
+                                        <th>Job Seeker</th>
                                         <th>Options</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-
-                                    <?php if ($jobs !=false): ?>
-
-                                    <?php foreach ($jobs as $job):?>
-
-                                    <?php renderEmployerJoblist($job); ?>
-
-                                    <?php endforeach; ?>
-
-                                    <?php else: echo "You haven't post any job yet"; ?>
-
-                                    <?php endif; ?>
-
+                                    <tr>
+                                        <td><a href="">Your Local Bread</a></td>
+                                        <td>
+                                            <a href="" class="option success mr-2">View</a>
+                                            <a href="" class="option warning">Remove</a>
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -124,10 +114,10 @@ if(isset($_SESSION['role']) && $_SESSION['role'] == 3){
                         <div class="summary-card">
 
                             <div class="summary-single">
-                                <span class="fa fa-clipboard"></span>
+                                <span class="fa fa-heart"></span>
                                 <div>
-                                    <h5> <?php echo $totalJobs['count']; ?> </h5>
-                                    <small>Number of Jobs</small>
+                                    <h5>24</h5>
+                                    <small>Favorite CVs</small>
                                 </div>
                             </div>
                         </div>
@@ -135,9 +125,6 @@ if(isset($_SESSION['role']) && $_SESSION['role'] == 3){
                     </div>
                 </div>
             </section>
-
-            <?php else: echo "<h1> You're not logged in or you're not an employer </h1>" ?>
-            <?php endif; ?>
 
         </main>
 
