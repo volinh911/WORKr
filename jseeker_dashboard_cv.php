@@ -127,8 +127,6 @@
 
             <!-- ==================================================================================================== -->
 
-
-
             <div class="recent-grid">
                 <div class="customers">
                     <div class="card">
@@ -140,7 +138,7 @@
                         </div>
                         <div class="profile-body">
                             <div class="pdesc-box">
-                                <p>no profile description :(</p>
+                                <p>no title :(</p>
                             </div>
                         </div>
                     </div>
@@ -181,7 +179,7 @@
                 <div class="customers">
                     <div class="card">
                         <div class="profile-header">
-                            <h3><i class="fas fa-id-badge" style="width: 50px;"></i>Personal Info</h3>
+                            <h3><i class="fas fa-id-badge" style="width: 50px;"></i>Personal Information</h3>
                             <button data-toggle='modal' data-target='#personalInfoPopUp' data-whatever='@getbootstrap'
                                 type="submit" class="edit-btn"
                                 style="padding: 0px 30px; margin: 0px 0px 0px auto;">Edit</button>
@@ -189,11 +187,11 @@
                         <div class="profile-body" id="special-body-uwu">
                             <div class="neatly-constructed-grid-rows">
                                 <div class="neatly-put-grid-columns">
-                                    <h2>Surname</h2>
+                                    <h2>First Name</h2>
                                     <p>C</p>
                                 </div>
                                 <div class="neatly-put-grid-columns">
-                                    <h2>Name</h2>
+                                    <h2>Last Name</h2>
                                     <p>J</p>
                                 </div>
                                 <div class="neatly-put-grid-columns">
@@ -225,7 +223,7 @@
                     <form action='' method='post' style="width: 100%;">
                         <div class='modal-content'>
                             <div class='modal-header'>
-                                <h5 class='modal-title' id='personalInfoPopUpForm'>Personal Info</h5>
+                                <h5 class='modal-title' id='personalInfoPopUpForm'>Personal Information</h5>
                                 <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
                                     <span aria-hidden='true'>&times;</span>
                                 </button>
@@ -233,7 +231,7 @@
                             <div class='modal-body'>
                                 <form>
                                     <div class="form-group">
-                                        <label for="recipient-name" class="col-form-label">Full Name:</label>
+                                        <label for="recipient-name" class="col-form-label">First Name:</label>
                                         <input style="margin-left: 0;" type="text" class="form-control"
                                             id="recipient-name">
                                     </div>
@@ -369,7 +367,7 @@
                     <form action='' method='post' style="width: 100%;">
                         <div class='modal-content'>
                             <div class='modal-header'>
-                                <h5 class='modal-title' id='careerInfoPopUpForm'>Personal Info</h5>
+                                <h5 class='modal-title' id='careerInfoPopUpForm'>Career Info</h5>
                                 <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
                                     <span aria-hidden='true'>&times;</span>
                                 </button>
@@ -562,7 +560,7 @@
                                             id="recipient-name">
                                     </div>
                                     <div class="form-group">
-                                        <label for="recipient-name" class="col-form-label">School Year (yyyy -
+                                        <label for="recipient-name" class="col-form-label">Academic Year (yyyy -
                                             yyyy):</label>
                                         <input style="margin-left: 0;" type="text" class="form-control"
                                             id="recipient-name">
@@ -594,7 +592,7 @@
                         <div class="profile-body" id="special-body-uwu">
                             <div class="neatly-constructed-grid-rows">
                                 <div class="neatly-put-grid-columns">
-                                    <h2>Degree</h2>
+                                    <h2>Certificate</h2>
                                     <p>Bachelor Degree Of Fine Arts >:(</p>
                                 </div>
                                 <div class="neatly-put-grid-columns">
