@@ -1,5 +1,101 @@
 <?php
 
+// ------------------------------------- RENDER HEADER ------------------------------------- //
+
+    function renderHeader($role, $jobseeker, $employer){
+
+        switch($role){
+
+            case '1': //Admin dashboard
+                echo "        
+                <header>
+                    <h2>
+                        <label for='nav-toggle'>
+                            <span><i class='fas fa-bars text-white'></i></span>
+                        </label>
+                    </h2>
+                    <div class='user-wrapper'>
+                        <img src='/images/Avatar.png' width='40px' height='40px' alt=''>
+                        <div>
+                            <h6 class='text-white'>Admin({$jobseeker['email']})</h6>
+                        </div>
+                    </div>
+                </header>";
+
+                break;
+
+            case '2': //Jobseeker dashboard
+                if ($jobseeker['avatar'] != null) {
+
+                    echo "
+                <header>
+                    <h2>
+                        <label for='nav-toggle'>
+                            <span><i class='fas fa-bars text-white'></i></span>
+                        </label>
+                    </h2>
+                    <div class='user-wrapper'>
+                        <img src='{$jobseeker['avatar']}' width='40px' height='40px' alt=''>
+                        <div>
+                            <h6 class='text-white'>{$jobseeker['username']}</h6>
+                        </div>
+                    </div>
+                </header>";
+
+                }else{
+
+                    echo "
+                <header>
+                    <h2>
+                        <label for='nav-toggle'>
+                            <span><i class='fas fa-bars text-white'></i></span>
+                        </label>
+                    </h2>
+                    <div class='user-wrapper'>
+                        <img src='/images/Avatar.png' width='40px' height='40px' alt=''>
+                        <div>
+                            <h6 class='text-white'>{$jobseeker['username']}</h6>
+                        </div>
+                    </div>
+                </header>";
+
+                }
+
+                break;
+
+            case '3': // Employer dashboard
+                echo "
+                <header>
+                    <h2>
+                        <label for='nav-toggle'>
+                            <span><i class='fas fa-bars text-white'></i></span>
+                        </label>
+                    </h2>
+                    <div class='user-wrapper'>
+                        <img src='/images/Avatar.png' width='40px' height='40px' alt=''>
+                        <li class='nav-item dropdown'>
+                            <a style='font-size: 1.2rem;' class='nav-link dropdown-toggle text-white font-weight-bolder'
+                                href='#' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true'
+                                aria-expanded='false'>
+                                Employer({$employer['email']})
+                            </a>
+                            <div class='dropdown-menu' aria-labelledby='navbarDropdown'>
+                                <a class='dropdown-item' href='#'>Search Resumes</a>
+                            </div>
+                        </li>
+                    </div>
+                </header>";
+
+                break;
+
+            default:
+                echo "not loggedin";
+        }
+
+    }
+
+// ------------------------------------- END RENDER HEADER ------------------------------------- //
+
 // ------------------------------------- RENDER BLOGS ------------------------------------- //
 
     function renderMoreBlog($blog,$smallText) {
@@ -92,10 +188,6 @@
 
     function renderEditBlogAdmin($blog){
 
-        $blog = '';
-
-        
-
         echo "                               
             <form action='' method='POST' enctype='multipart/form-data'>
 
@@ -125,6 +217,7 @@
 
             <button type='submit' name='update'> Update Blog</button>
         </form>";
+
     }
 
     function renderReviewsListAdmin($review){

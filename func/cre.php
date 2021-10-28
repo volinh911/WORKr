@@ -173,6 +173,42 @@
 
 		}
 
+		public function getJobSeeker($userid){
+			
+			$fetch = "SELECT email, username, avatar FROM jobseeker WHERE id = '$userid';";
+			$result = pg_query($this->conn, $fetch);
+
+			if(pg_num_rows($result)){
+
+				return pg_fetch_assoc($result);
+
+			}else{
+
+				return false;
+				echo "<script>alert('No Jobseeker');</script>";
+
+			}
+
+		}
+
+		public function getEmployer($userid){
+
+			$fetch = "SELECT email FROM employer WHERE id = '$userid';";
+			$result = pg_query($this->conn, $fetch);
+
+			if(pg_num_rows($result)){
+
+				return pg_fetch_assoc($result);
+
+			}else{
+
+				return false;
+				echo "<script>alert('No Employer');</script>";
+
+			}
+		}
+
+
 // ------------------------------------- END GET EVERYTHING FROM DATABASE ------------------------------------- //
 
 

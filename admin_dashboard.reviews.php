@@ -4,8 +4,23 @@
     include './func/render.php';
 
     $model = new Model;
-    $reviews = $model->manageReviews();
+
+    if(isset($_SESSION['role']) && $_SESSION['role'] == 1){
+
+        $role = $_SESSION['role'];        
+        $userid = $_SESSION['userid'];
+        $employer = new stdClass();
     
+        $jobseeker = $model->getJobSeeker($userid);
+        // End header
+        $reviews = $model->manageReviews();
+    
+    }else{
+    
+        echo "<script>window.location.href = 'index.php';</script>";
+    
+    }
+
 ?>
 
 <!doctype html>
@@ -53,19 +68,9 @@
 
     <div class="main-content">
         <!-- Header -->
-        <header>
-            <h2>
-                <label for="nav-toggle">
-                    <span><i class="fas fa-bars text-white"></i></span>
-                </label>
-            </h2>
-            <div class="user-wrapper">
-                <img src="/images/Avatar.png" width="40px" height="40px" alt="">
-                <div>
-                    <h6 class="text-white">Administrador</h6>
-                </div>
-            </div>
-        </header>
+
+        <?php renderHeader($role, $jobseeker, $employer); ?>
+
         <!-- Header -->
 
         <main>
@@ -90,16 +95,11 @@
                                     </thead>
                                     <tbody>
 
-                                        <?php if (isset($_SESSION['role']) && $_SESSION['role'] == 1 && $reviews !=false): ?>
-
                                         <?php foreach($reviews as $review): ?>
 
                                         <?php renderReviewsListAdmin($review); ?>
 
                                         <?php endforeach; ?>
-
-                                        <?php else : echo "<h1> You're in a wrong place my friend"; ?>
-                                        <?php endif ?>
 
                                     </tbody>
                                 </table>

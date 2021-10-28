@@ -1,16 +1,27 @@
 <?php 
 
-include("includes/head.php"); 
-include './func/cre.php';
-include './func/render.php';
+    include("includes/head.php"); 
+    include './func/cre.php';
+    include './func/render.php';
 
-$model = new Model;
-if (isset($_SESSION['role']) && $_SESSION['role'] == 2) {
+    $model = new Model;
     
-    $userid = $_SESSION['userid'];
-    $favoritecompany = $model->getFavoriteCompany($userid);
-    
-}
+    if (isset($_SESSION['role']) && $_SESSION['role'] == 2) {
+        
+        $role = $_SESSION['role']; 
+        $userid = $_SESSION['userid'];
+        $employer = new stdClass();
+
+        $jobseeker = $model->getJobSeeker($userid);
+        // End header
+        
+        $favoritecompany = $model->getFavoriteCompany($userid);
+        
+    }else{
+
+        echo "<script>window.location.href = 'index.php';</script>";
+
+    }
 
 ?>
 <link rel="stylesheet" href="css/dashboard.css">
@@ -62,19 +73,9 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == 2) {
 
     <div class="main-content">
         <!-- Header -->
-        <header>
-            <h2>
-                <label for="nav-toggle">
-                    <span><i class="fas fa-bars text-white"></i></span>
-                </label>
-            </h2>
-            <div class="user-wrapper">
-                <img src="images/Avatar.png" width="40px" height="40px" alt="">
-                <div>
-                    <h6 class="text-white">Administrador</h6>
-                </div>
-            </div>
-        </header>
+
+        <?php renderHeader($role, $jobseeker, $employer); ?>
+
         <!-- Header -->
 
         <main>
@@ -84,8 +85,6 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == 2) {
                         <div class="card-header">
                             <h2>Favourite Companies</h2>
                         </div>
-
-                        <?php if (isset($_SESSION['role']) && $_SESSION['role'] == 2) :?>
 
                         <div class="card-body">
                             <div class="c-list">
@@ -102,9 +101,6 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == 2) {
 
                             </div>
                         </div>
-
-                        <?php else: echo "<h1> You're not logged in or you're not a jobseeker </h1>" ?>
-                        <?php endif; ?>
 
                     </div>
                 </div>

@@ -1,14 +1,27 @@
 <?php 
 
-include './func/cre.php';
-$model = new Model;
-if (isset($_SESSION['role']) && $_SESSION['role'] == 3) {
-  
-    $companyID = $_SESSION['companyid'];
-    $company = $model->getCompanyOverview($companyID);
-    $model->updateCompany($companyID);
+    include './func/cre.php';
+    include './func/render.php';
 
-}
+    $model = new Model;
+
+    if (isset($_SESSION['role']) && $_SESSION['role'] == 3) {
+        
+        $role = $_SESSION['role'];        
+        $userid = $_SESSION['userid'];
+        $jobseeker = new stdClass();
+
+        $employer = $model->getEmployer($userid);
+        // End header
+        $companyID = $_SESSION['companyid'];
+        $company = $model->getCompanyOverview($companyID);
+        $model->updateCompany($companyID);
+
+    }else{
+
+        echo "<script>window.location.href = 'index.php';</script>";
+
+    }
 
 ?>
 
@@ -62,33 +75,16 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == 3) {
 
     <div class="main-content">
         <!-- Header -->
-        <header>
-            <h2>
-                <label for="nav-toggle">
-                    <span><i class="fas fa-bars text-white"></i></span>
-                </label>
-            </h2>
-            <div class="user-wrapper">
-                <img src="/images/Avatar.png" width="40px" height="40px" alt="">
-                <li class="nav-item dropdown">
-                    <a style="font-size: 1.2rem;" class="nav-link dropdown-toggle text-white font-weight-bolder"
-                        href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false">
-                        Administrator
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Search Resumes</a>
-                    </div>
-                </li>
-            </div>
-        </header>
+
+        <?php renderHeader($role, $jobseeker, $employer); ?>
+
         <!-- Header -->
 
         <main>
             <h2 class="dash-title">Company Detail</h2>
 
             <div class="form-wrapper mb-5">
-                <?php if (isset($_SESSION['role']) && $_SESSION['role'] == 3):?>
+
                 <form action="" method="post">
 
                     <div class="input-form">
@@ -138,9 +134,6 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == 3) {
 
                     </div>
                 </form>
-
-                <?php else: echo "<h1> You're not logged in or you're not an employer </h1>" ?>
-                <?php endif; ?>
 
             </div>
         </main>
