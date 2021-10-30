@@ -126,55 +126,6 @@
             </div>
 
             <!-- ==================================================================================================== -->
-
-            <div class="recent-grid">
-                <div class="customers">
-                    <div class="card">
-                        <div class="profile-header">
-                            <h3><i class="fas fa-user-circle" style="width: 50px;"></i>Resume Title*</h3>
-                            <button data-toggle='modal' data-target='#titlePopUp' data-whatever='@getbootstrap'
-                                type="submit" class="edit-btn"
-                                style="padding: 0px 30px; margin: 0px 0px 0px auto;">Edit</button>
-                        </div>
-                        <div class="profile-body">
-                            <div class="pdesc-box">
-                                <p>no title :(</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- title form -->
-            <div class='modal fade' id='titlePopUp' tabindex='-1' role='dialog' aria-labelledby='titlePopUpForm'
-                aria-hidden='true'>
-                <div class='modal-dialog' role='document'>
-                    <form action='' method='post'>
-                        <div class='modal-content'>
-                            <div class='modal-header'>
-                                <h5 class='modal-title' id='titlePopUpForm'>Resume Title</h5>
-                                <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
-                                    <span aria-hidden='true'>&times;</span>
-                                </button>
-                            </div>
-                            <div class='modal-body'>
-                                <form>
-                                    <div class='form-group'>
-                                        <textarea class='form-control' id='title-text' name='title-content'></textarea>
-                                    </div>
-                                </form>
-                                <div class='modal-footer'>
-                                    <button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>
-                                    <button type='submit' class='btn btn-success' name='title'>Submit</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-            <!-- ==================================================================================================== -->
-
             <div class="recent-grid">
                 <div class="customers">
                     <div class="card">
@@ -277,7 +228,53 @@
 
             <!-- ==================================================================================================== -->
 
+            <div class="recent-grid">
+                <div class="customers">
+                    <div class="card">
+                        <div class="profile-header">
+                            <h3><i class="fas fa-user-circle" style="width: 50px;"></i>Resume Title*</h3>
+                            <button data-toggle='modal' data-target='#titlePopUp' data-whatever='@getbootstrap'
+                                type="submit" class="edit-btn"
+                                style="padding: 0px 30px; margin: 0px 0px 0px auto;">Edit</button>
+                        </div>
+                        <div class="profile-body">
+                            <div class="pdesc-box">
+                                <p>no title :(</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
+            <!-- title form -->
+            <div class='modal fade' id='titlePopUp' tabindex='-1' role='dialog' aria-labelledby='titlePopUpForm'
+                aria-hidden='true'>
+                <div class='modal-dialog' role='document'>
+                    <form action='' method='post'>
+                        <div class='modal-content'>
+                            <div class='modal-header'>
+                                <h5 class='modal-title' id='titlePopUpForm'>Resume Title</h5>
+                                <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                                    <span aria-hidden='true'>&times;</span>
+                                </button>
+                            </div>
+                            <div class='modal-body'>
+                                <form>
+                                    <div class='form-group'>
+                                        <textarea class='form-control' id='title-text' name='title-content'></textarea>
+                                    </div>
+                                </form>
+                                <div class='modal-footer'>
+                                    <button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>
+                                    <button type='submit' class='btn btn-success' name='title'>Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- ==================================================================================================== -->
 
             <div class="recent-grid">
                 <div class="customers">
@@ -577,7 +574,6 @@
             </div>
 
             <!-- ==================================================================================================== -->
-
 
 
             <div class="recent-grid">
