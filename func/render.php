@@ -246,7 +246,7 @@
         foreach ($favoriteJob as $favojob) {
 
             if($favojob['jobid'] == $job['jobid']){
-                $favorite .= "<p> Favorited </p>";
+                $favorite .= "<p class='text-success'> Favorited </p>";
             }else{
                 $favorite .= "";
             }
@@ -292,7 +292,8 @@
                         </div>
                     </div>
                 </div>
-            </div>";
+            </div>
+        ";
 
     }
 
@@ -301,15 +302,15 @@
         $appfavo = "";
         if($favoriteJob == true){
 
-            $appfavo .= "<button type='submit' class='btn btn-danger text-white' name='apply'><a style='color: white;' href ='{$job['website']}'>Apply</a></button>
-                        <button type='submit' class='btn btn-outline-danger love-btn' name='favorite'><i
-                        class='far fa-heart' aria-hidden='true'></i> Add to favorite list</button>";
+            $appfavo .= "<button type='submit' class='btn btn-danger text-white  mt-2' name='apply'><a style='color: white;' href ='{$job['website']}'>Apply</a></button>
+                        <button type='submit' class='btn btn-outline-danger love-btn mt-2' name='favorite'><i
+                            class='far fa-heart' aria-hidden='true'></i> Add to favorite list</button>";
 
         }else {
 
-            $appfavo .="<button type='submit' class='btn btn-danger text-white' name='apply'><a href ='{$job['website']}'>Apply</a></button>
-                        <button type='submit' class='btn btn-outline-danger love-btn' name='favorite'><i
-                        class='far fa-heart' aria-hidden='true'></i> Favorited </button>";
+            $appfavo .="<button type='submit' class='btn btn-danger text-white mt-2' name='apply'><a style='color: white;' href ='{$job['website']}'>Apply</a></button>
+                        <button type='submit' class='btn btn-outline-success love-btn mt-2' name='favorite'><i
+                            class='far fa-heart' aria-hidden='true'></i> Favorited </button>";
 
         }
 
@@ -320,118 +321,113 @@
 
         }else{
 
-            $companyfavo .= "<button type='submit' class='btn btn-outline-danger love-btn mb-3' name = 'favoritecompany'><i class='far fa-heart' aria-hidden='true'></i> Favorited </button>";
+            $companyfavo .= "<button type='submit' class='btn btn-outline-success love-btn mb-3' name = 'favoritecompany'><i class='far fa-heart' aria-hidden='true'></i> Favorited </button>";
 
         }
 
         echo"
         <div class='tab-content' id='nav-tabContent'>
-        <div class='tab-pane fade show active' id='job-detail' role='tabpanel'>
-            <!-- Job title -->
-            <div class='container mt-3'>
-                <div class='row'>
-                    <div class='col'>
-                        <div class='jobs d-flex align-items-center mt-3 mb-3'>
-                            <div class='card' style='width:150px;'>
-                                <img src='{$job['logo']}' class='card-img-top' style='height: 150px; width: 100%; object-fit: cover;' alt='...'>
-                            </div>
-                            <div class='card_content w-100 ml-3 d-flex justify-content-between align-items-end'>
-                                <div class='job_info'>
-                                    <h3 class='text-danger'> {$job['title']} </h3>
-                                    <h6> {$job['companyname']} </h6>
-                                    <h6 class=' text-success'><span><i class='fas fa-dollar-sign'></i></span>
-                                        {$job['salary']} </h6>
-                                    <h6><i class='fas fa-map-marker-alt'></i> {$job['location']} </h6>
+            <div class='tab-pane fade show active' id='job-detail' role='tabpanel'>
+                <!-- Job title -->
+                <div class='container mt-3'>
+                    <div class='row'>
+                        <div class='col'>
+                            <div class='jobs d-flex align-items-center mt-3 mb-3'>
+                                <div class='card' style='width:150px;'>
+                                    <img src='{$job['logo']}' class='card-img-top' style='height: 150px; width: 100%; object-fit: cover;' alt='...'>
                                 </div>
-                                <div class='details'>
-                                
-                                <form action='' method='post'>
-
-                                    {$appfavo}
-
-                                </form>
-
+                                <div class='card_content w-100 ml-3 d-flex justify-content-between align-items-end'>
+                                    <div class='job_info'>
+                                        <h3 class='text-danger'> {$job['title']} </h3>
+                                        <h6> {$job['companyname']} </h6>
+                                        <h6 class=' text-success'><span><i class='fas fa-dollar-sign'></i></span>
+                                            {$job['salary']} </h6>
+                                        <h6><i class='fas fa-map-marker-alt'></i> {$job['location']} </h6>
+                                    </div>
+                                    <div class='details'>
+                                        <form action='' method='post'>
+                                            {$appfavo}
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class='container  mt-4'>
-                <div class='row'>
-                    <div class='col-md-8'>
-                        <div class='job-description '>
-                            <h3>Description</h3>
-                            <p> {$job['description']} </p>
-                        </div>
-                        <div class='job-requirement'>
-                            <h3>Requirement</h3>
-                            <p> {$job['requirements']} </p>
-                        </div>
-                    </div>
-                    <div class='col-md-4 '>
-                        <div class='summary offset-2 mt-3 '>
-                            <div class='card rounded-0' style='width: 18rem;'>
-                                <ul class='list-group list-group-flush'>
-                                    <li class='list-group-item'>
-                                        <i class='fa fa-calendar mr-2' aria-hidden='true'></i>
-                                        {$job['enddate']}
-                                    </li>
-                                    <li class='list-group-item'>
-                                        <i class='fas fa-layer-group mr-2'></i> {$job['level']}
-                                    </li>
-                                    <li class='list-group-item'>
-                                        <i class='fas fa-briefcase mr-2'></i> {$job['industry']}
-                                    </li>
-                                    <li class='list-group-item'>
-                                        <i class='fas fa-flag mr-2'></i> {$job['experienceyear']}
-                                        year(s) of experience
-                                    </li>
-                                    <li class='list-group-item'>
-                                        <i class='fas fa-language mr-2'></i> {$job['type']}
-                                    </li>
-                                </ul>
+                <div class='container  mt-4'>
+                    <div class='row'>
+                        <div class='col-md-8'>
+                            <div class='job-description '>
+                                <h3>Description</h3>
+                                <p> {$job['description']} </p>
+                            </div>
+                            <div class='job-requirement'>
+                                <h3>Requirement</h3>
+                                <p> {$job['requirements']} </p>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class='tab-pane fade' id='company'>
-            <div class='container mt-3'>
-                <div class='row'>
-                    <div class='col-md-12 '>
-                        <div class='jobs d-flex align-items-center mt-3 mb-3'>
-                            <div class='card' style='width:150px;'>
-                                <img src='{$job['logo']}' class='card-img-top' style='height: 150px; width: 100%; object-fit: cover;' alt='...'>
-                            </div>
-                            <div class='card_content w-100 ml-3 d-flex justify-content-between align-items-end'>
-                                <div class='job_info'>
-                                    <h3 class='text-danger'>{$company['companyname']}</h3>
-                                    <h6>Location: <i class='fas fa-map-marker-alt text-black-50'></i> {$company['address']} </h6>
-                                    <ul class='d-flex'>
-                                        <li class='mr-3'><i class='fa fa-users' aria-hidden='true'></i> Company size: {$company['size']} </li>
-                                        <li class='mr-3'><i class='fa fa-users' aria-hidden='true'></i> Company size: {$company['applyemail']} </li>
-                                        <li><i class='fas fa-gamepad'></i> {$company['website']} </li>
+                        <div class='col-md-4 '>
+                            <div class='summary offset-2 mt-3 '>
+                                <div class='card rounded-0' style='width: 18rem;'>
+                                    <ul class='list-group list-group-flush'>
+                                        <li class='list-group-item'>
+                                            <i class='fa fa-calendar mr-2' aria-hidden='true'></i>
+                                            {$job['enddate']}
+                                        </li>
+                                        <li class='list-group-item'>
+                                            <i class='fas fa-layer-group mr-2'></i> {$job['level']}
+                                        </li>
+                                        <li class='list-group-item'>
+                                            <i class='fas fa-briefcase mr-2'></i> {$job['industry']}
+                                        </li>
+                                        <li class='list-group-item'>
+                                            <i class='fas fa-flag mr-2'></i> {$job['experienceyear']}
+                                            year(s) of experience
+                                        </li>
+                                        <li class='list-group-item'>
+                                            <i class='fas fa-language mr-2'></i> {$job['type']}
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
-                            </div>  
-                                <div class='details float-right'>
-
-                                    <form action='' method='post'>
-                                        {$companyfavo}
-                                    </form>
-
-                                </div>      
-                            </div>
                         </div>
                     </div>
                 </div>
-                <div class='treatment'>
-                    <h6 class='text-bold'>{$company['companydescription']} </h6>
+            </div>
+
+            <div class='tab-pane fade' id='company'>
+                <div class='container mt-3'>
+                    <div class='row'>
+                        <div class='col-md-12 '>
+                            <div class='jobs d-flex align-items-center mt-3 mb-3'>
+                                <div class='card' style='width:150px;'>
+                                    <img src='{$job['logo']}' class='card-img-top' style='height: 150px; width: 100%; object-fit: cover;' alt='...'>
+                                </div>
+                                <div class='card_content w-100 ml-3 d-flex justify-content-between align-items-end'>
+                                    <div class='job_info'>
+                                        <h3 class='text-danger'>{$company['companyname']}</h3>
+                                        <h6>Location: <i class='fas fa-map-marker-alt text-black-50'></i> {$company['address']} </h6>
+                                        <ul class='d-flex'>
+                                            <li class='mr-3'><i class='fa fa-users' aria-hidden='true'></i> Company size: {$company['size']} </li>
+                                            <li class='mr-3'><i class='fa fa-users' aria-hidden='true'></i> Company size: {$company['applyemail']} </li>
+                                            <li><i class='fas fa-gamepad'></i> {$company['website']} </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                </div>  
+                                    <div class='details float-right'>
+                                        <form action='' method='post'>
+                                            {$companyfavo}
+                                        </form>
+                                    </div>      
+                                </div>
+                            </div>
+                        </div>
+                        <div class='treatment'>
+                            <h6 class='text-bold'>{$company['companydescription']} </h6>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>";

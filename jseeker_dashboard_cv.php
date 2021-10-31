@@ -152,6 +152,10 @@
                         <span>Company Reviews</span></a>
                 </li>
                 <li>
+                    <a href="index.php" class="active"><span><i class="fa fa-home" aria-hidden="true"></i></span>
+                        <span>Home</span></a>
+                </li>
+                <li>
                     <a href="logout.php" class="active"><span><i class="fas fa-sign-out-alt"></i></span>
                         <span>Logout</span></a>
                 </li>
@@ -416,7 +420,7 @@
             <!-- ==================================================================================================== -->
 
             <!-- RESUME WORK EXPERIENCE -->
-            
+
             <?php renderResumeWorkExperience($workExperience); ?>
 
             <!-- work experience form -->
@@ -552,7 +556,8 @@
                                     </div>
                                     <div class='form-group'>
                                         <label for="recipient-name" class="col-form-label">Description:</label>
-                                        <textarea class='form-control' id='title-text' name='certificateDescription'></textarea>
+                                        <textarea class='form-control' id='title-text'
+                                            name='certificateDescription'></textarea>
                                     </div>
                                 </form>
                                 <div class='modal-footer'>
@@ -592,7 +597,8 @@
                                     </div>
                                     <div class='form-group'>
                                         <label for="recipient-name" class="col-form-label">Description:</label>
-                                        <textarea class='form-control' id='title-text' name='achievementDescription'></textarea>
+                                        <textarea class='form-control' id='title-text'
+                                            name='achievementDescription'></textarea>
                                     </div>
                                 </form>
                                 <div class='modal-footer'>
@@ -632,7 +638,8 @@
                                     </div>
                                     <div class='form-group'>
                                         <label for="recipient-name" class="col-form-label">Description:</label>
-                                        <textarea class='form-control' id='title-text' name='activityDescription'></textarea>
+                                        <textarea class='form-control' id='title-text'
+                                            name='activityDescription'></textarea>
                                     </div>
                                 </form>
                                 <div class='modal-footer'>
