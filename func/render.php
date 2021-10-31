@@ -543,6 +543,768 @@
 
     }
 
+    // RENDER RESUME
+
+        function renderResumeProfile($jobseeker, $personalInfo, $title, $desiredCareer){
+
+            $avatar = '';
+            if ($jobseeker != false) {
+
+                if ($jobseeker['avatar'] != null) {
+
+                    $avatar .= $jobseeker['avatar'];
+
+                } else {
+
+                    $avatar = './images/Avatar.png';
+
+                }
+
+            }else{
+
+                $avatar = './images/Avatar.png';
+
+            }
+
+            $fullname = '';
+            if($personalInfo != false){
+
+                if($personalInfo != NULL){
+
+                    $fullname .= $personalInfo['firstname'] . ' ' . $personalInfo['lastname'];
+
+                }else{
+
+                    $fullname = 'Your full name here';
+
+                }
+
+            }else{
+
+                $fullname = 'Your full name here';
+
+            }
+
+            $resumeTitle = '';
+            if ($title !=false) {
+
+                if ($title['title'] != null) {
+
+                    $resumeTitle .= $title['title'];
+
+                } else {
+
+                    $resumeTitle = 'Your Resume Title Here';
+
+                }
+
+            } else {
+
+                $resumeTitle = 'Your Resume Title Here';
+
+            }
+
+            $industry = '';
+            $type = '';
+            $salary = '';
+
+            if ($desiredCareer != false) {
+
+                if ($desiredCareer['industry'] != null) {
+
+                    $industry .= $desiredCareer['industry'];
+
+                } else {
+
+                    $industry = "Your desired industry here";
+
+                }
+
+                if ($desiredCareer['type'] != null) {
+
+                    $type .= $desiredCareer['type'];
+
+                } else {
+
+                    $type .= "Your desired type here";
+
+                }
+
+                if ($desiredCareer['salary'] != null) {
+
+                    $salary .= $desiredCareer['salary'];
+
+                } else {
+
+                    $salary = "Your desired salary here";
+
+                }
+
+            }else{
+
+                $industry = "Your desired industry here";
+                $type .= "Your desired type here";
+                $salary = "Your desired salary here";
+
+            }
+
+            echo "
+                <div class='recent-grid'>
+                    <div class='customers'>
+                        <div class='card'>
+                            <div class='profile-header'>
+                                <h3>WORKr Profile</h3>
+                            </div>
+                            <div class='profile-body'>
+                                <div class='profile-img'>
+                                    <div class='info'>
+                                        <img src='$avatar' width='300px' height='300px ' alt=''>
+                                        <a data-toggle='modal' data-target='#imagePopUp' data-whatever='@getbootstrap'
+                                            href='' style='margin-top: 20px;'><i class='fas fa-plus'></i> Upload Picture</a>
+                                    </div>
+                                </div>
+                                <div class='text-box'>
+                                    <h1>$fullname</h1>
+                                    <h4 style='margin-bottom: 20px;'> $resumeTitle </h4>
+                                    <p><i class='fas fa-star'></i> $industry </p>
+                                    <p><i class='fas fa-user'></i> $type </p>
+                                    <p><i class='fas fa-dollar-sign'></i> $salary </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>";
+
+        }
+
+        function renderResumePersonalInfo($personalInfo){
+
+            $firstName = '';
+            $lastName = '';
+            $nationality = '';
+            $maritalStatus = '';
+
+            if($personalInfo != false){
+
+                if($personalInfo['firstname'] != NULL){
+
+                    $firstName .= $personalInfo['firstname'];
+
+                }else{
+
+                    $firstName = "Your first name here";
+
+                }
+
+                if($personalInfo['lastname'] != NULL){
+
+                    $lastName .= $personalInfo['lastname'];
+
+                }else{
+
+                    $lastName = "Your last name here";
+
+                }
+
+                if($personalInfo['nationality'] != NULL){
+
+                    $nationality .= $personalInfo['nationality'];
+
+                }else{
+
+                    $nationality = "Your nationality here";
+
+                }
+
+                if($personalInfo['status'] != NULL){
+
+                    $maritalStatus .= $personalInfo['status'];
+
+                }else{
+
+                    $maritalStatus = "Your marital status here";
+
+                }
+
+            }else{
+
+                $firstName = "Your first name here";
+                $lastName = "Your last name here";
+                $nationality = "Your nationality here";
+                $maritalStatus = "Your marital status here";
+
+            }
+
+            echo "
+                <div class='recent-grid'>
+                    <div class='customers'>
+                        <div class='card'>
+                            <div class='profile-header'>
+                                <h3><i class='fas fa-id-badge' style='width: 50px;'></i>Personal Information</h3>
+                                <button data-toggle='modal' data-target='#personalInfoPopUp' data-whatever='@getbootstrap'
+                                    type='submit' class='edit-btn'
+                                    style='padding: 0px 30px; margin: 0px 0px 0px auto;'>Edit</button>
+                            </div>
+                            <div class='profile-body' id='special-body-uwu'>
+                                <div class='neatly-constructed-grid-rows'>
+
+                                    <div class='neatly-put-grid-columns'>
+                                        <h2>First Name</h2>
+                                        <p>$firstName</p>
+                                    </div>
+
+                                    <div class='neatly-put-grid-columns'>
+                                        <h2>Last Name</h2>
+                                        <p>$lastName</p>
+                                    </div>
+
+                                    <div class='neatly-put-grid-columns'>
+                                        <h2>Nationality</h2>
+                                        <p>$nationality</p>
+                                    </div>
+
+                                    <div class='neatly-put-grid-columns'>
+                                        <h2>Martial Status</h2>
+                                        <p>$maritalStatus</p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>";
+
+        }
+
+        function renderResumeTitle($title){
+
+            $resumeTitle = '';
+            if($title != false){
+
+                if($title['title'] != NULL){
+
+                    $resumeTitle .= $title['title'];
+
+                }else{
+
+                    $resumeTitle = "Your resume title here";
+
+                }
+
+            }else{
+
+                $resumeTitle = "Your resume title here";
+
+            }
+
+            echo "
+                <div class='recent-grid'>
+                    <div class='customers'>
+                        <div class='card'>
+                            <div class='profile-header'>
+                                <h3><i class='fas fa-user-circle' style='width: 50px;'></i>Resume Title</h3>
+                                <button data-toggle='modal' data-target='#titlePopUp' data-whatever='@getbootstrap'
+                                    type='submit' class='edit-btn'
+                                    style='padding: 0px 30px; margin: 0px 0px 0px auto;'>Edit</button>
+                            </div>
+                            <div class='profile-body'>
+                                <div class='pdesc-box'>
+                                    <p> $resumeTitle </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>";
+        } 
+
+        function renderResumeCareerObjective($goals){
+
+            $careerGoals = '';
+            if ($goals != false){
+
+                if($goals != NULL){
+
+                    $careerGoals .= $goals['careergoals'];
+
+                }else{
+
+                    $careerGoals = "Your career goals here";
+
+                }
+
+            }else{
+
+                $careerGoals = "Your career goals here";
+
+            }
+
+            echo "
+                <div class='recent-grid'>
+                    <div class='customers'>
+                        <div class='card'>
+                            <div class='profile-header'>
+                                <h3><i class='fas fa-bullseye' style='width: 50px;'></i>Career Objective</h3>
+                                <button data-toggle='modal' data-target='#goalsPopUp' data-whatever='@getbootstrap'
+                                    type='submit' class='edit-btn'
+                                    style='padding: 0px 30px; margin: 0px 0px 0px auto;'>Edit</button>
+                            </div>
+                            <div class='profile-body'>
+                                <div class='pdesc-box'>
+                                    <p>$careerGoals</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>";
+
+        }
+
+        function renderResumeDesiredCareer($desiredCareer){
+
+            $salary = '';
+            $type = '';
+            $industry = '';
+            $location = '';
+
+            if($desiredCareer != false){
+
+                if ($desiredCareer['salary'] != NULL){
+
+                    $salary .= $desiredCareer['salary'];
+
+                }else{
+
+                    $salary = "Your desired salary here";
+
+                }
+
+                if ($desiredCareer['type'] != NULL){
+
+                    $type .= $desiredCareer['type'];
+
+                }else{
+
+                    $type = "Your desired type of work here";
+
+                }
+
+                if($desiredCareer['industry'] != NULL){
+
+                    $industry .= $desiredCareer['industry'];
+
+                }else{
+
+                    $industry = "Your desired industry here";
+
+                }
+
+                if($desiredCareer['location'] != NULL){
+
+                    $location .= $desiredCareer['location'];
+
+                }else{
+
+                    $location = "Your desired location here";
+
+                }
+
+            }else{
+
+                $salary = "Your desired salary here";
+                $type = "Your desired type of work here";
+                $industry = "Your desired industry here";
+                $location = "Your desired location here";
+
+            }
+
+            echo "
+                <div class='recent-grid'>
+                    <div class='customers'>
+                        <div class='card'>
+                            <div class='profile-header'>
+                                <h3><i class='fas fa-briefcase' style='width: 50px;'></i>Desired Career Take ID for resume
+                                    Search</h3>
+                                <button data-toggle='modal' data-target='#careerInfoPopUp' data-whatever='@getbootstrap'
+                                    type='submit' class='edit-btn'
+                                    style='padding: 0px 30px; margin: 0px 0px 0px auto;'>Edit</button>
+                            </div>
+                            <div class='profile-body' id='special-body-uwu'>
+                                <div class='neatly-constructed-grid-rows'>
+                                    <div class='neatly-put-grid-columns'>
+                                        <h2>Salary</h2>
+                                        <p>$salary</p>
+                                    </div>
+                                    <div class='neatly-put-grid-columns'>
+                                        <h2>Job Type</h2>
+                                        <p>$type</p>
+                                    </div>
+                                    <div class='neatly-put-grid-columns'>
+                                        <h2>Industry</h2>
+                                        <p>$industry</p>
+                                    </div>
+                                    <div class='neatly-put-grid-columns'>
+                                        <h2>Work Location</h2>
+                                        <p>$location</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>";
+
+        }
+
+        function renderResumeWorkExperience($workExperience){
+
+            $jobtitle = '';
+            $company = '';
+            $experienceYear = '';
+            $level = '';
+
+            if($workExperience != false){
+
+                if($workExperience['title'] != NULL){
+
+                    $jobtitle .= $workExperience['title'];
+
+                }else{
+
+                    $jobtitle = "Your job title here";
+
+                }
+
+                if($workExperience['companyname'] != NULL){
+
+                    $company .= $workExperience['companyname'];
+
+                }else{
+
+                    $company = "Your company you used to work here";
+
+                }
+
+                if($workExperience['experienceyear'] != NULL){
+
+                    $experienceYear .= $workExperience['experienceyear'];
+
+                }else{
+
+                    $experienceYear = "Your year(s) of experience here";
+
+                }
+
+                if($workExperience['level'] != NULL){
+
+                    $level .= $workExperience['level'];
+
+                }else{
+
+                    $level = "Your level here";
+
+                }
+
+            }else{
+
+                $jobtitle = "Your job title here";
+                $company = "Your company you used to work here";
+                $experienceYear = "Your year(s) of experience here";
+                $level = "Your level here";
+
+            }
+
+            echo "
+                <div class='recent-grid'>
+                    <div class='customers'>
+                        <div class='card'>
+                            <div class='profile-header'>
+                                <h3><i class='fas fa-star' style='width: 50px;'></i>Work Experience</h3>
+                                <button data-toggle='modal' data-target='#workExpPopUp' data-whatever='@getbootstrap'
+                                    type='submit' class='edit-btn'
+                                    style='padding: 0px 30px; margin: 0px 0px 0px auto;'>Edit</button>
+                            </div>
+                            <div class='profile-body' id='special-body-uwu'>
+                                <div class='neatly-constructed-grid-rows'>
+                                    <div class='neatly-put-grid-columns'>
+                                        <h2>Job Title/Position: </h2>
+                                        <p>$jobtitle</p>
+                                    </div>
+                                    <div class='neatly-put-grid-columns'>
+                                        <h2>Company: </h2>
+                                        <p>$company</p>
+                                    </div>
+                                    <div class='neatly-put-grid-columns'>
+                                        <h2>Years Of Experience</h2>
+                                        <p>$experienceYear year(s)</p>
+                                    </div>
+                                    <div class='neatly-put-grid-columns'>
+                                        <h2>Current Level</h2>
+                                        <p>$level</p>
+                                    </div>
+                                </div>
+                                <hr class='center-diamond'>
+                            </div>
+                        </div>
+                    </div>
+                </div>";
+        }
+
+        function renderResumeEducation($education){
+
+            $schoolName = '';
+            $academicYear = '';
+
+            if($education != false){
+
+               if($education['schoolname'] != NULL){
+
+                   $schoolName .= $education['schoolname'];
+
+               }else{
+                   
+                   $schoolName = "Your school name here";
+
+               }
+
+               if($education['academicyear'] != NULL){
+
+                    $academicYear .= $education['academicyear'];
+
+               }else{
+
+                    $academicYear = "Your academic year here";
+
+               }
+
+            }else{
+
+                $schoolName = "Your school name here";
+                $academicYear = "Your academic year here";
+
+            }
+
+            echo "
+                <div class='recent-grid'>
+                    <div class='customers'>
+                        <div class='card'>
+                            <div class='profile-header'>
+                                <h3><i class='fas fa-graduation-cap' style='width: 50px;'></i>Education</h3>
+                                <button data-toggle='modal' data-target='#eduPopUp' data-whatever='@getbootstrap'
+                                    type='submit' class='edit-btn'
+                                    style='padding: 0px 30px; margin: 0px 0px 0px auto;'>Edit</button>
+                            </div>
+                            <div class='profile-body' id='special-body-uwu'>
+                                <div class='neatly-constructed-grid-rows'>
+                                    <div class='neatly-put-grid-columns'>
+                                        <h2>School</h2>
+                                        <p>$schoolName</p>
+                                    </div>
+                                    <div class='neatly-put-grid-columns'>
+                                        <h2>Academic Year</h2>
+                                        <p>$academicYear</p>
+                                    </div>
+                                    <hr class='center-diamond'>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>";
+
+        }
+
+        function renderResumeCertificate($certificate){
+
+            $name = '';
+            $description = '';
+
+            if($certificate != false){
+
+                if($certificate['name'] != NULL){
+
+                    $name .= $certificate['name'];
+
+                }else{
+
+                    $name = "Your certificate identification";
+
+                }
+
+                if($certificate['description'] != NULL){
+
+                    $description .= $certificate['description'];
+
+                }else{
+
+                    $description = "Your certificate specification";
+
+                }
+
+            }else{
+
+                $name = "Your certificate indentification";
+                $description = "Your certificate specification";
+
+            }
+
+            echo "
+                <div class='recent-grid'>
+                    <div class='customers'>
+                        <div class='card'>
+                            <div class='profile-header'>
+                                <h3><i class='fas fa-stamp' style='width: 50px;'></i>Certificate</h3>
+                                <button data-toggle='modal' data-target='#certPopUp' data-whatever='@getbootstrap'
+                                    type='submit' class='edit-btn'
+                                    style='padding: 0px 30px; margin: 0px 0px 0px auto;'>Edit</button>
+                            </div>
+                            <div class='profile-body' id='special-body-uwu'>
+                                <div class='neatly-constructed-grid-rows'>
+                                    <div class='neatly-put-grid-columns'>
+                                        <h2>Certificate</h2>
+                                        <p>$name</p>
+                                    </div>
+                                    <div class='neatly-put-grid-columns'>
+                                        <h2>Description</h2>
+                                        <p>$description</p>
+                                    </div>
+                                    <hr class='center-diamond'>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>";
+
+        }
+
+        function renderResumeAchievement($achievement){
+
+            $name = '';
+            $description = '';
+
+            if($achievement != false){
+
+                if($achievement['name'] != NULL){
+
+                    $name .= $achievement['name'];
+
+                }else{
+
+                    $name = "Your achievement here";
+
+                }
+
+                if($achievement['description'] != NULL){
+
+                    $description .= $achievement['description'];
+
+                }else{
+
+                    $description = "Your achievement description here";
+
+                }
+
+            }else{
+
+                $name = "Your achievement here";
+                $description = "Your description here";
+
+            }
+
+            echo "
+                <div class='recent-grid'>
+                    <div class='customers'>
+                        <div class='card'>
+                            <div class='profile-header'>
+                                <h3><i class='fas fa-trophy' style='width: 50px;'></i>Achievement</h3>
+                                <button data-toggle='modal' data-target='#achievementsPopUp' data-whatever='@getbootstrap'
+                                    type='submit' class='edit-btn'
+                                    style='padding: 0px 30px; margin: 0px 0px 0px auto;'>Edit</button>
+                            </div>
+                            <div class='profile-body' id='special-body-uwu'>
+                                <div class='neatly-constructed-grid-rows'>
+                                    <div class='neatly-put-grid-columns'>
+                                        <h2>Achievement</h2>
+                                        <p>$name</p>
+                                    </div>
+                                    <div class='neatly-put-grid-columns'>
+                                        <h2>Description</h2>
+                                        <p>$description</p>
+                                    </div>
+                                    <hr class='center-diamond'>
+                                
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>";
+
+        }
+
+        function renderResumeActivity($activity){
+
+            $name = '';
+            $description = '';
+
+            if($activity != false){
+
+                if($activity['name'] != NULL){
+
+                    $name .= $activity['name'];
+
+                }else{
+
+                    $name = "Your project/work here";
+
+                }
+
+                if($activity['description'] != NULL){
+
+                    $description .= $activity['description'];
+
+                }else{
+
+                    $description = "Your project/work detail here";
+
+                }
+
+            }else{
+
+                $name = "Your project/work here";
+                $description = "Your project/work detail here";
+
+            }
+
+            echo "
+                <div class='recent-grid'>
+                    <div class='customers'>
+                        <div class='card'>
+                            <div class='profile-header'>
+                                <h3><i class='fas fa-air-freshener' style='width: 50px;'></i>Activity</h3>
+                                <button data-toggle='modal' data-target='#actPopUp' data-whatever='@getbootstrap'
+                                    type='submit' class='edit-btn'
+                                    style='padding: 0px 30px; margin: 0px 0px 0px auto;'>Edit</button>
+                            </div>
+                            <div class='profile-body' id='special-body-uwu'>
+                                <div class='neatly-constructed-grid-rows'>
+                                    <div class='neatly-put-grid-columns'>
+                                        <h2>Activity</h2>
+                                        <p>$name</p>
+                                    </div>
+                                    <div class='neatly-put-grid-columns'>
+                                        <h2>Description</h2>
+                                        <p>$description</p>
+                                    </div>
+                                    <hr class='center-diamond'>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>";
+
+        }
+
+    // END RENDER RESUME
+
 // ------------------------------------- END RENDER JOBSEEKER DASHBOARD ------------------------------------- //
 
 // ------------------------------------- RENDER COMPANY ------------------------------------- //

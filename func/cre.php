@@ -12,6 +12,12 @@
 		public $totalJobSearch;
 		public $totalEmployerJobs;
 		public $totalFavoriteJobs;
+		
+		public $checkWorkExperience;
+		public $checkEducation;
+		public $checkCertificate;
+		public $checkAchievement;
+		public $checkActivity;
 
 		public function __construct(){
 
@@ -207,7 +213,216 @@
 
 			}
 		}
+		
+		public function getResumeID($userid){
 
+			$sql = "SELECT id FROM resume WHERE userid = '$userid'";
+
+			$query = pg_query($this->conn, $sql);
+
+			if(pg_num_rows($query) > 0){
+
+				$resumeID = pg_fetch_assoc($query);
+				return $resumeID['id'];
+
+			}else{
+
+				return false;
+
+			}
+
+		}
+
+		public function getResumePersonalInfo($userid){
+
+			$sql = "SELECT re.firstname, re.lastname, re.nationality, ms.status 
+					FROM resume re, marriagestatus ms 
+					WHERE re.userid = '$userid' AND re.marriagestatusid = ms.id";
+
+			$query = pg_query($this->conn, $sql);
+
+			if(pg_num_rows($query) > 0){
+
+				return pg_fetch_assoc($query);
+
+			}else{
+				
+				return false;
+
+			}
+
+		}
+
+		public function getResumeTitle($userid){
+
+			$sql = "SELECT title FROM resume WHERE userid = '$userid'";
+
+			$query = pg_query($this->conn, $sql);
+
+			if(pg_num_rows($query) > 0){
+
+				return pg_fetch_assoc($query);
+
+			}else{
+
+				return false;
+
+			}
+
+		}
+
+		public function getResumeGoals($userid){
+
+			$sql = "SELECT careergoals FROM resume WHERE userid = '$userid'";
+
+			$query = pg_query($this->conn, $sql);
+
+			if(pg_num_rows($query) > 0){
+
+				return pg_fetch_assoc($query);
+
+			}else{
+
+				return false;
+
+			}
+
+		}
+
+		public function getResumeCareer($userid){
+
+			$sql = "SELECT sa.salary, ind.industry, ty.type, lo.location 
+					FROM resume re, salary sa, industry ind, type ty, location lo 
+					WHERE re.userid = '$userid' AND re.salaryid = sa.id AND re.industryid = ind.id AND re.typeid = ty.id AND re.locationid = lo.id";
+
+			$query = pg_query($this->conn, $sql);
+
+			if(pg_num_rows($query) > 0){
+
+				return pg_fetch_assoc($query);
+
+			}else{
+
+				return false;
+
+			}
+
+		}
+
+		public function getMarriageStatus(){
+
+			$sql = "SELECT * FROM marriagestatus";
+
+			$results = pg_query($this->conn, $sql);
+
+			if(pg_num_rows($results) > 0) {
+
+				return pg_fetch_all($results);
+
+            }else{
+
+				return false;
+
+			}
+
+		}
+
+		public function getResumeWorkExperience($userid){
+
+			$checkWExp = "SELECT expinfo.title, expinfo.companyname, exp.experienceyear, le.level
+							FROM resume re, experienceinfo expinfo, experience exp, level le 
+							WHERE re.userid = '$userid' AND expinfo.resumeid = re.id AND expinfo.years = exp.id AND expinfo.currentlevel = le.id;";
+			$queryWExp = pg_query($this->conn, $checkWExp);
+
+			if(pg_num_rows($queryWExp) > 0){
+
+				$this->checkWorkExperience = true;
+				return pg_fetch_assoc($queryWExp);
+
+			}else{
+
+				$this->checkWorkExperience = false;
+				return false;
+
+			}
+
+		}
+
+		public function getResumeEducation($userid){
+
+			$checkEdu = "SELECT schoolname, academicyear FROM education edu, resume re WHERE re.userid = '$userid' AND edu.resumeid = re.id;";
+			$queryEdu = pg_query($this->conn, $checkEdu);
+	
+			if(pg_num_rows($queryEdu) > 0){
+	
+				$this->checkEducation = true;
+				return pg_fetch_assoc($queryEdu);
+	
+			}else{
+	
+				$this->checkEducation = false;
+				return false;
+	
+			}
+
+		}
+
+		public function getResumeCertificate($userid){
+
+			$checkCer = "SELECT cer.name, cer.description FROM certificate cer, resume re WHERE re.userid = '$userid' AND cer.resumeid = re.id";
+			$queryCer = pg_query($this->conn, $checkCer);
+	
+			if(pg_num_rows($queryCer) > 0){
+	
+				$this->checkCertificate = true;
+				return pg_fetch_assoc($queryCer);
+	
+			}else{
+	
+				$this->checkCertificate = false;
+				return false;
+	
+			}
+
+		}
+
+		public function getResumeAchievement($userid){
+
+			$checkAch = "SELECT ach.name, ach.description FROM achivement ach, resume re WHERE re.userid = '$userid' AND ach.resumeid = re.id";
+			$queryAch = pg_query($this->conn, $checkAch);
+	
+			if(pg_num_rows($queryAch) > 0){
+	
+				$this->checkAchievement = true;
+				return pg_fetch_assoc($queryAch);
+	
+			}else{
+	
+				$this->checkAchievement = false;
+				return false;
+
+			}
+
+		}
+
+		public function getResumeActivity($userid){
+
+			$checkAct = "SELECT act.name, act.description FROM activity act, resume re WHERE re.userid = '$userid' AND act.resumeid = re.id";
+			$queryAct = pg_query($this->conn, $checkAct);
+	
+			if(pg_num_rows($queryAct) > 0){
+	
+				$this->checkActivity = true;
+				return pg_fetch_assoc($queryAct);
+	
+			}else{
+	
+				$this->checkActivity = false;
+				return false;
+
+			}
+
+		}
 
 // ------------------------------------- END GET EVERYTHING FROM DATABASE ------------------------------------- //
 
@@ -1315,6 +1530,712 @@
 
 	}
 // ------------------------------------- END JOBSEEKER DASHBOARD ------------------------------------- //
+
+// ------------------------------------- RESUME ------------------------------------- //
+
+	public function uploadAvatar($userid){
+
+		if(isset($_POST['avatar'])){
+
+			$file = $_FILES['img'];
+			$fileName = $file['name'];
+			$fileTmpName = $file['tmp_name'];
+			$fileSize = $file['size'];
+			$fileError = $file['error'];
+			$fileType = $file['type'];
+			$fileExt = explode('.', $fileName);
+			$fileActualExt = strtolower(end($fileExt));
+			$allowed = array('jpg', 'jpeg', 'png');
+			
+			if(in_array($fileActualExt, $allowed)){
+
+				if($fileError === 0){
+
+					if($fileSize < 10000000 && $fileSize > 1000){
+						
+						$fileNameNew = uniqid('',true).".".$fileActualExt;
+						$filenalDestination = './userAvatar/'.$fileNameNew;
+						move_uploaded_file($fileTmpName, $filenalDestination);
+
+						$updateAvatar = "UPDATE jobseeker SET avatar = '$filenalDestination' WHERE id = '$userid'";
+						$queryInsert = pg_query($this->conn, $updateAvatar);
+
+						if($queryInsert){
+
+							echo "<script>alert('Avatar upload successfully');</script>";
+							echo "<script>window.location.href = 'jseeker_dashboard_cv.php';</script>";
+	
+						}else{
+	
+							echo "<script>alert('Query Failed');</script>";
+							echo "<script>window.location.href = 'jseeker_dashboard_cv.php';</script>";
+	
+						}
+
+					}else{
+
+						echo "<script>alert('Your file too fat or it is empty');</script>";
+						echo "<script>window.location.href = 'jseeker_dashboard_cv.php';</script>";
+
+					}
+
+				}else{
+					echo "$fileError";
+					echo "<script>alert('Error uploading file');</script>";
+					echo "<script>window.location.href = 'jseeker_dashboard_cv.php';</script>";
+
+				}
+
+			}else{
+
+				echo "<script>alert('Your file must be jpg || jpeg || png');</script>";
+				echo "<script>window.location.href = 'jseeker_dashboard_cv.php';</script>";
+
+			}
+		}
+	}
+
+	public function insertResumePersonalInfo($userid){
+
+		if(isset($_POST['personalinfo'])){
+
+			if(isset($_POST['firstName']) && isset($_POST['lastName']) && isset($_POST['nationality']) && isset($_POST['marriage'])) {
+
+				if (!empty($_POST['firstName']) && !empty($_POST['lastName']) && !empty($_POST['nationality']) && $_POST['marriage'] != "0") {
+
+					$firstname = $this->validate($_POST['firstName']);
+					$lastname = $this->validate($_POST['lastName']);
+					$nationality = $this->validate($_POST['nationality']);
+					$marriagestatusid = $this->validate($_POST['marriage']);
+
+					$insertResume = "INSERT INTO resume (userid, firstname, lastname, nationality, marriagestatusid) VALUES ('$userid', '$firstname', '$lastname', '$nationality', '$marriagestatusid')";
+					$queryInsert = pg_query($this->conn, $insertResume);
+
+					if($queryInsert){
+
+						echo "<script>alert('Resume personal info create successfully');</script>";
+						echo "<script>window.location.href = 'jseeker_dashboard_cv.php';</script>";
+
+					}else{
+
+						echo "<script>alert('Resume create fail');</script>";
+
+					}
+
+				}else{
+
+					echo "<script>alert('You can't leave personal info empty');</script>";
+
+				}
+
+			}else{
+
+				echo "<script>alert('You can't leave personal info empty');</script>";
+
+			}
+
+		}
+
+	}
+
+	public function checkResumeAvailability(){
+
+		if(isset($_POST['title']) || isset($_POST['objective']) || isset($_POST['career']) 
+			|| isset($_POST['workExperience']) || isset($_POST['education']) || isset($_POST['certificate']) || isset($_POST['achievement']) || isset($_POST['activity'])){
+
+			echo "<script>alert('You need to create Personal Info first to update');</script>";
+
+		}
+
+	}
+
+	public function updateResumePersonalInfo($resumeid){
+
+		if(isset($_POST['personalinfo'])){
+
+			if(isset($_POST['firstName']) && isset($_POST['lastName']) && isset($_POST['nationality']) && isset($_POST['marriage'])) {
+
+				if (!empty($_POST['firstName']) && !empty($_POST['lastName']) && !empty($_POST['nationality']) && $_POST['marriage'] != "0") {
+
+					$firstname = $this->validate($_POST['firstName']);
+					$lastname = $this->validate($_POST['lastName']);
+					$nationality = $this->validate($_POST['nationality']);
+					$marriagestatusid = $this->validate($_POST['marriage']);
+
+					$updateResume = "UPDATE resume SET firstname='$firstname', lastname='$lastname', nationality='$nationality', marriagestatusid='$marriagestatusid' WHERE id = '$resumeid'";
+					$queryUpdate = pg_query($this->conn, $updateResume);
+
+					if($queryUpdate){
+
+						echo "<script>alert('Resume personal info update successfully');</script>";
+						echo "<script>window.location.href = 'jseeker_dashboard_cv.php';</script>";
+
+					}else{
+
+						echo "<script>alert('Resume update fail');</script>";
+
+					}
+
+				}else{
+
+					echo "<script>alert('You can't leave personal info empty');</script>";
+
+				}
+
+			}else{
+
+				echo "<script>alert('You can't leave personal info empty');</script>";
+
+			}
+
+		}
+
+	}
+
+	public function updateResumeTitle($resumeid){
+
+		if(isset($_POST['title'])){
+
+			if (isset($_POST['title-content'])) {
+
+				if(!empty($_POST['title-content'])){
+
+					$titleContent = $this->validate($_POST['title-content']);
+
+					$updateResumeTitle = "UPDATE resume SET title = '$titleContent' WHERE id = '$resumeid'";
+					$queryUpdate = pg_query($this->conn, $updateResumeTitle);
+
+					if($queryUpdate){
+
+						echo "<script>alert('Resume title update successfully');</script>";
+						echo "<script>window.location.href = 'jseeker_dashboard_cv.php';</script>";
+
+					}else{
+
+						echo "<script>alert('Resume title update fail');</script>";
+
+					}
+
+				}else{
+
+					echo "<script>alert('You can't leave title empty');</script>";
+
+				}
+
+			}else{
+
+				echo "<script>alert('You can't leave title empty');</script>";
+
+			}
+
+		}
+
+	}
+
+	public function updateResumeObjective($resumeid){
+
+		if(isset($_POST['objective'])){
+
+			if (isset($_POST['objective-content'])) {
+
+				if(!empty($_POST['objective-content'])){
+
+					$objectiveContent = $this->validate($_POST['objective-content']);
+
+					$updateResumeTitle = "UPDATE resume SET careergoals = '$objectiveContent' WHERE id = '$resumeid'";
+					$queryUpdate = pg_query($this->conn, $updateResumeTitle);
+
+					if($queryUpdate){
+
+						echo "<script>alert('Resume objective update successfully');</script>";
+						echo "<script>window.location.href = 'jseeker_dashboard_cv.php';</script>";
+
+					}else{
+
+						echo "<script>alert('Resume objective update fail');</script>";
+
+					}
+
+				}else{
+
+					echo "<script>alert('You can't leave objective empty');</script>";
+
+				}
+
+			}else{
+
+				echo "<script>alert('You can't leave objective empty');</script>";
+
+			}
+
+		}
+
+	}
+
+	public function updateResumeCareer($resumeid){
+
+		if(isset($_POST['career'])){
+
+			if (isset($_POST['salary']) && isset($_POST['type']) && isset($_POST['industry']) && isset($_POST['location'])) {
+
+				if($_POST['salary'] != '0' && $_POST['type'] != '0' && $_POST['industry'] != '0' && $_POST['location'] != '0'){
+
+					$salary = $_POST['salary'];
+					$type = $_POST['type'];
+					$industry = $_POST['industry'];
+					$location = $_POST['location'];
+
+					$updateResumeTitle = "UPDATE resume SET salaryid = '$salary', industryid = '$industry', typeid = '$type', locationid = '$location' WHERE id = '$resumeid'";
+					$queryUpdate = pg_query($this->conn, $updateResumeTitle);
+
+					if($queryUpdate){
+
+						echo "<script>alert('Resume career update successfully');</script>";
+						echo "<script>window.location.href = 'jseeker_dashboard_cv.php';</script>";
+
+					}else{
+
+						echo "<script>alert('Resume career update fail');</script>";
+
+					}
+
+				}else{
+
+					echo "<script>alert('You can't leave career empty');</script>";
+
+				}
+
+			}else{
+
+				echo "<script>alert('You can't leave career empty');</script>";
+
+			}
+
+		}
+
+	}
+
+	public function insertResumeWorkExperience($resumeid){
+
+		if(isset($_POST['workExperience'])){
+
+			if(isset($_POST['workTitle']) && isset($_POST['workCompany']) && isset($_POST['workYear']) && isset($_POST['workLevel'])){
+
+				if(!empty($_POST['workTitle']) && !empty($_POST['workCompany']) && $_POST['workYear'] != '0' && $_POST['workLevel'] != '0'){
+
+					$workTitle = $this->validate($_POST['workTitle']);
+					$workCompany = $this->validate($_POST['workCompany']);
+					$yearid = $_POST['workYear'];
+					$levelid = $_POST['workLevel'];
+
+					$sql = "INSERT INTO experienceinfo (resumeid, companyname, title, years, currentlevel) VALUES ('$resumeid', '$workCompany', '$workTitle', '$yearid', '$levelid')";
+					$query = pg_query($this->conn, $sql);
+
+					if($query){
+
+						echo "<script>alert('Work experience create successfully');</script>";
+						echo "<script>window.location.href = 'jseeker_dashboard_cv.php';</script>";
+
+					}else{
+
+						echo "<script>alert('Work experience create fail');</script>";
+
+					}
+
+				}else{
+
+					echo "<script>alert('You can't leave work experience empty');</script>";
+
+				}
+
+			}else{
+
+				echo "<script>alert('You can't leave work experience empty');</script>";
+
+			}
+
+		}
+
+	}
+
+	public function updateResumeWorkExperience($resumeid){
+
+		if(isset($_POST['workExperience'])){
+
+			if(isset($_POST['workTitle']) && isset($_POST['workCompany']) && isset($_POST['workYear']) && isset($_POST['workLevel'])){
+
+				if(!empty($_POST['workTitle']) && !empty($_POST['workCompany']) && $_POST['workYear'] != '0' && $_POST['workLevel'] != '0'){
+
+					$workTitle = $this->validate($_POST['workTitle']);
+					$workCompany = $this->validate($_POST['workCompany']);
+					$yearid = $_POST['workYear'];
+					$levelid = $_POST['workLevel'];
+
+					$sql = "UPDATE experienceinfo SET companyname = '$workCompany', title = '$workTitle', years = '$yearid', currentlevel = '$levelid' WHERE resumeid = '$resumeid'";
+					$query = pg_query($this->conn, $sql);
+
+					if($query){
+
+						echo "<script>alert('Work experience update successfully');</script>";
+						echo "<script>window.location.href = 'jseeker_dashboard_cv.php';</script>";
+
+					}else{
+
+						echo "<script>alert('Work experience update fail');</script>";
+
+					}
+
+				}else{
+
+					echo "<script>alert('You can't leave work experience empty');</script>";
+
+				}
+
+			}else{
+
+				echo "<script>alert('You can't leave work experience empty');</script>";
+
+			}
+
+		}
+
+	}
+
+	public function insertResumeEducation($resumeid){
+
+		if (isset($_POST['education'])){
+
+			if (isset($_POST['educationSchool']) && isset($_POST['educationYear'])){
+
+				if (!empty($_POST['educationSchool']) && !empty($_POST['educationYear'])){
+
+					$schoolName = $this->validate($_POST['educationSchool']);
+					$academicYear = $this->validate($_POST['educationYear']);
+
+					$sql = "INSERT INTO education (resumeid, schoolname, academicyear) VALUES ('$resumeid', '$schoolName', '$academicYear')";
+					$query = pg_query($this->conn, $sql);
+
+					if($query){
+
+						echo "<script>alert('Education create successfully');</script>";
+						echo "<script>window.location.href = 'jseeker_dashboard_cv.php';</script>";
+
+					}else{
+
+						echo "<script>alert('Education create fail');</script>";
+
+					}
+
+				}else{
+
+					echo "<script>alert('You can't leave education empty');</script>";
+
+				}
+
+			}else{
+
+				echo "<script>alert('You can't leave education empty');</script>";
+
+			}
+
+		}
+
+	}
+
+	public function updateResumeEducation($resumeid){
+
+		if (isset($_POST['education'])){
+
+			if (isset($_POST['educationSchool']) && isset($_POST['educationYear'])){
+
+				if (!empty($_POST['educationSchool']) && !empty($_POST['educationYear'])){
+
+					$schoolName = $this->validate($_POST['educationSchool']);
+					$academicYear = $this->validate($_POST['educationYear']);
+
+					$sql = "UPDATE education SET schoolname = '$schoolName', academicyear = '$academicYear' WHERE resumeid = '$resumeid'";
+					$query = pg_query($this->conn, $sql);
+
+					if($query){
+
+						echo "<script>alert('Education update successfully');</script>";
+						echo "<script>window.location.href = 'jseeker_dashboard_cv.php';</script>";
+
+					}else{
+
+						echo "<script>alert('Education update fail');</script>";
+
+					}
+
+				}else{
+
+					echo "<script>alert('You can't leave education empty');</script>";
+
+				}
+
+			}else{
+
+				echo "<script>alert('You can't leave education empty');</script>";
+
+			}
+
+		}
+
+	}
+
+	public function insertResumeCertificate($resumeid){
+
+		if(isset($_POST['certificate'])){
+
+			if(isset($_POST['certificateName']) && isset($_POST['certificateDescription'])){
+
+				if(!empty($_POST['certificateName']) && !empty($_POST['certificateDescription'])){
+
+					$name = $this->validate($_POST['certificateName']);
+					$description = $this->validate($_POST['certificateDescription']);
+
+					$sql = "INSERT INTO certificate (resumeid, description, name) VALUES ('$resumeid', '$description', '$name')";
+					$query = pg_query($this->conn, $sql);
+
+					if($query){
+
+						echo "<script>alert('Certificate create successfully');</script>";
+						echo "<script>window.location.href = 'jseeker_dashboard_cv.php';</script>";
+
+					}else{
+
+						echo "<script>alert('Certificate create fail');</script>";
+						echo "<script>window.location.href = 'jseeker_dashboard_cv.php';</script>";
+
+					}
+
+				}else{
+
+					echo "<script>alert('You can't leave certificate empty');</script>";
+
+				}
+
+			}else{
+
+				echo "<script>alert('You can't leave certificate empty');</script>";
+
+			}
+
+		}
+
+	}
+
+	public function updateResumeCertificate($resumeid){
+
+		if(isset($_POST['certificate'])){
+
+			if(isset($_POST['certificateName']) && isset($_POST['certificateDescription'])){
+
+				if(!empty($_POST['certificateName']) && !empty($_POST['certificateDescription'])){
+
+					$name = $this->validate($_POST['certificateName']);
+					$description = $this->validate($_POST['certificateDescription']);
+
+					$sql = "UPDATE certificate SET description = '$description', name = '$name' WHERE resumeid = '$resumeid'";
+					$query = pg_query($this->conn, $sql);
+
+					if($query){
+
+						echo "<script>alert('Certificate update successfully');</script>";
+						echo "<script>window.location.href = 'jseeker_dashboard_cv.php';</script>";
+
+					}else{
+
+						echo "<script>alert('Certificate update fail');</script>";
+						echo "<script>window.location.href = 'jseeker_dashboard_cv.php';</script>";
+
+					}
+
+				}else{
+
+					echo "<script>alert('You can't leave certificate empty');</script>";
+
+				}
+
+			}else{
+
+				echo "<script>alert('You can't leave certificate empty');</script>";
+
+			}
+
+		}
+
+	}
+
+	public function insertResumeAchievement($resumeid){
+
+		if (isset($_POST['achievement'])){
+
+			if(isset($_POST['achievementName']) && isset($_POST['achievementDescription'])){
+
+				if(!empty($_POST['achievementName']) && !empty($_POST['achievementDescription'])){
+
+					$name = $this->validate($_POST['achievementName']);
+					$description = $this->validate($_POST['achievementDescription']);
+
+					$sql = "INSERT INTO achivement (resumeid, description, name) VALUES ('$resumeid', '$description', '$name')";
+					$query = pg_query($this->conn, $sql);
+
+					if($query){
+
+						echo "<script>alert('Achievement create successfully');</script>";
+						echo "<script>window.location.href = 'jseeker_dashboard_cv.php';</script>";
+
+					}else{
+
+						echo "<script>alert('Achievement create fail');</script>";
+						echo "<script>window.location.href = 'jseeker_dashboard_cv.php';</script>";
+
+					}
+
+				}else{
+
+					echo "<script>alert('You can't leave achievement empty');</script>";
+
+				}
+
+			}else{
+
+				echo "<script>alert('You can't leave achievement empty');</script>";
+
+			}
+
+		}
+
+	}
+
+	public function updateResumeAchievement($resumeid){
+
+		if (isset($_POST['achievement'])){
+
+			if(isset($_POST['achievementName']) && isset($_POST['achievementDescription'])){
+
+				if(!empty($_POST['achievementName']) && !empty($_POST['achievementDescription'])){
+
+					$name = $this->validate($_POST['achievementName']);
+					$description = $this->validate($_POST['achievementDescription']);
+
+					$sql = "UPDATE achivement SET description = '$description', name = '$name' WHERE resumeid = '$resumeid'";
+					$query = pg_query($this->conn, $sql);
+
+					if($query){
+
+						echo "<script>alert('Achievement update successfully');</script>";
+						echo "<script>window.location.href = 'jseeker_dashboard_cv.php';</script>";
+
+					}else{
+
+						echo "<script>alert('Achievement update fail');</script>";
+						echo "<script>window.location.href = 'jseeker_dashboard_cv.php';</script>";
+
+					}
+
+				}else{
+
+					echo "<script>alert('You can't leave achievement empty');</script>";
+
+				}
+
+			}else{
+
+				echo "<script>alert('You can't leave achievement empty');</script>";
+
+			}
+
+		}
+
+	}
+
+	public function insertResumeActivity($resumeid){
+
+		if(isset($_POST['activity'])){
+
+			if(isset($_POST['activityName']) && isset($_POST['activityDescription'])){
+
+				if(!empty($_POST['activityName']) && !empty($_POST['activityDescription'])){
+
+					$name = $this->validate($_POST['activityName']);
+					$description = $this->validate($_POST['activityDescription']);
+
+					$sql = "INSERT INTO activity (resumeid, description, name) VALUES ('$resumeid', '$description', '$name')";
+					$query = pg_query($this->conn, $sql);
+
+					if($query){
+
+						echo "<script>alert('Activity create successfully');</script>";
+						echo "<script>window.location.href = 'jseeker_dashboard_cv.php';</script>";
+
+					}else{
+
+						echo "<script>alert('Activity create fail');</script>";
+						echo "<script>window.location.href = 'jseeker_dashboard_cv.php';</script>";
+
+					}
+
+				}else{
+
+					echo "<script>alert('You can't leave activity empty');</script>";
+
+				}
+
+			}else{
+
+				echo "<script>alert('You can't leave activity empty');</script>";
+				
+			}
+
+		}
+
+	}
+
+	public function updateResumeActivity($resumeid){
+
+		if(isset($_POST['activity'])){
+
+			if(isset($_POST['activityName']) && isset($_POST['activityDescription'])){
+
+				if(!empty($_POST['activityName']) && !empty($_POST['activityDescription'])){
+
+					$name = $this->validate($_POST['activityName']);
+					$description = $this->validate($_POST['activityDescription']);
+
+					$sql = "UPDATE activity SET description = '$description', name = '$name' WHERE resumeid = '$resumeid'";
+					$query = pg_query($this->conn, $sql);
+
+					if($query){
+
+						echo "<script>alert('Activity update successfully');</script>";
+						echo "<script>window.location.href = 'jseeker_dashboard_cv.php';</script>";
+
+					}else{
+
+						echo "<script>alert('Activity update fail');</script>";
+						echo "<script>window.location.href = 'jseeker_dashboard_cv.php';</script>";
+
+					}
+
+				}else{
+
+					echo "<script>alert('You can't leave activity empty');</script>";
+
+				}
+
+			}else{
+
+				echo "<script>alert('You can't leave activity empty');</script>";
+				
+			}
+
+		}
+
+	}
+	
+// ------------------------------------- END RESUME ------------------------------------- //
 
 // ------------------------------------- REVIEW  ------------------------------------- //
 
