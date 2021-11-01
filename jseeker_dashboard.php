@@ -14,6 +14,14 @@
 
         $jobseeker = $model->getJobSeeker($userid);
         // End header
+        // Print out Profile
+        $personalInfo = $model->getResumePersonalInfo($userid);
+        $title = $model->getResumeTitle($userid);
+        $goals = $model->getResumeGoals($userid);
+        $desiredCareer = $model->getResumeCareer($userid);
+
+        // Form handler
+        $avatar = $model->uploadAvatar($userid);
 
         
     }else{
@@ -77,35 +85,33 @@
         <!-- Header -->
 
         <main>
-            <div class="recent-grid">
-                <div class="customers">
-                    <div class="card">
-                        <div class="profile-header">
-                            <h3>Profile</h3>
-                        </div>
-                        
-                        <div class="profile-body">
-                            <div class="profile-img">
-                                <div class="info">
-                                    <img src="images/null_following.png" width="300px" height="300px " alt="">
-                                </div>
-                            </div>
-                            <div class="text-box">
-                                <h1>VO THUY KHANG</h1>
-                                <h4 style="margin-bottom: 20px;">Not updated</h4>
-                                <p><i class="fas fa-star"></i> No experience</p>
-                                <p><i class="fas fa-user"></i> No desired rank</p>
-                                <p><i class="fas fa-dollar-sign"></i> No desired salary</p>
-                                <button onclick="location.href='jseeker_dashboard_cv.php'" type="button"
-                                    class="edit-btn">Edit
-                                    Profile
+            
+            <?php renderResumeProfile($jobseeker, $personalInfo, $title, $desiredCareer); ?>
+
+            <!-- image form -->
+            <div class='modal fade' id='imagePopUp' tabindex='-1' role='dialog' aria-labelledby='imagePopUpForm'
+                aria-hidden='true'>
+                <div class='modal-dialog' role='document'>
+                    <form action='' method='post' enctype="multipart/form-data">
+                        <div class='modal-content'>
+                            <div class='modal-header'>
+                                <h5 class='modal-title' id='imagePopUpForm'>New Image</h5>
+                                <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                                    <span aria-hidden='true'>&times;</span>
                                 </button>
                             </div>
+                            <div class='modal-body'>
+                                <form>
+                                    <label for="img">Select image:</label>
+                                    <input type="file" id="img" name="img" accept="image/*">
+                                    <input type="submit" name="avatar">
+                                </form>
+                            </div>
                         </div>
-
-                    </div>
+                    </form>
                 </div>
             </div>
+
         </main>
         <footer>
             <p class="text-center pt-2">© 2021 WORKr. All rights reserved.</p>
