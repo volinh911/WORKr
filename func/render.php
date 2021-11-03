@@ -918,8 +918,7 @@
                     <div class='customers'>
                         <div class='card'>
                             <div class='profile-header'>
-                                <h3><i class='fas fa-briefcase' style='width: 50px;'></i>Desired Career Take ID for resume
-                                    Search</h3>
+                                <h3><i class='fas fa-briefcase' style='width: 50px;'></i>Desired Career</h3>
                                 <button data-toggle='modal' data-target='#careerInfoPopUp' data-whatever='@getbootstrap'
                                     type='submit' class='edit-btn'
                                     style='padding: 0px 30px; margin: 0px 0px 0px auto;'>Edit</button>

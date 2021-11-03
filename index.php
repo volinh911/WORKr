@@ -73,7 +73,8 @@
                         <p class="card-text">Where you can write, read and receive a variety of advice for your next
                             job.
                         </p>
-                        <a href="#" class="sienna">Learn More <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+                        <a href="comp_review.php" class="sienna">Learn More <i class="fa fa-arrow-right"
+                                aria-hidden="true"></i></a>
                     </div>
                 </div>
             </div>
