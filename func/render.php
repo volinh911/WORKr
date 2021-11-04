@@ -433,42 +433,700 @@
         </div>";
     }
 
-    function renderSearchResult($result){
+    function renderListResume($resumes){
+
+        $avatar = '';
+        $fullname = '';
+        $title = '';
+        $location = '';
+        $salary = '';
+        if($resumes != false){
+            
+            if($resumes['avatar'] != NULL){
+
+                $avatar .= $resumes['avatar'];
+
+            }else{
+
+                $avatar = "./images/Avatar.png";
+
+            }
+
+            if($resumes['firstname'] != NULL && $resumes['lastname'] != NULL){
+
+                $fullname .= $resumes['firstname'] . ' ' . $resumes['lastname'];
+
+            }else{
+
+                $fullname = "Not updated";
+
+            }
+
+            if($resumes['title'] != NULL){
+
+                $title .= $resumes['title'];
+
+            }else{
+
+                $title = "Not updated";
+
+            }
+
+            if($resumes['location'] != NULL){
+
+                $location .= $resumes['location'];
+
+            }else{
+
+                $location = "Not updated";
+
+            }
+
+            if($resumes['salary'] != NULL){
+
+                $salary .= $resumes['salary'];
+
+            }else{
+
+                $salary = "Not updated";
+
+            }
+
+        }else{
+
+            echo "<h1> Page not available </h1>";
+
+        }
+
+
         echo "
-        <hr>
-        <div class='row'>
-            <div class='col-md-12'>
-                <div class='jobs d-flex align-items-center mt-3 mb-3'>
-                    <div class='card' style='width: 170px;'>
-                        <img src=' {$result['logo']} ' class='card-img-top' style='height: 150px; width: 100%; object-fit: cover;' alt='...'>
+            <div class='resume-detail row'>
+                <div class='resume-avt col-lg-3 p-2'>
+                    <img src='$avatar' alt='' style='height: 150px; width: 150px;'>
+                </div>
+                <div class='resume-brief col-lg-9 pl-4 py-2'>
+                    <span class='resume-name'>$fullname</span>
+                    <div class='resume-title'>$title</div>
+                    <div class='resume-exp'>
+                        <span>$location</span>
+                        <span class='exp-years'></span>
+                        <!--can adjust for input here-->
                     </div>
-
-                    <div class='card_content w-100 ml-3 d-flex justify-content-between align-items-end'>
-                        <div class='job_info'>
-                            <a href='job_details.php?id={$result['jobid']}'>
-                                <h5 class='text-danger' style='margin-left: 12px;'> {$result['title']} </h5> 
-                            </a>
-                                <h6 style='margin-left: 12px;'> {$result['companyname']} </h6>
-                                <h6 class=' text-warning' style='margin-left: 12px;'><span><i class='fas fa-dollar-sign'></i></span>
-                                    {$result['salary']} </h6>
-                                <h6 style='margin-left: 12px;'><i class='fas fa-map-marker-alt'></i> {$result['location']} </h6>
-                                <div class='treatment'>
-                                    <ul class='d-flex'>
-                                        <li><i class='fas fa-medkit'></i> Health Insurance</li>
-                                        <li><i class='fas fa-star-of-life'></i> Medical Services</li>
-                                    </ul>
-                                </div>
-                        </div>
-
-                        <div class='details'>
-                            <p><i class='far fa-calendar-minus mr-2'></i> {$result['enddate']} </p>
-                        </div>
+                    <div class='resume-locat'>
+                        $salary
+                    </div>
+                    <hr>
+                    <div class='resume-option'>
+                        <a href='cv_detail.php?id={$resumes['id']}' class='resume-view'>View more... <i class='fa fa-chevron-right'></i></a>
+                        <!--btn to view resume detail-->
                     </div>
                 </div>
             </div>
-        </div>";
+        <hr>";
+
     }
 
+    // RENDER RESUME DETAIL
+
+        function renderResumeDetailProfile($jobseeker, $personalInfo, $title, $goals, $favoriteResume){
+
+            $favorite = '';
+            if($favoriteResume == true){
+
+                $favorite .= "<button type='submit' name='favorite' class='btn'>Favorite CV</button>";
+
+            }else{
+
+                $favorite .= "<button type='submit' name='favorite' class='btn'>Favorited</button>";
+
+            }
+            
+            $avatar = '';
+            if ($jobseeker != false) {
+
+                if ($jobseeker['avatar'] != null) {
+
+                    $avatar .= $jobseeker['avatar'];
+
+                } else {
+
+                    $avatar = './images/Avatar.png';
+
+                }
+
+            }else{
+
+                $avatar = './images/Avatar.png';
+
+            }
+
+            $fullname = '';
+            if($personalInfo != false){
+
+                if($personalInfo != NULL){
+
+                    $fullname .= $personalInfo['firstname'] . ' ' . $personalInfo['lastname'];
+
+                }else{
+
+                    $fullname = 'Your full name here';
+
+                }
+
+            }else{
+
+                $fullname = 'Your full name here';
+
+            }
+
+            $resumeTitle = '';
+            if ($title !=false) {
+
+                if ($title['title'] != null) {
+
+                    $resumeTitle .= $title['title'];
+
+                } else {
+
+                    $resumeTitle = 'Your Resume Title Here';
+
+                }
+
+            } else {
+
+                $resumeTitle = 'Your Resume Title Here';
+
+            }
+
+            $resumeGoals = '';
+
+            if ($goals != false) {
+
+                $resumeGoals .= $goals['careergoals'];
+
+            }else{
+
+                $resumeGoals = "Not updated";
+
+            }
+
+            echo "
+                <div class='container grid-2'>
+                    <div class='column-1'>
+                        <h1 class='header-title'>$fullname</h1>
+                        <p class='text text'>$resumeTitle</p>
+                        <p class='text goals'>$resumeGoals</p>
+                        <form action='' method='post'>
+                            $favorite
+                        </form>
+                    </div>
+
+                    <div class='column-2 image'>
+                        <img style='width: 100%;' src='./img/shapes/points2.png' class='points points2' alt='' />
+                        <img style='width: 100%;' src='$avatar' class='img-element z-index'
+                            alt='' />
+                    </div>
+                </div>";
+
+        }
+
+        function renderResumeDetailPersonalInfo($personalInfo){
+
+            $firstName = '';
+            $lastName = '';
+            $nationality = '';
+            $maritalStatus = '';
+
+            if($personalInfo != false){
+
+                if($personalInfo['firstname'] != NULL){
+
+                    $firstName .= $personalInfo['firstname'];
+
+                }else{
+
+                    $firstName = "Not updated";
+
+                }
+
+                if($personalInfo['lastname'] != NULL){
+
+                    $lastName .= $personalInfo['lastname'];
+
+                }else{
+
+                    $lastName = "Not updated";
+
+                }
+
+                if($personalInfo['nationality'] != NULL){
+
+                    $nationality .= $personalInfo['nationality'];
+
+                }else{
+
+                    $nationality = "Not updated";
+
+                }
+
+                if($personalInfo['status'] != NULL){
+
+                    $maritalStatus .= $personalInfo['status'];
+
+                }else{
+
+                    $maritalStatus = "Not updated";
+
+                }
+
+            }else{
+
+                $firstName = "Not updated";
+                $lastName = "Not updated";
+                $nationality = "Not updated";
+                $maritalStatus = "Not updated";
+
+            }
+
+            echo "
+                <div class='recent-grid container'>
+                    <div class='customers'>
+                        <div class='card'>
+                            <div class='profile-body' id='special-body-uwu'>
+                                <div class='neatly-constructed-grid-rows'>
+                                    <div class='neatly-put-grid-columns'>
+                                        <h2>First Name</h2>
+                                        <p>$firstName</p>
+                                    </div>
+                                    <div class='neatly-put-grid-columns'>
+                                        <h2>Last Name</h2>
+                                        <p>$lastName</p>
+                                    </div>
+
+                                    <div class='neatly-put-grid-columns'>
+                                        <h2>Nationality</h2>
+                                        <p>$nationality</p>
+                                    </div>
+                                    <div class='neatly-put-grid-columns'>
+                                        <h2>Martial Status</h2>
+                                        <p>$maritalStatus</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>";
+
+        }
+
+        function renderResumeDetailDesiredCareer($desiredCareer){
+
+            $salary = '';
+            $type = '';
+            $industry = '';
+            $location = '';
+
+            if($desiredCareer != false){
+
+                if ($desiredCareer['salary'] != NULL){
+
+                    $salary .= $desiredCareer['salary'];
+
+                }else{
+
+                    $salary = "Not updated";
+
+                }
+
+                if ($desiredCareer['type'] != NULL){
+
+                    $type .= $desiredCareer['type'];
+
+                }else{
+
+                    $type = "Not updated";
+
+                }
+
+                if($desiredCareer['industry'] != NULL){
+
+                    $industry .= $desiredCareer['industry'];
+
+                }else{
+
+                    $industry = "Not updated";
+
+                }
+
+                if($desiredCareer['location'] != NULL){
+
+                    $location .= $desiredCareer['location'];
+
+                }else{
+
+                    $location = "Not updated";
+
+                }
+
+            }else{
+
+                $salary = "Not updated";
+                $type = "Not updated";
+                $industry = "Not updated";
+                $location = "Not updated";
+
+            }
+
+            echo "
+                <div class='recent-grid container'>
+                    <div class='customers'>
+                        <div class='card'>
+                            <div class='profile-body' id='special-body-uwu'>
+                                <div class='neatly-constructed-grid-rows'>
+                                    <div class='neatly-put-grid-columns'>
+                                        <h2>Salary</h2>
+                                        <p>$salary</p>
+                                    </div>
+                                    <div class='neatly-put-grid-columns'>
+                                        <h2>Job Type</h2>
+                                        <p>$type</p>
+                                    </div>
+                                    <div class='neatly-put-grid-columns'>
+                                        <h2>Industry</h2>
+                                        <p>$industry</p>
+                                    </div>
+                                    <div class='neatly-put-grid-columns'>
+                                        <h2>Work Location</h2>
+                                        <p>$location</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>";
+
+        }
+
+        function renderResumeDetailWorkExperience($workExperience){
+
+            $jobtitle = '';
+            $company = '';
+            $experienceYear = '';
+            $level = '';
+
+            if($workExperience != false){
+
+                if($workExperience['title'] != NULL){
+
+                    $jobtitle .= $workExperience['title'];
+
+                }else{
+
+                    $jobtitle = "Not updated";
+
+                }
+
+                if($workExperience['companyname'] != NULL){
+
+                    $company .= $workExperience['companyname'];
+
+                }else{
+
+                    $company = "Not updated";
+
+                }
+
+                if($workExperience['experienceyear'] != NULL){
+
+                    $experienceYear .= $workExperience['experienceyear'];
+
+                }else{
+
+                    $experienceYear = "Not updated";
+
+                }
+
+                if($workExperience['level'] != NULL){
+
+                    $level .= $workExperience['level'];
+
+                }else{
+
+                    $level = "Not updated";
+
+                }
+
+            }else{
+
+                $jobtitle = "Not updated";
+                $company = "Not updated";
+                $experienceYear = "Not updated";
+                $level = "Not updated";
+
+            }
+
+            echo "
+                <div class='recent-grid container'>
+                    <div class='customers'>
+                        <div class='card'>
+                            <div class='profile-body' id='special-body-uwu'>
+                                <div class='neatly-constructed-grid-rows'>
+                                    <div class='neatly-put-grid-columns'>
+                                        <h2>Job Title/Position: </h2>
+                                        <p>$jobtitle</p>
+                                    </div>
+                                    <div class='neatly-put-grid-columns'>
+                                        <h2>Company: </h2>
+                                        <p>$company</p>
+                                    </div>
+                                    <div class='neatly-put-grid-columns'>
+                                        <h2>Years Of Experience</h2>
+                                        <p>$experienceYear year(s)</p>
+                                    </div>
+                                    <div class='neatly-put-grid-columns'>
+                                        <h2>Current Level</h2>
+                                        <p>$level</p>
+                                    </div>
+                                </div>
+                                <hr class='center-diamond'>
+                            </div>
+                        </div>
+                    </div>
+                </div>";
+        }
+
+        function renderResumeDetailEducation($education){
+
+            $schoolName = '';
+            $academicYear = '';
+
+            if($education != false){
+
+            if($education['schoolname'] != NULL){
+
+                $schoolName .= $education['schoolname'];
+
+            }else{
+                
+                $schoolName = "Not updated";
+
+            }
+
+            if($education['academicyear'] != NULL){
+
+                    $academicYear .= $education['academicyear'];
+
+            }else{
+
+                    $academicYear = "Not updated";
+
+            }
+
+            }else{
+
+                $schoolName = "Not updated";
+                $academicYear = "Not updated";
+
+            }
+
+            echo "
+                <div class='recent-grid container'>
+                    <div class='customers'>
+                        <div class='card'>
+                            <div class='profile-body' id='special-body-uwu'>
+                                <div class='neatly-constructed-grid-rows'>
+                                    <div class='neatly-put-grid-columns'>
+                                        <h2>School</h2>
+                                        <p>$schoolName</p>
+                                    </div>
+                                    <div class='neatly-put-grid-columns'>
+                                        <h2>Academic Year</h2>
+                                        <p>$academicYear</p>
+                                    </div>
+                                    <hr class='center-diamond'>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>";
+
+        }
+
+        function renderResumeDetailCertificate($certificate){
+
+            $name = '';
+            $description = '';
+
+            if($certificate != false){
+
+                if($certificate['name'] != NULL){
+
+                    $name .= $certificate['name'];
+
+                }else{
+
+                    $name = "Not updated";
+
+                }
+
+                if($certificate['description'] != NULL){
+
+                    $description .= $certificate['description'];
+
+                }else{
+
+                    $description = "Not updated";
+
+                }
+
+            }else{
+
+                $name = "Not updated";
+                $description = "Not updated";
+
+            }
+
+            echo "
+                <div class='recent-grid container'>
+                    <div class='customers'>
+                        <div class='card'>
+                            <div class='profile-body' id='special-body-uwu'>
+                                <div class='neatly-constructed-grid-rows'>
+                                    <div class='neatly-put-grid-columns'>
+                                        <h2>Degree</h2>
+                                        <p>$name</p>
+                                    </div>
+                                    <div class='neatly-put-grid-columns'>
+                                        <h2>Description</h2>
+                                        <p>$description</p>
+                                    </div>
+                                    <hr class='center-diamond'>
+                                    <!-- cái hr là trong trường hợp còn thêm chứng chỉ -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>";
+
+        }
+
+        function renderResumeDetailAchievement($achievement){
+
+            $name = '';
+            $description = '';
+
+            if($achievement != false){
+
+                if($achievement['name'] != NULL){
+
+                    $name .= $achievement['name'];
+
+                }else{
+
+                    $name = "Not updated";
+
+                }
+
+                if($achievement['description'] != NULL){
+
+                    $description .= $achievement['description'];
+
+                }else{
+
+                    $description = "Not updated";
+
+                }
+
+            }else{
+
+                $name = "Not updated";
+                $description = "Not updated";
+
+            }
+
+            echo "
+                <div class='recent-grid container'>
+                    <div class='customers'>
+                        <div class='card'>
+                        </div>
+                        <div class='profile-body' id='special-body-uwu'>
+                            <div class='neatly-constructed-grid-rows'>
+                                <div class='neatly-put-grid-columns'>
+                                    <h2>Achievement</h2>
+                                    <p>$name</p>
+                                </div>
+                                <div class='neatly-put-grid-columns'>
+                                    <h2>Description</h2>
+                                    <p>$description</p>
+                                </div>
+                                <hr class='center-diamond'>
+                                <!-- cái hr là trong trường hợp còn thêm achievements -->
+                            </div>
+                        </div>
+                    </div>
+                </div>";
+
+        }
+
+        function renderResumeDetailActivity($activity){
+
+            $name = '';
+            $description = '';
+
+            if($activity != false){
+
+                if($activity['name'] != NULL){
+
+                    $name .= $activity['name'];
+
+                }else{
+
+                    $name = "Not updated";
+
+                }
+
+                if($activity['description'] != NULL){
+
+                    $description .= $activity['description'];
+
+                }else{
+
+                    $description = "Not updated";
+
+                }
+
+            }else{
+
+                $name = "Not updated";
+                $description = "Not updated";
+
+            }
+
+            echo "
+                <div class='recent-grid container'>
+                    <div class='customers'>
+                        <div class='card'>
+                        </div>
+                        <div class='profile-body' id='special-body-uwu'>
+                            <div class='neatly-constructed-grid-rows'>
+                                <div class='neatly-put-grid-columns'>
+                                    <h2>Activity</h2>
+                                    <p>$name</p>
+                                </div>
+                                <div class='neatly-put-grid-columns'>
+                                    <h2>Description</h2>
+                                    <p>$description</p>
+                                </div>
+                                <hr class='center-diamond'>
+                                <!-- cái hr là trong trường hợp còn thêm activities -->
+                            </div>
+                        </div>
+                    </div>
+                </div>";
+
+        }
+
+    // END RENDER RESUME DETAIL
 
 // ------------------------------------- END RENDER JOBLIST AND JOBDETAIL ------------------------------------- //
 
@@ -488,6 +1146,51 @@
             </td>
 
         </tr>";
+    }
+
+    function renderEmployerFavoriteResume($resume){
+
+        if($resume != NULL){
+
+            $fullname = '';
+            if($resume['firstname'] != NULL && $resume['lastname'] != NULL){
+
+                $fullname .= $resume['firstname'] . ' ' . $resume['lastname'];
+
+            }else{
+
+                $fullname = "No full name for this resume";
+
+            }
+
+            $resumeTitle = '';
+            if($resume['title'] != NULL){
+
+                $resumeTitle .= $resume['title'];
+
+            }else{
+
+                $resumeTitle = "No title for this resume";
+
+            }
+
+        }else{
+            
+            $fullname = "No full name for this resume";
+            $resumeTitle = "No title for this resume";
+
+        }
+
+        echo "
+            <tr>
+                <td>$fullname</td>
+                <td>$resumeTitle</td>
+                <td>
+                    <a href='./cv_detail.php?id={$resume['id']}' class='option success mr-2'>View</a>
+                    <a href='./employer_Fav_CV_delete.php?id={$resume['favoriteid']}' class='option warning'>Remove</a>
+                </td>
+            </tr>";
+
     }
 
 // ------------------------------------- END RENDER EMPLOYER DASHBOARD ------------------------------------- //
@@ -1299,6 +2002,7 @@
         }
 
     // END RENDER RESUME
+
 
 // ------------------------------------- END RENDER JOBSEEKER DASHBOARD ------------------------------------- //
 

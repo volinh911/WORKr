@@ -8,8 +8,10 @@
 		private $conn;
 
 		public $totalJobs;
+		public $totalResumes;
 		public $totalBlogs;
 		public $totalJobSearch;
+		public $totalResumeSearch;
 		public $totalEmployerJobs;
 		public $totalFavoriteJobs;
 		
@@ -214,6 +216,24 @@
 			}
 		}
 		
+		public function getResumeUserID($resumeid){
+
+			$sql = "SELECT * FROM resume WHERE id = '$resumeid'";
+			$query = pg_query($this->conn, $sql);
+
+			if(pg_num_rows($query) > 0){
+
+				$resumeID = pg_fetch_assoc($query);
+				return $resumeID['userid'];
+
+			}else{
+
+				return false;
+
+			}
+
+		}
+
 		public function getResumeID($userid){
 
 			$sql = "SELECT id FROM resume WHERE userid = '$userid'";
@@ -1035,7 +1055,7 @@
 
 // ------------------------------------- END CREATE FUNCTION ------------------------------------- //
 
-// ------------------------------------- JOBLIST AND JOBDETAIL PAGE FUNCTION ------------------------------------- //
+// ------------------------------------- JOBLIST && RESUMELIST AND JOBDETAIL && RESUME DETAIL PAGE FUNCTION ------------------------------------- //
 
 		public function getPagesJobs(){
 
@@ -1195,7 +1215,100 @@
 				}
 			}
 
-	}
+		}
+
+		public function getPagesResume(){
+
+            $limit = 5;
+            $countQuery = "SELECT count(id) as resnum from resume;";
+            $result = pg_query($this->conn,$countQuery);
+
+            if(pg_num_rows($result) > 0){
+
+                $resumes =  pg_fetch_assoc($result);
+                $total = $resumes['resnum'];
+				$this->totalResumes = $total;
+                return ceil($total/ $limit);
+
+            }else{
+
+				echo "<script>alert('empty');</script>";
+				return false;
+
+			}
+        }
+
+		public function getResumes($page){
+
+			$start = ($page - 1) * 5;
+
+			$fetchResumes = "SELECT re.id, re.firstname, re.lastname, re.title, lo.location, sa.salary, jo.avatar
+							FROM resume re, location lo, salary sa, jobseeker jo
+							WHERE re.locationid = lo.id AND re.salaryid = sa.id AND re.userid = jo.id ORDER BY re.id DESC OFFSET $start;";
+
+			$results = pg_query($this->conn, $fetchResumes);
+
+			if(pg_num_rows($results) > 0){
+
+				return pg_fetch_all($results);
+
+			}
+
+			else{
+
+				echo "<script>alert('no resumes');</script>";
+				return false;
+
+			}
+
+		}
+
+		public function favoriteResume($resumeid, $userid){
+
+			// Check user da favorite chua
+			$favoriteCheck = "SELECT * FROM favoriteresume WHERE resumeid = '$resumeid' AND userid = '$userid'";
+			$queryCheck = pg_query($this->conn, $favoriteCheck);
+
+			if(pg_num_rows($queryCheck) > 0){
+
+				return false;
+			
+			// Neu chua thi favorite (true = co the favorite | false = da favorite)
+			}else{
+
+				if(isset($_POST['favorite'])){
+
+					if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true && $_SESSION['role'] == 3) {
+
+						$favoriteQuery = "INSERT INTO favoriteresume (resumeid, userid) VALUES ('$resumeid', '$userid')";
+					
+						$queryFavorite = pg_query($this->conn, $favoriteQuery);
+		
+						if ($queryFavorite) {
+
+							echo "<script>alert('Favorite resume successfully');</script>";
+
+						} else {
+
+							echo "<script>alert('queryFail');</script>";
+
+						}
+
+					}else{
+
+						echo "<script>alert('You have to be a employer to favorite job');</script>";
+						return true;
+
+					}
+
+				}else{
+
+					return true;
+
+				}
+			}
+
+		}
 
 // ------------------------------------- END JOBLIST AND JOBDETAIL PAGE FUNCTION ------------------------------------- //
 
@@ -1263,6 +1376,69 @@
 			
 		}
 
+		public function searchResume(){
+
+            if (isset($_POST['submit'])) {
+                if ($_POST['typeid'] != 0 || $_POST['locationid'] != 0 ||
+                    $_POST['salaryid'] != 0 || $_POST['industryid'] != 0) {
+						
+                    $select = ["typeid","locationid","salaryid","industryid"];
+
+                    $validSelect = [];
+
+                    foreach ($select as $key) {
+                        $value = $_POST[$key];
+                        if ($value != 0) {
+                            array_push($validSelect, $key);
+                        }
+                    }
+
+                    $whereString = "WHERE re.locationid = lo.id AND re.salaryid = sa.id AND re.userid = jo.id AND re.typeid = ty.id AND re.industryid = ind.id and ";
+
+                    // key = companyid/levelid/locationid
+                    // $_POST[$key] la value cua tung thang
+                    foreach ($validSelect as $key) {
+                        $whereString .= "$key = $_POST[$key] and ";
+                    }
+					
+					// Cat chu "and" cuoi query
+                    $finalWhere = substr($whereString, 0, -5);
+
+                    $fetchSearch = "SELECT re.id, re.firstname, re.lastname, re.title, lo.location, sa.salary, jo.avatar
+									FROM resume re, location lo, salary sa, type ty, industry ind, jobseeker jo " . $finalWhere;
+					
+					// Dem so luong search tim duoc
+					$countSearch = "SELECT count(re.id) FROM resume re, location lo, salary sa, type ty, industry ind, jobseeker jo " . $finalWhere;
+
+					// Dem tong luong rows search duoc
+					$searchResult = pg_query($this->conn,$countSearch);
+					$searchNum = pg_fetch_assoc($searchResult);
+					$this->totalResumeSearch = $searchNum['count'];
+
+					// in ra ket qua search
+					$results = pg_query($this->conn, $fetchSearch);
+
+					if(pg_num_rows($results) > 0){
+
+						return pg_fetch_all($results);
+
+					}else{
+
+						echo "<script>alert('Your search return none');</script>";
+						return false;
+
+					}
+
+                }else{
+
+					echo "<script>alert('You can\'t leave everything empty');</script>";
+
+				}
+
+            }
+			
+		}
+
 // ------------------------------------- END SEARCH BAR FUNCTION ------------------------------------- //
 
 // ------------------------------------- EMPLOYER DASHBOARD ------------------------------------- //
@@ -1279,6 +1455,25 @@
 		}else{
 
 			return false;
+			echo "<script>alert('No result');</script>";
+
+		}
+
+	}
+
+	public function countTotalResume($userid){
+
+		$countQuery = "SELECT COUNT(id) OVER() FROM favoriteresume WHERE userid = $userid GROUP BY id ORDER BY id DESC LIMIT 1;";
+		$result = pg_query($this->conn, $countQuery);
+
+		if(pg_num_rows($result) > 0){
+
+			$count = pg_fetch_assoc($result);
+			return $count['count'];
+
+		}else{
+
+			return '0';
 			echo "<script>alert('No result');</script>";
 
 		}
@@ -1413,6 +1608,42 @@
 
 	}
 	
+	public function getFavoriteResume($userid){
+
+		$getFavoriteResume = "SELECT re.id, re.firstname, re.lastname, re.title, fr.id as favoriteid FROM resume re, favoriteresume fr, employer em WHERE em.id = '$userid' AND fr.resumeid = re.id AND fr.userid = em.id";
+
+		$results = pg_query($this->conn, $getFavoriteResume);
+
+		if(pg_num_rows($results) > 0){
+
+			return pg_fetch_all($results);
+
+		}else{
+
+			return false;
+			echo "<script>alert('No Favorite Resume');</script>";
+
+		}
+
+	}
+
+	public function deleteFavoriteResume($resumeid){
+
+		$deleteFavoriteResume = "DELETE FROM favoriteresume WHERE id = '$resumeid'";
+		$deleteQuery = pg_query($this->conn, $deleteFavoriteResume);
+
+		if($deleteQuery){
+
+			return true;
+
+		}else{
+
+			return false;
+
+		}
+
+	}
+
 // ------------------------------------- END EMPLOYER DASHBOARD ------------------------------------- //
 
 // ------------------------------------- JOBSEEKER DASHBOARD ------------------------------------- //

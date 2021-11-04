@@ -199,9 +199,10 @@
 
         <!-- In jobs da search -->
         <?php elseif($searchResult): ?>
+            
         <?php foreach($searchResult as $result): ?>
 
-        <?php renderSearchResult($result); ?>
+        <?php renderJobList($result, $favoriteJobs); ?>
 
         <?php endforeach; ?>
 

@@ -221,4 +221,8 @@ hr {
 	font-weight: 700;
 	font-size: 20px;
 }
+
+.disabled {
+    pointer-events:none;        
+}
 /* page pagination */

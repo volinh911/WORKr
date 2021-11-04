@@ -16,7 +16,8 @@
         $companyID = $_SESSION['companyid'];
         $company = $model->getCompanyOverview($companyID);
         $postjobOV = $model->countTotalJob($userid);
-        
+        $resumeCountOV = $model->countTotalResume($userid);
+
     }else{
 
         echo "<script>window.location.href = 'index.php';</script>";
@@ -83,7 +84,7 @@
 
         <main>
 
-            
+
 
             <div class="container">
 
@@ -126,6 +127,7 @@
                         <h2 class="my-3">Post Jobs</h2>
                     </div>
                     <div class="overview-content pl-5 pt-3 pb-4 bg-white">
+                        <?php if($postjobOV != false): ?>
                         <div class="job-posting-sum">
                             <span>You have posted </span>
                             <span class="job-num text-large"><?php echo $postjobOV['count']; ?></span>
@@ -136,8 +138,18 @@
                             <span class="job-date text-large"><?php echo $postjobOV['startdate']; ?></span>
                         </div>
                         <div class="job-posting-option">
-                            <a href="" class="btn overview-button">Make a Post</a>
+                            <a href="./employer_PJ.php" class="btn overview-button">Make a Post</a>
                         </div>
+                        <?php else: ?>
+                        <div class="job-posting-sum">
+                            <span>You have posted </span>
+                            <span class="job-num text-large">0</span>
+                            <span>recruitment seekings.</span>
+                        </div>
+                        <div class="job-posting-option">
+                            <a href="./employer_PJ.php" class="btn overview-button">Make a Post</a>
+                        </div>
+                        <?php endif; ?>
                     </div>
 
                 </div>
@@ -149,12 +161,12 @@
                     <div class="overview-content pl-5 pt-3 pb-4 pr-5 bg-white">
                         <div class="favorite-sum">
                             <span>You have </span>
-                            <span class="fav-num text-large">75</span>
+                            <span class="fav-num text-large"><?php echo $resumeCountOV; ?></span>
                             <span>favorite resumes in your stocks.</span>
                         </div>
                         <div class="favorite-option">
-                            <a href="" class="btn overview-button">Go Check</a>
-                            <a href="" class="btn overview-button">Search Resumes</a>
+                            <a href="./employer_Fav_CV.php" class="btn overview-button">Go Check</a>
+                            <a href="./find_resume.php" class="btn overview-button">Search Resumes</a>
                         </div>
                     </div>
 

@@ -13,6 +13,8 @@
         
         $employer = $model->getEmployer($userid);
         // End header
+        $resumeCount = $model->countTotalResume($userid);
+        $favoriteResume = $model->getFavoriteResume($userid);
 
     }else{
 
@@ -87,18 +89,25 @@
                             <table>
                                 <thead>
                                     <tr>
-                                        <th>Job Seeker</th>
-                                        <th>Options</th>
+                                        <th>Resume Full Name</th>
+                                        <th>Resume Title</th>
+                                        <th>Option</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td><a href="">Your Local Bread</a></td>
-                                        <td>
-                                            <a href="" class="option success mr-2">View</a>
-                                            <a href="" class="option warning">Remove</a>
-                                        </td>
-                                    </tr>
+
+                                    <?php if ($favoriteResume !=false): ?>
+
+                                    <?php foreach ($favoriteResume as $resume):?>
+
+                                    <?php renderEmployerFavoriteResume($resume); ?>
+
+                                    <?php endforeach; ?>
+
+                                    <?php else: echo "You have no favorite resume"; ?>
+
+                                    <?php endif; ?>
+
                                 </tbody>
                             </table>
                         </div>
@@ -110,7 +119,7 @@
                             <div class="summary-single">
                                 <span class="fa fa-heart"></span>
                                 <div>
-                                    <h5>24</h5>
+                                    <h5><?php echo $resumeCount; ?></h5>
                                     <small>Favorite CVs</small>
                                 </div>
                             </div>
