@@ -21,7 +21,12 @@
         $desiredCareer = $model->getResumeCareer($userid);
 
         // Form handler
-        $avatar = $model->uploadAvatar($userid);
+        // $avatar = $model->uploadAvatar($userid);
+
+        if (isset($_POST['avatar'])) {
+            $avatar = $model->upload($_FILES['img']['tmp_name']);
+            var_dump($avatar['secure_url']);
+        }
 
         
     }else{

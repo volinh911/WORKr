@@ -1,4 +1,19 @@
 <?php 
+
+	require $_SERVER['DOCUMENT_ROOT'].'../vendor/autoload.php';
+	use Cloudinary\Configuration\Configuration;
+	use Cloudinary\Api\Upload\UploadApi;
+
+	Configuration::instance([
+		'cloud' => [
+		  'cloud_name' => 'hxhaaq53x', 
+		  'api_key' => '288527284287483', 
+		  'api_secret' => 'icTkgML0kcSAgPx-ehkS7KMvYSg'],
+		'url' => [
+		  'secure' => true]]);
+
+
+
     class Model{
 
 		private $server = "host = ec2-23-20-208-173.compute-1.amazonaws.com";
@@ -35,6 +50,13 @@
 			}
 		}
 
+		public function upload($file){
+
+			return (new UploadApi())->upload($file);
+
+		}
+
+		
 // ------------------------------------- GET EVERYTHING FROM DATABASE ------------------------------------- //
 
 		public function getCompany(){
