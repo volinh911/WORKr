@@ -270,6 +270,7 @@ input {
 .form-wrapper .input-form .input-field .textarea {
     resize: none;
     height: 80px;
+    margin-left: 2.5rem;
 }
 
 .input-field select {
@@ -281,6 +282,10 @@ input {
 .form-wrapper .input-form .input-field .textarea:focus,
 .form-wrapper .input-form .input-field select:focus {
     border: 1px solid var(--main-color);
+}
+
+select#inlineFormCustomSelect {
+    margin-left: 1.5rem;
 }
 
 .form-wrapper .input-form .input-field .btn {

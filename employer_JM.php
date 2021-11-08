@@ -43,7 +43,7 @@
         <div class="sidebar-menu">
             <ul>
                 <li>
-                    <a href="employer_OV.php" class="active"><span><i class="fa fa-home"></i></span>
+                    <a href="employer_OV.php" class="active"><span><i class="far fa-address-card"></i></span>
                         <span>Overview</span></a>
                 </li>
                 <li>
@@ -64,6 +64,10 @@
                         <span>Jobs Management</span></a>
                 </li>
                 <li>
+                    <a href="index.php" class="active"><span><i class="fa fa-home"></i></span>
+                        <span>Home</span></a>
+                </li>
+                <li>
                     <a href="logout.php" class="active"><span><i class="fas fa-sign-out-alt"></i></span>
                         <span>Logout</span></a>
                 </li>
@@ -82,7 +86,7 @@
         <main>
             <h2 class="dash-title">Jobs Management</h2>
 
-            
+
             <section class="recent">
                 <div class="activity-grid">
                     <div class="activity-card">

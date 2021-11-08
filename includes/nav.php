@@ -74,7 +74,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="../employer_PJ.php">Post Jobs</a>
-                    <a class="dropdown-item" href="#">Search Resumes</a>
+                    <a class="dropdown-item" href="../find_resume.php">Search Resumes</a>
                 </div>
             </li>
             <li class="nav-item">

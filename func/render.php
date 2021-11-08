@@ -80,7 +80,7 @@
                                 Employer({$employer['email']})
                             </a>
                             <div class='dropdown-menu' aria-labelledby='navbarDropdown'>
-                                <a class='dropdown-item' href='#'>Search Resumes</a>
+                                <a class='dropdown-item' href='find_resume.php'>Search Resumes</a>
                             </div>
                         </li>
                     </div>

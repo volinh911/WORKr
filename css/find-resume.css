@@ -1,228 +1,237 @@
 body {
-	background: #fefefe;
-	font-family: Roboto;
+    background: #fefefe;
 }
 
 hr {
-	border: 0.8px solid #525861;
+    border: 0.8px solid #525861;
 }
 
+
 /* header */
+
 .user-wrapper {
-	display: flex;
-	align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 .user-wrapper img {
-	border-radius: 50%;
-	margin-right: 1rem;
+    border-radius: 50%;
+    margin-right: 1rem;
 }
 
 .user-wrapper small {
-	display: inline-block;
-	color: #0d141f;
+    display: inline-block;
+    color: #0d141f;
 }
+
 
 /* end of header */
 
 .filter-sidebar {
-	border-right: 2px solid #0d141f;
-	margin-right: 1rem;
-	position: sticky;
+    border-right: 2px solid #0d141f;
+    margin-right: 1rem;
+    position: sticky;
 }
 
 .filter-column {
-	padding: 0 8px 12px 16px;
+    padding: 0 8px 12px 16px;
 }
 
 .filter-column h4 {
-	color: #0d141f;
-	font-size: 13px;
-	padding: 14px 0px;
+    color: #0d141f;
+    font-size: 13px;
+    padding: 14px 0px;
 }
 
+
 /* this is for the dropdown list */
+
 .select-box {
-	font-size: 13px;
-	display: flex;
-	flex-direction: column;
-	border: 1px solid #414b57;
+    font-size: 13px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #414b57;
 }
 
 .select-box .options-container {
-	max-height: 0;
-	width: 100%;
-	opacity: 0;
-	transition: all 0.4s;
-	/* border-radius: 8px; */
-	overflow: hidden;
-
-	order: 1;
+    max-height: 0;
+    width: 100%;
+    opacity: 0;
+    transition: all 0.4s;
+    /* border-radius: 8px; */
+    overflow: hidden;
+    order: 1;
 }
 
 .selected {
-	/* background: #2f3640; */
-	/* border-radius: 8px; */
-	/* margin-bottom: 8px; */
-	/* color: #f5f6fa; */
-	position: relative;
-
-	order: 0;
+    /* background: #2f3640; */
+    /* border-radius: 8px; */
+    /* margin-bottom: 8px; */
+    /* color: #f5f6fa; */
+    position: relative;
+    order: 0;
 }
 
 .selected::after {
-	transition: all 0.4s;
+    transition: all 0.4s;
 }
 
 .select-box .options-container.active {
-	max-height: 240px;
-	opacity: 1;
-	overflow-y: scroll;
-	border-top: 1px solid #0d141f;
+    max-height: 240px;
+    opacity: 1;
+    overflow-y: scroll;
+    border-top: 1px solid #0d141f;
 }
 
-.select-box .options-container.active + .selected::after {
-	transform: rotateX(180deg);
-	top: -6px;
+.select-box .options-container.active+.selected::after {
+    transform: rotateX(180deg);
+    top: -6px;
 }
 
 .select-box .options-container::-webkit-scrollbar {
-	width: 8px;
-	background: #0d141f;
-	/* border-radius: 0 8px 8px 0; */
+    width: 8px;
+    background: #0d141f;
+    /* border-radius: 0 8px 8px 0; */
 }
 
 .select-box .options-container::-webkit-scrollbar-thumb {
-	background: #525861;
-	/* border-radius: 0 8px 8px 0; */
+    background: #525861;
+    /* border-radius: 0 8px 8px 0; */
 }
 
 .select-box .option,
 .selected {
-	padding: 12px 24px;
-	cursor: pointer;
+    padding: 12px 24px;
+    cursor: pointer;
 }
 
 .select-box .option:hover {
-	background: #414b57;
-	color: #fefefe;
+    background: #414b57;
+    color: #fefefe;
 }
 
 .select-box label {
-	cursor: pointer;
+    cursor: pointer;
 }
 
 .select-box .option .radio {
-	display: none;
+    display: none;
 }
 
 .filter-sidebar .filter-search .filter-submit {
-	background-color: #ff9248;
-	color: #fefefe;
-	font-size: 1.2rem;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 200px;
-	height: 50px;
-	font-weight: 700;
+    background-color: #ff9248;
+    color: #fefefe;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+    height: 50px;
+    font-weight: 700;
 }
 
+
 /* the end of dropdown part */
+
 
 /* resume list  */
 
 .resume-name a {
-	color: #3c1414;
-	font-size: 1.5rem;
-	font-weight: 700;
+    color: #3c1414;
+    font-size: 1.5rem;
+    font-weight: 700;
 }
 
 .resume-detail .resume-avt {
-	display: flex;
-	align-items: center;
-	justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .resume-list .resume-detail .resume-option {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .resume-list .resume-detail .resume-add {
-	background-color: #ff9248;
-	color: #fefefe;
-	font-size: 1.2rem;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 200px;
-	height: 50px;
-	font-weight: 700;
+    background-color: #ff9248;
+    color: #fefefe;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+    height: 50px;
+    font-weight: 700;
 }
 
 .resume-list .resume-detail .resume-view {
-	font-size: 1.5rem;
-	color: #3c1414;
+    font-size: 1.5rem;
+    color: #3c1414;
 }
+
 
 /* end of resume list  */
 
+
 /* page pagination */
+
 .resume-pagination {
-	display: flex;
-	justify-content: center;
-	align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .resume-pagination ul {
-	position: relative;
-	background: #fff;
-	display: flex;
-	padding: 10px 20px;
+    position: relative;
+    background: #fff;
+    display: flex;
+    padding: 10px 20px;
 }
 
 .resume-pagination ul li {
-	list-style: none;
-	line-height: 50px;
-	margin: 0 5px;
+    list-style: none;
+    line-height: 50px;
+    margin: 0 5px;
 }
 
 .resume-pagination ul li.pageNumber {
-	width: 50px;
-	height: 50px;
-	line-height: 50px;
-	text-align: center;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
 }
 
 .resume-pagination ul li a {
-	display: block;
-	text-decoration: none;
-	color: #777;
-	font-weight: 600;
-	border-radius: 50%;
+    display: block;
+    text-decoration: none;
+    color: #777;
+    font-weight: 600;
+    border-radius: 50%;
 }
 
 .resume-pagination ul li.pageNumber:hover a,
 .resume-pagination ul li.pageNumber.active a {
-	background: #ff9248;
-	color: #fff;
+    background: #ff9248;
+    color: #fff;
 }
 
 .resume-pagination ul li:first-child {
-	margin-right: 30px;
-	font-weight: 700;
-	font-size: 20px;
+    margin-right: 30px;
+    font-weight: 700;
+    font-size: 20px;
 }
 
 .resume-pagination ul li:last-child {
-	margin-left: 30px;
-	font-weight: 700;
-	font-size: 20px;
+    margin-left: 30px;
+    font-weight: 700;
+    font-size: 20px;
 }
 
 .disabled {
-    pointer-events:none;        
+    pointer-events: none;
 }
+
+
 /* page pagination */

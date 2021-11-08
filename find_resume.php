@@ -34,25 +34,17 @@
 <html lang="en">
 
 <head>
-    <title>Title</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
-        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
-        integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="/css/style.css">
+    <?php include ('./includes/head.php');?>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.4.8/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <link rel="stylesheet" href="/css/find-resume.css">
+    <link rel="stylesheet" href="./css/jseeker.css">
 </head>
 
 <body>
     <!-- header -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand ml-5" href="">
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand ml-5" href="../index.php">
             <img src="../images/LOGO.png" alt="">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -62,31 +54,34 @@
         <div class="collapse navbar-collapse ml-5" id="navbarNav">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item ">
-                    <a class="nav-link" href="#">Home</a>
+                    <a class="nav-link" href="../joblist.php">Search Jobs</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Career Blog</a>
+                    <a class="nav-link" href="../careerblog.php">Career Blog</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Company Review</a>
+                    <a class="nav-link" href="../comp_review.php">Company Review</a>
                 </li>
             </ul>
             <ul class="navbar-nav">
+                <!--employer-->
+                <?php if (isset($_SESSION['role']) && $_SESSION['role'] == 3): ?>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Find Resume</a>
+                    <a class="nav-link" href="employer_PJ.php">
+                        <i class="far fa-plus-square"></i> Post a Job
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Dashboard</a>
+                    <a class="nav-link" href="../employer_OV.php">
+                        <i class="fa fa-user" aria-hidden="true"></i> Dashboard
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-danger" href="#">Log Out</a>
+                    <a class="nav-link" href="../logout.php">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </a>
                 </li>
-                <a href="" class="user-wrapper">
-                    <img src="/images/user.jpg" width="40px" height="40px" alt="">
-                    <div>
-                        <h6 class="text-dark justify-content-center">User</h6>
-                    </div>
-                </a>
+                <?php endif ; ?>
             </ul>
         </div>
     </nav>
@@ -276,59 +271,7 @@
     </div>
 
     <!-- Footer -->
-    <footer class="bg-light">
-        <div class="container">
-            <div class="boxx">
-                <div class="weird mt-4">
-                    <img src="../images/LOGO.png" alt="">
-                    <h6 style="font-size: 13px;">227 Nguyễn Văn Cừ, Distreet 5, HCMC, VN</h6>
-                </div>
-                <div class="row mt-4">
-                    <div class="col-md-4 col-sm-6">
-                        <ul class="list-group">
-                            <li>
-                                <a class="title" href="">
-                                    <h6>WORKr</h6>
-                                </a>
-                            </li>
-                            <li><a href="">About</a></li>
-                            <li><a href="">Carrer Blog</a></li>
-                            <li><a href="">Company Review</a></li>
-                            <li><a href="">Term of Use</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-md-4 col-sm-6">
-                        <ul class="list-group">
-                            <li>
-                                <a class="title" href="">
-                                    <h6>Job Seeker</h6>
-                                </a>
-                            </li>
-                            <li><a href="">Find All Jobs</a></li>
-                            <li><a href="">Create Resume</a></li>
-                            <li><a href="">Favorite Jobs</a></li>
-                            <li><a href="">Review Company</a></li>
-                            <li><a href="">Favorite Company</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-md-4 col-sm-6">
-                        <ul class="list-group">
-                            <li>
-                                <a class="title" href="">
-                                    <h6>Employers</h6>
-                                </a>
-                            </li>
-                            <li><a href="">Post Jobs</a></li>
-                            <li><a href="">Find All Resume</a></li>
-                            <li><a href="">Favorite Resume</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <br>
-        <h6 class="text-center" style="color: #2D7BA0;">© 2021 WORKs. All rights reserved</h6>
-    </footer>
+    <?php include ('./includes/footer.php');?>
     <!-- Footer -->
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
