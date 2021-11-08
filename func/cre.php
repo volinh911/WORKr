@@ -50,7 +50,7 @@
 			}
 		}
 
-		public function upload($file){
+		public function uploadPicture($file){
 
 			return (new UploadApi())->upload($file);
 
@@ -723,11 +723,13 @@
 
 								if($fileSize < 10000000 && $fileSize > 1000){
 									
-									$fileNameNew = uniqid('',true).".".$fileActualExt;
-									$filenalDestination = './blogImages/'.$fileNameNew;
-									move_uploaded_file($fileTmpName, $filenalDestination);
+									// $fileNameNew = uniqid('',true).".".$fileActualExt;
+									// $filenalDestination = './blogImages/'.$fileNameNew;
+									// move_uploaded_file($fileTmpName, $filenalDestination);
+									$avatar = $this->uploadPicture($fileTmpName);
+									$url = $avatar['secure_url'];
 
-									$insertBlog = "INSERT INTO blog (userid, title, authorname, content, image) VALUES ('$userid', '$title', '$authorname', '$body', '$filenalDestination')" ;
+									$insertBlog = "INSERT INTO blog (userid, title, authorname, content, image) VALUES ('$userid', '$title', '$authorname', '$body', '$url')" ;
 									$queryInsert = pg_query($this->conn, $insertBlog);
 
 									if($queryInsert){
@@ -846,7 +848,7 @@
 
 		public function getRandBlogID($exclude){
 
-			$getBlogID = "SELECT id FROM blog";
+			$getBlogID = "SELECT id FROM blog ORDER BY id";
 			$queryID = pg_query($this->conn,$getBlogID);
 
 			if(pg_num_rows($queryID) > 0){	
@@ -925,11 +927,10 @@
 
 								if($fileSize < 10000000 && $fileSize > 1000){
 									
-									$fileNameNew = uniqid('',true).".".$fileActualExt;
-									$filenalDestination = './blogImages/'.$fileNameNew;
-									move_uploaded_file($fileTmpName, $filenalDestination);
+									$avatar = $this->uploadPicture($fileTmpName);
+									$url = $avatar['secure_url'];
 
-									$updateBlog = "UPDATE blog SET userid= $userid, title= '$title', authorname= '$authorname', content= '$body', image='$filenalDestination' WHERE id = $id"; 
+									$updateBlog = "UPDATE blog SET userid= $userid, title= '$title', authorname= '$authorname', content= '$body', image='$url' WHERE id = $id"; 
 									$queryUpdate = pg_query($this->conn, $updateBlog);
 
 									if($queryUpdate){
@@ -1152,7 +1153,7 @@
 				$queryCheck = pg_query($this->conn, $favoriteCheck);
 
 				if(pg_num_rows($queryCheck) > 0){
-
+					
 					return false;
 				
 				// Neu chua thi favorite (true = co the favorite | false = da favorite)
@@ -1806,11 +1807,13 @@
 
 					if($fileSize < 10000000 && $fileSize > 1000){
 						
-						$fileNameNew = uniqid('',true).".".$fileActualExt;
-						$filenalDestination = './userAvatar/'.$fileNameNew;
-						move_uploaded_file($fileTmpName, $filenalDestination);
+						// $fileNameNew = uniqid('',true).".".$fileActualExt;
+						// $filenalDestination = './userAvatar/'.$fileNameNew;
+						// move_uploaded_file($fileTmpName, $filenalDestination);
+						$avatar = $this->uploadPicture($fileTmpName);
+						$url = $avatar['secure_url'];
 
-						$updateAvatar = "UPDATE jobseeker SET avatar = '$filenalDestination' WHERE id = '$userid'";
+						$updateAvatar = "UPDATE jobseeker SET avatar = '$url' WHERE id = '$userid'";
 						$queryInsert = pg_query($this->conn, $updateAvatar);
 
 						if($queryInsert){

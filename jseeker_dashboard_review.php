@@ -14,6 +14,11 @@
         $jobseeker = $model->getJobSeeker($userid);
         // End header
         $reviews = $model->userReviews($userid);
+        if($reviews == false){
+
+            $reviews = [];
+
+        }
 
     }else{
 

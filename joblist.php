@@ -35,6 +35,11 @@
 
         $userid = $_SESSION['userid'];
         $favoriteJobs = $model->getfavoriteJob($userid);
+        if($favoriteJobs == false){
+
+            $favoriteJobs = [];
+
+        }
 
     }
 ?>
