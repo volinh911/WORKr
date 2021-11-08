@@ -1799,7 +1799,7 @@
 			$fileType = $file['type'];
 			$fileExt = explode('.', $fileName);
 			$fileActualExt = strtolower(end($fileExt));
-			$allowed = array('jpg', 'jpeg', 'png');
+			$allowed = array('jpg', 'jpeg', 'png', 'gif');
 			
 			if(in_array($fileActualExt, $allowed)){
 
