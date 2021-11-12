@@ -97,7 +97,7 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="../login_employer.php">Log In</a>
                     <a class="dropdown-item" href="#">Post Jobs</a>
-                    <a class="dropdown-item" href="#">Search Resumes</a>
+                    <a class="dropdown-item" href="../find_resume.php">Search Resumes</a>
                 </div>
             </li>
             <li class="nav-item">
