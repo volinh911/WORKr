@@ -61,7 +61,7 @@
                 <li>
                     <a href="employer_JM.php" class="active"><span><i class="fa fa-clipboard"
                                 aria-hidden="true"></i></span>
-                        <span>Jobs Management</span></a>
+                        <span>Job Management</span></a>
                 </li>
                 <li>
                     <a href="index.php" class="active"><span><i class="fa fa-home"></i></span>
@@ -84,7 +84,7 @@
         <!-- Header -->
 
         <main>
-            <h2 class="dash-title">Jobs Management</h2>
+            <h2 class="dash-title">Favorite Resume(s) Management</h2>
 
             <section class="recent">
                 <div class="activity-grid">
