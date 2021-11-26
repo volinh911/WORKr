@@ -15,7 +15,7 @@
         // End header
         $companyID = $_SESSION['companyid'];
         $company = $model->getCompanyOverview($companyID);
-        $createJog = $model->createJob();
+        $createJob = $model->createJob();
         $experience = $model->getExperience();
         $industry = $model->getIndustry();
         $level = $model->getLevel();
@@ -104,7 +104,7 @@
 
                         <div class="input-field" style="margin-top: 2rem;">
                             <label for="">Company name</label>
-                            <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="industry"
+                            <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="company"
                                 style="padding-top: 0; padding-bottom: 0;">
                                 <!-- Late put company name here acording to session that user logged in -->
                                 <option value="0" selected>Choose company</option>
@@ -216,7 +216,7 @@
                         </div>
 
                         <div>
-                            <textarea name="body" id="description" class="text-input"></textarea>
+                            <textarea name="description" id="description" class="text-input"></textarea>
                         </div>
 
                         <div class="input-field" style="margin-top: 2rem;">
