@@ -133,7 +133,7 @@
                         </div>
 
                         <div class="input-field float-right">
-                            <input type=" submit" value="Update" class="btn btn-danger" name="submit">
+                            <input type="submit" value="Update" class="btn btn-danger" name="submit">
                         </div>
 
                     </div>
