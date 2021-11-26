@@ -28,8 +28,6 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="#">Log In</a>
-                    <a class="dropdown-item" href="#">Post Jobs</a>
-                    <a class="dropdown-item" href="../find_resume.php">Search Resumes</a>
                 </div>
             </li>
             <li class="nav-item">
@@ -51,8 +49,6 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="#">Sign In</a>
-                    <a class="dropdown-item" href="#">Post Jobs</a>
-                    <a class="dropdown-item" href="../find_resume.php">Search Resumes</a>
                 </div>
             </li>
             <li class="nav-item">
@@ -96,8 +92,6 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="../login_employer.php">Log In</a>
-                    <a class="dropdown-item" href="#">Post Jobs</a>
-                    <a class="dropdown-item" href="../find_resume.php">Search Resumes</a>
                 </div>
             </li>
             <li class="nav-item">
