@@ -79,7 +79,7 @@
                     <div class="card">
                         <div class="card-header">
                             <h5>Add Blog</h5>
-                            <a href="/html/admin_dashboard_blog.html">
+                            <a href="./admin_dashboard_blog.php">
                                 <button>Manage Blogs</button>
                             </a>
                         </div>

@@ -80,7 +80,7 @@
                     <div class="card">
                         <div class="card-header">
                             <h5>Manage Blogs</h5>
-                            <a href="/html/admin_dashboard_add.html">
+                            <a href="./admin_dashboard_add.php">
                                 <button>Add New Blogs</button>
                             </a>
                         </div>
