@@ -34,7 +34,7 @@
     <!-- !Navbar -->
 
     <!-- Cards -->
-    <div class="container-fluid mt-5 ">
+    <div class="container-fluid mt-5" style="padding-left: 150px;">
         <h3>Advice and inspiration for building successful careers.</h3>
         <p class="">Resume guides. Interviewing tips. Industry data.</p>
         <div class="row topic-post">
