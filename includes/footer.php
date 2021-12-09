@@ -10,14 +10,14 @@
                 <div class="col-md-4 col-sm-6">
                     <ul class="list-group">
                         <li>
-                            <a class="title" href="">
+                            <a class="title" href="/index.php">
                                 <h6>WORKr</h6>
                             </a>
                         </li>
-                        <li><a href="">About</a></li>
-                        <li><a href="">Career Blog</a></li>
-                        <li><a href="">Company Review</a></li>
-                        <li><a href="">Term of Use</a></li>
+                        <li><a href="/careerblog.php">Career Blog</a></li>
+                        <li><a href="/comp_review.php">Company Review</a></li>
+                        <li><a href="/term_of_use.php">Terms of Use</a></li>
+                        <li><a href="/contact.php">Contact</a></li>
                     </ul>
                 </div>
                 <div class="col-md-4 col-sm-6">
@@ -27,7 +27,7 @@
                                 <h6>Job Seeker</h6>
                             </a>
                         </li>
-                        <li><a href="">Find All Jobs</a></li>
+                        <li><a href="/joblist.php">Find All Jobs</a></li>
                         <li><a href="">Create Resume</a></li>
                         <li><a href="">Favorite Jobs</a></li>
                         <li><a href="">Review Company</a></li>
