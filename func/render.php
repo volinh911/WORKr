@@ -1217,7 +1217,7 @@
 
         echo "                                
         <div class='c-box'>
-            <a href='#'>
+            <a href='./comp_review_details.php?id={$company['companyid']}'>
                 <img src='{$company['logo']}' alt=''>
                 <h3> {$company['companyname']} </h3>
             </a>
