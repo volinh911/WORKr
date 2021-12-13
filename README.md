@@ -1,4 +1,4 @@
-# WORKr
+# WORKr (/ˈwɜː.kər/)
 
 This is the final project of Course CS207 - Introduction to Software Engineering of HCMUS
 
